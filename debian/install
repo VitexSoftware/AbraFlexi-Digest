@@ -1,0 +1,5 @@
+debian/conf/composer.json       usr/lib/php-flexibee-digestmail/
+src/*			        usr/lib/php-flexibee-digestmail/
+src/modules/*		        usr/lib/php-flexibee-digestmail/modules/
+bin/*                           usr/bin/
+digestmail.json                 etc/flexibee/

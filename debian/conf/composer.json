@@ -1,0 +1,49 @@
+{
+    "name": "flexibee-digestmail",
+    "description": "Invoice Digestmail for FlexiBee written in PHP",
+    "type": "project",
+    "version": "0.8",
+    "authors": [
+        {
+            "name": "Vítězslav Dvořák",
+            "email": "info@vitexsoftware.cz"
+        }
+    ],
+    "config": {
+        "vendor-dir": "/var/lib/php-flexibee-digestmail"
+    },
+    "require": {
+        "php": ">= 5.5.9",
+        "flexipeehp": "*",
+        "ease-framework": "*",
+        "flexipeehp-bricks": ">= 0.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "FlexiPeeHP\\DigestMail\\": "."
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "/usr/share/php/Ease",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "/usr/share/php/FlexiPeeHP",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "/usr/share/php/FlexiPeeHPBricks",
+            "options": {
+                "symlink": true
+            }
+        }
+    ]
+}

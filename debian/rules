@@ -1,0 +1,15 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_install:
+	dh_install
+	sed -i -e 's/..\/vendor/\/var\/lib\/php-flexibee-digestmail/g' 	     debian/php-flexibee-digestmail/usr/lib/php-flexibee-digestmail/flexibee-daydigest.php
+	sed -i -e 's/..\/vendor/\/var\/lib\/php-flexibee-digestmail/g' 	     debian/php-flexibee-digestmail/usr/lib/php-flexibee-digestmail/flexibee-weekdigest.php
+	sed -i -e 's/..\/vendor/\/var\/lib\/php-flexibee-digestmail/g' 	     debian/php-flexibee-digestmail/usr/lib/php-flexibee-digestmail/flexibee-monthdigest.php
+	sed -i -e 's/..\/vendor/\/var\/lib\/php-flexibee-digestmail/g' 	     debian/php-flexibee-digestmail/usr/lib/php-flexibee-digestmail/flexibee-yeardigest.php
+	sed -i -e 's/\.\./\/etc\/flexibee/g' 	     debian/php-flexibee-digestmail/usr/lib/php-flexibee-digestmail/flexibee-daydigest.php
+	sed -i -e 's/\.\./\/etc\/flexibee/g' 	     debian/php-flexibee-digestmail/usr/lib/php-flexibee-digestmail/flexibee-weekdigest.php
+	sed -i -e 's/\.\./\/etc\/flexibee/g' 	     debian/php-flexibee-digestmail/usr/lib/php-flexibee-digestmail/flexibee-monthdigest.php
+	sed -i -e 's/\.\./\/etc\/flexibee/g' 	     debian/php-flexibee-digestmail/usr/lib/php-flexibee-digestmail/flexibee-yeardigest.php
