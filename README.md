@@ -1,4 +1,4 @@
-![Package Logo](https://github.com/VitexSoftware/php-flexibee-digestmail/blob/master/package_logo.png "Project Logo")
+![Package Logo](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-DigestMail/master/package-logo.png "Project Logo")
 
 FlexiBee Digest mail generator
 ==============================
