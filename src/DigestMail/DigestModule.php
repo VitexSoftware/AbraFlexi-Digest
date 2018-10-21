@@ -31,7 +31,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
         $this->dig();
         $this->setTagID(get_class($this));
     }
-    
+
     public function dig()
     {
         
@@ -44,5 +44,14 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
     public function heading()
     {
         return _('No heading set');
+    }
+
+    /**
+     * Print progress log
+     */
+    public function finalize()
+    {
+        $this->addStatusMessage($this->heading(),'debug');
+        parent::finalize();
     }
 }

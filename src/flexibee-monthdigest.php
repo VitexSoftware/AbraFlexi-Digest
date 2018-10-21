@@ -32,3 +32,6 @@ $postman = new Mailer($shared->getConfigValue('EASE_MAILTO'), $subject,
     constant('MODULE_DIR'));
 $postman->dig($period);
 $postman->send();
+$postman->htmlDocument->draw();
+
+
