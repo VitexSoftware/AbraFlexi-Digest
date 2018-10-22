@@ -1,5 +1,5 @@
 #!/bin/sh
-# preinst script for php-flexibee-digestmail
+# preinst script for php-flexibee-digest
 
 set -e
 

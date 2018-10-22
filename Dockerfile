@@ -12,5 +12,5 @@ RUN apt update
 RUN apt-get update
 RUN apt-get -y upgrade
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install flexibee-digestmail
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install flexibee-digest
 

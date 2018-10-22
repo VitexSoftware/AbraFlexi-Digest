@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "496c69c696d4b2b4ba9ac377e8295ab5",
+    "content-hash": "fa40fa59f87fd6beb0df978e8f2326de",
     "packages": [
         {
             "name": "pear/console_getopt",

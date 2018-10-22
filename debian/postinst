@@ -1,5 +1,5 @@
 #!/bin/sh
-# postinst script for php-flexibee-digestmail
+# postinst script for php-flexibee-digest
 WEBUSER="root" 
 set -e
 
@@ -12,9 +12,9 @@ set -e
 
 mkdir -p /var/lib/composer
 chown $WEBUSER:$WEBUSER /var/lib/composer
-su - $WEBUSER -s /bin/bash -c 'COMPOSER_HOME="/var/lib/composer" composer --no-dev -o install -d /usr/lib/php-flexibee-digestmail/'
+su - $WEBUSER -s /bin/bash -c 'COMPOSER_HOME="/var/lib/composer" composer --no-dev -o install -d /usr/lib/php-flexibee-digest/'
 
-php -f /usr/lib/php-flexibee-digestmail/Init.php
+php -f /usr/lib/php-flexibee-digest/Init.php
 
 #DEBHELPER#
 

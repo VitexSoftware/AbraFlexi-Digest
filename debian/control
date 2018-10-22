@@ -1,17 +1,18 @@
-Source: php-flexibee-digestmail
+Source: flexibee-digest
 Build-Depends: debhelper (>= 7.0.50~)
 Standards-Version: 3.8.4
 Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
 Uploaders: Vitex <vitex@hippy.cz>
 Priority: optional
-Homepage: https://github.com/VitexSoftware/php-flexibee-digestmail
+Homepage: https://github.com/VitexSoftware/FlexiBee-Digest
 
-Package: php-flexibee-digestmail
+Package: flexibee-digest
 Depends: ${misc:Depends}, php-flexibee-config, flexipeehp-bricks (>= 0.8) , composer, php-cli
 Suggests: flexibee-server
 Architecture: all
 Section: web
 Priority: optional
-Description: External digestmail for FlexiBee
- Match payments & invoices in FlexiBee usin PHP Library FlexiPeeHP
+Description: digest for FlexiBee
+ Prepare digest with accounting state of FlexiBee. Then save to file or send by
+ email. Dayly, weekly, monthly and yearly.
 

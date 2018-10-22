@@ -1,0 +1,5 @@
+/etc/cron.d/flexibee-digest
+/etc/cron.daily/flexibee-digest
+/etc/cron.monthly/flexibee-digest
+/etc/cron.weekly/flexibee-digest
+/etc/flexibee/digest.json

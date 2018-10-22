@@ -1,4 +1,4 @@
-![Package Logo](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-DigestMail/master/package-logo.png "Project Logo")
+![Package Logo](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-Digest/master/package-logo.png "Project Logo")
 
 FlexiBee Digest mail generator
 ==============================
@@ -20,7 +20,7 @@ Packages are availble. Please use repo :
     wget -O - http://v.s.cz/info@vitexsoftware.cz.gpg.key|sudo apt-key add -
     echo deb http://v.s.cz/ stable main > /etc/apt/sources.list.d/ease.list
     apt update
-    apt install php-flexibee-digestmail
+    apt install php-flexibee-digest
 ```
 
 Po instalaci balíku jsou v systému k dispozici dva nové příkazy:
@@ -44,7 +44,7 @@ Konfigurace
 -----------
 
  * [/etc/flexibee/client.json](client.json)   - společná konfigurace připojení k FlexiBee serveru
- * [/etc/flexibee/digestmail.json](digestmail.json) - nastavení párovače:
+ * [/etc/flexibee/digest.json](digest.json) - nastavení párovače:
 
 ```
     "EASE_MAILTO": "info@yourdomain.net",         - mail digest recipient
@@ -63,5 +63,5 @@ Poděkování
 
 Tento software by nevznikl pez podpory:
 
-[ ![Spoje.Net](https://raw.githubusercontent.com/VitexSoftware/php-flexibee-digestmail/master/doc/spojenet.gif "Spoje.Net s.r.o.") ](https://spoje.net/)
+[ ![Spoje.Net](https://raw.githubusercontent.com/VitexSoftware/php-flexibee-digest/master/doc/spojenet.gif "Spoje.Net s.r.o.") ](https://spoje.net/)
 

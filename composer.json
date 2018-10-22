@@ -1,5 +1,5 @@
 {
-    "name": "vitexsoftware/php-flexibee-digestmail",
+    "name": "vitexsoftware/php-flexibee-digest",
     "description": "Dayli FlexiBee dayly digest by mail.",
     "authors": [
         {
@@ -12,7 +12,7 @@
     },
     "autoload": {
         "psr-4": {
-            "FlexiPeeHP\\DigestMail\\": "src/DigestMail/"
+            "FlexiPeeHP\\Digest\\": "src/Digest/"
         }
     }
 }
