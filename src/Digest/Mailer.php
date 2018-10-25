@@ -63,6 +63,9 @@ Copyright (c) Nicolas Gallagher and Jonathan Neal
                 $this->addItem(new $class($interval));
             }
             $d->close();
+        } else {
+            $this->addStatusMessage(sprintf(_('Module dir %s is wrong'),
+                    $this->moduleDir), 'error');
         }
     }
 

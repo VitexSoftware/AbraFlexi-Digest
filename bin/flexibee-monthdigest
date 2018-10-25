@@ -1,4 +1,4 @@
 #!/bin/bash
-php -f /usr/lib/php-flexibee-digest/flexibee-monthdigest.php
+php -f /usr/share/flexibee-digest/flexibee-monthdigest.php
 
 

@@ -1,4 +1,0 @@
-#!/bin/bash
-php -f /usr/lib/php-flexibee-digest/flexibee-monthdigest.php
-
-

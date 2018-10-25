@@ -1,2 +1,2 @@
 #!/bin/bash
-php -f /usr/lib/php-flexibee-digest/flexibee-daydigest.php
+php -f /usr/share/flexibee-digest/flexibee-daydigest.php

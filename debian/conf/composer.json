@@ -20,30 +20,8 @@
     },
     "autoload": {
         "psr-4": {
-            "FlexiPeeHP\\Digest\\": "."
-        }
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "/usr/share/php/Ease",
-            "options": {
-                "symlink": true
-            }
+            "FlexiPeeHP\\Digest\\": "./Digest"
         },
-        {
-            "type": "path",
-            "url": "/usr/share/php/FlexiPeeHP",
-            "options": {
-                "symlink": true
-            }
-        },
-        {
-            "type": "path",
-            "url": "/usr/share/php/FlexiPeeHPBricks",
-            "options": {
-                "symlink": true
-            }
-        }
-    ]
-}
+        "classmap": ["/usr/share/php/"]
+    }
+ }

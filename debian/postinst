@@ -10,11 +10,11 @@ set -e
     fi
 
 
-mkdir -p /var/lib/composer
+mkdir -p /var/lib/composer 
 chown $WEBUSER:$WEBUSER /var/lib/composer
-su - $WEBUSER -s /bin/bash -c 'COMPOSER_HOME="/var/lib/composer" composer --no-dev -o install -d /usr/lib/php-flexibee-digest/'
+su - $WEBUSER -s /bin/bash -c 'COMPOSER_HOME="/var/lib/composer" composer --no-dev -o install -d /usr/share/flexibee-digest/'
 
-php -f /usr/lib/php-flexibee-digest/Init.php
+#php -f /usr/lib/php-flexibee-digest/Init.php
 
 #DEBHELPER#
 

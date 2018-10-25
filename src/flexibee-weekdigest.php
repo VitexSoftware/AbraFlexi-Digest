@@ -9,7 +9,7 @@
 namespace FlexiPeeHP\Digest;
 
 define('EASE_APPNAME', 'FlexiBeeDigest');
-define('MODULE_DIR', '../modules');
+define('MODULE_DIR', './modules');
 
 require_once '../vendor/autoload.php';
 $shared = new \Ease\Shared();

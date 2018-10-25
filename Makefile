@@ -63,7 +63,7 @@ test73:
 	cd src &&  php7.3 -f flexibee-monthdigest.php && cd ..
 	cd src &&  php7.3 -f flexibee-yeardigest.php && cd ..
 
-testphp: test56 test70 test71 test72
+testphp: test70
 
 
 clean:

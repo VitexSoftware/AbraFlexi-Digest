@@ -51,7 +51,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      */
     public function finalize()
     {
-        $this->addStatusMessage($this->heading(),'debug');
+        $this->addStatusMessage($this->heading(), 'debug');
         parent::finalize();
     }
 }

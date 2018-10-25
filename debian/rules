@@ -5,11 +5,12 @@
 
 override_dh_install:
 	dh_install
-	sed -i -e 's/..\/vendor/\/var\/lib\/flexibee-digest/g' 	     debian/flexibee-digest/usr/lib/flexibee-digest/flexibee-daydigest.php
-	sed -i -e 's/..\/vendor/\/var\/lib\/flexibee-digest/g' 	     debian/flexibee-digest/usr/lib/flexibee-digest/flexibee-weekdigest.php
-	sed -i -e 's/..\/vendor/\/var\/lib\/flexibee-digest/g' 	     debian/flexibee-digest/usr/lib/flexibee-digest/flexibee-monthdigest.php
-	sed -i -e 's/..\/vendor/\/var\/lib\/flexibee-digest/g' 	     debian/flexibee-digest/usr/lib/flexibee-digest/flexibee-yeardigest.php
-	sed -i -e 's/\.\./\/etc\/flexibee/g' 	     debian/flexibee-digest/usr/lib/flexibee-digest/flexibee-daydigest.php
-	sed -i -e 's/\.\./\/etc\/flexibee/g' 	     debian/flexibee-digest/usr/lib/flexibee-digest/flexibee-weekdigest.php
-	sed -i -e 's/\.\./\/etc\/flexibee/g' 	     debian/flexibee-digest/usr/lib/flexibee-digest/flexibee-monthdigest.php
-	sed -i -e 's/\.\./\/etc\/flexibee/g' 	     debian/flexibee-digest/usr/lib/flexibee-digest/flexibee-yeardigest.php
+	sed -i -e 's/..\/vendor/\/var\/lib\/php-flexibee-digest/g' 	     debian/flexibee-digest/usr/share/flexibee-digest/flexibee-daydigest.php
+	sed -i -e 's/..\/vendor/\/var\/lib\/php-flexibee-digest/g' 	     debian/flexibee-digest/usr/share/flexibee-digest/flexibee-weekdigest.php
+	sed -i -e 's/..\/vendor/\/var\/lib\/php-flexibee-digest/g' 	     debian/flexibee-digest/usr/share/flexibee-digest/flexibee-monthdigest.php
+	sed -i -e 's/..\/vendor/\/var\/lib\/php-flexibee-digest/g' 	     debian/flexibee-digest/usr/share/flexibee-digest/flexibee-yeardigest.php
+	sed -i -e 's/\.\./\/etc\/flexibee/g'                                 debian/flexibee-digest/usr/share/flexibee-digest/flexibee-daydigest.php
+	sed -i -e 's/\.\./\/etc\/flexibee/g'                                 debian/flexibee-digest/usr/share/flexibee-digest/flexibee-weekdigest.php
+	sed -i -e 's/\.\./\/etc\/flexibee/g'                                 debian/flexibee-digest/usr/share/flexibee-digest/flexibee-monthdigest.php
+	sed -i -e 's/\.\./\/etc\/flexibee/g'                                 debian/flexibee-digest/usr/share/flexibee-digest/flexibee-yeardigest.php
+	sed -i -e 's/.\/modules/\/usr\/lib\/flexibee-digest/g'               debian/flexibee-digest/usr/share/flexibee-digest/*.php

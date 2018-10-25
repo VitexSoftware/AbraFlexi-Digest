@@ -1,3 +1,9 @@
+flexibee-digest (0.5) UNRELEASED; urgency=medium
+
+  * Debian package installation fix IIII
+
+ -- Vítězslav Dvořák <vitex@develoid.jinonice.czf>  Thu, 25 Oct 2018 09:42:00 +0200
+
 flexibee-digest (0.1) experimental; urgency=medium
 
   * Initial release

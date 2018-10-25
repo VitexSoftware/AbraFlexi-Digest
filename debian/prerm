@@ -1,8 +1,7 @@
 #!/bin/bash
-# rm script for php-flexibee-reminder
+# rm script for flexibee-digest
 
-rm -f /usr/share/php-flexibee-reminder/composer.lock
-
+rm -f /usr/share/flexibee-digest/composer.lock
 #DEBHELPER#
 
 exit 0
