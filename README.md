@@ -5,10 +5,10 @@ FlexiBee Digest mail generator
 
 Features:
 
-    * **Custom Modules**         - you can write your own Digest modules
-    * **Static page export**     - Digest is saved to file
-    * **Send by eMail**          - Digest is send by email   
-    * **Skinable**               - You can choose or add custom css
+* **Extensible**             - you can write your own Digest modules
+* **Static page export**     - Digest is saved to file
+* **Send by eMail**          - Digest is send by email   
+* **Skinable**               - You can choose or add custom css
 
 There are four scripts:
 
@@ -39,15 +39,6 @@ Po instalaci balíku jsou v systému k dispozici dva nové příkazy:
   * **flexibee-alltimedigest**  - Generate FlexiBee digest for all time
 
 
-Závislosti
-----------
-
-Tento nástroj ke svojí funkci využívá následující knihovny:
-
- * [**EasePHP Framework**](https://github.com/VitexSoftware/EaseFramework) - pomocné funkce např. logování
- * [**FlexiPeeHP**](https://github.com/Spoje-NET/FlexiPeeHP)        - komunikace s [FlexiBee](https://flexibee.eu/)
- * [**FlexiPeeHP Bricks**](https://github.com/VitexSoftware/FlexiPeeHP-Bricks) - používají se třídy Zákazníka, Upomínky a Upomínače
-
 Konfigurace
 -----------
 
@@ -62,6 +53,45 @@ Konfigurace
     "SAVETO": "/var/tmp/"                         - save html digest to 
 ```
 
+Modules
+=======
+
+Digest is generated using modules located in [src\modules](src\modules)
+
+This Module add Company logo to Digest:
+
+```php
+class Logo extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Digest\DigestModuleInterface
+{
+
+    public function dig()
+    {
+        $configurator = new \FlexiPeeHP\Nastaveni();
+        $logoInfo     = $configurator->getFlexiData($configurator->getEvidenceUrl().'/1/logo');
+        if (is_array($logoInfo) && isset($logoInfo[0])) {
+            $this->addItem(new \Ease\Html\ImgTag('data:'.$logoInfo[0]['contentType'].';'.$logoInfo[0]['content@encoding'].','.$logoInfo[0]['content'],
+                $logoInfo[0]['nazSoub']));
+        }
+    }
+
+    public function heading()
+    {
+        return _('Company Logo')';
+    }
+}
+```
+
+
+
+Dependencies
+------------
+
+Tento nástroj ke svojí funkci využívá následující knihovny:
+
+ * [**EasePHP Framework**](https://github.com/VitexSoftware/EaseFramework) - pomocné funkce např. logování
+ * [**FlexiPeeHP**](https://github.com/Spoje-NET/FlexiPeeHP)        - komunikace s [FlexiBee](https://flexibee.eu/)
+ * [**FlexiPeeHP Bricks**](https://github.com/VitexSoftware/FlexiPeeHP-Bricks) - používají se třídy Zákazníka, Upomínky a Upomínače
+
 
 See also
 --------
@@ -74,5 +104,5 @@ Poděkování
 
 Tento software by nevznikl pez podpory:
 
-[ ![Spoje.Net](https://raw.githubusercontent.com/VitexSoftware/php-flexibee-digest/master/doc/spojenet.gif "Spoje.Net s.r.o.") ](https://spoje.net/)
+[ ![Spoje.Net](https://raw.githubusercontent.com/VitexSoftware/php-flexibee-digest/master/spojenet.gif "Spoje.Net s.r.o.") ](https://spoje.net/)
 
