@@ -1,2 +1,7 @@
 /nbproject/private/
 /.vagrant/
+/debian/flexibee-digest/
+/debian/debhelper-build-stamp
+/debian/files
+/debian/flexibee-digest.postrm.debhelper
+/debian/flexibee-digest.substvars

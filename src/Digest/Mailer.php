@@ -52,6 +52,7 @@ Copyright (c) Nicolas Gallagher and Jonathan Neal
      */
     public function dig($interval)
     {
+        $this->addItem( new \FlexiPeeHP\ui\StatusInfoBox() );
         if (is_dir($this->moduleDir)) {
             $d     = dir($this->moduleDir);
             while (false !== ($entry = $d->read())) {

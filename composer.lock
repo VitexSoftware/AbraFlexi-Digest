@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c63f20eef88ca192066496f0a919c1f7",
+    "content-hash": "cf9d111c43593bff2f065cd7e5f94a02",
     "packages": [
         {
             "name": "pear/console_getopt",
@@ -262,12 +262,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Spoje-NET/FlexiPeeHP.git",
-                "reference": "a0bd550c2154db01ece239c877ee4569df46c749"
+                "reference": "571f684ca23326589d3ddd7c3ce5e4a40cda6456"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Spoje-NET/FlexiPeeHP/zipball/a0bd550c2154db01ece239c877ee4569df46c749",
-                "reference": "a0bd550c2154db01ece239c877ee4569df46c749",
+                "url": "https://api.github.com/repos/Spoje-NET/FlexiPeeHP/zipball/571f684ca23326589d3ddd7c3ce5e4a40cda6456",
+                "reference": "571f684ca23326589d3ddd7c3ce5e4a40cda6456",
                 "shasum": ""
             },
             "require": {
@@ -299,27 +299,27 @@
                 }
             ],
             "description": "PHP Based Library for easy interaction with czech accounting system Flexibee.",
-            "time": "2018-10-25T10:04:03+00:00"
+            "time": "2018-10-25T11:24:10+00:00"
         },
         {
             "name": "vitexsoftware/ease-framework",
-            "version": "1.5.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/EaseFramework.git",
-                "reference": "3047341f9c938c35c5f3cc33e3605617ee2387f3"
+                "reference": "6f6edb627bc9da1b19b385c9df7a6b8c2038c577"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/EaseFramework/zipball/3047341f9c938c35c5f3cc33e3605617ee2387f3",
-                "reference": "3047341f9c938c35c5f3cc33e3605617ee2387f3",
+                "url": "https://api.github.com/repos/VitexSoftware/EaseFramework/zipball/6f6edb627bc9da1b19b385c9df7a6b8c2038c577",
+                "reference": "6f6edb627bc9da1b19b385c9df7a6b8c2038c577",
                 "shasum": ""
             },
             "require": {
                 "ext-pdo": "*",
                 "pear/mail": "~1.3",
                 "pear/mail_mime": "~1.10",
-                "php": ">=5.6 <7.3"
+                "php": ">=5.6"
             },
             "require-dev": {
                 "apigen/apigen": ">=4",
@@ -358,7 +358,7 @@
             ],
             "description": "An PHP Framework for Ease of writing Applications",
             "homepage": "http://v.s.cz/ease.php",
-            "time": "2018-06-11T20:52:45+00:00"
+            "time": "2018-10-26T08:59:31+00:00"
         },
         {
             "name": "vitexsoftware/flexipeehp-bricks",
@@ -366,12 +366,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/FlexiPeeHP-Bricks.git",
-                "reference": "a47aab4f4f17ea32079184dac688410b6d2c1d1d"
+                "reference": "0fcbdb045ec646cfded4f11041aae88adb4fde4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/FlexiPeeHP-Bricks/zipball/a47aab4f4f17ea32079184dac688410b6d2c1d1d",
-                "reference": "a47aab4f4f17ea32079184dac688410b6d2c1d1d",
+                "url": "https://api.github.com/repos/VitexSoftware/FlexiPeeHP-Bricks/zipball/0fcbdb045ec646cfded4f11041aae88adb4fde4c",
+                "reference": "0fcbdb045ec646cfded4f11041aae88adb4fde4c",
                 "shasum": ""
             },
             "require": {
@@ -398,7 +398,7 @@
                 }
             ],
             "description": "FlexiPeeHP code Sniplets",
-            "time": "2018-09-27T12:04:02+00:00"
+            "time": "2018-10-25T22:10:14+00:00"
         }
     ],
     "packages-dev": [],
@@ -406,7 +406,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "vitexsoftware/flexipeehp-bricks": 20,
-        "spoje.net/flexipeehp": 20
+        "spoje.net/flexipeehp": 20,
+        "vitexsoftware/ease-framework": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

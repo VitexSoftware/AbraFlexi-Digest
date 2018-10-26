@@ -35,7 +35,7 @@ class WaitingIncome extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPee
                     new \Ease\Html\ATag($checker->getApiUrl(),
                         $outInvoiceData['kod']),
                     new \Ease\Html\ATag($adreser->getApiUrl(),
-                        $outInvoiceData['firma@showAs']),
+                        empty($outInvoiceData['firma']) ? '' : $outInvoiceData['firma@showAs']),
                     $outInvoiceData['sumCelkem'].' '.current(explode(':',
                             $outInvoiceData['mena@showAs']))
                 ]);

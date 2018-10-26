@@ -18,7 +18,7 @@ $shared->loadConfig('../digest.json', true);
 
 $period = new \DateTime();
 
-$subject = \sprintf(_('FlexiBee Dayly digest for %s'),
+$subject = \sprintf(_('FlexiBee Daily digest for %s'),
     \strftime('%x', $period->getTimestamp()));
 
 $postman = new Mailer($shared->getConfigValue('EASE_MAILTO'), $subject,
