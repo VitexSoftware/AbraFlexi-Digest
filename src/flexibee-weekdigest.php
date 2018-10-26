@@ -9,7 +9,7 @@
 namespace FlexiPeeHP\Digest;
 define('EASE_APPNAME', 'FlexiBeeWeekDigest');
 
-require_once './init.php';
+require_once __DIR__ . '/init.php';
 
 
 $start  = new \DateTime();

@@ -10,7 +10,7 @@ namespace FlexiPeeHP\Digest;
 
 define('EASE_APPNAME', 'FlexiYearDigest');
 
-require_once './init.php';
+require_once __DIR__ . '/init.php';
 
 $start  = new \DateTime();
 $start->modify('-1 year');

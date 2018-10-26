@@ -104,5 +104,5 @@ Poděkování
 
 Tento software by nevznikl pez podpory:
 
-[ ![Spoje.Net](https://raw.githubusercontent.com/VitexSoftware/php-flexibee-digest/master/spojenet.gif "Spoje.Net s.r.o.") ](https://spoje.net/)
+[ ![Spoje.Net](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-Digest/master/spojenet.gif "Spoje.Net s.r.o.") ](https://spoje.net/)
 

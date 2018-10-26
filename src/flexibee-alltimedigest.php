@@ -9,7 +9,7 @@
 namespace FlexiPeeHP\Digest;
 define('EASE_APPNAME', 'FlexiBeeAllTimeDigest');
 
-require_once './init.php';
+require_once __DIR__ . '/init.php';
 
 $subject = sprintf(_('FlexiBee Alltime'));
 
