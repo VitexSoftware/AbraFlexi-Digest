@@ -10,13 +10,18 @@
  */
 class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Digest\DigestModuleInterface
 {
+    /**
+     * Column used to filter by date
+     * @var string 
+     */
+    public $timeColumn = 'datVyst';
 
     public function dig()
     {
         $digger          = new FlexiPeeHP\FakturaVydana();
         $outInvoicesData = $digger->getColumnsFromFlexibee(['kod', 'typDokl', 'sumCelkem',
             'uhrazeno', 'storno', 'mena', 'juhSum', 'juhSumMen'],
-            ['datVyst' => $this->interval]);
+            $this->condition);
         $exposed         = 0;
         $invoicedRaw     = [];
         $paid            = [];
@@ -24,7 +29,7 @@ class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
 
         $typDoklRaw = [];
         if (empty($outInvoicesData)) {
-            $this->addItem(_('No outcoming invoices'));
+            $this->addItem(_('none'));
         } else {
             foreach ($outInvoicesData as $outInvoiceData) {
                 $exposed++;
@@ -50,7 +55,7 @@ class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
                 $typDokl[] = $count.' x '.FlexiPeeHP\FlexiBeeRO::uncode($type);
             }
             $this->addItem(new \Ease\Html\DivTag(sprintf(_('Exposed %s invoices'),
-                    $exposed.' '.implode(',', $typDokl))));
+                    $exposed.' '.implode('<br>', $typDokl))));
 
             $invoiced = [];
             foreach ($invoicedRaw as $currencyCode => $amount) {
@@ -58,7 +63,7 @@ class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
             }
 
             $this->addItem(new \Ease\Html\DivTag(sprintf(_('Invoiced amount %s'),
-                    implode(',', $invoiced))));
+                    implode('<br>', $invoiced))));
 
             $this->addItem(new \Ease\Html\DivTag(sprintf(_('Exposed %s invoices'),
                     $exposed)));

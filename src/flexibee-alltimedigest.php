@@ -7,15 +7,9 @@
  */
 
 namespace FlexiPeeHP\Digest;
+define('EASE_APPNAME', 'FlexiBeeAllTimeDigest');
 
-define('EASE_APPNAME', 'FlexiBeeDigest');
-define('MODULE_DIR', './modules');
-define('STYLE_DIR', './css');
-
-require_once '../vendor/autoload.php';
-$shared = \Ease\Shared::instanced();
-$shared->loadConfig('../client.json', true);
-$shared->loadConfig('../digest.json', true);
+require_once './init.php';
 
 $subject = sprintf(_('FlexiBee Alltime'));
 

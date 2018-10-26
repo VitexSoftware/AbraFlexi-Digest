@@ -16,14 +16,16 @@ build:
 #	composer --ansi --no-interaction update
 #	php -f tests/PrepareForTest.php
 
-incoming:
-	cd src &&  php -f ParujPrijateFaktury.php && cd ..
-outcoming:
-	cd src &&  php -f ParujVydaneFaktury.php && cd ..
-newtoold:
-	cd src &&  php -f ParujFakturyNew2Old.php && cd ..
-parujnew2old:
-	cd src &&  php -f ParujFakturyNew2Old.php && cd ..
+daydigest:
+	cd src &&  php -f flexibee-daydigest.php && cd ..
+weekdigest:
+	cd src &&  php -f flexibee-weekdigest.php && cd ..
+monthdigest:
+	cd src &&  php -f flexibee-monthdigest.php && cd ..
+yeardigest:
+	cd src &&  php -f flexibee-yeardigest.php && cd ..
+alltimedigest:
+	cd src &&  php -f flexibee-alltimedigest.php && cd ..
 
 match: incoming outcoming parujnew2old
 test: composer testphp
@@ -34,6 +36,7 @@ test56:
 	cd src &&  php5.6 -f flexibee-weekdigest.php && cd ..
 	cd src &&  php5.6 -f flexibee-monthdigest.php && cd ..
 	cd src &&  php5.6 -f flexibee-yeardigest.php && cd ..
+	cd src &&  php5.6 -f flexibee-alltimedigest.php && cd ..
 	
 test70:
 	@echo '################################################### PHP 7.0'
@@ -41,6 +44,7 @@ test70:
 	cd src &&  php7.0 -f flexibee-weekdigest.php && cd ..
 	cd src &&  php7.0 -f flexibee-monthdigest.php && cd ..
 	cd src &&  php7.0 -f flexibee-yeardigest.php && cd ..
+	cd src &&  php7.0 -f flexibee-alltimedigest.php && cd ..
 
 test71:
 	@echo '################################################### PHP 7.1'
@@ -48,6 +52,7 @@ test71:
 	cd src &&  php7.1 -f flexibee-weekdigest.php && cd ..
 	cd src &&  php7.1 -f flexibee-monthdigest.php && cd ..
 	cd src &&  php7.1 -f flexibee-yeardigest.php && cd ..
+	cd src &&  php7.1 -f flexibee-alltimedigest.php && cd ..
 
 test72:
 	@echo '################################################### PHP 7.2'
@@ -55,6 +60,7 @@ test72:
 	cd src &&  php7.2 -f flexibee-weekdigest.php && cd ..
 	cd src &&  php7.2 -f flexibee-monthdigest.php && cd ..
 	cd src &&  php7.2 -f flexibee-yeardigest.php && cd ..
+	cd src &&  php7.2 -f flexibee-alltimedigest.php && cd ..
 
 test73:
 	@echo '################################################### PHP 7.3'
@@ -62,6 +68,7 @@ test73:
 	cd src &&  php7.3 -f flexibee-weekdigest.php && cd ..
 	cd src &&  php7.3 -f flexibee-monthdigest.php && cd ..
 	cd src &&  php7.3 -f flexibee-yeardigest.php && cd ..
+	cd src &&  php7.3 -f flexibee-alltimedigest.php && cd ..
 
 testphp: test70
 

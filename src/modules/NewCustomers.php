@@ -10,17 +10,21 @@
  */
 class NewCustomers extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Digest\DigestModuleInterface
 {
-
+    /**
+     * Column used to filter by date
+     * @var string 
+     */
+    public $timeColumn = 'lastUpdate';
     public function dig()
     {
         $digger           = new FlexiPeeHP\Adresar();
         $newCustomersData = $digger->getColumnsFromFlexibee(['kod', 'nazev', 'tel',
-            'email'], ['lastUpdate' => $this->interval]);
+            'email'], $this->condition);
 
         $typDoklRaw = [];
 
         if (empty($newCustomersData)) {
-            $this->addItem(_('No new/changed clients'));
+            $this->addItem(_('none'));
         } else {
             $userTable = new Ease\Html\TableTag(null, ['class' => 'pure-table']);
             $userTable->addRowHeaderColumns([_('Position'), _('Code'), _('Name'),

@@ -3,6 +3,13 @@
 FlexiBee Digest mail generator
 ==============================
 
+Features:
+
+    * **Custom Modules**         - you can write your own Digest modules
+    * **Static page export**     - Digest is saved to file
+    * **Send by eMail**          - Digest is send by email   
+    * **Skinable**               - You can choose or add custom css
+
 There are four scripts:
 
 [flexibee-daydigest.php](src/flexibee-daydigest.php)     - Generate FlexiBee digest for one day

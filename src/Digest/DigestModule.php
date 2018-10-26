@@ -1,8 +1,9 @@
 <?php
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * FlexiBee Digest
+ *
+ * @author     Vítězslav Dvořák <info@vitexsofware.cz>
+ * @copyright  (G) 2018 Vitex Software
  */
 
 namespace FlexiPeeHP\Digest;
@@ -15,10 +16,16 @@ namespace FlexiPeeHP\Digest;
 class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
 {
     /**
-     * 
-     * @param \DateTime|\DateInterval $interval
+     * Which records we want to see ?
+     * @param array $condition
      */
-    public $interval = null;
+    public $condition = [];
+
+    /**
+     * Flexibe Evidence Column used to filter by date
+     * @var string 
+     */
+    public $timeColumn = null;
 
     /**
      * 
@@ -26,7 +33,10 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      */
     public function __construct($interval)
     {
-        $this->interval = $interval;
+        if (!empty($interval) && $this->timeColumn) {
+            $this->condition = [$this->timeColumn => $interval];
+        }
+
         parent::__construct();
         $this->setTagID(get_class($this));
         $this->addItem(new \Ease\Html\HrTag());
@@ -40,7 +50,8 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      */
     public function dig()
     {
-        
+        $this->addItem(new \Ease\Html\ATag('https://www.vitexsoftware.cz/cenik.php',
+            _('Please contact Vitex Software to make this module working.')));
     }
 
     /**
