@@ -56,7 +56,7 @@ Konfigurace
 Modules
 =======
 
-Digest is generated using modules located in [src\modules](src\modules)
+Digest is generated using modules located in [src/modules](src/modules)
 
 This Module add Company logo to Digest:
 
@@ -67,7 +67,7 @@ class Logo extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Digest
     public function dig()
     {
         $configurator = new \FlexiPeeHP\Nastaveni();
-        $logoInfo     = $configurator->getFlexiData($configurator->getEvidenceUrl().'/1/logo');
+        $logoInfo     = $configurator->getFlexiData('1/logo');
         if (is_array($logoInfo) && isset($logoInfo[0])) {
             $this->addItem(new \Ease\Html\ImgTag('data:'.$logoInfo[0]['contentType'].';'.$logoInfo[0]['content@encoding'].','.$logoInfo[0]['content'],
                 $logoInfo[0]['nazSoub']));
