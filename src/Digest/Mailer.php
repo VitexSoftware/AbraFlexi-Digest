@@ -52,7 +52,22 @@ Copyright (c) Nicolas Gallagher and Jonathan Neal
      */
     public function dig($interval)
     {
-        $this->addItem( new \FlexiPeeHP\ui\StatusInfoBox() );
+        $prober  = new \FlexiPeeHP\Company();
+        $infoRaw = $prober->getFlexiData();
+        if (count($infoRaw) && !array_key_exists('success', $infoRaw)) {
+            $info = self::reindexArrayBy($infoRaw, 'dbNazev');
+            $myCompany = $prober->getCompany();
+            if (array_key_exists($myCompany, $info)) {
+                $return = new \Ease\Html\ATag($prober->url.'/c/'.$myCompany,
+                    $info[$myCompany]['nazev']);
+            } else {
+                $return = new \Ease\Html\ATag($prober->getApiURL(),_('Connection Problem'));
+            }
+        }
+
+        $this->addItem($return);
+
+
         if (is_dir($this->moduleDir)) {
             $d     = dir($this->moduleDir);
             while (false !== ($entry = $d->read())) {

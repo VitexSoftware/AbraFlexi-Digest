@@ -23,43 +23,46 @@ class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
         $storno          = 0;
 
         $typDoklRaw = [];
+        if (empty($outInvoicesData)) {
+            $this->addItem(_('No outcoming invoices'));
+        } else {
+            foreach ($outInvoicesData as $outInvoiceData) {
+                $exposed++;
+                if ($outInvoiceData['storno'] == 'true') {
+                    $storno++;
+                }
 
-        foreach ($outInvoicesData as $outInvoiceData) {
-            $exposed++;
-            if ($outInvoiceData['storno'] == 'true') {
-                $storno++;
+                if (array_key_exists($outInvoiceData['typDokl'], $typDoklRaw)) {
+                    $typDoklRaw[$outInvoiceData['typDokl']] ++;
+                } else {
+                    $typDoklRaw[$outInvoiceData['typDokl']] = 1;
+                }
+
+                if (array_key_exists($outInvoiceData['mena'], $outInvoiceData)) {
+                    $invoicedRaw[$outInvoiceData['mena']] += floatval($outInvoiceData['sumCelkem']);
+                } else {
+                    $invoicedRaw[$outInvoiceData['mena']] = floatval($outInvoiceData['sumCelkem']);
+                }
             }
 
-            if (array_key_exists($outInvoiceData['typDokl'], $typDoklRaw)) {
-                $typDoklRaw[$outInvoiceData['typDokl']] ++;
-            } else {
-                $typDoklRaw[$outInvoiceData['typDokl']] = 1;
+            $typDokl = [];
+            foreach ($typDoklRaw as $type => $count) {
+                $typDokl[] = $count.' x '.FlexiPeeHP\FlexiBeeRO::uncode($type);
+            }
+            $this->addItem(new \Ease\Html\DivTag(sprintf(_('Exposed %s invoices'),
+                    $exposed.' '.implode(',', $typDokl))));
+
+            $invoiced = [];
+            foreach ($invoicedRaw as $currencyCode => $amount) {
+                $invoiced[] = $amount.' '.FlexiPeeHP\FlexiBeeRO::uncode($currencyCode);
             }
 
-            if (array_key_exists($outInvoiceData['mena'], $outInvoiceData)) {
-                $invoicedRaw[$outInvoiceData['mena']] += floatval($outInvoiceData['sumCelkem']);
-            } else {
-                $invoicedRaw[$outInvoiceData['mena']] = floatval($outInvoiceData['sumCelkem']);
-            }
+            $this->addItem(new \Ease\Html\DivTag(sprintf(_('Invoiced amount %s'),
+                    implode(',', $invoiced))));
+
+            $this->addItem(new \Ease\Html\DivTag(sprintf(_('Exposed %s invoices'),
+                    $exposed)));
         }
-
-        $typDokl = [];
-        foreach ($typDoklRaw as $type => $count) {
-            $typDokl[] = $count.' x '.FlexiPeeHP\FlexiBeeRO::uncode($type);
-        }
-        $this->addItem(new \Ease\Html\DivTag(sprintf(_('Exposed %s invoices'),
-                $exposed.' '.implode(',', $typDokl))));
-
-        $invoiced = [];
-        foreach ($invoicedRaw as $currencyCode => $amount) {
-            $invoiced[] = $amount.' '.FlexiPeeHP\FlexiBeeRO::uncode($currencyCode);
-        }
-
-        $this->addItem(new \Ease\Html\DivTag(sprintf(_('Invoiced amount %s'),
-                implode(',', $invoiced))));
-
-        $this->addItem(new \Ease\Html\DivTag(sprintf(_('Exposed %s invoices'),
-                $exposed)));
     }
 
     public function heading()
