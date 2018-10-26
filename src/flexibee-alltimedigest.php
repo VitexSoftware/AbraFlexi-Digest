@@ -1,6 +1,6 @@
 <?php
 /**
- * FlexiBee Digest - Monthly 
+ * FlexiBee Digest - Yearly 
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
  * @copyright  (G) 2018 Vitex Software
@@ -17,17 +17,7 @@ $shared = \Ease\Shared::instanced();
 $shared->loadConfig('../client.json', true);
 $shared->loadConfig('../digest.json', true);
 
-$start  = new \DateTime();
-$start->modify('-1 month');
-$end    = new \DateTime();
-$period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
-
-$subject = sprintf(
-    _('FlexiBee Monthly digest from %s to %s'),
-    \strftime('%x', $period->getStartDate()->getTimestamp()),
-    \strftime('%x', $period->getEndDate()->getTimestamp())
-);
-
+$subject = sprintf(_('FlexiBee Alltime'));
 
 $digestor = new Digestor($subject);
-$digestor->dig($period, constant('MODULE_DIR'));
+$digestor->dig(null, constant('MODULE_DIR'));

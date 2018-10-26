@@ -9,7 +9,7 @@ There are four scripts:
 [flexibee-weekdigest.php](src/flexibee-weekdigest.php)   - Generate FlexiBee digest for one week
 [flexibee-monthdigest.php](src/flexibee-monthdigest.php) - Generate FlexiBee digest for one month
 [flexibee-yeardigest.php](src/flexibee-yeardigest.php)   - Generate FlexiBee digest for one year
-
+[flexibee-alltimedigest.php](src/flexibee-yeardigest.php)- Generate FlexiBee digest for all time
 
 Debian/Ubuntu
 -------------
@@ -25,10 +25,11 @@ Packages are availble. Please use repo :
 
 Po instalaci balíku jsou v systému k dispozici dva nové příkazy:
 
-  * **flexibee-daydigest**   - Generate and send FlexiBee digest for one day
-  * **flexibee-monthdigest** - Generate and send FlexiBee digest for one week
-  * **flexibee-weekdigest**  - Generate and send FlexiBee digest for one month
-  * **flexibee-yeardigest**  - Generate and send FlexiBee digest for one year
+  * **flexibee-daydigest**      - Generate FlexiBee digest for one day
+  * **flexibee-monthdigest**    - Generate FlexiBee digest for one week
+  * **flexibee-weekdigest**     - Generate FlexiBee digest for one month
+  * **flexibee-yeardigest**     - Generate FlexiBee digest for one year
+  * **flexibee-alltimedigest**  - Generate FlexiBee digest for all time
 
 
 Závislosti
@@ -47,8 +48,11 @@ Konfigurace
  * [/etc/flexibee/digest.json](digest.json) - nastavení párovače:
 
 ```
-    "EASE_MAILTO": "info@yourdomain.net",         - mail digest recipient
     "EASE_LOGGER": "syslog|mail|console",         - how to log progress and results
+    "EASE_MAILTO": "info@yourdomain.net",         - send digest mail
+    "DIGEST_FROM": "noreply@vitexsoftware.cz",    - digest mail sender address 
+    "THEME":  "happy",                            - additional css
+    "SAVETO": "/var/tmp/"                         - save html digest to 
 ```
 
 

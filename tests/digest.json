@@ -1,4 +1,7 @@
 {
+    "EASE_LOGGER": "syslog|console",
+    "THEME":  "happy",
+    "SAVETO": "/var/tmp/",
     "EASE_MAILTO": "info@vitexsoftware.cz",
-    "EASE_LOGGER": "syslog|mail"
+    "DIGEST_FROM": "noreply@vitexsoftware.cz"
 }

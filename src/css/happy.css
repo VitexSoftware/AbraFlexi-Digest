@@ -1,0 +1,9 @@
+body {
+  background: -webkit-linear-gradient(315deg, #04edf9 0%, rgba(4, 237, 249, 0) 70%), -webkit-linear-gradient(65deg, #09e782 10%, rgba(9, 231, 130, 0) 80%), -webkit-linear-gradient(135deg, #dec806 15%, rgba(222, 200, 6, 0) 80%), -webkit-linear-gradient(205deg, #048fcc 100%, rgba(4, 143, 204, 0) 70%);
+  background: linear-gradient(135deg, #04edf9 0%, rgba(4, 237, 249, 0) 70%), linear-gradient(25deg, #09e782 10%, rgba(9, 231, 130, 0) 80%), linear-gradient(315deg, #dec806 15%, rgba(222, 200, 6, 0) 80%), linear-gradient(245deg, #048fcc 100%, rgba(4, 143, 204, 0) 70%);
+  font-family: Lato;
+  margin: 10px;
+  font-size: 1.4em;
+  text-align: center; }
+
+/*# sourceMappingURL=happy.css.map */

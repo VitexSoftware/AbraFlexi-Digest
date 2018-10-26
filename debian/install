@@ -2,5 +2,6 @@ debian/conf/composer.json       usr/share/flexibee-digest/
 src/*			        usr/share/flexibee-digest/
 src/modules/*		        usr/lib/flexibee-digest/
 src/Digest/*                    usr/share/flexibee-digest/Digest/
+src/css/*.css                   usr/share/flexibee-digest/themes/
 bin/*                           usr/bin/
 debian/conf/digest.json         etc/flexibee/

@@ -14,3 +14,4 @@ override_dh_install:
 	sed -i -e 's/\.\./\/etc\/flexibee/g'                                 debian/flexibee-digest/usr/share/flexibee-digest/flexibee-monthdigest.php
 	sed -i -e 's/\.\./\/etc\/flexibee/g'                                 debian/flexibee-digest/usr/share/flexibee-digest/flexibee-yeardigest.php
 	sed -i -e 's/.\/modules/\/usr\/lib\/flexibee-digest/g'               debian/flexibee-digest/usr/share/flexibee-digest/*.php
+	sed -i -e 's/.\/css/\/usr\/share\/flexibee-digest/\themes/g'         debian/flexibee-digest/usr/share/flexibee-digest/*.php

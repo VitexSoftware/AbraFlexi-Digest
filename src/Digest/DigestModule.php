@@ -28,15 +28,16 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
     {
         $this->interval = $interval;
         parent::__construct();
-        $this->dig();
         $this->setTagID(get_class($this));
-        $this->addItem(new \Ease\Html\H2Tag($this->heading()));
         $this->addItem(new \Ease\Html\HrTag());
+        $this->addItem(new \Ease\Html\H2Tag($this->heading()));
+        $this->dig();
+        $this->addStatusMessage($this->heading());
     }
 
     /**
      * Obtaining informations
-     */    
+     */
     public function dig()
     {
         

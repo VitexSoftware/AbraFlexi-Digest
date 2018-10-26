@@ -10,9 +10,10 @@ namespace FlexiPeeHP\Digest;
 
 define('EASE_APPNAME', 'FlexiBeeDigest');
 define('MODULE_DIR', './modules');
+define('STYLE_DIR', './css');
 
 require_once '../vendor/autoload.php';
-$shared = new \Ease\Shared();
+$shared = \Ease\Shared::instanced();
 $shared->loadConfig('../client.json', true);
 $shared->loadConfig('../digest.json', true);
 
@@ -21,7 +22,5 @@ $period = new \DateTime();
 $subject = \sprintf(_('FlexiBee Daily digest for %s'),
     \strftime('%x', $period->getTimestamp()));
 
-$postman = new Mailer($shared->getConfigValue('EASE_MAILTO'), $subject,
-    constant('MODULE_DIR'));
-$postman->dig($period);
-$postman->send();
+$digestor = new Digestor($subject);
+$digestor->dig($period, constant('MODULE_DIR'));
