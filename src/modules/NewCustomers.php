@@ -15,6 +15,7 @@ class NewCustomers extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeH
      * @var string 
      */
     public $timeColumn = 'lastUpdate';
+
     public function dig()
     {
         $digger           = new FlexiPeeHP\Adresar();
@@ -31,8 +32,17 @@ class NewCustomers extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeH
                 _('Email'), _('Phone')]);
 
             foreach ($newCustomersData as $pos => $newCustomerData) {
-                $userTable->addRowColumns([$pos, $newCustomerData['kod'], $newCustomerData['nazev'],
-                    $newCustomerData['email'], $newCustomerData['tel']]);
+                $digger->setMyKey(FlexiPeeHP\FlexiBeeRO::code($newCustomerData['kod']));
+                $userTable->addRowColumns([
+                    $pos,
+                    new \Ease\Html\ATag($digger->getApiURL(),
+                        $newCustomerData['kod']),
+                    $newCustomerData['nazev'],
+                    new \Ease\Html\ATag('mailto:'.$newCustomerData['email'],
+                        $newCustomerData['email']),
+                    new \Ease\Html\ATag('callto:'.$newCustomerData['tel'],
+                        $newCustomerData['tel'])
+                ]);
             }
 
             $this->addItem($userTable);

@@ -64,6 +64,30 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
     }
 
     /**
+     * Get Currency name
+     * 
+     * @param array $data
+     * 
+     * @return string
+     */
+    public static function getCurrency($data)
+    {
+        return current(explode(':', $data['mena@showAs']));
+    }
+
+    /**
+     * Format Czech Currency
+     * 
+     * @param float $price
+     * 
+     * @return string
+     */
+    public static function formatCurrency($price)
+    {
+        return number_format($price, 2, ',', ' ');
+    }
+
+    /**
      * Print progress log
      */
     public function finalize()

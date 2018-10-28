@@ -23,7 +23,7 @@ class WaitingPayments extends \FlexiPeeHP\Digest\DigestModule implements \FlexiP
 
     public function dig()
     {
-        $totals = [];
+        $totals     = [];
         $checker    = new \FlexiPeeHP\FakturaPrijata();
         $inInvoices = $checker->getColumnsFromFlexibee(['kod', 'firma', 'sumCelkem',
             'mena'],
@@ -65,7 +65,7 @@ class WaitingPayments extends \FlexiPeeHP\Digest\DigestModule implements \FlexiP
             $this->addItem($invTable);
             $this->addItem(new Ease\Html\H3Tag(_('Total')));
             foreach ($totals as $currency => $amount) {
-                $this->addItem($amount.'&nbsp;'.$currency);
+                $this->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount).'&nbsp;'.$currency));
             }
         }
     }

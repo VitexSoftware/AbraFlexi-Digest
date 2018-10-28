@@ -59,7 +59,7 @@ class WaitingIncome extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPee
 
             $this->addItem(new Ease\Html\H3Tag(_('Total')));
             foreach ($totals as $currency => $amount) {
-                $this->addItem($amount.'&nbsp;'.$currency);
+                $this->addItem( new \Ease\Html\DivTag( self::formatCurrency($amount).'&nbsp;'.$currency));
             }
         }
     }

@@ -55,11 +55,11 @@ class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
                 $typDokl[] = $count.' x '.FlexiPeeHP\FlexiBeeRO::uncode($type);
             }
             $this->addItem(new \Ease\Html\DivTag(sprintf(_('Exposed %s invoices'),
-                    $exposed.' '.implode('<br>', $typDokl))));
+                    implode('<br>', $typDokl))));
 
             $invoiced = [];
             foreach ($invoicedRaw as $currencyCode => $amount) {
-                $invoiced[] = $amount.' '.FlexiPeeHP\FlexiBeeRO::uncode($currencyCode);
+                $invoiced[] = self::formatCurrency($amount).' '.FlexiPeeHP\FlexiBeeRO::uncode($currencyCode);
             }
 
             $this->addItem(new \Ease\Html\DivTag(sprintf(_('Invoiced amount %s'),

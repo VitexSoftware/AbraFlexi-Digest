@@ -262,12 +262,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Spoje-NET/FlexiPeeHP.git",
-                "reference": "571f684ca23326589d3ddd7c3ce5e4a40cda6456"
+                "reference": "fdd90096f19e7f4d5505eb6a927abc6811b07eb2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Spoje-NET/FlexiPeeHP/zipball/571f684ca23326589d3ddd7c3ce5e4a40cda6456",
-                "reference": "571f684ca23326589d3ddd7c3ce5e4a40cda6456",
+                "url": "https://api.github.com/repos/Spoje-NET/FlexiPeeHP/zipball/fdd90096f19e7f4d5505eb6a927abc6811b07eb2",
+                "reference": "fdd90096f19e7f4d5505eb6a927abc6811b07eb2",
                 "shasum": ""
             },
             "require": {
@@ -299,7 +299,7 @@
                 }
             ],
             "description": "PHP Based Library for easy interaction with czech accounting system Flexibee.",
-            "time": "2018-10-25T11:24:10+00:00"
+            "time": "2018-10-28T20:49:51+00:00"
         },
         {
             "name": "vitexsoftware/ease-framework",
@@ -366,12 +366,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/FlexiPeeHP-Bricks.git",
-                "reference": "0fcbdb045ec646cfded4f11041aae88adb4fde4c"
+                "reference": "b3ce606b0707ac0f4ec71f9ccfdaed89a2d006b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/FlexiPeeHP-Bricks/zipball/0fcbdb045ec646cfded4f11041aae88adb4fde4c",
-                "reference": "0fcbdb045ec646cfded4f11041aae88adb4fde4c",
+                "url": "https://api.github.com/repos/VitexSoftware/FlexiPeeHP-Bricks/zipball/b3ce606b0707ac0f4ec71f9ccfdaed89a2d006b4",
+                "reference": "b3ce606b0707ac0f4ec71f9ccfdaed89a2d006b4",
                 "shasum": ""
             },
             "require": {
@@ -398,7 +398,7 @@
                 }
             ],
             "description": "FlexiPeeHP code Sniplets",
-            "time": "2018-10-25T22:10:14+00:00"
+            "time": "2018-10-28T16:45:22+00:00"
         }
     ],
     "packages-dev": [],
