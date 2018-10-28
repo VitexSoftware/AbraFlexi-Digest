@@ -20,7 +20,7 @@ There are four scripts:
 [flexibee-alltimedigest.php](src/flexibee-yeardigest.php)- Generate FlexiBee digest for all time
 
 
-![Example](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-Digest/master/weeekdigest.png "Week Digest")
+![Example](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-Digest/master/weekdigest.png "Week Digest")
 
 Debian/Ubuntu
 -------------
