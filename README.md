@@ -9,6 +9,7 @@ Features:
 * **Static page export**     - Digest is saved to file
 * **Send by eMail**          - Digest is send by email   
 * **Skinable**               - You can choose or add custom css
+* **Localised**              - Czech and English gettext localization   
 
 There are four scripts:
 
@@ -17,6 +18,9 @@ There are four scripts:
 [flexibee-monthdigest.php](src/flexibee-monthdigest.php) - Generate FlexiBee digest for one month
 [flexibee-yeardigest.php](src/flexibee-yeardigest.php)   - Generate FlexiBee digest for one year
 [flexibee-alltimedigest.php](src/flexibee-yeardigest.php)- Generate FlexiBee digest for all time
+
+
+![Example](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-Digest/master/weeekdigest.png "Week Digest")
 
 Debian/Ubuntu
 -------------
@@ -90,7 +94,7 @@ Tento nástroj ke svojí funkci využívá následující knihovny:
 
  * [**EasePHP Framework**](https://github.com/VitexSoftware/EaseFramework) - pomocné funkce např. logování
  * [**FlexiPeeHP**](https://github.com/Spoje-NET/FlexiPeeHP)        - komunikace s [FlexiBee](https://flexibee.eu/)
- * [**FlexiPeeHP Bricks**](https://github.com/VitexSoftware/FlexiPeeHP-Bricks) - používají se třídy Zákazníka, Upomínky a Upomínače
+ * [**FlexiPeeHP Bricks**](https://github.com/VitexSoftware/FlexiPeeHP-Bricks) - Company Logo image widget
 
 
 See also
