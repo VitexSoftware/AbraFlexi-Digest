@@ -5,11 +5,11 @@ FlexiBee Digest mail generator
 
 Features:
 
-* **Extensible**             - you can write your own Digest modules
-* **Static page export**     - Digest is saved to file
-* **Send by eMail**          - Digest is send by email   
-* **Skinable**               - You can choose or add custom css
-* **Localised**              - Czech and English gettext localization   
+  * **Extensible**             - you can write your own Digest modules
+  * **Static page export**     - Digest is saved to file
+  * **Send by eMail**          - Digest is send by email   
+  * **Skinable**               - You can choose or add custom css
+  * **Localised**              - Czech and English gettext localization   
 
 There are four scripts:
 

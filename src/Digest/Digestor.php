@@ -22,6 +22,12 @@ class Digestor extends \Ease\Html\DivTag
     private $subject;
 
     /**
+     * Index of included modules
+     * @var array 
+     */
+    private $index = [];
+
+    /**
      * Default Style
      * @var string 
      */
@@ -38,7 +44,13 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
      * App Logo
      * @var string 
      */
-    static $logo    = '<svg width="250" height="250" enable-background="new -0.161 -0.355 237 211" version="1.1" viewBox="-0.161 -0.355 250 250" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><linearGradient id="a" x1="148.69" x2="148.69" y1="80.375" y2="205" gradientUnits="userSpaceOnUse"><stop stop-color="#CDAD2D" offset="0"/><stop stop-color="#917D2E" offset="1"/></linearGradient><metadata><rdf:RDF><cc:Work><dc:format>image/svg+xml</dc:format><dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/><cc:license rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/"/><dc:publisher><cc:Agent rdf:about="http://openclipart.org/"><dc:title>Openclipart</dc:title></cc:Agent></dc:publisher><dc:title>Email</dc:title><dc:date>2008-06-14T10:49:47</dc:date><dc:description>Email icon.</dc:description><dc:source>https://openclipart.org/detail/17371/email-by-ytknick</dc:source><dc:creator><cc:Agent><dc:title>ytknick</dc:title></cc:Agent></dc:creator><dc:subject><rdf:Bag><rdf:li>email</rdf:li><rdf:li>envelope</rdf:li><rdf:li>icon</rdf:li><rdf:li>letter</rdf:li><rdf:li>mail</rdf:li><rdf:li>postage</rdf:li></rdf:Bag></dc:subject></cc:Work><cc:License rdf:about="http://creativecommons.org/publicdomain/zero/1.0/"><cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/><cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/><cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/></cc:License></rdf:RDF></metadata><g transform="translate(6,-18)"><polygon transform="translate(0,39)" points="148.69 142.69 229.32 80.375 229.32 205 68.055 205 68.055 80.375" fill="url(#a)"/><polygon transform="translate(0,39)" points="229.32 80.375 148.69 142.69 68.055 80.375" fill="#826a2a" stroke="#000" stroke-width="5"/><rect x="68.055" y="119.38" width="161.27" height="124.62" fill="none" stroke="#000" stroke-width="10"/><polyline transform="translate(0,39)" points="68.055 80.375 148.69 142.69 229.32 80.375" fill="none" stroke="#000" stroke-width="3"/><path d="m108.85 95.927c0-28.679-23.246-51.927-51.922-51.927-28.68 0-51.928 23.248-51.928 51.927s23.248 51.927 51.928 51.927c3.191 0 6.312-0.303 9.344-0.854l27.316 17.951-5.141-27.768c12.403-9.489 20.403-24.434 20.403-41.255z" fill="#812619" stroke="#000" stroke-width="10"/><g transform="matrix(.097526 0 0 -.097526 -96.586 115.38)" clip-rule="evenodd" image-rendering="optimizeQuality" shape-rendering="geometricPrecision"><path d="m1708.7 0 133.78 231.62 133.71-231.62z" fill="#f9ae2d"/><path d="m1708.7 0-133.75 231.62h267.53z" fill="#d28b25"/><path d="m1574.9 231.62 133.75 231.68 133.78-231.68z" fill="#936327"/><path d="m1708.7 463.3h-267.47l-267.56-463.3h267.56l267.47 463.3" fill="#767a7c"/></g></g></svg>';
+    static $logo = '<svg width="250" height="250" enable-background="new -0.161 -0.355 237 211" version="1.1" viewBox="-0.161 -0.355 250 250" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><linearGradient id="a" x1="148.69" x2="148.69" y1="80.375" y2="205" gradientUnits="userSpaceOnUse"><stop stop-color="#CDAD2D" offset="0"/><stop stop-color="#917D2E" offset="1"/></linearGradient><metadata><rdf:RDF><cc:Work><dc:format>image/svg+xml</dc:format><dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/><cc:license rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/"/><dc:publisher><cc:Agent rdf:about="http://openclipart.org/"><dc:title>Openclipart</dc:title></cc:Agent></dc:publisher><dc:title>Email</dc:title><dc:date>2008-06-14T10:49:47</dc:date><dc:description>Email icon.</dc:description><dc:source>https://openclipart.org/detail/17371/email-by-ytknick</dc:source><dc:creator><cc:Agent><dc:title>ytknick</dc:title></cc:Agent></dc:creator><dc:subject><rdf:Bag><rdf:li>email</rdf:li><rdf:li>envelope</rdf:li><rdf:li>icon</rdf:li><rdf:li>letter</rdf:li><rdf:li>mail</rdf:li><rdf:li>postage</rdf:li></rdf:Bag></dc:subject></cc:Work><cc:License rdf:about="http://creativecommons.org/publicdomain/zero/1.0/"><cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/><cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/><cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/></cc:License></rdf:RDF></metadata><g transform="translate(6,-18)"><polygon transform="translate(0,39)" points="148.69 142.69 229.32 80.375 229.32 205 68.055 205 68.055 80.375" fill="url(#a)"/><polygon transform="translate(0,39)" points="229.32 80.375 148.69 142.69 68.055 80.375" fill="#826a2a" stroke="#000" stroke-width="5"/><rect x="68.055" y="119.38" width="161.27" height="124.62" fill="none" stroke="#000" stroke-width="10"/><polyline transform="translate(0,39)" points="68.055 80.375 148.69 142.69 229.32 80.375" fill="none" stroke="#000" stroke-width="3"/><path d="m108.85 95.927c0-28.679-23.246-51.927-51.922-51.927-28.68 0-51.928 23.248-51.928 51.927s23.248 51.927 51.928 51.927c3.191 0 6.312-0.303 9.344-0.854l27.316 17.951-5.141-27.768c12.403-9.489 20.403-24.434 20.403-41.255z" fill="#812619" stroke="#000" stroke-width="10"/><g transform="matrix(.097526 0 0 -.097526 -96.586 115.38)" clip-rule="evenodd" image-rendering="optimizeQuality" shape-rendering="geometricPrecision"><path d="m1708.7 0 133.78 231.62 133.71-231.62z" fill="#f9ae2d"/><path d="m1708.7 0-133.75 231.62h267.53z" fill="#d28b25"/><path d="m1574.9 231.62 133.75 231.68 133.78-231.68z" fill="#936327"/><path d="m1708.7 463.3h-267.47l-267.56-463.3h267.56l267.47 463.3" fill="#767a7c"/></g></g></svg>';
+
+    /**
+     * Top menu 
+     * @var \Ease\Html\DivTag 
+     */
+    public $topMenu;
 
     /**
      * Digest Engine
@@ -56,7 +68,9 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
      */
     public function addHeading($subject)
     {
-        $this->addItem(new \FlexiPeeHP\ui\CompanyLogo(['align'=>'right','id'=>'companylogo','height'=>'50','title'=>_('Company logo')]));
+        $this->addItem(new \Ease\Html\ATag('','',['name'=>'index']));
+        $this->addItem(new \FlexiPeeHP\ui\CompanyLogo(['align' => 'right', 'id' => 'companylogo',
+            'height' => '50', 'title' => _('Company logo')]));
         $this->addItem(new \Ease\Html\H1Tag($subject));
         $prober  = new \FlexiPeeHP\Company();
         $prober->logBanner($_SERVER['SCRIPT_FILENAME']);
@@ -74,6 +88,7 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
         }
 
         $this->addItem($return);
+        $this->topMenu = $this->addItem(new \Ease\Html\DivTag(null,['class'=>'topmenu']));
     }
 
     /**
@@ -91,14 +106,14 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
                 }
                 include_once $moduleDir.'/'.$entry;
                 $class = pathinfo($entry, PATHINFO_FILENAME);
-                $this->addItem(new $class($interval));
+                $this->addToIndex($this->addItem(new $class($interval)));
             }
             $d->close();
         } else {
             $this->addStatusMessage(sprintf(_('Module dir %s is wrong'),
                     $moduleDir), 'error');
         }
-
+        $this->addIndex();
         $this->addFoot();
 
         $shared  = \Ease\Shared::instanced();
@@ -111,6 +126,47 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
             $this->saveToHtml($saveto);
         }
     }
+
+    /**
+     * 
+     * @param DigestModule $element
+     */
+    public function addToIndex($element)
+    {
+        $this->index[get_class($element)] = $element->heading();
+    }
+
+    public function addIndex()
+    {
+        $this->addItem(new \Ease\Html\H1Tag(new \Ease\Html\ATag('', _('Index'),
+            ['name' => 'index2'])));
+        $this->addItem(new \Ease\Html\HrTag());
+
+        $index = new \Ease\Html\UlTag(null, ['class' => 'pure-menu-list']);
+
+        foreach ($this->index as $class => $heading) {
+            $index->addItemSmart(new \Ease\Html\ATag('#'.$class, $heading,
+                ['class' => 'pure-menu-link']),
+                ['class' => 'pure-menu-item', 'style' => 'height: inherit']);
+
+            $this->topMenu->addItem(new \Ease\Html\ATag('#'.$class,$heading,['class' => 'topmenu-item']));
+        }
+
+        $this->addItem(new \Ease\Html\DivTag($index,
+            ['class' => 'pure-menu', 'css' => 'display: inline-block;']));
+    }
+//    /**
+//     * Include next element into current page (if not closed).
+//     *
+//     * @param mixed  $pageItem     value or EaseClass with draw() method
+//     * @param string $pageItemName Custom 'storing' name
+//     *
+//     * @return mixed Pointer to included object
+//     */
+//    public function addItem($pageItem, $pageItemName = null)
+//    {
+//        return parent::addItem($pageItem, $pageItemName);
+//    }
 
     /**
      * Sent digest by mail 
@@ -136,7 +192,8 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
             new \Ease\Html\TitleTag($this->subject),
             '<style>'.Digestor::$purecss.Digestor::getCustomCss().'</style>']));
         $webPage->addItem(new \Ease\Html\BodyTag($this));
-        $this->addStatusMessage(sprintf(_('Saved to %s'), $filename ), file_put_contents($filename, $webPage->getRendered()) ? 'success' : 'error');
+        $this->addStatusMessage(sprintf(_('Saved to %s'), $filename),
+            file_put_contents($filename, $webPage->getRendered()) ? 'success' : 'error');
     }
 
     /**
@@ -167,7 +224,4 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
             '&nbsp;', new \Ease\Html\ATag('https://www.vitexsoftware.cz/',
                 'Vitex Software')])));
     }
-    
-    
-    
 }

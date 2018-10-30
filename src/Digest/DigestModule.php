@@ -40,7 +40,8 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
         parent::__construct();
         $this->setTagID(get_class($this));
         $this->addItem(new \Ease\Html\HrTag());
-        $this->addItem(new \Ease\Html\H2Tag($this->heading()));
+        $this->addItem(new \Ease\Html\H2Tag(new \Ease\Html\ATag('#index',
+            $this->heading(), ['name' => get_class($this)])));
         $this->dig();
         $this->addStatusMessage($this->heading());
     }
@@ -85,6 +86,22 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
     public static function formatCurrency($price)
     {
         return number_format($price, 2, ',', ' ');
+    }
+
+    /**
+     * Return Totals for serveral currencies
+     * 
+     * @param array $totals [currency=>amount,currency2=>amount2]
+     * 
+     * @return \Ease\Html\DivTag
+     */
+    public static function getTotalsDiv(array $totals)
+    {
+        $total = new \Ease\Html\DivTag();
+        foreach ($totals as $currency => $amount) {
+            $total->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount).'&nbsp;'.$currency));
+        }
+        return $total;
     }
 
     /**
