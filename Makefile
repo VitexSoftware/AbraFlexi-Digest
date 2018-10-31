@@ -28,7 +28,16 @@ alltimedigest:
 	cd src &&  php -f flexibee-alltimedigest.php && cd ..
 
 match: incoming outcoming parujnew2old
-test: composer testphp
+test: composer testrun
+
+testrun:
+	@echo '################################################### Default PHP '
+	cd src &&  php -f flexibee-daydigest.php && cd ..
+	cd src &&  php -f flexibee-weekdigest.php && cd ..
+	cd src &&  php -f flexibee-monthdigest.php && cd ..
+	cd src &&  php -f flexibee-yeardigest.php && cd ..
+	cd src &&  php -f flexibee-alltimedigest.php && cd ..
+
 
 test56:
 	@echo '################################################### PHP 5.6'
@@ -69,9 +78,6 @@ test73:
 	cd src &&  php7.3 -f flexibee-monthdigest.php && cd ..
 	cd src &&  php7.3 -f flexibee-yeardigest.php && cd ..
 	cd src &&  php7.3 -f flexibee-alltimedigest.php && cd ..
-
-testphp: test70
-
 
 clean:
 	rm -rf debian/php-flexibee-digest 

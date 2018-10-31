@@ -16,3 +16,4 @@ $shared  = \Ease\Shared::instanced();
 $shared->loadConfig('../client.json', true);
 $shared->loadConfig('../digest.json', true);
 $localer = new \Ease\Locale('cs_CZ', '../i18n', 'flexibee-digest');
+

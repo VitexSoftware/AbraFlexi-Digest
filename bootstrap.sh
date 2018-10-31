@@ -1,20 +1,26 @@
 #!/usr/bin/env bash
-wget -O - http://v.s.cz/info@vitexsoftware.cz.gpg.key|sudo apt-key add -
-echo deb http://v.s.cz/ stable main > /etc/apt/sources.list.d/vitexsoftware.list
-
 export DEBIAN_FRONTEND="noninteractive"
+wget -O - http://v.s.cz/info@vitexsoftware.cz.gpg.key|sudo apt-key add -
+echo deb http://v.s.cz/ stable main | tee /etc/apt/sources.list.d/vitexsoftware.list 
 apt-get update
-apt-get install -y devscripts dpkg-dev php-curl composer
+apt-get install -y php-cli php-curl php-pear php-intl php-zip composer dpkg-dev devscripts php-apigen-theme-default debhelper gdebi-core
+apt-get update
+
 cd /vagrant
 debuild -i -us -uc -b
-mkdir -p /vagrant/deb
-mv /*.deb /vagrant/deb
-cd /vagrant/deb
-dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz
-echo "deb file:/vagrant/deb ./" > /etc/apt/sources.list.d/local.list
-apt-get update
+
+#mkdir -p /vagrant/deb
+#mv /*.deb /vagrant/deb
+#cd /vagrant/deb
+#dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz
+#echo "deb file:/vagrant/deb ./" > /etc/apt/sources.list.d/local.list
+#apt-get update
 export DEBCONF_DEBUG="developer"
-apt-get -y --allow-unauthenticated install flexibee-digest
+
+#apt-get -y --allow-unauthenticated install flexibee-digest
+gdebi -n  ../flexibee-digest_*_all.deb 
+
+cp -f /vagrant/tests/digest.json /etc/flexibee/digest.json
 
 flexibee-daydigest
 flexibee-monthdigest

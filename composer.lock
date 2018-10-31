@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf9d111c43593bff2f065cd7e5f94a02",
+    "content-hash": "1d49f68ae64b4b3bde113e4d01a4315e",
     "packages": [
         {
             "name": "pear/console_getopt",
@@ -262,12 +262,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Spoje-NET/FlexiPeeHP.git",
-                "reference": "4948a38e104393fbdfa2c994c9c26df28585ef6f"
+                "reference": "ebd5c50cad64dddc31b9e4704187d64719e1f6c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Spoje-NET/FlexiPeeHP/zipball/4948a38e104393fbdfa2c994c9c26df28585ef6f",
-                "reference": "4948a38e104393fbdfa2c994c9c26df28585ef6f",
+                "url": "https://api.github.com/repos/Spoje-NET/FlexiPeeHP/zipball/ebd5c50cad64dddc31b9e4704187d64719e1f6c5",
+                "reference": "ebd5c50cad64dddc31b9e4704187d64719e1f6c5",
                 "shasum": ""
             },
             "require": {
@@ -299,7 +299,7 @@
                 }
             ],
             "description": "PHP Based Library for easy interaction with czech accounting system Flexibee.",
-            "time": "2018-10-29T12:06:37+00:00"
+            "time": "2018-10-31T17:41:00+00:00"
         },
         {
             "name": "vitexsoftware/ease-framework",
@@ -405,9 +405,9 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "vitexsoftware/flexipeehp-bricks": 20,
+        "vitexsoftware/ease-framework": 20,
         "spoje.net/flexipeehp": 20,
-        "vitexsoftware/ease-framework": 20
+        "vitexsoftware/flexipeehp-bricks": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

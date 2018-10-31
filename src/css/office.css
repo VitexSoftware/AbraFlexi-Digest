@@ -12,4 +12,10 @@ table {
   margin: 4px;
   font-size: small; }
 
+.companylink {
+  font-weight: bolder; }
+
+body {
+  margin: 10px; }
+
 /*# sourceMappingURL=office.css.map */

@@ -10,3 +10,4 @@ override_dh_install:
 	sed -i -e 's/\.\./\/etc\/flexibee/g'                                 debian/flexibee-digest/usr/share/flexibee-digest/init.php
 	sed -i -e 's/.\/modules/\/usr\/lib\/flexibee-digest/g'               debian/flexibee-digest/usr/share/flexibee-digest/init.php
 	sed -i -e 's/.\/css/\/usr\/share\/flexibee-digest\/themes/'          debian/flexibee-digest/usr/share/flexibee-digest/init.php
+	sed -i -e 's/..\/composer.json/\/usr\/share\/flexibee-digest\/composer.json/g' 	     debian/flexibee-digest/usr/share/flexibee-digest/Digest/Digestor.php

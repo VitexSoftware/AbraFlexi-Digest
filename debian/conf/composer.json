@@ -2,7 +2,7 @@
     "name": "flexibee-digest",
     "description": "Invoice Digest for FlexiBee written in PHP",
     "type": "project",
-    "version": "0.8",
+    "version": "1.2",
     "authors": [
         {
             "name": "Vítězslav Dvořák",
@@ -14,9 +14,9 @@
     },
     "require": {
         "php": ">= 5.5.9",
-        "flexipeehp": "*",
         "ease-framework": "*",
-        "flexipeehp-bricks": ">= 0.4"
+        "flexipeehp": "*",
+        "flexipeehp-bricks": "*"
     },
     "autoload": {
         "psr-4": {

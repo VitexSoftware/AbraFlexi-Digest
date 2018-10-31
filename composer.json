@@ -1,6 +1,6 @@
 {
     "name": "vitexsoftware/php-flexibee-digest",
-    "description": "Dayli FlexiBee dayly digest by mail.",
+    "description": "Dayli FlexiBee daily digest.",
     "authors": [
         {
             "name": "Vitex",
@@ -8,9 +8,9 @@
         }
     ],
     "require": {
-        "vitexsoftware/flexipeehp-bricks": "dev-master",
+        "vitexsoftware/ease-framework": "dev-master",
         "spoje.net/flexipeehp": "dev-master",
-        "vitexsoftware/ease-framework": "dev-master"
+        "vitexsoftware/flexipeehp-bricks": "dev-master"
     },
     "autoload": {
         "psr-4": {
