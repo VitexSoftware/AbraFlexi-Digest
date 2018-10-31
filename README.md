@@ -36,7 +36,7 @@ Packages are availble. Please use repo :
     sudo apt install flexibee-digest
 ```
 
-Po instalaci balíku jsou v systému k dispozici dva nové příkazy:
+After package installation you can use this new commands:
 
   * **flexibee-daydigest**      - Generate FlexiBee digest for one day
   * **flexibee-monthdigest**    - Generate FlexiBee digest for one week

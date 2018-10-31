@@ -5,3 +5,4 @@
 /debian/files
 /debian/flexibee-digest.postrm.debhelper
 /debian/flexibee-digest.substvars
+/deb/
