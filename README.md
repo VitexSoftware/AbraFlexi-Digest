@@ -13,11 +13,13 @@ Features:
 
 There are four scripts:
 
-  [flexibee-daydigest.php](src/flexibee-daydigest.php)     - Generate FlexiBee digest for one day
-  [flexibee-weekdigest.php](src/flexibee-weekdigest.php)   - Generate FlexiBee digest for one week
-  [flexibee-monthdigest.php](src/flexibee-monthdigest.php) - Generate FlexiBee digest for one month
-  [flexibee-yeardigest.php](src/flexibee-yeardigest.php)   - Generate FlexiBee digest for one year
-  [flexibee-alltimedigest.php](src/flexibee-yeardigest.php)- Generate FlexiBee digest for all time
+|  File                                                     | Description                            |
+|-----------------------------------------------------------|----------------------------------------| 
+|  [flexibee-daydigest.php](src/flexibee-daydigest.php)     | Generate FlexiBee digest for one day   |
+|  [flexibee-weekdigest.php](src/flexibee-weekdigest.php)   | Generate FlexiBee digest for one week  |
+|  [flexibee-monthdigest.php](src/flexibee-monthdigest.php) | Generate FlexiBee digest for one month |
+|  [flexibee-yeardigest.php](src/flexibee-yeardigest.php)   | Generate FlexiBee digest for one year  |
+|  [flexibee-alltimedigest.php](src/flexibee-yeardigest.php)| Generate FlexiBee digest for all time  |
 
 
 ![Example](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-Digest/master/weekdigest.png "Week Digest")
