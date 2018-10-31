@@ -15,7 +15,7 @@ class WithoutTel extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\
     {
         $addresser    = new \FlexiPeeHP\Adresar();
         $withoutEmail = $addresser->getColumnsFromFlexibee(['nazev', 'kod', 'ulice',
-            'mesto', 'email'], ['tel' => '']);
+            'mesto', 'email'], ['tel' => 'is empty']);
 
 
         if (empty($withoutEmail)) {
