@@ -21,8 +21,7 @@
     "autoload": {
         "psr-4": {
             "FlexiPeeHP\\Digest\\": "./Digest"
-        },
-        "classmap": ["/usr/share/php/"]
+        }
     },
     "repositories": [
         {

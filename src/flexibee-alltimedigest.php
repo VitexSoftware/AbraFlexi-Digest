@@ -7,11 +7,12 @@
  */
 
 namespace FlexiPeeHP\Digest;
+
 define('EASE_APPNAME', 'FlexiBeeAllTimeDigest');
 
-require_once __DIR__ . '/init.php';
+require_once __DIR__.'/init.php';
 
 $subject = sprintf(_('FlexiBee Alltime'));
 
 $digestor = new Digestor($subject);
-$digestor->dig($period, [constant('MODULE_ALLTIME_PATH'),constant('MODULE_PATH')]);
+$digestor->dig(null, [constant('MODULE_ALLTIME_PATH'), constant('MODULE_PATH')]);

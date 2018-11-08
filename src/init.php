@@ -10,6 +10,7 @@
 namespace FlexiPeeHP\Digest;
 
 define('MODULE_PATH', './modules');
+define('MODULE_DAILY_PATH', './modules.daily');
 define('MODULE_WEEKLY_PATH', './modules.weekly');
 define('MODULE_MONTHLY_PATH', './modules.monthly');
 define('MODULE_YEARLY_PATH', './modules.yearly');
