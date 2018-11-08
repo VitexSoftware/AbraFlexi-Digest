@@ -26,6 +26,7 @@ class Mailer extends \Ease\Mailer
             new \Ease\Html\TitleTag($this->emailSubject),
             '<style>'.Digestor::$purecss.
             Digestor::getCustomCss().
+            Digestor::getWebPageInlineCSS().
             '</style>']));
         $this->htmlDocument->setOutputFormat($this->getOutputFormat());
         $this->htmlBody     = $this->htmlDocument->addItem(new \Ease\Html\BodyTag());
