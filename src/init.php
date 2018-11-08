@@ -1,4 +1,5 @@
 <?php
+
 /**
  * FlexiBee Digest - Dayly 
  *
@@ -8,11 +9,16 @@
 
 namespace FlexiPeeHP\Digest;
 
-define('MODULE_DIR', './modules');
+define('MODULE_PATH', './modules');
+define('MODULE_WEEKLY_PATH', './modules.weekly');
+define('MODULE_MONTHLY_PATH', './modules.monthly');
+define('MODULE_YEARLY_PATH', './modules.yearly');
+define('MODULE_ALLTIME_PATH', './modules.alltime');
+
 define('STYLE_DIR', './css');
 
 require_once '../vendor/autoload.php';
-$shared  = \Ease\Shared::instanced();
+$shared = \Ease\Shared::instanced();
 $shared->loadConfig('../client.json', true);
 $shared->loadConfig('../digest.json', true);
 $localer = new \Ease\Locale('cs_CZ', '../i18n', 'flexibee-digest');

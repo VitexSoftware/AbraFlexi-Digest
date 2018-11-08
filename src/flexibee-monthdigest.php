@@ -25,4 +25,5 @@ $subject = sprintf(
 
 
 $digestor = new Digestor($subject);
-$digestor->dig($period, constant('MODULE_DIR'));
+$digestor->dig($period, [constant('MODULE_MONTHLY_PATH'),constant('MODULE_PATH')]);
+

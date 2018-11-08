@@ -262,12 +262,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Spoje-NET/FlexiPeeHP.git",
-                "reference": "ebd5c50cad64dddc31b9e4704187d64719e1f6c5"
+                "reference": "44055ebcf092a7290ac2254dcab47b7ff7d0fca9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Spoje-NET/FlexiPeeHP/zipball/ebd5c50cad64dddc31b9e4704187d64719e1f6c5",
-                "reference": "ebd5c50cad64dddc31b9e4704187d64719e1f6c5",
+                "url": "https://api.github.com/repos/Spoje-NET/FlexiPeeHP/zipball/44055ebcf092a7290ac2254dcab47b7ff7d0fca9",
+                "reference": "44055ebcf092a7290ac2254dcab47b7ff7d0fca9",
                 "shasum": ""
             },
             "require": {
@@ -299,7 +299,7 @@
                 }
             ],
             "description": "PHP Based Library for easy interaction with czech accounting system Flexibee.",
-            "time": "2018-10-31T17:41:00+00:00"
+            "time": "2018-11-07T23:38:15+00:00"
         },
         {
             "name": "vitexsoftware/ease-framework",
@@ -307,12 +307,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/EaseFramework.git",
-                "reference": "6f6edb627bc9da1b19b385c9df7a6b8c2038c577"
+                "reference": "588aa88d10ad03ea3c74c3a358d5241a28257934"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/EaseFramework/zipball/6f6edb627bc9da1b19b385c9df7a6b8c2038c577",
-                "reference": "6f6edb627bc9da1b19b385c9df7a6b8c2038c577",
+                "url": "https://api.github.com/repos/VitexSoftware/EaseFramework/zipball/588aa88d10ad03ea3c74c3a358d5241a28257934",
+                "reference": "588aa88d10ad03ea3c74c3a358d5241a28257934",
                 "shasum": ""
             },
             "require": {
@@ -358,7 +358,7 @@
             ],
             "description": "An PHP Framework for Ease of writing Applications",
             "homepage": "http://v.s.cz/ease.php",
-            "time": "2018-10-26T08:59:31+00:00"
+            "time": "2018-11-05T19:55:23+00:00"
         },
         {
             "name": "vitexsoftware/flexipeehp-bricks",

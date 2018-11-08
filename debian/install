@@ -1,6 +1,11 @@
 debian/conf/composer.json       usr/share/flexibee-digest/
 src/*			        usr/share/flexibee-digest/
 src/modules/*		        usr/lib/flexibee-digest/
+src/modules.daily/*	        usr/lib/flexibee-digest/daily/
+src/modules.weekly/*	        usr/lib/flexibee-digest/weekly/
+src/modules.monthly/*	        usr/lib/flexibee-digest/monthly/
+src/modules.yearly/*	        usr/lib/flexibee-digest/yearly/
+src/modules.alltime/*	        usr/lib/flexibee-digest/alltime/
 src/Digest/*                    usr/share/flexibee-digest/Digest/
 src/css/*.css                   usr/share/flexibee-digest/themes/
 bin/*                           usr/bin/

@@ -17,4 +17,4 @@ $subject = \sprintf(_('FlexiBee Daily digest for %s'),
     \strftime('%x', $period->getTimestamp()));
 
 $digestor = new Digestor($subject);
-$digestor->dig($period, constant('MODULE_DIR'));
+$digestor->dig($period, [constant('MODULE_DAILY_PATH'),constant('MODULE_PATH')]);

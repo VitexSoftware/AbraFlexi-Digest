@@ -100,21 +100,14 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
      */
     public function dig($interval, $moduleDir)
     {
-        if (is_dir($moduleDir)) {
-            $d     = dir($moduleDir);
-            while (false !== ($entry = $d->read())) {
-                if ($entry[0] == '.') {
-                    continue;
-                }
-                include_once $moduleDir.'/'.$entry;
-                $class = pathinfo($entry, PATHINFO_FILENAME);
-                $this->addToIndex($this->addItem(new $class($interval)));
+        if (is_array($moduleDir)) {
+            foreach ($moduleDir as $mDir) {
+                $this->processModules($mDir, $interval);
             }
-            $d->close();
         } else {
-            $this->addStatusMessage(sprintf(_('Module dir %s is wrong'),
-                    $moduleDir), 'error');
+            $this->processModules($moduleDir, $interval);
         }
+
         $this->addIndex();
         $this->addFoot();
 
@@ -126,6 +119,30 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
         $saveto = $shared->getConfigValue('SAVETO');
         if ($saveto) {
             $this->saveToHtml($saveto);
+        }
+    }
+
+    /**
+     * Process All modules in specified Dir
+     * 
+     * @param string $moduleDir path
+     * @param \DateTime|\DatePeriod $interval
+     */
+    public function processModules($moduleDir, $interval)
+    {
+        if (is_dir($moduleDir)) {
+            $d     = dir($moduleDir);
+            while (false !== ($entry = $d->read())) {
+                if (is_file($moduleDir.'/'.$entry)) {
+                    include_once $moduleDir.'/'.$entry;
+                    $class = pathinfo($entry, PATHINFO_FILENAME);
+                    $this->addToIndex($this->addItem(new $class($interval)));
+                }
+            }
+            $d->close();
+        } else {
+            $this->addStatusMessage(sprintf(_('Module dir %s is wrong'),
+                    $moduleDir), 'error');
         }
     }
 
@@ -193,10 +210,25 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
                 PATHINFO_FILENAME).'.html';
         $webPage  = new \Ease\Html\HtmlTag(new \Ease\Html\SimpleHeadTag([
             new \Ease\Html\TitleTag($this->subject),
-            '<style>'.Digestor::$purecss.Digestor::getCustomCss().'</style>']));
+            '<style>'.Digestor::$purecss.Digestor::getCustomCss().Digestor::getWebPageInlineCSS().'</style>']));
         $webPage->addItem(new \Ease\Html\BodyTag($this));
         $this->addStatusMessage(sprintf(_('Saved to %s'), $filename),
             file_put_contents($filename, $webPage->getRendered()) ? 'success' : 'error');
+    }
+
+    static public function getWebPageInlineCSS()
+    {
+//        $easeShared = \Ease\Shared::webPage();
+//        if (isset($easeShared->cascadeStyles) && count($easeShared->cascadeStyles)) {
+//            $cascadeStyles = [];
+//            foreach ($easeShared->cascadeStyles as $StyleRes => $Style) {
+//                if ($StyleRes != $Style) {
+//                    $cascadeStyles[] = $Style;
+//                }
+//            }
+//        }
+//        return implode('', $cascadeStyles);
+        return VerticalChart::$chartCss;
     }
 
     /**
@@ -217,7 +249,7 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
      */
     static public function getAppVersion()
     {
-        $composerInfo = json_decode( file_get_contents('../composer.json'), true);
+        $composerInfo = json_decode(file_get_contents('../composer.json'), true);
         return array_key_exists('version', $composerInfo) ? $composerInfo['version']
                 : 'dev-master';
     }

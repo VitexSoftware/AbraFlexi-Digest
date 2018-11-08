@@ -12,6 +12,10 @@ install:
 build:
 	echo build
 
+compass:
+	compass compile  --output-style compressed --force  .
+
+
 #pretest:
 #	composer --ansi --no-interaction update
 #	php -f tests/PrepareForTest.php
