@@ -20,14 +20,16 @@ class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
     {
         $digger          = new FlexiPeeHP\FakturaVydana();
         $outInvoicesData = $digger->getColumnsFromFlexibee(['kod', 'typDokl', 'sumCelkem',
-            'uhrazeno', 'storno', 'mena', 'juhSum', 'juhSumMen'],
+            'sumZalohy', 'uhrazeno', 'storno', 'mena', 'juhSum', 'juhSumMen'],
             $this->condition);
         $exposed         = 0;
         $invoicedRaw     = [];
         $paid            = [];
         $storno          = 0;
 
-        $typDoklRaw = [];
+        $typDoklCounts = [];
+        $typDoklTotals = [];
+
         if (empty($outInvoicesData)) {
             $this->addItem(_('none'));
         } else {
@@ -37,36 +39,57 @@ class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
                     $storno++;
                 }
 
-                if (array_key_exists($outInvoiceData['typDokl'], $typDoklRaw)) {
-                    $typDoklRaw[$outInvoiceData['typDokl']] ++;
+                $amount = floatval($outInvoiceData['sumCelkem']) + floatval($outInvoiceData['sumZalohy']);
+                
+                if (array_key_exists($outInvoiceData['typDokl'], $typDoklCounts)) {
+                    $typDoklCounts[$outInvoiceData['typDokl']] ++;
+                    $typDoklTotals[$outInvoiceData['typDokl']][$outInvoiceData['mena']]
+                        += $amount;
                 } else {
-                    $typDoklRaw[$outInvoiceData['typDokl']] = 1;
+                    $typDoklCounts[$outInvoiceData['typDokl']]                          = 1;
+                    $typDoklTotals[$outInvoiceData['typDokl']][$outInvoiceData['mena']]
+                        = $amount;
                 }
 
-                if (array_key_exists($outInvoiceData['mena'], $outInvoiceData)) {
-                    $invoicedRaw[$outInvoiceData['mena']] += floatval($outInvoiceData['sumCelkem']);
+                if (array_key_exists($outInvoiceData['mena'], $invoicedRaw)) {
+                    $invoicedRaw[$outInvoiceData['mena']] += $amount;
                 } else {
-                    $invoicedRaw[$outInvoiceData['mena']] = floatval($outInvoiceData['sumCelkem']);
+                    $invoicedRaw[$outInvoiceData['mena']] = $amount;
                 }
             }
 
-            $typDokl = [];
-            foreach ($typDoklRaw as $type => $count) {
-                $typDokl[] = $count.' x '.FlexiPeeHP\FlexiBeeRO::uncode($type);
+
+            $outInvoicesTable = new \Ease\Html\TableTag(null,
+                ['class' => 'pure-table']);
+
+            $tableHeader[] = _('Count');
+            $tableHeader[] = _('Document type');
+            $currencies    = array_keys($invoicedRaw);
+            foreach ($currencies as $currencyCode) {
+                $tableHeader[] = _('Total').' '.\FlexiPeeHP\FlexiBeeRO::uncode($currencyCode);
             }
-            $this->addItem(new \Ease\Html\DivTag(sprintf(_('Exposed %s invoices'),
-                    implode('<br>', $typDokl))));
+            $outInvoicesTable->addRowHeaderColumns($tableHeader);
 
-            $invoiced = [];
-            foreach ($invoicedRaw as $currencyCode => $amount) {
-                $invoiced[] = self::formatCurrency($amount).' '.FlexiPeeHP\FlexiBeeRO::uncode($currencyCode);
+            foreach ($typDoklTotals as $typDokl => $typDoklTotal) {
+                $tableRow   = [$typDoklCounts[$typDokl]];
+                $tableRow[] = \FlexiPeeHP\FlexiBeeRO::uncode($typDokl);
+
+                foreach ($currencies as $currencyCode) {
+                    $tableRow[] = array_key_exists($currencyCode,
+                            $typDoklTotals[$typDokl]) ? $typDoklTotals[$typDokl][$currencyCode]
+                            : '';
+                }
+
+                $outInvoicesTable->addRowColumns($tableRow);
             }
 
-            $this->addItem(new \Ease\Html\DivTag(sprintf(_('Invoiced amount %s'),
-                    implode('<br>', $invoiced))));
+            $tableFooter = [$exposed, count(array_keys($typDoklTotals))];
+            foreach ($currencies as $currencyCode) {
+                $tableFooter[] = self::formatCurrency( $invoicedRaw[$currencyCode] ).' '.FlexiPeeHP\FlexiBeeRO::uncode($currencyCode);
+            }
+            $outInvoicesTable->addRowFooterColumns($tableFooter);
 
-            $this->addItem(new \Ease\Html\DivTag(sprintf(_('Exposed %s invoices'),
-                    $exposed)));
+            $this->addItem($outInvoicesTable);
         }
     }
 
