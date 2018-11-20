@@ -107,7 +107,7 @@ class Reminds extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Dig
         if (!array_key_exists($column, $this->remids)) {
             $this->remids[$column] = 0;
         }
-        if ($this->isMyDate(\FlexiPeeHP\FlexiBeeRO::flexiDateToDateTime($date))) {
+        if (!empty($date) && $this->isMyDate(\FlexiPeeHP\FlexiBeeRO::flexiDateToDateTime($date))) {
             if (array_key_exists($column, $this->remids)) {
                 $this->remids[$column] ++;
             }
