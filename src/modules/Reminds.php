@@ -23,8 +23,9 @@ class Reminds extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Dig
     {
         $invoicer = new \FlexiPeeHP\FakturaVydana();
 
-        $faDatakturyRaw = $invoicer->getColumnsFromFlexiBee(['kod', 'firma', 'sumCelkem',
-            'zbyvaUhradit', 'mena', 'datUp1', 'datUp2', 'datSmir', 'datSplat'],
+        $faDatakturyRaw = $invoicer->getColumnsFromFlexiBee(['kod', 'firma', 'popis',
+            'sumCelkem',
+            'zbyvaUhradit', 'mena', 'datUp1', 'datUp2', 'datSmir'],
             $this->condition);
 
         $invoicer->addStatusMessage("Faktur: ".count($faDatakturyRaw));
@@ -39,9 +40,9 @@ class Reminds extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Dig
         } else {
             $adreser  = new FlexiPeeHP\Adresar(null, ['offline' => 'true']);
             $invTable = new \FlexiPeeHP\Digest\Table([
-                _('Company'),
+                _('Client'),
+                _('Invoice'),
                 _('Amount'),
-                _('Overdue days'),
                 _('Remind #1'),
                 _('Remind #2'),
                 _('Remind #3')
@@ -53,26 +54,24 @@ class Reminds extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Dig
 
                 $this->countReminds($invoiceData);
 
-                $overdueDays = \FlexiPeeHP\FakturaVydana::overdueDays($invoiceData['datSplat']);
-                $overDues[]  = $overdueDays;
-
                 $adreser->setMyKey($invoiceData['firma']);
+                $invoicer->setMyKey(\FlexiPeeHP\FlexiBeeRO::code($invoiceData['kod']));
 
                 $nazevFirmy = array_key_exists('firma@showAs', $invoiceData) ? $invoiceData['firma@showAs']
                         : \FlexiPeeHP\FlexiBeeRO::uncode($invoiceData['firma']);
 
                 $invTable->addRowColumns([
                     new \Ease\Html\ATag($adreser->getApiURL(), $nazevFirmy),
-                    $invoiceData['zbyvaUhradit'],
-                    $overdueDays,
+                    new \Ease\Html\ATag($invoicer->getApiURL(),
+                        trim($invoiceData['kod'].' '.$invoiceData['popis'])),
+                    $invoiceData['zbyvaUhradit'].' '.\FlexiPeeHP\FlexiBeeRO::uncode($invoiceData['mena']),
                     empty($invoiceData['datUp1']) ? '' : $this->myDate($invoiceData['datUp1']),
                     empty($invoiceData['datUp2']) ? '' : $this->myDate($invoiceData['datUp2']),
                     empty($invoiceData['datSmir']) ? '' : $this->myDate($invoiceData['datSmir'])
                 ]);
             }
 
-            $invTable->addRowFooterColumns([count($faDatakturyRaw), '', (array_sum($overDues)
-                / count($overDues)), $this->remids['datUp1'],
+            $invTable->addRowFooterColumns([count($faDatakturyRaw), '', '', $this->remids['datUp1'],
                 $this->remids['datUp2'], $this->remids['datSmir']]);
 
             $this->addItem($invTable);

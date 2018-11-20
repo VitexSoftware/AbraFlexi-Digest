@@ -262,18 +262,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Spoje-NET/FlexiPeeHP.git",
-                "reference": "44055ebcf092a7290ac2254dcab47b7ff7d0fca9"
+                "reference": "b768aa1eca5e2b83e3570ba2de2510c6222a5686"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Spoje-NET/FlexiPeeHP/zipball/44055ebcf092a7290ac2254dcab47b7ff7d0fca9",
-                "reference": "44055ebcf092a7290ac2254dcab47b7ff7d0fca9",
+                "url": "https://api.github.com/repos/Spoje-NET/FlexiPeeHP/zipball/b768aa1eca5e2b83e3570ba2de2510c6222a5686",
+                "reference": "b768aa1eca5e2b83e3570ba2de2510c6222a5686",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "php": ">=5.6 <7.4",
-                "vitexsoftware/ease-framework": ">=1.5"
+                "php": ">=5.6",
+                "vitexsoftware/ease-framework": "dev-master"
             },
             "require-dev": {
                 "jakub-onderka/php-console-highlighter": "^0.3.2",
@@ -299,7 +299,7 @@
                 }
             ],
             "description": "PHP Based Library for easy interaction with czech accounting system Flexibee.",
-            "time": "2018-11-07T23:38:15+00:00"
+            "time": "2018-11-14T21:15:46+00:00"
         },
         {
             "name": "vitexsoftware/ease-framework",
@@ -307,12 +307,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/EaseFramework.git",
-                "reference": "588aa88d10ad03ea3c74c3a358d5241a28257934"
+                "reference": "cf50d0b08d2e7e675efefb18d3c0b77600384042"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/EaseFramework/zipball/588aa88d10ad03ea3c74c3a358d5241a28257934",
-                "reference": "588aa88d10ad03ea3c74c3a358d5241a28257934",
+                "url": "https://api.github.com/repos/VitexSoftware/EaseFramework/zipball/cf50d0b08d2e7e675efefb18d3c0b77600384042",
+                "reference": "cf50d0b08d2e7e675efefb18d3c0b77600384042",
                 "shasum": ""
             },
             "require": {
@@ -358,7 +358,7 @@
             ],
             "description": "An PHP Framework for Ease of writing Applications",
             "homepage": "http://v.s.cz/ease.php",
-            "time": "2018-11-05T19:55:23+00:00"
+            "time": "2018-11-19T01:53:29+00:00"
         },
         {
             "name": "vitexsoftware/flexipeehp-bricks",
@@ -366,12 +366,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/FlexiPeeHP-Bricks.git",
-                "reference": "1125d5ba60e19bd9f97851596531b244cbfae1fb"
+                "reference": "b00f60c8b04a4f46ff7f28b253b0f7d23034231b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/FlexiPeeHP-Bricks/zipball/1125d5ba60e19bd9f97851596531b244cbfae1fb",
-                "reference": "1125d5ba60e19bd9f97851596531b244cbfae1fb",
+                "url": "https://api.github.com/repos/VitexSoftware/FlexiPeeHP-Bricks/zipball/b00f60c8b04a4f46ff7f28b253b0f7d23034231b",
+                "reference": "b00f60c8b04a4f46ff7f28b253b0f7d23034231b",
                 "shasum": ""
             },
             "require": {
@@ -398,7 +398,7 @@
                 }
             ],
             "description": "FlexiPeeHP code Sniplets",
-            "time": "2018-10-28T22:19:50+00:00"
+            "time": "2018-11-14T18:57:24+00:00"
         }
     ],
     "packages-dev": [],

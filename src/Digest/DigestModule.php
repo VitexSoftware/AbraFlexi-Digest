@@ -156,7 +156,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      */
     public function isMyDate(\DateTime $date)
     {
-        return self::isDateWithinInterval($date, $this->timeInterval);
+        return is_null($this->timeInterval) ? true : self::isDateWithinInterval($date, $this->timeInterval);
     }
 
     /**
