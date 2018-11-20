@@ -30,8 +30,10 @@ class OutcomingPayments extends \FlexiPeeHP\Digest\DigestModule implements \Flex
                     $total[$currency] = floatval($outcome['sumCelkem']);
                 }
             }
+
+            $totalsTable = new \FlexiPeeHP\Digest\Table([_('Amount'), _('Currency')]);
             foreach ($total as $currency => $amount) {
-                $this->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount).'&nbsp;'.$currency));
+                $totalsTable->addRowColumns([self::formatCurrency($amount), $currency]);
             }
         }
     }

@@ -20,8 +20,7 @@ class WithoutTel extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\
         if (empty($withoutEmail)) {
             $this->addItem(_('none'));
         } else {
-            $noTelTable = new Ease\Html\TableTag(null, ['class' => 'pure-table']);
-            $noTelTable->addRowHeaderColumns([_('Company'), _('Street'), _('City'),
+            $noTelTable = new \FlexiPeeHP\Digest\Table([_('Company'), _('Street'), _('City'),
                 _('Email')]);
             $count      = 0;
             foreach ($withoutEmail as $address) {

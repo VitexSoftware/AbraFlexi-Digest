@@ -21,9 +21,7 @@ class WithoutEmail extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeH
         if (empty($withoutEmail)) {
             $this->addItem(_('none'));
         } else {
-            $noMailTable = new Ease\Html\TableTag(null,
-                ['class' => 'pure-table']);
-            $noMailTable->addRowHeaderColumns([_('Company'), _('Street'), _('City'),
+            $noMailTable = new \FlexiPeeHP\Digest\Table([_('Company'), _('Street'), _('City'),
                 _('Phone')]);
             $count       = 0;
             foreach ($withoutEmail as $address) {

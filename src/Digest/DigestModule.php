@@ -22,21 +22,37 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
     public $condition = [];
 
     /**
-     * Flexibe Evidence Column used to filter by date
-     * @var string 
+     * Flexibe Evidence Column(s) used to filter by date
+     * @var string|array 
      */
     public $timeColumn = null;
 
     /**
+     * Initial date to process
+     * @var  \DateInterval
+     */
+    public $timeInterval = null;
+
+    /**
+     * Prepare condition, add header with anchors
      * 
-     * @param type $interval
+     * @param \DateInterval $interval
      */
     public function __construct($interval)
     {
         if (!empty($interval) && $this->timeColumn) {
-            $this->condition = [$this->timeColumn => $interval];
+            if (is_array($this->timeColumn)) {
+                $condParts = [];
+                foreach ($this->timeColumn as $timeColumn) {
+                    $condParts[$timeColumn] = $interval;
+                }
+                $this->condition = [\FlexiPeeHP\FlexiBeeRO::flexiUrl($condParts,
+                        ' or ')];
+            } else {
+                $this->condition = [$this->timeColumn => $interval];
+            }
         }
-
+        $this->timeInterval = $interval;
         parent::__construct();
         $this->setTagID(get_class($this));
         $this->addItem(new \Ease\Html\HrTag());
@@ -86,6 +102,61 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
     public static function formatCurrency($price)
     {
         return number_format($price, 2, ',', ' ');
+    }
+
+    /**
+     * FlexiBee date in human readable form 
+     * 
+     * @param string $flexiDate
+     * 
+     * @return string
+     */
+    public static function humanDate($flexiDate)
+    {
+        return \FlexiPeeHP\FlexiBeeRW::flexiDateToDateTime($flexiDate)->format('d. m. Y');
+    }
+
+    /**
+     * Is Date between dates
+     * 
+     * @param DateTime $date Date that is to be checked if it falls between $startDate and $endDate
+     * @param DateTime $startDate Date should be after this date to return true
+     * @param DateTime $endDate Date should be before this date to return true
+     * 
+     * return bool
+     */
+    public static function isDateBetweenDates(\DateTime $date,
+                                              \DateTime $startDate,
+                                              \DateTime $endDate)
+    {
+        return $date > $startDate && $date < $endDate;
+    }
+
+    /**
+     * Is datw within date interval
+     * 
+     * @param \FlexiPeeHP\Digest\DateTime $date
+     * @param \DateInterval               $interval
+     * 
+     * @return boolean
+     */
+    public static function isDateWithinInterval(\DateTime $date,
+                                                \DatePeriod $interval)
+    {
+        return self::isDateBetweenDates($date, $interval->getStartDate(),
+                $interval->getEndDate());
+    }
+
+    /**
+     * Is date subject of digest ?
+     * 
+     * @param \FlexiPeeHP\Digest\DateTime $date
+     * 
+     * @return boolean
+     */
+    public function isMyDate(\DateTime $date)
+    {
+        return self::isDateWithinInterval($date, $this->timeInterval);
     }
 
     /**

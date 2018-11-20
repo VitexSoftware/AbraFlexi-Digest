@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2018-11-08 17:14+0100\n"
-"PO-Revision-Date: 2018-11-08 17:14+0100\n"
+"POT-Creation-Date: 2018-11-20 01:13+0100\n"
+"PO-Revision-Date: 2018-11-20 01:14+0100\n"
 "Last-Translator: Vítězslav Dvořák <info@vitexsoftware.cz>\n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -16,11 +16,11 @@ msgstr ""
 "X-Poedit-SearchPath-0: ../src\n"
 "X-Poedit-SearchPathExcluded-0: ../vendor\n"
 
-#: ../src/Digest/DigestModule.php:55
+#: ../src/Digest/DigestModule.php:71
 msgid "Please contact Vitex Software to make this module working."
 msgstr "Prosím kontaktujete Vitex Software pokud chcete tento modul používat"
 
-#: ../src/Digest/DigestModule.php:64
+#: ../src/Digest/DigestModule.php:80
 msgid "No heading set"
 msgstr "Nadpis nenastaven"
 
@@ -62,7 +62,7 @@ msgstr "Verze"
 msgid "(G) 2018"
 msgstr "(G) 2018"
 
-#: ../src/flexibee-alltimedigest.php:14
+#: ../src/flexibee-alltimedigest.php:15
 #, php-format
 msgid "FlexiBee Alltime"
 msgstr "souhrn FlexiBee za celou dobu"
@@ -90,10 +90,10 @@ msgstr "Roční souhrn FlexiBee  od %s do %s"
 #: ../src/modules.monthly/DailyIncomeChart.php:51 ../src/modules/Debtors.php:57
 #: ../src/modules/IncomingInvoices.php:34
 #: ../src/modules/IncomingPayments.php:23 ../src/modules/NewCustomers.php:28
-#: ../src/modules/OutcomingInvoices.php:32
-#: ../src/modules/OutcomingPayments.php:23 ../src/modules/WaitingIncome.php:30
-#: ../src/modules/WaitingPayments.php:35 ../src/modules/WithoutEmail.php:22
-#: ../src/modules/WithoutTel.php:21
+#: ../src/modules/OutcomingInvoices.php:34
+#: ../src/modules/OutcomingPayments.php:23 ../src/modules/Reminds.php:38
+#: ../src/modules/WaitingIncome.php:30 ../src/modules/WaitingPayments.php:35
+#: ../src/modules/WithoutEmail.php:22 ../src/modules/WithoutTel.php:21
 msgid "none"
 msgstr "žádné"
 
@@ -106,17 +106,18 @@ msgstr "100%% - průměrný příjem je %s %s"
 msgid "Incoming payments chart"
 msgstr "Graf příchozích plateb"
 
-#: ../src/modules/Debtors.php:61 ../src/modules/WithoutEmail.php:26
-#: ../src/modules/WithoutTel.php:24
+#: ../src/modules/Debtors.php:61 ../src/modules/Reminds.php:42
+#: ../src/modules/WithoutEmail.php:24 ../src/modules/WithoutTel.php:23
 msgid "Company"
 msgstr "Společnost"
 
-#: ../src/modules/Debtors.php:61 ../src/modules/WaitingIncome.php:35
-#: ../src/modules/WaitingPayments.php:40
+#: ../src/modules/Debtors.php:61 ../src/modules/OutcomingPayments.php:34
+#: ../src/modules/Reminds.php:43 ../src/modules/WaitingIncome.php:34
+#: ../src/modules/WaitingPayments.php:39
 msgid "Amount"
 msgstr "částka"
 
-#: ../src/modules/Debtors.php:61
+#: ../src/modules/Debtors.php:61 ../src/modules/Reminds.php:44
 msgid "Overdue days"
 msgstr "Dní po splatnosti"
 
@@ -128,9 +129,9 @@ msgstr "Faktury"
 msgid "days"
 msgstr "dní"
 
-#: ../src/modules/Debtors.php:92 ../src/modules/WaitingIncome.php:60
-#: ../src/modules/WaitingPayments.php:66 ../src/modules/WithoutEmail.php:40
-#: ../src/modules/WithoutTel.php:38
+#: ../src/modules/Debtors.php:92 ../src/modules/OutcomingInvoices.php:65
+#: ../src/modules/WaitingIncome.php:59 ../src/modules/WaitingPayments.php:65
+#: ../src/modules/WithoutEmail.php:38 ../src/modules/WithoutTel.php:37
 msgid "Total"
 msgstr "Celkem"
 
@@ -139,14 +140,11 @@ msgid "Debtors"
 msgstr "Dlužníci"
 
 #: ../src/modules/IncomingInvoices.php:66
-#: ../src/modules/OutcomingInvoices.php:65
 #, php-format
 msgid "Invoiced amount %s"
 msgstr "Fakturovaná částka %s"
 
 #: ../src/modules/IncomingInvoices.php:69
-#: ../src/modules/OutcomingInvoices.php:57
-#: ../src/modules/OutcomingInvoices.php:68
 #, php-format
 msgid "Exposed %s invoices"
 msgstr "Vystaveno %s faktur"
@@ -159,50 +157,78 @@ msgstr "Přijaté faktury"
 msgid "Incoming payments"
 msgstr "Příchozí platby"
 
-#: ../src/modules/NewCustomers.php:31 ../src/modules/WaitingIncome.php:34
-#: ../src/modules/WaitingPayments.php:39
+#: ../src/modules/NewCustomers.php:30 ../src/modules/WaitingIncome.php:33
+#: ../src/modules/WaitingPayments.php:38
 msgid "Position"
 msgstr "Pozice"
 
-#: ../src/modules/NewCustomers.php:31 ../src/modules/WaitingIncome.php:34
-#: ../src/modules/WaitingPayments.php:39
+#: ../src/modules/NewCustomers.php:30 ../src/modules/WaitingIncome.php:33
+#: ../src/modules/WaitingPayments.php:38
 msgid "Code"
 msgstr "Kód"
 
-#: ../src/modules/NewCustomers.php:31
+#: ../src/modules/NewCustomers.php:30
 msgid "Name"
 msgstr "Jméno"
 
-#: ../src/modules/NewCustomers.php:32 ../src/modules/WithoutTel.php:25
+#: ../src/modules/NewCustomers.php:31 ../src/modules/WithoutTel.php:24
 msgid "Email"
 msgstr "Email"
 
-#: ../src/modules/NewCustomers.php:32 ../src/modules/WithoutEmail.php:27
+#: ../src/modules/NewCustomers.php:31 ../src/modules/WithoutEmail.php:25
 msgid "Phone"
 msgstr "Pevná linka"
 
-#: ../src/modules/NewCustomers.php:50
+#: ../src/modules/NewCustomers.php:49
 #, php-format
 msgid "%d new Customers"
 msgstr "%d nových klientů"
 
-#: ../src/modules/NewCustomers.php:57
+#: ../src/modules/NewCustomers.php:56
 msgid "New or updated customers"
 msgstr "Noví nebo aktualizovaní zákazníci"
 
-#: ../src/modules/OutcomingInvoices.php:75
+#: ../src/modules/OutcomingInvoices.php:61
+msgid "Count"
+msgstr "Počet"
+
+#: ../src/modules/OutcomingInvoices.php:62
+msgid "Document type"
+msgstr "Typ dokumentu"
+
+#: ../src/modules/OutcomingInvoices.php:95
 msgid "Outcoming invoices"
 msgstr "Vydané faktury"
 
-#: ../src/modules/OutcomingPayments.php:41
+#: ../src/modules/OutcomingPayments.php:34
+msgid "Currency"
+msgstr "Měna"
+
+#: ../src/modules/OutcomingPayments.php:43
 msgid "Outcoming payments"
 msgstr "Odchozí platby"
 
-#: ../src/modules/WaitingIncome.php:34 ../src/modules/WaitingPayments.php:39
+#: ../src/modules/Reminds.php:45
+msgid "Remind #1"
+msgstr "Upomínka #1"
+
+#: ../src/modules/Reminds.php:46
+msgid "Remind #2"
+msgstr "Upomínka #2"
+
+#: ../src/modules/Reminds.php:47
+msgid "Remind #3"
+msgstr "Upomínka #3"
+
+#: ../src/modules/Reminds.php:136
+msgid "Reminds"
+msgstr "Upomínky"
+
+#: ../src/modules/WaitingIncome.php:33 ../src/modules/WaitingPayments.php:38
 msgid "Partner"
 msgstr "Partner"
 
-#: ../src/modules/WaitingIncome.php:69
+#: ../src/modules/WaitingIncome.php:68
 msgid "Waiting Income"
 msgstr "očekávané příjmy"
 
@@ -210,19 +236,19 @@ msgstr "očekávané příjmy"
 msgid "We have to pay"
 msgstr "Máme uhradit"
 
-#: ../src/modules/WithoutEmail.php:26 ../src/modules/WithoutTel.php:24
+#: ../src/modules/WithoutEmail.php:24 ../src/modules/WithoutTel.php:23
 msgid "Street"
 msgstr "Ulice"
 
-#: ../src/modules/WithoutEmail.php:26 ../src/modules/WithoutTel.php:24
+#: ../src/modules/WithoutEmail.php:24 ../src/modules/WithoutTel.php:23
 msgid "City"
 msgstr "Město"
 
-#: ../src/modules/WithoutEmail.php:46
+#: ../src/modules/WithoutEmail.php:44
 msgid "Customers without notification email address"
 msgstr "Zákazníci bez notifikační emailové adresy"
 
-#: ../src/modules/WithoutTel.php:44
+#: ../src/modules/WithoutTel.php:43
 msgid "Customers without notification phone number"
 msgstr "Zákazníci bez notifikačního telefoního čísla"
 
@@ -499,9 +525,6 @@ msgstr "Zákazníci bez notifikačního telefoního čísla"
 
 #~ msgid "Price"
 #~ msgstr "Cena"
-
-#~ msgid "Count"
-#~ msgstr "Počet"
 
 #~ msgid "Remove"
 #~ msgstr "Odstranit"

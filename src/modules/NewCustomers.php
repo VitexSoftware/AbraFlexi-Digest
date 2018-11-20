@@ -27,8 +27,7 @@ class NewCustomers extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeH
         if (empty($newCustomersData)) {
             $this->addItem(_('none'));
         } else {
-            $userTable = new Ease\Html\TableTag(null, ['class' => 'pure-table']);
-            $userTable->addRowHeaderColumns([_('Position'), _('Code'), _('Name'),
+            $userTable = new \FlexiPeeHP\Digest\Table([_('Position'), _('Code'), _('Name'),
                 _('Email'), _('Phone')]);
 
             foreach ($newCustomersData as $pos => $newCustomerData) {

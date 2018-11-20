@@ -35,8 +35,7 @@ class WaitingPayments extends \FlexiPeeHP\Digest\DigestModule implements \FlexiP
             $this->addItem(_('none'));
         } else {
             $adreser  = new FlexiPeeHP\Adresar(null, ['offline' => 'true']);
-            $invTable = new Ease\Html\TableTag(null, ['class' => 'pure-table']);
-            $invTable->addRowHeaderColumns([_('Position'), _('Code'), _('Partner'),
+            $invTable = new \FlexiPeeHP\Digest\Table([_('Position'), _('Code'), _('Partner'),
                 _('Amount')]);
             $pos      = 0;
 

@@ -30,8 +30,7 @@ class WaitingIncome extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPee
             $this->addItem(_('none'));
         } else {
             $adreser  = new FlexiPeeHP\Adresar(null, ['offline' => 'true']);
-            $invTable = new Ease\Html\TableTag(null, ['class' => 'pure-table']);
-            $invTable->addRowHeaderColumns([_('Position'), _('Code'), _('Partner'),
+            $invTable = new \FlexiPeeHP\Digest\Table([_('Position'), _('Code'), _('Partner'),
                 _('Amount')]);
             $pos      = 0;
 
@@ -59,7 +58,7 @@ class WaitingIncome extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPee
 
             $this->addItem(new Ease\Html\H3Tag(_('Total')));
             foreach ($totals as $currency => $amount) {
-                $this->addItem( new \Ease\Html\DivTag( self::formatCurrency($amount).'&nbsp;'.$currency));
+                $this->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount).'&nbsp;'.$currency));
             }
         }
     }

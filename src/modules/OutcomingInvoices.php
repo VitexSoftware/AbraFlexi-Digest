@@ -58,18 +58,15 @@ class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
                 }
             }
 
-
-            $outInvoicesTable = new \Ease\Html\TableTag(null,
-                ['class' => 'pure-table']);
-
             $tableHeader[] = _('Count');
             $tableHeader[] = _('Document type');
             $currencies    = array_keys($invoicedRaw);
             foreach ($currencies as $currencyCode) {
                 $tableHeader[] = _('Total').' '.\FlexiPeeHP\FlexiBeeRO::uncode($currencyCode);
             }
-            $outInvoicesTable->addRowHeaderColumns($tableHeader);
-
+            
+            $outInvoicesTable = new \FlexiPeeHP\Digest\Table($tableHeader);
+            
             foreach ($typDoklTotals as $typDokl => $typDoklTotal) {
                 $tableRow   = [$typDoklCounts[$typDokl]];
                 $tableRow[] = \FlexiPeeHP\FlexiBeeRO::uncode($typDokl);

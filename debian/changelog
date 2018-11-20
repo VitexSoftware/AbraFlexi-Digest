@@ -1,4 +1,4 @@
-flexibee-digest (1.4.1) UNRELEASED; urgency=medium
+flexibee-digest (1.4.2) UNRELEASED; urgency=medium
 
   [ Vítězslav Dvořák ]
   * Use 'is empty' to find unset emails and phone numbers
@@ -7,7 +7,10 @@ flexibee-digest (1.4.1) UNRELEASED; urgency=medium
   [ Vitex ]
   * Mail CSS fix
 
- -- Vitex <vitex@hebeditko>  Thu, 08 Nov 2018 19:31:29 +0100
+  [ Vítězslav Dvořák ]
+  * 
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Sat, 10 Nov 2018 00:37:29 +0100
 
 flexibee-digest (1.1) experimental; urgency=medium
 
