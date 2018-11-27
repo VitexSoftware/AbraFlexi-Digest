@@ -307,12 +307,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/EaseFramework.git",
-                "reference": "cf50d0b08d2e7e675efefb18d3c0b77600384042"
+                "reference": "176498391beba358e67403748d818cd8058e18ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/EaseFramework/zipball/cf50d0b08d2e7e675efefb18d3c0b77600384042",
-                "reference": "cf50d0b08d2e7e675efefb18d3c0b77600384042",
+                "url": "https://api.github.com/repos/VitexSoftware/EaseFramework/zipball/176498391beba358e67403748d818cd8058e18ad",
+                "reference": "176498391beba358e67403748d818cd8058e18ad",
                 "shasum": ""
             },
             "require": {
@@ -358,7 +358,7 @@
             ],
             "description": "An PHP Framework for Ease of writing Applications",
             "homepage": "http://v.s.cz/ease.php",
-            "time": "2018-11-19T01:53:29+00:00"
+            "time": "2018-11-22T11:52:38+00:00"
         },
         {
             "name": "vitexsoftware/flexipeehp-bricks",
@@ -366,12 +366,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/FlexiPeeHP-Bricks.git",
-                "reference": "b00f60c8b04a4f46ff7f28b253b0f7d23034231b"
+                "reference": "7b5ef61b1d555fca8e26ec5647d1309de54091f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/FlexiPeeHP-Bricks/zipball/b00f60c8b04a4f46ff7f28b253b0f7d23034231b",
-                "reference": "b00f60c8b04a4f46ff7f28b253b0f7d23034231b",
+                "url": "https://api.github.com/repos/VitexSoftware/FlexiPeeHP-Bricks/zipball/7b5ef61b1d555fca8e26ec5647d1309de54091f3",
+                "reference": "7b5ef61b1d555fca8e26ec5647d1309de54091f3",
                 "shasum": ""
             },
             "require": {
@@ -398,7 +398,7 @@
                 }
             ],
             "description": "FlexiPeeHP code Sniplets",
-            "time": "2018-11-14T18:57:24+00:00"
+            "time": "2018-11-26T23:18:22+00:00"
         }
     ],
     "packages-dev": [],

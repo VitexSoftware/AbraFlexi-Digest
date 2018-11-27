@@ -89,7 +89,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      */
     public static function getCurrency($data)
     {
-        return current(explode(':', $data['mena@showAs']));
+        return array_key_exists('mena@showAs', $data) ? current(explode(':', $data['mena@showAs'])) : \FlexiPeeHP\FlexiBeeRO::uncode($data['mena']) ;
     }
 
     /**

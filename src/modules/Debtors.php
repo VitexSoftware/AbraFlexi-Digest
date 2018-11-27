@@ -45,7 +45,7 @@ class Debtors extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Dig
             }
 
             $totals[$faData['firma']][$currency] += $amount;
-            $totalsByCurrency[$amount]           += $amount;
+            $totalsByCurrency[$currency]         += $amount;
 
             $oDays = \FlexiPeeHP\FakturaVydana::overdueDays($faData['datSplat']);
 
