@@ -20,8 +20,9 @@ class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
     {
         $digger          = new FlexiPeeHP\FakturaVydana();
         $outInvoicesData = $digger->getColumnsFromFlexibee(['kod', 'typDokl', 'sumCelkem',
-            'sumZalohy', 'uhrazeno', 'storno', 'mena', 'juhSum', 'juhSumMen'],
-            $this->condition);
+            'sumCelkemMen',
+            'sumZalohy', 'sumZalohyMen', 'uhrazeno', 'storno', 'mena', 'juhSum',
+            'juhSumMen'], $this->condition);
         $exposed         = 0;
         $invoicedRaw     = [];
         $paid            = [];
@@ -39,8 +40,12 @@ class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
                     $storno++;
                 }
 
-                $amount = floatval($outInvoiceData['sumCelkem']) + floatval($outInvoiceData['sumZalohy']);
-                
+                if ($outInvoiceData['mena'] != 'code:CZK') {
+                    $amount = floatval($outInvoiceData['sumCelkemMen']) + floatval($outInvoiceData['sumZalohyMen']);
+                } else {
+                    $amount = floatval($outInvoiceData['sumCelkem']) + floatval($outInvoiceData['sumZalohy']);
+                }
+
                 if (array_key_exists($outInvoiceData['typDokl'], $typDoklCounts)) {
                     $typDoklCounts[$outInvoiceData['typDokl']] ++;
                     $typDoklTotals[$outInvoiceData['typDokl']][$outInvoiceData['mena']]
@@ -64,9 +69,9 @@ class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
             foreach ($currencies as $currencyCode) {
                 $tableHeader[] = _('Total').' '.\FlexiPeeHP\FlexiBeeRO::uncode($currencyCode);
             }
-            
+
             $outInvoicesTable = new \FlexiPeeHP\Digest\Table($tableHeader);
-            
+
             foreach ($typDoklTotals as $typDokl => $typDoklTotal) {
                 $tableRow   = [$typDoklCounts[$typDokl]];
                 $tableRow[] = \FlexiPeeHP\FlexiBeeRO::uncode($typDokl);
@@ -82,7 +87,7 @@ class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
 
             $tableFooter = [$exposed, count(array_keys($typDoklTotals))];
             foreach ($currencies as $currencyCode) {
-                $tableFooter[] = self::formatCurrency( $invoicedRaw[$currencyCode] ).' '.FlexiPeeHP\FlexiBeeRO::uncode($currencyCode);
+                $tableFooter[] = self::formatCurrency($invoicedRaw[$currencyCode]).' '.FlexiPeeHP\FlexiBeeRO::uncode($currencyCode);
             }
             $outInvoicesTable->addRowFooterColumns($tableFooter);
 

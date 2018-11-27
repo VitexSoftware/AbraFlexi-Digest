@@ -15,7 +15,7 @@ class IncomingPayments extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
     public function dig()
     {
         $banker  = new FlexiPeeHP\Banka();
-        $incomes = $banker->getColumnsFromFlexibee('mena,sumCelkem',
+        $incomes = $banker->getColumnsFromFlexibee(['mena', 'sumCelkem','sumCelkemMen'],
             array_merge($this->condition,
                 ['typPohybuK' => 'typPohybu.prijem', 'storno' => false]));
         $total   = [];
@@ -24,10 +24,17 @@ class IncomingPayments extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
         } else {
             foreach ($incomes as $income) {
                 $currency = self::getCurrency($income);
-                if (array_key_exists($currency, $total)) {
-                    $total[$currency] += floatval($income['sumCelkem']);
+
+                if ($currency == 'CZK') {
+                    $amount = floatval($income['sumCelkem']);
                 } else {
-                    $total[$currency] = floatval($income['sumCelkem']);
+                    $amount = floatval($income['sumCelkemMen']);
+                }
+
+                if (array_key_exists($currency, $total)) {
+                    $total[$currency] += $amount;
+                } else {
+                    $total[$currency] = $amount;
                 }
             }
             foreach ($total as $currency => $amount) {

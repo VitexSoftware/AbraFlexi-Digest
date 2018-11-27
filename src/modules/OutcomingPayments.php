@@ -16,6 +16,7 @@ class OutcomingPayments extends \FlexiPeeHP\Digest\DigestModule implements \Flex
     {
         $banker   = new FlexiPeeHP\Banka();
         $outcomes = $banker->getColumnsFromFlexibee('mena,sumCelkem',
+            'sumCelkemMen',
             array_merge($this->condition,
                 ['typPohybuK' => 'typPohybu.vydej', 'storno' => false]));
         $total    = [];
@@ -24,10 +25,17 @@ class OutcomingPayments extends \FlexiPeeHP\Digest\DigestModule implements \Flex
         } else {
             foreach ($outcomes as $outcome) {
                 $currency = self::getCurrency($outcome);
-                if (array_key_exists($currency, $total)) {
-                    $total[$currency] += floatval($outcome['sumCelkem']);
+
+                if ($currency != 'CZK') {
+                    $amount = floatval($outcome['sumCelkemMen']);
                 } else {
-                    $total[$currency] = floatval($outcome['sumCelkem']);
+                    $amount = floatval($outcome['sumCelkem']);
+                }
+
+                if (array_key_exists($currency, $total)) {
+                    $total[$currency] += $amount;
+                } else {
+                    $total[$currency] = $amount;
                 }
             }
 

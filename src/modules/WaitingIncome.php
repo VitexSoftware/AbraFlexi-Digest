@@ -21,10 +21,11 @@ class WaitingIncome extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPee
         $totals      = [];
         $checker     = new \FlexiPeeHP\FakturaVydana();
         $outInvoices = $checker->getColumnsFromFlexibee(['kod', 'firma', 'sumCelkem',
+            'sumCelkemMen',
             'mena'],
             array_merge($this->condition,
                 ["(stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr')",
-            'storno' => false]));
+                    'storno' => false]));
 
         if (empty($outInvoices)) {
             $this->addItem(_('none'));
@@ -35,7 +36,7 @@ class WaitingIncome extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPee
             $pos      = 0;
 
             foreach ($outInvoices as $outInvoiceData) {
-                $currency = current(explode(':', $outInvoiceData['mena@showAs']));
+                $currency = self::getCurrency($outInvoiceData);
                 $checker->setMyKey(urlencode($outInvoiceData['kod']));
                 $adreser->setMyKey($outInvoiceData['firma']);
 
@@ -45,7 +46,7 @@ class WaitingIncome extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPee
                         $outInvoiceData['kod']),
                     new \Ease\Html\ATag($adreser->getApiUrl(),
                         empty($outInvoiceData['firma']) ? '' : $outInvoiceData['firma@showAs']),
-                    $outInvoiceData['sumCelkem'].' '.$currency
+                    (($currency != 'CZK') ? $outInvoiceData['sumCelkemMen'] : $outInvoiceData['sumCelkem']).' '.$currency
                 ]);
 
                 if (array_key_exists($currency, $totals)) {

@@ -1,4 +1,7 @@
 {
     "EASE_MAILTO": "your@email.tld",
-    "EASE_LOGGER": "syslog|mail"
+    "DIGEST_FROM": "noreply@vitexsoftware.cz",
+    "EASE_LOGGER": "syslog|mail",
+    "THEME":  "office",
+    "SAVETO": "/var/tmp/"
 }

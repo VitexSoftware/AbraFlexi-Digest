@@ -24,13 +24,11 @@ class Reminds extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Dig
         $invoicer = new \FlexiPeeHP\FakturaVydana();
 
         $faDatakturyRaw = $invoicer->getColumnsFromFlexiBee(['kod', 'firma', 'popis',
-            'sumCelkem',
-            'zbyvaUhradit', 'mena', 'datUp1', 'datUp2', 'datSmir'],
+            'sumCelkem', 'sumCelkemMen',
+            'zbyvaUhradit', 'zbyvaUhraditMen', 'mena', 'datUp1', 'datUp2', 'datSmir'],
             $this->condition);
 
         $invoicer->addStatusMessage("Faktur: ".count($faDatakturyRaw));
-
-
 
 
 
@@ -64,7 +62,9 @@ class Reminds extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Dig
                     new \Ease\Html\ATag($adreser->getApiURL(), $nazevFirmy),
                     new \Ease\Html\ATag($invoicer->getApiURL(),
                         trim($invoiceData['kod'].' '.$invoiceData['popis'])),
-                    $invoiceData['zbyvaUhradit'].' '.\FlexiPeeHP\FlexiBeeRO::uncode($invoiceData['mena']),
+                    (($invoiceData['mena'] != 'code:CZK') ? $invoiceData['zbyvaUhraditMen']
+                            : $invoiceData['zbyvaUhradit']).
+                    ' '.\FlexiPeeHP\FlexiBeeRO::uncode($invoiceData['mena']),
                     empty($invoiceData['datUp1']) ? '' : $this->myDate($invoiceData['datUp1']),
                     empty($invoiceData['datUp2']) ? '' : $this->myDate($invoiceData['datUp2']),
                     empty($invoiceData['datSmir']) ? '' : $this->myDate($invoiceData['datSmir'])
