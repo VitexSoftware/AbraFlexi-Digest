@@ -17,7 +17,7 @@ class Reminds extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Dig
      * Count several reminds
      * @var array of int
      */
-    private $remids = [];
+    private $remids = ['datUp1'=>[],'datUp2'=>[],'datSmir'=>[]];
 
     public function dig()
     {
@@ -130,6 +130,10 @@ class Reminds extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Dig
         return $humanDate;
     }
 
+    /**
+     * 
+     * @return string
+     */
     function heading()
     {
         return _('Reminds');

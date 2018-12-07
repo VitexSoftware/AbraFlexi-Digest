@@ -18,7 +18,7 @@ $end    = new \DateTime();
 $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
 
 $subject = sprintf(
-    _('FlexiBee Year digest from %s to %s'),
+    _('FlexiBee %s Year digest from %s to %s'),$myCompanyName,
     \strftime('%x', $period->getStartDate()->getTimestamp()),
     \strftime('%x', $period->getEndDate()->getTimestamp())
 );

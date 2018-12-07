@@ -45,7 +45,7 @@ class Debtors extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Dig
             }
 
             $totals[$faData['firma']][$currency] += $amount;
-            $totalsByCurrency[$amount]           += $amount;
+            $totalsByCurrency[$currency]         += $amount;
 
             $oDays = \FlexiPeeHP\FakturaVydana::overdueDays($faData['datSplat']);
 
@@ -78,9 +78,9 @@ class Debtors extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Dig
                     $overdueInvoice = \FlexiPeeHP\FlexiBeeRO::uncode($invoiceData['kod']);
 
                     $overdueInvoices->addItem(new Ease\Html\DivTag([new \Ease\Html\ATag($invoicer->getApiURL(),
-                                $overdueInvoice, ['css' => 'margin: 5px;']),
-                            '&nbsp;<small>'.( ($currency != 'CZK') ? $invoiceData['zbyvaUhraditMen']
-                                    : $invoiceData['zbyvaUhradit']).' '.$currency.' '.\FlexiPeeHP\FakturaVydana::overdueDays($invoiceData['datSplat']).' '._('days').'</small>']
+                            $overdueInvoice, ['css' => 'margin: 5px;']),
+                        '&nbsp;<small>'.( ($currency != 'CZK') ? $invoiceData['zbyvaUhraditMen']
+                                : $invoiceData['zbyvaUhradit']).' '.$currency.' '.\FlexiPeeHP\FakturaVydana::overdueDays($invoiceData['datSplat']).' '._('days').'</small>']
                     ));
                 }
 

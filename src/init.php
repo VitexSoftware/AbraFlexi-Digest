@@ -1,5 +1,4 @@
 <?php
-
 /**
  * FlexiBee Digest - Dayly 
  *
@@ -19,8 +18,10 @@ define('MODULE_ALLTIME_PATH', './modules.alltime');
 define('STYLE_DIR', './css');
 
 require_once '../vendor/autoload.php';
-$shared = \Ease\Shared::instanced();
+$shared  = \Ease\Shared::instanced();
 $shared->loadConfig('../client.json', true);
 $shared->loadConfig('../digest.json', true);
 $localer = new \Ease\Locale('cs_CZ', '../i18n', 'flexibee-digest');
 
+$myCompany     = new \FlexiPeeHP\Company($shared->getConfigValue('FLEXIBEE_COMPANY'));
+$myCompanyName = $myCompany->getDataValue('nazev');
