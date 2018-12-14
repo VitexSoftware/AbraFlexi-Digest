@@ -43,7 +43,8 @@ class DailyIncomeChart extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
     {
         $banker   = new FlexiPeeHP\Banka();
         $averages = [];
-        $incomes  = $banker->getColumnsFromFlexibee('mena,sumCelkem,datVyst',
+        $incomes  = $banker->getColumnsFromFlexibee(['mena', 'sumCelkem', 'sumCelkemMen',
+            'datVyst'],
             array_merge($this->condition,
                 ['typPohybuK' => 'typPohybu.prijem', 'storno' => false]));
         $days     = [];
@@ -59,8 +60,11 @@ class DailyIncomeChart extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
                     $averages[$currency] = [];
                 }
 
-                $incomeAmount = floatval($income['sumCelkem']);
-
+                if ($currency == 'CZK') {
+                    $incomeAmount = floatval($income['sumCelkem']);
+                } else {
+                    $incomeAmount = floatval($income['sumCelkemMen']);
+                }
 
                 if (array_key_exists($currency, $days[$income['datVyst']])) {
                     $days[$income['datVyst']][$currency] += $incomeAmount;
@@ -78,7 +82,7 @@ class DailyIncomeChart extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
             foreach ($averages as $currency => $amounts) {
                 $this->average[$currency] = ceil(array_sum($averages[$currency])
                     / count($averages[$currency]));
-                $this->addItem( new Ease\Html\DivTag(sprintf(_('100%% - average income is %s %s'),
+                $this->addItem(new Ease\Html\DivTag(sprintf(_('100%% - average income is %s %s'),
                         $this->average[$currency], $currency)));
             }
             $this->addChart(array_reverse($days));

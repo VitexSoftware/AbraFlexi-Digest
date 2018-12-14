@@ -13,7 +13,7 @@ require_once __DIR__ . '/init.php';
 
 $period = new \DateTime();
 
-$subject = \sprintf(_('FlexiBee Daily digest for %s'),
+$subject = \sprintf(_('FlexiBee %s Daily digest for %s'),$myCompanyName,
     \strftime('%x', $period->getTimestamp()));
 
 $digestor = new Digestor($subject);

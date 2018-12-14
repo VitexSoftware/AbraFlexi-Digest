@@ -87,7 +87,52 @@ class Logo extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Digest
 }
 ```
 
+Universal Modules
+-----------------
 
+Applied in every case
+
+* Debtors.php  
+* IncomingInvoices.php  
+* IncomingPayments.php  
+* NewCustomers.php  
+* OutcomingInvoices.php  
+* OutcomingPayments.php  
+* Reminds.php  
+* WaitingIncome.php  
+* WaitingPayments.php  
+* WithoutEmail.php  
+* WithoutTel.php
+
+
+Daily Modules
+-------------
+
+none yet
+
+Weekly Modules
+--------------
+
+none yet
+
+Monthly Modules
+---------------
+
+ Applied once per month
+
+ * DailyIncomeChart.php
+
+![Average Income](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-Digest/master/monthly-average-income-chart.png "Week Digest")
+
+Yearly modules
+--------------
+
+none yet
+
+Alltime modules
+---------------
+
+none yet
 
 Dependencies
 ------------

@@ -39,27 +39,35 @@ class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
                 if ($outInvoiceData['storno'] == 'true') {
                     $storno++;
                 }
+                $currency = self::getCurrency($outInvoiceData);
+                $typDokl  = $outInvoiceData['typDokl'];
 
-                if ($outInvoiceData['mena'] != 'code:CZK') {
+                if ($currency != 'CZK') {
                     $amount = floatval($outInvoiceData['sumCelkemMen']) + floatval($outInvoiceData['sumZalohyMen']);
                 } else {
                     $amount = floatval($outInvoiceData['sumCelkem']) + floatval($outInvoiceData['sumZalohy']);
                 }
 
-                if (array_key_exists($outInvoiceData['typDokl'], $typDoklCounts)) {
-                    $typDoklCounts[$outInvoiceData['typDokl']] ++;
-                    $typDoklTotals[$outInvoiceData['typDokl']][$outInvoiceData['mena']]
-                        += $amount;
-                } else {
-                    $typDoklCounts[$outInvoiceData['typDokl']]                          = 1;
-                    $typDoklTotals[$outInvoiceData['typDokl']][$outInvoiceData['mena']]
-                        = $amount;
+                if (!array_key_exists($typDokl, $typDoklTotals)) {
+                    $typDoklTotals[$typDokl] = [];
                 }
 
-                if (array_key_exists($outInvoiceData['mena'], $invoicedRaw)) {
-                    $invoicedRaw[$outInvoiceData['mena']] += $amount;
+                if (!array_key_exists($currency, $typDoklTotals[$typDokl])) {
+                    $typDoklTotals[$typDokl][$currency] = 0;
+                }
+
+                if (array_key_exists($typDokl, $typDoklCounts)) {
+                    $typDoklCounts[$typDokl] ++;
+                    $typDoklTotals[$typDokl][$currency] += $amount;
                 } else {
-                    $invoicedRaw[$outInvoiceData['mena']] = $amount;
+                    $typDoklCounts[$typDokl]            = 1;
+                    $typDoklTotals[$typDokl][$currency] = $amount;
+                }
+
+                if (array_key_exists($currency, $invoicedRaw)) {
+                    $invoicedRaw[$currency] += $amount;
+                } else {
+                    $invoicedRaw[$currency] = $amount;
                 }
             }
 

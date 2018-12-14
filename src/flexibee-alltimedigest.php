@@ -12,7 +12,7 @@ define('EASE_APPNAME', 'FlexiBeeAllTimeDigest');
 
 require_once __DIR__.'/init.php';
 
-$subject = sprintf(_('FlexiBee Alltime'));
+$subject = sprintf(_('FlexiBee %s Alltime'), $myCompanyName);
 
 $digestor = new Digestor($subject);
 $digestor->dig(null, [constant('MODULE_ALLTIME_PATH'), constant('MODULE_PATH')]);

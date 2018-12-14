@@ -15,7 +15,8 @@ class OutcomingPayments extends \FlexiPeeHP\Digest\DigestModule implements \Flex
     public function dig()
     {
         $banker   = new FlexiPeeHP\Banka();
-        $outcomes = $banker->getColumnsFromFlexibee(['mena','sumCelkem','sumCelkemMen'],
+        $outcomes = $banker->getColumnsFromFlexibee(['mena','sumCelkem',
+            'sumCelkemMen'],
             array_merge($this->condition,
                 ['typPohybuK' => 'typPohybu.vydej', 'storno' => false]));
         $total    = [];

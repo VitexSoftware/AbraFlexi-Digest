@@ -159,20 +159,20 @@
         },
         {
             "name": "pear/pear-core-minimal",
-            "version": "v1.10.6",
+            "version": "v1.10.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pear/pear-core-minimal.git",
-                "reference": "052868b244d31f822796e7e9981f62557eb256d4"
+                "reference": "19a3e0fcd50492c4357372f623f55f1b144346da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pear/pear-core-minimal/zipball/052868b244d31f822796e7e9981f62557eb256d4",
-                "reference": "052868b244d31f822796e7e9981f62557eb256d4",
+                "url": "https://api.github.com/repos/pear/pear-core-minimal/zipball/19a3e0fcd50492c4357372f623f55f1b144346da",
+                "reference": "19a3e0fcd50492c4357372f623f55f1b144346da",
                 "shasum": ""
             },
             "require": {
-                "pear/console_getopt": "~1.3",
+                "pear/console_getopt": "~1.4",
                 "pear/pear_exception": "~1.0"
             },
             "replace": {
@@ -199,7 +199,7 @@
                 }
             ],
             "description": "Minimal set of PEAR core files to be used as composer dependency",
-            "time": "2018-08-22T19:28:09+00:00"
+            "time": "2018-12-05T20:03:52+00:00"
         },
         {
             "name": "pear/pear_exception",
@@ -262,12 +262,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Spoje-NET/FlexiPeeHP.git",
-                "reference": "b768aa1eca5e2b83e3570ba2de2510c6222a5686"
+                "reference": "b78bd23786076d969467e08274d16471acb4e9ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Spoje-NET/FlexiPeeHP/zipball/b768aa1eca5e2b83e3570ba2de2510c6222a5686",
-                "reference": "b768aa1eca5e2b83e3570ba2de2510c6222a5686",
+                "url": "https://api.github.com/repos/Spoje-NET/FlexiPeeHP/zipball/b78bd23786076d969467e08274d16471acb4e9ee",
+                "reference": "b78bd23786076d969467e08274d16471acb4e9ee",
                 "shasum": ""
             },
             "require": {
@@ -299,7 +299,7 @@
                 }
             ],
             "description": "PHP Based Library for easy interaction with czech accounting system Flexibee.",
-            "time": "2018-11-14T21:15:46+00:00"
+            "time": "2018-12-02T20:59:49+00:00"
         },
         {
             "name": "vitexsoftware/ease-framework",
@@ -366,12 +366,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/FlexiPeeHP-Bricks.git",
-                "reference": "7b5ef61b1d555fca8e26ec5647d1309de54091f3"
+                "reference": "0ebd716a092784d5cc744cef8f184406394f2974"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/FlexiPeeHP-Bricks/zipball/7b5ef61b1d555fca8e26ec5647d1309de54091f3",
-                "reference": "7b5ef61b1d555fca8e26ec5647d1309de54091f3",
+                "url": "https://api.github.com/repos/VitexSoftware/FlexiPeeHP-Bricks/zipball/0ebd716a092784d5cc744cef8f184406394f2974",
+                "reference": "0ebd716a092784d5cc744cef8f184406394f2974",
                 "shasum": ""
             },
             "require": {
@@ -398,7 +398,7 @@
                 }
             ],
             "description": "FlexiPeeHP code Sniplets",
-            "time": "2018-11-26T23:18:22+00:00"
+            "time": "2018-12-05T14:06:18+00:00"
         }
     ],
     "packages-dev": [],
