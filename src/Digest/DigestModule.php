@@ -55,9 +55,13 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
         $this->timeInterval = $interval;
         parent::__construct();
         $this->setTagID(get_class($this));
+    }
+
+    public function process()
+    {
         $this->addItem(new \Ease\Html\HrTag());
         $this->addItem(new \Ease\Html\H2Tag(new \Ease\Html\ATag('#index',
-            $this->heading(), ['name' => get_class($this)])));
+                    $this->heading(), ['name' => get_class($this)])));
         $this->dig();
         $this->addStatusMessage($this->heading());
     }
@@ -68,7 +72,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
     public function dig()
     {
         $this->addItem(new \Ease\Html\ATag('https://www.vitexsoftware.cz/cenik.php',
-            _('Please contact Vitex Software to make this module working.')));
+                _('Please contact Vitex Software to make this module working.')));
     }
 
     /**
@@ -89,7 +93,8 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      */
     public static function getCurrency($data)
     {
-        return array_key_exists('mena@showAs', $data) ? current(explode(':', $data['mena@showAs'])) : \FlexiPeeHP\FlexiBeeRO::uncode($data['mena']) ;
+        return array_key_exists('mena@showAs', $data) ? current(explode(':',
+                    $data['mena@showAs'])) : \FlexiPeeHP\FlexiBeeRO::uncode($data['mena']);
     }
 
     /**
@@ -156,7 +161,8 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      */
     public function isMyDate(\DateTime $date)
     {
-        return is_null($this->timeInterval) ? true : self::isDateWithinInterval($date, $this->timeInterval);
+        return is_null($this->timeInterval) ? true : self::isDateWithinInterval($date,
+                $this->timeInterval);
     }
 
     /**

@@ -70,7 +70,7 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
     {
         $this->addItem(new \Ease\Html\ATag('', '', ['name' => 'index']));
         $this->addItem(new \FlexiPeeHP\ui\CompanyLogo(['align' => 'right', 'id' => 'companylogo',
-            'height' => '50', 'title' => _('Company logo')]));
+                'height' => '50', 'title' => _('Company logo')]));
         $this->addItem(new \Ease\Html\H1Tag($subject));
         $prober  = new \FlexiPeeHP\Company();
         $prober->logBanner(' FlexiBee Digest '.self::getAppVersion().' '.$_SERVER['SCRIPT_FILENAME']);
@@ -88,9 +88,9 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
         }
 
         $this->addItem(new \Ease\Html\StrongTag($return,
-            ['class' => 'companylink']));
+                ['class' => 'companylink']));
         $this->topMenu = $this->addItem(new \Ease\Html\DivTag(null,
-            ['class' => 'topmenu']));
+                ['class' => 'topmenu']));
     }
 
     /**
@@ -100,13 +100,7 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
      */
     public function dig($interval, $moduleDir)
     {
-        if (is_array($moduleDir)) {
-            foreach ($moduleDir as $mDir) {
-                $this->processModules($mDir, $interval);
-            }
-        } else {
-            $this->processModules($moduleDir, $interval);
-        }
+        $this->processModules(self::getModules($moduleDir), $interval);
 
         $this->addIndex();
         $this->addFoot();
@@ -125,25 +119,51 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
     /**
      * Process All modules in specified Dir
      * 
-     * @param string $moduleDir path
+     * @param array $modules [classname=>filepath]
      * @param \DateTime|\DatePeriod $interval
      */
-    public function processModules($moduleDir, $interval)
+    public function processModules($modules, $interval)
     {
-        if (is_dir($moduleDir)) {
-            $d     = dir($moduleDir);
-            while (false !== ($entry = $d->read())) {
-                if (is_file($moduleDir.'/'.$entry)) {
-                    include_once $moduleDir.'/'.$entry;
-                    $class = pathinfo($entry, PATHINFO_FILENAME);
-                    $this->addToIndex($this->addItem(new $class($interval)));
-                }
-            }
-            $d->close();
-        } else {
-            $this->addStatusMessage(sprintf(_('Module dir %s is wrong'),
-                    $moduleDir), 'error');
+        foreach ($modules as $class => $classFile) {
+            include_once $classFile;
+            $module = new $class($interval);
+            $module->process();
+            $this->addToIndex($this->addItem($module));
         }
+    }
+
+    /**
+     * Process All modules in specified Dir
+     * 
+     * @param string $moduleDir path
+     */
+    public static function getModules($moduleDir)
+    {
+        $modules = [];
+        if (is_array($moduleDir)) {
+            foreach ($moduleDir as $module) {
+                $modules = array_merge($modules, self::getModules($module));
+            }
+        } else {
+            if (is_dir($moduleDir)) {
+                $d     = dir($moduleDir);
+                while (false !== ($entry = $d->read())) {
+                    if (is_file($moduleDir.'/'.$entry)) {
+                        $class           = pathinfo($entry, PATHINFO_FILENAME);
+                        $modules[$class] = realpath($moduleDir.'/'.$entry);
+                    }
+                }
+                $d->close();
+            } else {
+                if (is_file($moduleDir)) {
+                    $class           = pathinfo($moduleDir, PATHINFO_FILENAME);
+                    $modules[$class] = realpath($moduleDir);
+                }
+                \Ease\Shared::instanced()->addStatusMessage(sprintf(_('Module dir %s is wrong'),
+                        $moduleDir), 'error');
+            }
+        }
+        return $modules;
     }
 
     /**
@@ -158,22 +178,22 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
     public function addIndex()
     {
         $this->addItem(new \Ease\Html\H1Tag(new \Ease\Html\ATag('', _('Index'),
-            ['name' => 'index2'])));
+                    ['name' => 'index2'])));
         $this->addItem(new \Ease\Html\HrTag());
 
         $index = new \Ease\Html\UlTag(null, ['class' => 'pure-menu-list']);
 
         foreach ($this->index as $class => $heading) {
             $index->addItemSmart(new \Ease\Html\ATag('#'.$class, $heading,
-                ['class' => 'pure-menu-link']),
+                    ['class' => 'pure-menu-link']),
                 ['class' => 'pure-menu-item', 'style' => 'height: inherit']);
 
             $this->topMenu->addItem(new \Ease\Html\ATag('#'.$class, $heading,
-                ['class' => 'topmenu-item']));
+                    ['class' => 'topmenu-item']));
         }
 
         $this->addItem(new \Ease\Html\DivTag($index,
-            ['class' => 'pure-menu', 'css' => 'display: inline-block;']));
+                ['class' => 'pure-menu', 'css' => 'display: inline-block;']));
     }
 //    /**
 //     * Include next element into current page (if not closed).
@@ -209,8 +229,8 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
         $filename = $saveTo.pathinfo($_SERVER['SCRIPT_FILENAME'],
                 PATHINFO_FILENAME).'.html';
         $webPage  = new \Ease\Html\HtmlTag(new \Ease\Html\SimpleHeadTag([
-            new \Ease\Html\TitleTag($this->subject),
-            '<style>'.Digestor::$purecss.Digestor::getCustomCss().Digestor::getWebPageInlineCSS().'</style>']));
+                new \Ease\Html\TitleTag($this->subject),
+                '<style>'.Digestor::$purecss.Digestor::getCustomCss().Digestor::getWebPageInlineCSS().'</style>']));
         $webPage->addItem(new \Ease\Html\BodyTag($this));
         $this->addStatusMessage(sprintf(_('Saved to %s'), $filename),
             file_put_contents($filename, $webPage->getRendered()) ? 'success' : 'error');
@@ -261,13 +281,13 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
     {
         $this->addItem(new \Ease\Html\HrTag());
         $this->addItem(new \Ease\Html\ImgTag('data:image/svg+xml;base64,'.base64_encode(self::$logo),
-            'Logo', ['align' => 'right', 'width' => '50']));
+                'Logo', ['align' => 'right', 'width' => '50']));
         $this->addItem(new \Ease\Html\SmallTag(new \Ease\Html\DivTag([_('Generated by'),
-            '&nbsp;', new \Ease\Html\ATag('https://github.com/VitexSoftware/FlexiBee-Digest',
-                _('FlexiBee Digest').' '._('version').' '.self::getAppVersion())])));
+                    '&nbsp;', new \Ease\Html\ATag('https://github.com/VitexSoftware/FlexiBee-Digest',
+                        _('FlexiBee Digest').' '._('version').' '.self::getAppVersion())])));
 
         $this->addItem(new \Ease\Html\SmallTag(new \Ease\Html\DivTag([_('(G) 2018'),
-            '&nbsp;', new \Ease\Html\ATag('https://www.vitexsoftware.cz/',
-                'Vitex Software')])));
+                    '&nbsp;', new \Ease\Html\ATag('https://www.vitexsoftware.cz/',
+                        'Vitex Software')])));
     }
 }
