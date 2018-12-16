@@ -59,6 +59,14 @@ Konfigurace
     "SAVETO": "/var/tmp/"                         - save html digest to 
 ```
 
+Webové rozhraní 
+---------------
+
+We Also provide form to test Digest modules. Availble as [index.php](src/index.php)
+
+![Example](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-Digest/master/doc/CustomDigestForm.png "Week Digest")
+
+
 Modules
 =======
 
