@@ -49,7 +49,21 @@ if ($oPage->isPosted()) {
     );
 
     $digestor = new Digestor($subject);
-    $digestor->dig($period, $oPage->getRequestValue('module'));
+    
+    $shared->setConfigValue('EASE_MAILTO', $oPage->getRequestValue('recipient'));
+    $shared->setConfigValue('SAVETO',$oPage->getRequestValue('outdir') );
+    
+    $digestor->dig($period, $oPage->getRequestValue('modules'));
+    
+    $digestor->addItem( new \Ease\Html\ATag('index.php', _('New Digest')) );
+    
+    $oPage->addCss(Digestor::$purecss);
+    $oPage->addCss(Digestor::getCustomCss());
+    $oPage->addCss(Digestor::getWebPageInlineCSS());
+    $oPage->setPageTitle($subject);
+    $oPage->body = $digestor;
+    $oPage->draw();
+    exit();
 }
 
 
@@ -64,7 +78,8 @@ $candidates[_('Alltime modules')] = Digestor::getModules(constant('MODULE_ALLTIM
 $fromtoForm = new \Ease\TWB\Form('fromto');
 $fromtoForm->addTagClass('form-horizontal');
 
-$container = new \Ease\TWB\Container(new \Ease\Html\H1Tag($myCompanyName.' '._('FlexiBee digest')));
+$container = new \Ease\TWB\Container(new \Ease\Html\H1Tag( new \Ease\Html\ATag( $myCompany->getApiURL(), $myCompanyName).' '._('FlexiBee digest')) );
+
 
 $formColumns = new \Ease\TWB\Row();
 $modulesCol  = $formColumns->addColumn(6, new \Ease\Html\H2Tag(_('Modules')));
@@ -74,7 +89,7 @@ foreach ($candidates as $heading => $modules) {
     asort($modules);
     foreach ($modules as $className => $classFile) {
         include_once $classFile;
-        $module = new $className();
+        $module = new $className(null);
         $modulesCol->addItem(new \Ease\TWB\Checkbox('modules['.$className.']',
                 $classFile, '&nbsp;'.$module->heading()));
     }
@@ -105,20 +120,18 @@ $optionsCol->addItem(new \Ease\TWB\FormGroup(_('Theme name'),
 $optionsCol->addItem(new \Ease\TWB\FormGroup(_('Output Directory'),
         new \Ease\Html\InputTextTag('outdir', '/var/tmp')));
 
-
+$optionsCol->addItem(new \Ease\TWB\FormGroup(_('Send by mail to'),
+        new \Ease\Html\InputEmailTag('recipient', $shared->getConfigValue('EASE_MAILTO') )));
 
 
 $fromtoForm->addItem($formColumns);
-$container->addItem($fromtoForm);
-
-$sendForm = new \Ease\TWB\Form('sendForm', 'index.php');
-
-$sendForm->addItem(new \Ease\TWB\SubmitButton(_('Generate digest'),
+$fromtoForm->addItem(new \Ease\TWB\SubmitButton(_('Generate digest'),
         'success btn-lg btn-block',
         ['onClick' => "window.scrollTo(0, 0); $('#Preloader').css('visibility', 'visible');",
         'style' => 'height: 90%']));
 
-$container->addItem($sendForm);
+$container->addItem($fromtoForm);
+
 
 $oPage->addItem($container);
 

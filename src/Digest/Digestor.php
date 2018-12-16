@@ -158,9 +158,10 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
                 if (is_file($moduleDir)) {
                     $class           = pathinfo($moduleDir, PATHINFO_FILENAME);
                     $modules[$class] = realpath($moduleDir);
+                } else {
+                    \Ease\Shared::instanced()->addStatusMessage(sprintf(_('Module dir %s is wrong'),
+                            $moduleDir), 'error');
                 }
-                \Ease\Shared::instanced()->addStatusMessage(sprintf(_('Module dir %s is wrong'),
-                        $moduleDir), 'error');
             }
         }
         return $modules;
