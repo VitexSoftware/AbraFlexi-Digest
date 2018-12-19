@@ -26,6 +26,7 @@ class WaitingPayments extends \FlexiPeeHP\Digest\DigestModule implements \FlexiP
         $totals     = [];
         $checker    = new \FlexiPeeHP\FakturaPrijata();
         $inInvoices = $checker->getColumnsFromFlexibee(['kod', 'firma', 'sumCelkem',
+            'zbyvaUhradit', 'zbyvaUhraditMen', 'datSplat',
             'mena'],
             array_merge($this->condition,
                 ["(stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr')",
@@ -36,10 +37,18 @@ class WaitingPayments extends \FlexiPeeHP\Digest\DigestModule implements \FlexiP
         } else {
             $adreser  = new FlexiPeeHP\Adresar(null, ['offline' => 'true']);
             $invTable = new \FlexiPeeHP\Digest\Table([_('Position'), _('Code'), _('Partner'),
+                _('Due Days'),
                 _('Amount')]);
             $pos      = 0;
 
             foreach ($inInvoices as $inInvoiceData) {
+
+                if (self::getCurrency($inInvoiceData) != 'CZK') {
+                    $amount = floatval($inInvoiceData['zbyvaUhraditMen']);
+                } else {
+                    $amount = floatval($inInvoiceData['zbyvaUhradit']);
+                }
+
                 $currency = current(explode(':', $inInvoiceData['mena@showAs']));
 
                 $checker->setMyKey(urlencode($inInvoiceData['kod']));
@@ -51,7 +60,8 @@ class WaitingPayments extends \FlexiPeeHP\Digest\DigestModule implements \FlexiP
                         $inInvoiceData['kod']),
                     new \Ease\Html\ATag($adreser->getApiUrl(),
                         empty($inInvoiceData['firma']) ? '' : $inInvoiceData['firma@showAs']),
-                    $inInvoiceData['sumCelkem'].' '.current(explode(':',
+                    \FlexiPeeHP\FakturaVydana::overdueDays($inInvoiceData['datSplat']),
+                    $amount.' '.current(explode(':',
                             $inInvoiceData['mena@showAs']))
                 ]);
 
