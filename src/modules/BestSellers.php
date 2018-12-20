@@ -22,7 +22,7 @@ class BestSellers extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP
         $invoicer                     = new \FlexiPeeHP\FakturaVydana();
         $this->condition['relations'] = 'polozkyDokladu';
         $this->condition['typDokl']   = FlexiPeeHP\FlexiBeeRO::code('FAKTURA');
-        $invoicesRaw                  = $invoicer->getColumnsFromFlexibee(['polozkyDokladu(cenik,nazev,sumZkl)',
+        $invoicesRaw                  = $invoicer->getColumnsFromFlexibee(['polozkyDokladu(cenik,nazev,sumZkl,typPolozkyK)',
             'typDokl'], $this->condition, 'kod');
 
         $items = [];
@@ -42,6 +42,11 @@ class BestSellers extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP
             $products = [];
             $totals   = [];
             foreach ($items as $item) {
+                if($item['typPolozkyK']!='typPolozky.katalog'){
+                    continue;
+                }
+                
+                
                 $itemIdent = !empty($item['cenik']) ? \FlexiPeeHP\FlexiBeeRO::uncode($item['cenik'])
                         : $item['nazev'];
                 if (array_key_exists($itemIdent, $products)) {
