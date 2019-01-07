@@ -77,6 +77,7 @@ class WaitingPayments extends \FlexiPeeHP\Digest\DigestModule implements \FlexiP
                 $this->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount).'&nbsp;'.$currency));
             }
         }
+        return !empty($inInvoices);
     }
 
     public function functionName($param)

@@ -100,6 +100,7 @@ class Debtors extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Dig
             $this->addItem(new \Ease\Html\H3Tag(_('Total')));
             $this->addItem(self::getTotalsDiv($totalsByCurrency));
         }
+        return !empty($invoicesByFirma);
     }
 
     function heading()

@@ -15,12 +15,14 @@ class WithoutTel extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\
     {
         $addresser    = new \FlexiPeeHP\Adresar();
         $withoutEmail = $addresser->getColumnsFromFlexibee(['nazev', 'kod', 'ulice',
-            'mesto', 'email'], ['tel' => 'is empty','typVztahuK'=>'typVztahu.odberDodav']);
+            'mesto', 'email'],
+            ['tel' => 'is empty', 'typVztahuK' => 'typVztahu.odberDodav']);
 
         if (empty($withoutEmail)) {
             $this->addItem(_('none'));
         } else {
-            $noTelTable = new \FlexiPeeHP\Digest\Table([_('Company'), _('Street'), _('City'),
+            $noTelTable = new \FlexiPeeHP\Digest\Table([_('Company'), _('Street'),
+                _('City'),
                 _('Email')]);
             $count      = 0;
             foreach ($withoutEmail as $address) {
@@ -36,6 +38,7 @@ class WithoutTel extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\
             $this->addItem($noTelTable);
             $this->addItem(_('Total').': '.$count);
         }
+        return !empty($withoutEmail);
     }
 
     function heading()

@@ -49,14 +49,14 @@ if ($oPage->isPosted()) {
     );
 
     $digestor = new Digestor($subject);
-    
+
     $shared->setConfigValue('EASE_MAILTO', $oPage->getRequestValue('recipient'));
-    $shared->setConfigValue('SAVETO',$oPage->getRequestValue('outdir') );
-    
+    $shared->setConfigValue('SAVETO', $oPage->getRequestValue('outdir'));
+
     $digestor->dig($period, $oPage->getRequestValue('modules'));
-    
-    $digestor->addItem( new \Ease\Html\ATag('index.php', _('New Digest')) );
-    
+
+    $digestor->addItem(new \Ease\Html\ATag('index.php', _('New Digest')));
+
     $oPage->addCss(Digestor::$purecss);
     $oPage->addCss(Digestor::getCustomCss());
     $oPage->addCss(Digestor::getWebPageInlineCSS());
@@ -78,7 +78,8 @@ $candidates[_('Alltime modules')] = Digestor::getModules(constant('MODULE_ALLTIM
 $fromtoForm = new \Ease\TWB\Form('fromto');
 $fromtoForm->addTagClass('form-horizontal');
 
-$container = new \Ease\TWB\Container(new \Ease\Html\H1Tag( new \Ease\Html\ATag( $myCompany->getApiURL(), $myCompanyName).' '._('FlexiBee digest')) );
+$container = new \Ease\TWB\Container(new \Ease\Html\H1Tag(new \Ease\Html\ATag($myCompany->getApiURL(),
+    $myCompanyName).' '._('FlexiBee digest')));
 
 
 $formColumns = new \Ease\TWB\Row();
@@ -91,7 +92,7 @@ foreach ($candidates as $heading => $modules) {
         include_once $classFile;
         $module = new $className(null);
         $modulesCol->addItem(new \Ease\TWB\Checkbox('modules['.$className.']',
-                $classFile, '&nbsp;'.$module->heading()));
+            $classFile, '&nbsp;'.$module->heading()));
     }
 }
 
@@ -109,26 +110,27 @@ $d->close();
 
 
 $optionsCol->addItem(new \Ease\TWB\FormGroup(_('From'),
-        new \Ease\Html\InputDateTag('from', $from)));
+    new \Ease\Html\InputDateTag('from', $from)));
 
 $optionsCol->addItem(new \Ease\TWB\FormGroup(_('To'),
-        new \Ease\Html\InputDateTag('to', $to)));
+    new \Ease\Html\InputDateTag('to', $to)));
 
 $optionsCol->addItem(new \Ease\TWB\FormGroup(_('Theme name'),
-        new \Ease\Html\SelectTag('theme', $themes)));
+    new \Ease\Html\SelectTag('theme', $themes)));
 
 $optionsCol->addItem(new \Ease\TWB\FormGroup(_('Output Directory'),
-        new \Ease\Html\InputTextTag('outdir', '/var/tmp/')));
+    new \Ease\Html\InputTextTag('outdir', '/var/tmp/')));
 
 $optionsCol->addItem(new \Ease\TWB\FormGroup(_('Send by mail to'),
-        new \Ease\Html\InputEmailTag('recipient', $shared->getConfigValue('EASE_MAILTO') )));
+    new \Ease\Html\InputEmailTag('recipient',
+    $shared->getConfigValue('EASE_MAILTO'))));
 
 
 $fromtoForm->addItem($formColumns);
 $fromtoForm->addItem(new \Ease\TWB\SubmitButton(_('Generate digest'),
-        'success btn-lg btn-block',
-        ['onClick' => "window.scrollTo(0, 0); $('#Preloader').css('visibility', 'visible');",
-        'style' => 'height: 90%']));
+    'success btn-lg btn-block',
+    ['onClick' => "window.scrollTo(0, 0); $('#Preloader').css('visibility', 'visible');",
+    'style' => 'height: 90%']));
 
 $container->addItem($fromtoForm);
 

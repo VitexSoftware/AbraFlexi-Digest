@@ -27,7 +27,8 @@ class NewCustomers extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeH
         if (empty($newCustomersData)) {
             $this->addItem(_('none'));
         } else {
-            $userTable = new \FlexiPeeHP\Digest\Table([_('Position'), _('Code'), _('Name'),
+            $userTable = new \FlexiPeeHP\Digest\Table([_('Position'), _('Code'),
+                _('Name'),
                 _('Email'), _('Phone')]);
 
             foreach ($newCustomersData as $pos => $newCustomerData) {
@@ -49,8 +50,14 @@ class NewCustomers extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeH
             $this->addItem(new \Ease\Html\DivTag(sprintf(_('%d new Customers'),
                     count($newCustomersData))));
         }
+        return !empty($inInvoicesData);
     }
 
+    /**
+     * "New or updated customers" heading
+     * 
+     * @return string
+     */
     public function heading()
     {
         return _('New or updated customers');

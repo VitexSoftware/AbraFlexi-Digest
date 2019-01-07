@@ -14,6 +14,8 @@ namespace FlexiPeeHP\Digest;
  */
 interface DigestModuleInterface
 {
+
     public function heading();
+
     public function dig();
 }

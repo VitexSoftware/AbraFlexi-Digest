@@ -101,8 +101,14 @@ class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
 
             $this->addItem($outInvoicesTable);
         }
+        return !empty($outInvoicesData);
     }
 
+    /**
+     * "Outcoming invoices" heading
+     * 
+     * @return string
+     */
     public function heading()
     {
         return _('Outcoming invoices');

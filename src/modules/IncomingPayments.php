@@ -12,10 +12,15 @@ class IncomingPayments extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
 {
     public $timeColumn = 'datVyst';
 
+    /**
+     * Process Incoming payments
+     * 
+     * @return boolean
+     */
     public function dig()
     {
         $banker  = new FlexiPeeHP\Banka();
-        $incomes = $banker->getColumnsFromFlexibee(['mena', 'sumCelkem','sumCelkemMen'],
+        $incomes = $banker->getColumnsFromFlexibee(['mena', 'sumCelkem', 'sumCelkemMen'],
             array_merge($this->condition,
                 ['typPohybuK' => 'typPohybu.prijem', 'storno' => false]));
         $total   = [];
@@ -41,6 +46,7 @@ class IncomingPayments extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
                 $this->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount).'&nbsp;'.$currency));
             }
         }
+        return !empty($incomes);
     }
 
     public function heading()

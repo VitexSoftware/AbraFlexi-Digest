@@ -61,9 +61,9 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
     {
         $this->addItem(new \Ease\Html\HrTag());
         $this->addItem(new \Ease\Html\H2Tag(new \Ease\Html\ATag('#index',
-                    $this->heading(), ['name' => get_class($this)])));
-        $this->dig();
+            $this->heading(), ['name' => get_class($this)])));
         $this->addStatusMessage($this->heading());
+        return $this->dig();
     }
 
     /**
@@ -72,11 +72,13 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
     public function dig()
     {
         $this->addItem(new \Ease\Html\ATag('https://www.vitexsoftware.cz/cenik.php',
-                _('Please contact Vitex Software to make this module working.')));
+            _('Please contact Vitex Software to make this module working.')));
+        return true;
     }
 
     /**
      * Default Heading
+     * 
      * @return string
      */
     public function heading()
@@ -179,6 +181,33 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
             $total->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount).'&nbsp;'.$currency));
         }
         return $total;
+    }
+
+    /**
+     * Save HTML digest fragment
+     * 
+     * @param string $saveTo directory
+     */
+    public function saveToHtml($saveTo)
+    {
+        $filename = $saveTo.pathinfo(get_class($this), PATHINFO_FILENAME).'.html';
+        $this->addStatusMessage(sprintf(_('Module output Saved to %s'),
+                $filename),
+            file_put_contents($filename, $this->getRendered()) ? 'success' : 'error');
+    }
+
+    /**
+     * Remove reportfile
+     * 
+     * @param string $saveTo
+     */
+    public function fileCleanUP($saveTo)
+    {
+        $filename = $saveTo.pathinfo(get_class($this), PATHINFO_FILENAME).'.html';
+        if (file_exists($filename)) {
+            $this->addStatusMessage(sprintf(_('Module output %s wiped out'),
+                    $filename), unlink($filename) ? 'success' : 'error');
+        }
     }
 
     /**

@@ -16,9 +16,11 @@ class BestSellers extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP
      */
     public $timeColumn = 'datVyst';
 
+    /**
+     * 
+     */
     public function dig()
     {
-
         $invoicer                     = new \FlexiPeeHP\FakturaVydana();
         $this->condition['relations'] = 'polozkyDokladu';
         $this->condition['typDokl']   = FlexiPeeHP\FlexiBeeRO::code('FAKTURA');
@@ -26,13 +28,14 @@ class BestSellers extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP
             'typDokl'], $this->condition, 'kod');
 
         $items = [];
-        foreach ($invoicesRaw as $invoiceCode => $invoiceData) {
-            if (array_key_exists('polozkyDokladu', $invoiceData))
-                    foreach ($invoiceData['polozkyDokladu'] as $itemRaw) {
-                    $items[] = $itemRaw;
-                }
+        if (!empty($invoicesRaw)) {
+            foreach ($invoicesRaw as $invoiceCode => $invoiceData) {
+                if (array_key_exists('polozkyDokladu', $invoiceData))
+                        foreach ($invoiceData['polozkyDokladu'] as $itemRaw) {
+                        $items[] = $itemRaw;
+                    }
+            }
         }
-
         if (empty($items)) {
             $this->addItem(_('none'));
         } else {
@@ -42,11 +45,11 @@ class BestSellers extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP
             $products = [];
             $totals   = [];
             foreach ($items as $item) {
-                if($item['typPolozkyK']!='typPolozky.katalog'){
+                if ($item['typPolozkyK'] != 'typPolozky.katalog') {
                     continue;
                 }
-                
-                
+
+
                 $itemIdent = !empty($item['cenik']) ? \FlexiPeeHP\FlexiBeeRO::uncode($item['cenik'])
                         : $item['nazev'];
                 if (array_key_exists($itemIdent, $products)) {
@@ -67,16 +70,21 @@ class BestSellers extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP
             $productor = new FlexiPeeHP\Cenik();
 
             foreach ($products as $productCode => $productInfo) {
-                $productor->setMyKey($productCode);
-                $topProductsTable->addRowColumns([new \Ease\Html\ATag($productor->getApiURL(),
-                        $productCode), $products[$productCode],
-                    $totals[$productCode]]);
+                if ($products[$productCode] > 1) {
+
+                    $productor->setMyKey($productCode);
+                    $topProductsTable->addRowColumns([new \Ease\Html\ATag($productor->getApiURL(),
+                            $productCode), $products[$productCode],
+                        $totals[$productCode]]);
+                }
             }
 
             $this->addItem($topProductsTable);
 
             $this->addItem(new \Ease\Html\DivTag(sprintf(_('%d top products'),
-                        count($topProductsTable))));
+                    $topProductsTable->getItemsCount())));
+
+            return !empty($topProductsTable->getItemsCount());
         }
     }
 

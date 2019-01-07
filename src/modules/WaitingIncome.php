@@ -25,7 +25,7 @@ class WaitingIncome extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPee
             'mena'],
             array_merge($this->condition,
                 ["(stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr')",
-                    'storno' => false]));
+            'storno' => false]));
 
         if (empty($outInvoices)) {
             $this->addItem(_('none'));
@@ -62,6 +62,7 @@ class WaitingIncome extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPee
                 $this->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount).'&nbsp;'.$currency));
             }
         }
+        return !empty($outInvoices);
     }
 
     public function heading()

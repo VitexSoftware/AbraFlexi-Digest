@@ -14,6 +14,7 @@ namespace FlexiPeeHP\Digest;
  */
 class Table extends \Ease\Html\TableTag
 {
+
     /**
      * Digest Table
      * 
@@ -23,7 +24,7 @@ class Table extends \Ease\Html\TableTag
     public function __construct($thCols, $properties = array())
     {
         parent::__construct(null, $properties);
-        $this->addRowHeaderColumns($thCols);        
+        $this->addRowHeaderColumns($thCols);
         $this->addTagClass('pure-table');
     }
 }

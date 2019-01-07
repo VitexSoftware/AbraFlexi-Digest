@@ -17,7 +17,7 @@ class Reminds extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Dig
      * Count several reminds
      * @var array of int
      */
-    private $remids = ['datUp1'=>[],'datUp2'=>[],'datSmir'=>[]];
+    private $remids = ['datUp1' => [], 'datUp2' => [], 'datSmir' => []];
 
     public function dig()
     {
@@ -76,6 +76,7 @@ class Reminds extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Dig
 
             $this->addItem($invTable);
         }
+        return !empty($faDatakturyRaw);
     }
 
     /**

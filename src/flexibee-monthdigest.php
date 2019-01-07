@@ -18,12 +18,13 @@ $end    = new \DateTime();
 $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
 
 $subject = sprintf(
-    _('FlexiBee %s Monthly digest from %s to %s'),$myCompanyName,
+    _('FlexiBee %s Monthly digest from %s to %s'), $myCompanyName,
     \strftime('%x', $period->getStartDate()->getTimestamp()),
     \strftime('%x', $period->getEndDate()->getTimestamp())
 );
 
 
 $digestor = new Digestor($subject);
-$digestor->dig($period, [constant('MODULE_MONTHLY_PATH'),constant('MODULE_PATH')]);
+$digestor->dig($period,
+    [constant('MODULE_MONTHLY_PATH'), constant('MODULE_PATH')]);
 

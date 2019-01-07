@@ -7,14 +7,15 @@
  */
 
 namespace FlexiPeeHP\Digest;
+
 define('EASE_APPNAME', 'FlexiBeeDayDigest');
 
-require_once __DIR__ . '/init.php';
+require_once __DIR__.'/init.php';
 
 $period = new \DateTime();
 
-$subject = \sprintf(_('FlexiBee %s Daily digest for %s'),$myCompanyName,
+$subject = \sprintf(_('FlexiBee %s Daily digest for %s'), $myCompanyName,
     \strftime('%x', $period->getTimestamp()));
 
 $digestor = new Digestor($subject);
-$digestor->dig($period, [constant('MODULE_DAILY_PATH'),constant('MODULE_PATH')]);
+$digestor->dig($period, [constant('MODULE_DAILY_PATH'), constant('MODULE_PATH')]);

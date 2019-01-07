@@ -87,6 +87,8 @@ class DailyIncomeChart extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
             }
             $this->addChart(array_reverse($days));
         }
+
+        return !empty($incomes);
     }
 
     /**

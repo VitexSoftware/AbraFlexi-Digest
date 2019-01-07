@@ -15,7 +15,7 @@ class OutcomingPayments extends \FlexiPeeHP\Digest\DigestModule implements \Flex
     public function dig()
     {
         $banker   = new FlexiPeeHP\Banka();
-        $outcomes = $banker->getColumnsFromFlexibee(['mena','sumCelkem',
+        $outcomes = $banker->getColumnsFromFlexibee(['mena', 'sumCelkem',
             'sumCelkemMen'],
             array_merge($this->condition,
                 ['typPohybuK' => 'typPohybu.vydej', 'storno' => false]));
@@ -44,6 +44,7 @@ class OutcomingPayments extends \FlexiPeeHP\Digest\DigestModule implements \Flex
                 $totalsTable->addRowColumns([self::formatCurrency($amount), $currency]);
             }
         }
+        return !empty($outcomes);
     }
 
     public function heading()

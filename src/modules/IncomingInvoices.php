@@ -56,7 +56,8 @@ class IncomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
             foreach ($typDoklRaw as $type => $count) {
                 $typDokl[] = $count.' x '.FlexiPeeHP\FlexiBeeRO::uncode($type);
             }
-            $this->addItem(new \Ease\Html\DivTag(sprintf(implode('<br>', $typDokl))));
+            $this->addItem(new \Ease\Html\DivTag(sprintf(implode('<br>',
+                        $typDokl))));
 
             $invoiced = [];
             foreach ($invoicedRaw as $currencyCode => $amount) {
@@ -69,6 +70,9 @@ class IncomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
             $this->addItem(new \Ease\Html\DivTag(sprintf(_('Exposed %s invoices'),
                     $exposed)));
         }
+
+
+        return !empty($inInvoicesData);
     }
 
     public function heading()
