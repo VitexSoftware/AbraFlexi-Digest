@@ -130,11 +130,13 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
             $module = new $class($interval);
             $saveto = $this->shared->getConfigValue('SAVETO');
             if ($module->process()) {
+                $this->addItem(new \Ease\Html\HrTag());
                 $this->addToIndex($this->addItem($module));
                 if ($saveto) {
                     $module->saveToHtml($saveto);
                 }
             } else {
+                $this->addStatusMessage(sprintf(_('Module %s do not found results'), $class));
                 if ($saveto) {
                     $module->fileCleanUP($saveto);
                 }

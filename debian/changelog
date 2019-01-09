@@ -1,3 +1,10 @@
+flexibee-digest (1.8) UNRELEASED; urgency=medium
+
+  * Do not show empty results
+  * per module html exports
+
+ -- Vítězslav Dvořák <vitex@develoid.jinonice.czf>  Mon, 07 Jan 2019 22:07:51 +0100
+
 flexibee-digest (1.6) UNRELEASED; urgency=medium
 
   * Warnings Fixed

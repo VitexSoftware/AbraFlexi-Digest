@@ -32,7 +32,7 @@ alltimedigest:
 	cd src &&  php -f flexibee-alltimedigest.php && cd ..
 
 match: incoming outcoming parujnew2old
-test: composer testrun
+#test: composer testrun
 
 testrun:
 	@echo '################################################### Default PHP '

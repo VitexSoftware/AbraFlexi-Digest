@@ -3,5 +3,5 @@
     "DIGEST_FROM": "noreply@vitexsoftware.cz",
     "EASE_LOGGER": "syslog|mail",
     "THEME":  "office",
-    "SAVETO": "/var/tmp/"
+    "SAVETO": "/var/run/flexibee-digest/"
 }

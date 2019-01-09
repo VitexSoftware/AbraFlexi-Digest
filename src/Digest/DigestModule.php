@@ -57,9 +57,13 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
         $this->setTagID(get_class($this));
     }
 
+    /**
+     * Proccess data digging
+     * 
+     * @return boolean
+     */
     public function process()
     {
-        $this->addItem(new \Ease\Html\HrTag());
         $this->addItem(new \Ease\Html\H2Tag(new \Ease\Html\ATag('#index',
             $this->heading(), ['name' => get_class($this)])));
         $this->addStatusMessage($this->heading());
@@ -163,8 +167,19 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      */
     public function isMyDate(\DateTime $date)
     {
-        return is_null($this->timeInterval) ? true : self::isDateWithinInterval($date,
-                $this->timeInterval);
+        switch (get_class($this->timeInterval)) {
+            case 'DatePeriod':
+                $result = self::isDateWithinInterval($date, $this->timeInterval);
+                break;
+            case 'DateTime':
+                $result = !date_diff($this->timeInterval,$date);
+                break;
+
+            default:
+                $result = true;
+                break;
+        }
+        return $result;
     }
 
     /**
@@ -190,7 +205,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      */
     public function saveToHtml($saveTo)
     {
-        $filename = $saveTo.pathinfo(get_class($this), PATHINFO_FILENAME).'.html';
+        $filename = $saveTo.$this->getReportFilename();
         $this->addStatusMessage(sprintf(_('Module output Saved to %s'),
                 $filename),
             file_put_contents($filename, $this->getRendered()) ? 'success' : 'error');
@@ -203,11 +218,17 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      */
     public function fileCleanUP($saveTo)
     {
-        $filename = $saveTo.pathinfo(get_class($this), PATHINFO_FILENAME).'.html';
+        $filename = $saveTo.$this->getReportFilename();
         if (file_exists($filename)) {
             $this->addStatusMessage(sprintf(_('Module output %s wiped out'),
                     $filename), unlink($filename) ? 'success' : 'error');
         }
+    }
+
+    public function getReportFilename()
+    {
+        return pathinfo($_SERVER['SCRIPT_FILENAME'], PATHINFO_FILENAME).'_'.pathinfo(get_class($this),
+                PATHINFO_FILENAME).'.html';
     }
 
     /**
