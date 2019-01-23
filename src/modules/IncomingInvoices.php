@@ -21,20 +21,21 @@ class IncomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
         $totals = [];
 
         $digger         = new \FlexiPeeHP\FakturaPrijata();
-        $inInvoicesData = $digger->getColumnsFromFlexibee(['kod', 'typDokl', 'sumCelkem',
+        $inInvoicesData = $digger->getColumnsFromFlexibee(['kod', 'typDokl', 'sumCelkem','sumCelkemMen',
             'uhrazeno', 'storno', 'mena', 'juhSum', 'juhSumMen'],
             $this->condition);
-        $exposed        = 0;
+        $accepted        = 0;
         $invoicedRaw    = [];
         $paid           = [];
         $storno         = 0;
+        $totals         = [];
 
         $typDoklRaw = [];
         if (empty($inInvoicesData)) {
             $this->addStatusMessage(_('none'));
         } else {
             foreach ($inInvoicesData as $outInvoiceData) {
-                $exposed++;
+                $accepted++;
                 if ($outInvoiceData['storno'] == 'true') {
                     $storno++;
                 }
@@ -45,32 +46,47 @@ class IncomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
                     $typDoklRaw[$outInvoiceData['typDokl']] = 1;
                 }
 
-                if (array_key_exists($outInvoiceData['mena'], $outInvoiceData)) {
-                    $invoicedRaw[$outInvoiceData['mena']] += floatval($outInvoiceData['sumCelkem']);
-                } else {
-                    $invoicedRaw[$outInvoiceData['mena']] = floatval($outInvoiceData['sumCelkem']);
-                }
-            }
+                $amount = ($outInvoiceData['mena'] == 'code:CZK') ? floatval($outInvoiceData['sumCelkem'])
+                        : floatval($outInvoiceData['sumCelkemMen']);
 
-            $typDokl = [];
-            foreach ($typDoklRaw as $type => $count) {
-                $typDokl[] = $count.' x '.FlexiPeeHP\FlexiBeeRO::uncode($type);
+                if (array_key_exists($outInvoiceData['mena'], $invoicedRaw)) {
+                    $invoicedRaw[$outInvoiceData['mena']] += $amount;
+                } else {
+                    $invoicedRaw[$outInvoiceData['mena']] = $amount;
+                }
+
+                if (!array_key_exists($outInvoiceData['typDokl'], $totals)) {
+                    $totals[$outInvoiceData['typDokl']] = [];
+                }
+
+                if (!array_key_exists($outInvoiceData['mena'],
+                        $totals[$outInvoiceData['typDokl']])) {
+                    $totals[$outInvoiceData['typDokl']][$outInvoiceData['mena']]
+                        = 0;
+                }
+
+                $totals[$outInvoiceData['typDokl']][$outInvoiceData['mena']] += $amount;
             }
-            $this->addItem(new \Ease\Html\DivTag(sprintf(implode('<br>',
-                        $typDokl))));
 
             $invoiced = [];
             foreach ($invoicedRaw as $currencyCode => $amount) {
                 $invoiced[] = self::formatCurrency($amount).' '.FlexiPeeHP\FlexiBeeRO::uncode($currencyCode);
             }
 
-            $this->addItem(new \Ease\Html\DivTag(sprintf(_('Invoiced amount %s'),
-                    implode('<br>', $invoiced))));
 
-            $this->addItem(new \Ease\Html\DivTag(sprintf(_('Exposed %s invoices'),
-                    $exposed)));
+            $inInvoicesTable = new \FlexiPeeHP\Digest\Table([_('Count'), _('Type'),
+                _('Total')]);
+            foreach ($typDoklRaw as $type => $count) {
+                $inInvoicesTable->addRowColumns([$count, FlexiPeeHP\FlexiBeeRO::uncode($type),
+                    self::getTotalsDiv($totals[$type])]);
+            }
+
+
+            $inInvoicesTable->addRowFooterColumns([$accepted, 0, $invoiced]);
+
+
+            $this->addItem($inInvoicesTable);
         }
-
 
         return !empty($inInvoicesData);
     }

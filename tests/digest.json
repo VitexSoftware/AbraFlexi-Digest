@@ -1,7 +1,7 @@
 {
     "EASE_LOGGER": "syslog|console",
     "THEME":  "happy",
-    "SAVETO": "/var/run/flexibee-digest/",
+    "SAVETO": "../tests/output/",
     "EASE_MAILTO": "info@vitexsoftware.cz",
     "DIGEST_FROM": "noreply@vitexsoftware.cz"
 }

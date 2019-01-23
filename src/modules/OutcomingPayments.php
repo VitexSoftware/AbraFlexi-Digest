@@ -47,6 +47,10 @@ class OutcomingPayments extends \FlexiPeeHP\Digest\DigestModule implements \Flex
         return !empty($outcomes);
     }
 
+    /**
+     * 
+     * @return string
+     */
     public function heading()
     {
         return _('Outcoming payments');

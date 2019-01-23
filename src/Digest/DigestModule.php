@@ -193,7 +193,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
     {
         $total = new \Ease\Html\DivTag();
         foreach ($totals as $currency => $amount) {
-            $total->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount).'&nbsp;'.$currency));
+            $total->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount).'&nbsp;'.\FlexiPeeHP\FlexiBeeRO::uncode($currency)));
         }
         return $total;
     }

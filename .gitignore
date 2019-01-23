@@ -7,3 +7,4 @@
 /debian/flexibee-digest.substvars
 /deb/
 /.sass-cache/
+/tests/output/

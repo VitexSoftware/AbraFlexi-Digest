@@ -27,15 +27,10 @@ class Reminds extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Dig
             'sumCelkem', 'sumCelkemMen',
             'zbyvaUhradit', 'zbyvaUhraditMen', 'mena', 'datUp1', 'datUp2', 'datSmir'],
             $this->condition);
-
-        $invoicer->addStatusMessage("Faktur: ".count($faDatakturyRaw));
-
-
-
-
         if (empty($faDatakturyRaw)) {
             $this->addItem(_('none'));
         } else {
+            $invoicer->addStatusMessage("Faktur: ". count($faDatakturyRaw));
             $adreser  = new FlexiPeeHP\Adresar(null, ['offline' => 'true']);
             $invTable = new \FlexiPeeHP\Digest\Table([
                 _('Client'),

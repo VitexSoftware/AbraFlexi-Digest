@@ -119,7 +119,7 @@ $optionsCol->addItem(new \Ease\TWB\FormGroup(_('Theme name'),
     new \Ease\Html\SelectTag('theme', $themes)));
 
 $optionsCol->addItem(new \Ease\TWB\FormGroup(_('Output Directory'),
-    new \Ease\Html\InputTextTag('outdir', '/var/tmp/')));
+    new \Ease\Html\InputTextTag('outdir', $shared->getConfigValue('SAVETO'))));
 
 $optionsCol->addItem(new \Ease\TWB\FormGroup(_('Send by mail to'),
     new \Ease\Html\InputEmailTag('recipient',
