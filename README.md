@@ -1,7 +1,7 @@
 ![Package Logo](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-Digest/master/package-logo.png "Project Logo")
 
-FlexiBee Digest mail generator
-==============================
+FlexiBee Digest generator
+=========================
 
 Features:
 
@@ -59,8 +59,8 @@ Konfigurace
     "SAVETO": "/var/tmp/"                         - save html digest to 
 ```
 
-Webové rozhraní 
----------------
+Web interface 
+-------------
 
 We Also provide form to test Digest modules. Availble as [index.php](src/index.php)
 
