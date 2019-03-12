@@ -1,5 +1,5 @@
 {
-    "name": "vitexsoftware_flexibee-digest",
+    "name": "deb/flexibee-digest",
     "description": "Invoice Digest for FlexiBee written in PHP",
     "type": "project",
     "version": "1.2",
@@ -13,9 +13,9 @@
         "vendor-dir": "/var/lib/php-flexibee-digest"
     },
     "require": {
-        "vitexsoftware_ease-framework": "*",
-        "spojenet_flexipeehp": "*",
-        "vitexsoftware_flexipeehp-bricks": "*"
+        "deb/ease-framework": "*",
+        "deb/flexipeehp": "*",
+        "deb/flexipeehp-bricks": "*"
     },
     "autoload": {
         "psr-4": {
