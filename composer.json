@@ -1,12 +1,13 @@
 {
     "name": "vitexsoftware/php-flexibee-digest",
-    "description": "Dayli FlexiBee daily digest.",
+    "description": "Daily FlexiBee digest.",
     "authors": [
         {
             "name": "Vitex",
             "email": "info@vitexsoftware.cz"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "vitexsoftware/ease-framework": "dev-master",
         "spoje.net/flexipeehp": "dev-master",
