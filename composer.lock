@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "100e61cc218377f38efccd6fa3ed3150",
+    "content-hash": "8a21d9c4eb7e011a1a628163335a1d7b",
     "packages": [
         {
             "name": "pear/console_getopt",
@@ -55,16 +55,16 @@
         },
         {
             "name": "pear/mail",
-            "version": "dev-master",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pear/Mail.git",
-                "reference": "c79a855bf8720d4643ef61500b766381c27cc741"
+                "reference": "9609ed5e42ac5b221dfd9af85de005c59d418ee7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pear/Mail/zipball/c79a855bf8720d4643ef61500b766381c27cc741",
-                "reference": "c79a855bf8720d4643ef61500b766381c27cc741",
+                "url": "https://api.github.com/repos/pear/Mail/zipball/9609ed5e42ac5b221dfd9af85de005c59d418ee7",
+                "reference": "9609ed5e42ac5b221dfd9af85de005c59d418ee7",
                 "shasum": ""
             },
             "require": {
@@ -109,11 +109,11 @@
             ],
             "description": "Class that provides multiple interfaces for sending emails.",
             "homepage": "http://pear.php.net/package/Mail",
-            "time": "2017-05-09T18:00:04+00:00"
+            "time": "2017-04-11T17:27:29+00:00"
         },
         {
             "name": "pear/mail_mime",
-            "version": "dev-master",
+            "version": "1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pear/Mail_Mime.git",
@@ -257,17 +257,58 @@
             "time": "2015-02-10T20:07:52+00:00"
         },
         {
+            "name": "spoje.net/flexibee",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Spoje-NET/php-flexibee.git",
+                "reference": "d6192a2be3bd0b513f794ce75127417ebbac6548"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Spoje-NET/php-flexibee/zipball/d6192a2be3bd0b513f794ce75127417ebbac6548",
+                "reference": "d6192a2be3bd0b513f794ce75127417ebbac6548",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "vitexsoftware/ease-core": "dev-master"
+            },
+            "require-dev": {
+                "phing/phing": "*",
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FlexiPeeHP\\": "src/FlexiPeeHP/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Vítězslav Dvořák",
+                    "email": "vitex@arachne.cz"
+                }
+            ],
+            "description": "PHP Based Library for easy interaction with czech accounting system FlexiBee.",
+            "time": "2019-06-02T21:22:32+00:00"
+        },
+        {
             "name": "spoje.net/flexipeehp",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Spoje-NET/FlexiPeeHP.git",
-                "reference": "433902f74538642859afab7061e767baba629bed"
+                "reference": "0661732ec694f1cdddf6c950cd40a0f619b1e85b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Spoje-NET/FlexiPeeHP/zipball/433902f74538642859afab7061e767baba629bed",
-                "reference": "433902f74538642859afab7061e767baba629bed",
+                "url": "https://api.github.com/repos/Spoje-NET/FlexiPeeHP/zipball/0661732ec694f1cdddf6c950cd40a0f619b1e85b",
+                "reference": "0661732ec694f1cdddf6c950cd40a0f619b1e85b",
                 "shasum": ""
             },
             "require": {
@@ -295,7 +336,7 @@
                 }
             ],
             "description": "PHP Based Library for easy interaction with czech accounting system Flexibee.",
-            "time": "2019-05-30T14:45:08+00:00"
+            "time": "2019-05-31T21:33:33+00:00"
         },
         {
             "name": "vitexsoftware/ease-bricks",
@@ -346,6 +387,60 @@
             "description": "EasePHPframework addons and code snipplets",
             "homepage": "http://v.s.cz/ease.php",
             "time": "2019-05-23T21:27:34+00:00"
+        },
+        {
+            "name": "vitexsoftware/ease-core",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/VitexSoftware/ease-core.git",
+                "reference": "b80cd5f0eaacd53a4e6808bdd6df25c1a6427b75"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/VitexSoftware/ease-core/zipball/b80cd5f0eaacd53a4e6808bdd6df25c1a6427b75",
+                "reference": "b80cd5f0eaacd53a4e6808bdd6df25c1a6427b75",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pdo": "*",
+                "pear/mail": "~1.3",
+                "pear/mail_mime": "~1.10",
+                "php": ">=7"
+            },
+            "require-dev": {
+                "apigen/apigen": "*",
+                "jakub-onderka/php-console-highlighter": "*",
+                "jakub-onderka/php-parallel-lint": "*",
+                "mockery/mockery": "*",
+                "php-coveralls/php-coveralls": "*",
+                "phpunit/php-token-stream": "*",
+                "phpunit/phpunit": "*",
+                "phpunit/phpunit-skeleton-generator": "*",
+                "robmorgan/phinx": "*",
+                "squizlabs/php_codesniffer": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ease\\": "src/Ease/",
+                    "Ease\\Logger\\": "src/Ease/Logger/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Vítězslav Dvořák",
+                    "email": "info@vitexsoftware.cz",
+                    "homepage": "http://v.s.cz/"
+                }
+            ],
+            "description": "An PHP Framework for writing Applications",
+            "homepage": "http://v.s.cz/ease.php",
+            "time": "2019-04-02T20:26:30+00:00"
         },
         {
             "name": "vitexsoftware/ease-framework",
@@ -448,8 +543,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "vitexsoftware/ease-framework": 20,
-        "spoje.net/flexipeehp": 20,
+        "spoje.net/flexibee": 20,
         "vitexsoftware/flexipeehp-bricks": 20
     },
     "prefer-stable": false,

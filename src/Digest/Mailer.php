@@ -28,7 +28,7 @@ class Mailer extends \Ease\Mailer
             Digestor::getCustomCss().
             Digestor::getWebPageInlineCSS().
             '</style>']));
-        $this->htmlDocument->setOutputFormat($this->getOutputFormat());
+
         $this->htmlBody     = $this->htmlDocument->addItem(new \Ease\Html\BodyTag());
     }
 

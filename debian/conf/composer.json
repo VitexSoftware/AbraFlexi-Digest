@@ -13,8 +13,8 @@
         "vendor-dir": "/var/lib/php-flexibee-digest"
     },
     "require": {
-        "deb/ease-framework": "*",
-        "deb/flexipeehp": "*",
+        "deb/ease-core": "*",
+        "deb/flexibee": "*",
         "deb/flexipeehp-bricks": "*"
     },
     "autoload": {
@@ -32,7 +32,7 @@
         },
         {
             "type": "path",
-            "url": "/usr/share/php/FlexiPeeHP",
+            "url": "/usr/share/php/flexibee",
             "options": {
                 "symlink": true
             }

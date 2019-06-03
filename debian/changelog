@@ -1,10 +1,11 @@
-flexibee-digest (1.9) UNRELEASED; urgency=medium
+flexibee-digest (1.14) UNRELEASED; urgency=medium
 
   * Do not show empty results
   * per module html exports
   * Incoming invoices fix
+  * new module: Purchase Price Lower Than Sales
 
- -- Vítězslav Dvořák <vitex@develoid.jinonice.czf>  Mon, 07 Jan 2019 22:07:51 +0100
+ -- Vítězslav Dvořák <vitex@develoid.jinonice.czf>  Mon, 03 Jun 2019 15:25:23 +0200
 
 flexibee-digest (1.6) UNRELEASED; urgency=medium
 
