@@ -79,7 +79,7 @@ $fromtoForm = new \Ease\TWB\Form('fromto');
 $fromtoForm->addTagClass('form-horizontal');
 
 $container = new \Ease\TWB\Container(new \Ease\Html\H1Tag(new \Ease\Html\ATag($myCompany->getApiURL(),
-    $myCompanyName).' '._('FlexiBee digest')));
+            $myCompanyName).' '._('FlexiBee digest')));
 
 
 $formColumns = new \Ease\TWB\Row();
@@ -92,7 +92,7 @@ foreach ($candidates as $heading => $modules) {
         include_once $classFile;
         $module = new $className(null);
         $modulesCol->addItem(new \Ease\TWB\Checkbox('modules['.$className.']',
-            $classFile, '&nbsp;'.$module->heading()));
+                $classFile, '&nbsp;'.$module->heading()));
     }
 }
 
@@ -108,29 +108,68 @@ while (false !== ($entry  = $d->read())) {
 }
 $d->close();
 
+$oPage->addJavaScript( '
+    
+var od = $( "input[name=\'from\']" );
+
+$( "#yesterday" ).click(function() {
+    var today = new Date();
+    today.setDate(today.getDate() - 1);
+    od.val( today.toISOString().split(\'T\')[0] );
+});
+
+$( "#lastweek" ).click(function() {
+    var today = new Date();
+    today.setDate(today.getDate() - 7);
+    od.val( today.toISOString().split(\'T\')[0] );
+});
+
+$( "#lastmonth" ).click(function() {
+    var today = new Date();
+    today.setMonth(today.getMonth() - 1);
+    od.val( today.toISOString().split(\'T\')[0] );
+});
+
+$( "#lastyear" ).click(function() {
+    var today = new Date();
+    today.setFullYear(today.getFullYear() - 1);
+    od.val( today.toISOString().split(\'T\')[0] );
+});
+
+' );
+
+$optionsCol->addItem(new \Ease\TWB\LinkButton('#', _('Yesterday'), 'inverse',
+        ['id' => 'yesterday']));
+$optionsCol->addItem(new \Ease\TWB\LinkButton('#', _('Week'), 'inverse',
+        ['id' => 'lastweek']));
+$optionsCol->addItem(new \Ease\TWB\LinkButton('#', _('Month'), 'inverse',
+        ['id' => 'lastmonth']));
+$optionsCol->addItem(new \Ease\TWB\LinkButton('#', _('Year'), 'inverse',
+        ['id' => 'lastyear']));
+
 
 $optionsCol->addItem(new \Ease\TWB\FormGroup(_('From'),
-    new \Ease\Html\InputDateTag('from', $from)));
+        new \Ease\Html\InputDateTag('from', $from)));
 
 $optionsCol->addItem(new \Ease\TWB\FormGroup(_('To'),
-    new \Ease\Html\InputDateTag('to', $to)));
+        new \Ease\Html\InputDateTag('to', $to)));
 
 $optionsCol->addItem(new \Ease\TWB\FormGroup(_('Theme name'),
-    new \Ease\Html\SelectTag('theme', $themes)));
+        new \Ease\Html\SelectTag('theme', $themes)));
 
 $optionsCol->addItem(new \Ease\TWB\FormGroup(_('Output Directory'),
-    new \Ease\Html\InputTextTag('outdir', $shared->getConfigValue('SAVETO'))));
+        new \Ease\Html\InputTextTag('outdir', $shared->getConfigValue('SAVETO'))));
 
 $optionsCol->addItem(new \Ease\TWB\FormGroup(_('Send by mail to'),
-    new \Ease\Html\InputEmailTag('recipient',
-    $shared->getConfigValue('EASE_MAILTO'))));
+        new \Ease\Html\InputEmailTag('recipient',
+            $shared->getConfigValue('EASE_MAILTO'))));
 
 
 $fromtoForm->addItem($formColumns);
 $fromtoForm->addItem(new \Ease\TWB\SubmitButton(_('Generate digest'),
-    'success btn-lg btn-block',
-    ['onClick' => "window.scrollTo(0, 0); $('#Preloader').css('visibility', 'visible');",
-    'style' => 'height: 90%']));
+        'success btn-lg btn-block',
+        ['onClick' => "window.scrollTo(0, 0); $('#Preloader').css('visibility', 'visible');",
+        'style' => 'height: 90%']));
 
 $container->addItem($fromtoForm);
 

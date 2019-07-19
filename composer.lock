@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8a21d9c4eb7e011a1a628163335a1d7b",
+    "content-hash": "c285e78323eb53df46eb4a8b7fd59938",
     "packages": [
         {
             "name": "pear/console_getopt",
@@ -262,12 +262,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Spoje-NET/php-flexibee.git",
-                "reference": "d6192a2be3bd0b513f794ce75127417ebbac6548"
+                "reference": "f15e3aa0d456d8788c27ae9e6755b45130924aec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Spoje-NET/php-flexibee/zipball/d6192a2be3bd0b513f794ce75127417ebbac6548",
-                "reference": "d6192a2be3bd0b513f794ce75127417ebbac6548",
+                "url": "https://api.github.com/repos/Spoje-NET/php-flexibee/zipball/f15e3aa0d456d8788c27ae9e6755b45130924aec",
+                "reference": "f15e3aa0d456d8788c27ae9e6755b45130924aec",
                 "shasum": ""
             },
             "require": {
@@ -295,98 +295,7 @@
                 }
             ],
             "description": "PHP Based Library for easy interaction with czech accounting system FlexiBee.",
-            "time": "2019-06-02T21:22:32+00:00"
-        },
-        {
-            "name": "spoje.net/flexipeehp",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Spoje-NET/FlexiPeeHP.git",
-                "reference": "0661732ec694f1cdddf6c950cd40a0f619b1e85b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Spoje-NET/FlexiPeeHP/zipball/0661732ec694f1cdddf6c950cd40a0f619b1e85b",
-                "reference": "0661732ec694f1cdddf6c950cd40a0f619b1e85b",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "vitexsoftware/ease-framework": ">=1.29"
-            },
-            "require-dev": {
-                "phing/phing": "*",
-                "phpunit/phpunit": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "FlexiPeeHP\\": "src/FlexiPeeHP/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Vítězslav Dvořák",
-                    "email": "vitex@arachne.cz"
-                }
-            ],
-            "description": "PHP Based Library for easy interaction with czech accounting system Flexibee.",
-            "time": "2019-05-31T21:33:33+00:00"
-        },
-        {
-            "name": "vitexsoftware/ease-bricks",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/VitexSoftware/Ease-PHP-Bricks.git",
-                "reference": "dd361f4e2c268a83bbeca246392d0fa745dcf9d1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/Ease-PHP-Bricks/zipball/dd361f4e2c268a83bbeca246392d0fa745dcf9d1",
-                "reference": "dd361f4e2c268a83bbeca246392d0fa745dcf9d1",
-                "shasum": ""
-            },
-            "require": {
-                "vitexsoftware/ease-framework": "*"
-            },
-            "require-dev": {
-                "apigen/apigen": "^4.",
-                "jakub-onderka/php-console-highlighter": "^0.3.2",
-                "jakub-onderka/php-parallel-lint": "^0.9.2",
-                "mockery/mockery": "~0.9",
-                "phpunit/php-token-stream": "~1.2",
-                "phpunit/phpunit": "5.3.*",
-                "phpunit/phpunit-skeleton-generator": "*",
-                "robmorgan/phinx": "* dev-master",
-                "satooshi/php-coveralls": "0.6.*",
-                "squizlabs/php_codesniffer": "~2.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Ease\\ui\\": "src/Ease/ui"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Vítězslav Dvořák",
-                    "email": "info@vitexsoftware.cz",
-                    "homepage": "http://v.s.cz/"
-                }
-            ],
-            "description": "EasePHPframework addons and code snipplets",
-            "homepage": "http://v.s.cz/ease.php",
-            "time": "2019-05-23T21:27:34+00:00"
+            "time": "2019-06-23T18:19:49+00:00"
         },
         {
             "name": "vitexsoftware/ease-core",
@@ -394,12 +303,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/ease-core.git",
-                "reference": "b80cd5f0eaacd53a4e6808bdd6df25c1a6427b75"
+                "reference": "927712468cbefa3b2e1c612721de76fe4a6e30aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/ease-core/zipball/b80cd5f0eaacd53a4e6808bdd6df25c1a6427b75",
-                "reference": "b80cd5f0eaacd53a4e6808bdd6df25c1a6427b75",
+                "url": "https://api.github.com/repos/VitexSoftware/ease-core/zipball/927712468cbefa3b2e1c612721de76fe4a6e30aa",
+                "reference": "927712468cbefa3b2e1c612721de76fe4a6e30aa",
                 "shasum": ""
             },
             "require": {
@@ -407,6 +316,9 @@
                 "pear/mail": "~1.3",
                 "pear/mail_mime": "~1.10",
                 "php": ">=7"
+            },
+            "conflict": {
+                "vitexsoftware/ease-framework": "*"
             },
             "require-dev": {
                 "apigen/apigen": "*",
@@ -440,53 +352,116 @@
             ],
             "description": "An PHP Framework for writing Applications",
             "homepage": "http://v.s.cz/ease.php",
-            "time": "2019-04-02T20:26:30+00:00"
+            "time": "2019-07-18T13:12:01+00:00"
         },
         {
-            "name": "vitexsoftware/ease-framework",
+            "name": "vitexsoftware/ease-html",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/VitexSoftware/EaseFramework.git",
-                "reference": "e8ab0bda9a47faf00a5d91ce5f2f8d7f9a7d4955"
+                "url": "https://github.com/VitexSoftware/ease-html.git",
+                "reference": "d45f66f4352661be09fee9c46a3876fe6ed56308"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/EaseFramework/zipball/e8ab0bda9a47faf00a5d91ce5f2f8d7f9a7d4955",
-                "reference": "e8ab0bda9a47faf00a5d91ce5f2f8d7f9a7d4955",
+                "url": "https://api.github.com/repos/VitexSoftware/ease-html/zipball/d45f66f4352661be09fee9c46a3876fe6ed56308",
+                "reference": "d45f66f4352661be09fee9c46a3876fe6ed56308",
                 "shasum": ""
             },
             "require": {
-                "ext-pdo": "*",
-                "pear/mail": "*",
-                "pear/mail_mime": "*",
-                "php": ">=5.6"
+                "vitexsoftware/ease-core": "dev-master"
             },
             "require-dev": {
-                "apigen/apigen": ">=4",
-                "jakub-onderka/php-console-highlighter": "*",
-                "jakub-onderka/php-parallel-lint": "^1",
-                "mockery/mockery": "^1.1",
-                "php-coveralls/php-coveralls": "^2",
-                "phpunit/php-token-stream": ">=1.4",
-                "phpunit/phpunit": "^6",
-                "robmorgan/phinx": "^0.9",
-                "squizlabs/php_codesniffer": "^3.2"
+                "phpunit/phpunit": "*"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "Ease\\": "src/Ease/",
-                    "Ease\\Logger\\": "src/Ease/Logger",
-                    "Ease\\Html\\": "src/Ease/Html",
-                    "Ease\\JQuery\\": "src/Ease/JQuery",
-                    "Ease\\SQL\\": "src/Ease/SQL",
-                    "Ease\\TWB\\": "src/Ease/TWB"
+                    "Ease\\Html\\": "src/Ease/Html/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPL-2.0-or-later"
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vítězslav Vitex Dvořák",
+                    "email": "info@vitexsoftware.cz"
+                }
+            ],
+            "description": "Set of HTML rendering objects",
+            "time": "2019-07-16T20:15:46+00:00"
+        },
+        {
+            "name": "vitexsoftware/ease-twbootstrap4",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/VitexSoftware/ease-twbootstrap4.git",
+                "reference": "ae9ace0a934937c67fb6de6c89e8bd76008cbfc1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/VitexSoftware/ease-twbootstrap4/zipball/ae9ace0a934937c67fb6de6c89e8bd76008cbfc1",
+                "reference": "ae9ace0a934937c67fb6de6c89e8bd76008cbfc1",
+                "shasum": ""
+            },
+            "require": {
+                "vitexsoftware/ease-html": "dev-master"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ease\\TWB4\\": "src/Ease/TWB4/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vítězslav Vitex Dvořák",
+                    "email": "info@vitexsoftware.cz"
+                }
+            ],
+            "description": "Set of Twitter Bootstrap 4 rendering objects",
+            "time": "2019-07-18T21:38:37+00:00"
+        },
+        {
+            "name": "vitexsoftware/ease-twbootstrap4-widgets",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Vitexus/php-ease-twbootstrap4-widgets.git",
+                "reference": "eed07eac1e53cc23fe859ca6e82b0120c2a8b917"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Vitexus/php-ease-twbootstrap4-widgets/zipball/eed07eac1e53cc23fe859ca6e82b0120c2a8b917",
+                "reference": "eed07eac1e53cc23fe859ca6e82b0120c2a8b917",
+                "shasum": ""
+            },
+            "require": {
+                "vitexsoftware/ease-twbootstrap4": "dev-master"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ease\\TWB4\\Widgets\\": "src/Ease/TWB4/Widgets"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
             ],
             "authors": [
                 {
@@ -495,27 +470,65 @@
                     "homepage": "http://v.s.cz/"
                 }
             ],
-            "description": "An PHP Framework for Ease of writing Applications",
+            "description": "EasePHP framework addons and code snipplets",
             "homepage": "http://v.s.cz/ease.php",
-            "time": "2019-05-29T17:45:50+00:00"
+            "time": "2019-07-04T12:03:55+00:00"
         },
         {
-            "name": "vitexsoftware/flexipeehp-bricks",
+            "name": "vitexsoftware/ease-twbootstrap4-widgets-flexibee",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/VitexSoftware/FlexiPeeHP-Bricks.git",
-                "reference": "0dc58790ba14cb1ac4dcf811d8eb2e988c61237b"
+                "url": "https://github.com/Vitexus/php-ease-twbootstrap4-widgets-flexibee.git",
+                "reference": "fdb8c3b178a47f1ecb2dc7e402b13bd3d231fc0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/FlexiPeeHP-Bricks/zipball/0dc58790ba14cb1ac4dcf811d8eb2e988c61237b",
-                "reference": "0dc58790ba14cb1ac4dcf811d8eb2e988c61237b",
+                "url": "https://api.github.com/repos/Vitexus/php-ease-twbootstrap4-widgets-flexibee/zipball/fdb8c3b178a47f1ecb2dc7e402b13bd3d231fc0c",
+                "reference": "fdb8c3b178a47f1ecb2dc7e402b13bd3d231fc0c",
                 "shasum": ""
             },
             "require": {
-                "spoje.net/flexipeehp": "dev-master",
-                "vitexsoftware/ease-bricks": "dev-master"
+                "vitexsoftware/ease-twbootstrap4": "dev-master",
+                "vitexsoftware/flexibee-bricks": "dev-master"
+            },
+            "require-dev": {
+                "codeception/codeception": "*",
+                "phpunit/phpunit": "^8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FlexiPeeHP\\ui\\TWB4\\": "src/FlexiPeeHP/ui/TWB4"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Vitex",
+                    "email": "info@vitexsoftware.cz"
+                }
+            ],
+            "description": "php-flexibee extending classes and widgets",
+            "time": "2019-07-18T13:06:37+00:00"
+        },
+        {
+            "name": "vitexsoftware/flexibee-bricks",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/VitexSoftware/php-flexibee-bricks.git",
+                "reference": "52fa43dfaef0b99ce27a08e5f6b4bf2ed3022d2e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/VitexSoftware/php-flexibee-bricks/zipball/52fa43dfaef0b99ce27a08e5f6b4bf2ed3022d2e",
+                "reference": "52fa43dfaef0b99ce27a08e5f6b4bf2ed3022d2e",
+                "shasum": ""
+            },
+            "require": {
+                "spoje.net/flexibee": "dev-master",
+                "vitexsoftware/ease-html": "dev-master"
             },
             "require-dev": {
                 "codeception/codeception": "*",
@@ -525,6 +538,7 @@
             "autoload": {
                 "psr-4": {
                     "FlexiPeeHP\\Bricks\\": "src/FlexiPeeHP/Bricks",
+                    "FlexiPeeHP\\Bricks\\ConvertRules\\": "src/FlexiPeeHP/Bricks/ConvertRules",
                     "FlexiPeeHP\\ui\\": "src/FlexiPeeHP/ui"
                 }
             },
@@ -535,16 +549,16 @@
                     "email": "info@vitexsoftware.cz"
                 }
             ],
-            "description": "FlexiPeeHP code Sniplets",
-            "time": "2019-05-28T09:37:07+00:00"
+            "description": "php-flexibee extending classes and widgets",
+            "time": "2019-06-25T20:28:40+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "spoje.net/flexibee": 20,
-        "vitexsoftware/flexipeehp-bricks": 20
+        "vitexsoftware/ease-twbootstrap4-widgets-flexibee": 20,
+        "vitexsoftware/ease-twbootstrap4-widgets": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

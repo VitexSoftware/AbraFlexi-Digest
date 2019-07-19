@@ -8,3 +8,4 @@
 /deb/
 /.sass-cache/
 /tests/output/
+/vendor/

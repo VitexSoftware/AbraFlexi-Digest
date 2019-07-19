@@ -1,6 +1,6 @@
 {
     "name": "vitexsoftware/php-flexibee-digest",
-    "description": "Daily FlexiBee digest.",
+    "description": "Periodical FlexiBee digest.",
     "authors": [
         {
             "name": "Vitex",
@@ -8,9 +8,11 @@
         }
     ],
     "minimum-stability": "dev",
+    "type": "project",
+    "version": "0.1a",
     "require": {
-        "spoje.net/flexibee": "dev-master",
-        "vitexsoftware/flexipeehp-bricks": "dev-master"
+        "vitexsoftware/ease-twbootstrap4-widgets-flexibee": "dev-master",
+        "vitexsoftware/ease-twbootstrap4-widgets": "dev-master"
     },
     "autoload": {
         "psr-4": {
