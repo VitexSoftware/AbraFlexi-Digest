@@ -1,10 +1,6 @@
 <?php
-/*
- * Incoming payments for us
- */
-
 /**
- * Description of IncomingPayments
+ * Incoming payments for us
  *
  * @author vitex
  */

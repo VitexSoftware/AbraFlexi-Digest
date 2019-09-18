@@ -27,7 +27,7 @@ class OutcomingInvoicesHiddenToCustomer extends DigestModule implements DigestMo
         $outInvoicesData = $digger->getColumnsFromFlexibee(['kod', 'typDokl', 'firma',
             'stavMailK', 'kontaktEmail'],
             array_merge($this->condition,
-                ['((stavMailK eq \'stavMail.odeslat\') OR (stavMailK is empty))']));
+                ['((stavMailK eq \'stavMail.odeslat\') OR (stavMailK is empty))','storno' => false]));
 
         if (empty($outInvoicesData)) {
             $this->addItem(_('none'));
@@ -100,4 +100,10 @@ class OutcomingInvoicesHiddenToCustomer extends DigestModule implements DigestMo
     {
         return _('Outcoming invoices not notified to customer');
     }
+    
+    public function description()
+    {
+        
+    }
+    
 }
