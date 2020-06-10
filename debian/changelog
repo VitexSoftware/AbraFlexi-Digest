@@ -1,11 +1,15 @@
-flexibee-digest (1.14) UNRELEASED; urgency=medium
+flexibee-digest (1.15) UNRELEASED; urgency=medium
 
+  [ Vítězslav Dvořák ]
   * Do not show empty results
   * per module html exports
   * Incoming invoices fix
   * new module: Purchase Price Lower Than Sales
 
- -- Vítězslav Dvořák <vitex@develoid.jinonice.czf>  Mon, 03 Jun 2019 15:25:23 +0200
+  [ CyberVitexus ]
+  * Debian buster build
+
+ -- CyberVitexus <vitex@exiv.jinonice.czf>  Sun, 29 Mar 2020 21:48:08 +0200
 
 flexibee-digest (1.6) UNRELEASED; urgency=medium
 

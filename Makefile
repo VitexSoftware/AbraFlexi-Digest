@@ -1,10 +1,12 @@
-all: fresh build install
+all: fresh build install dimage
 
 composer:
 	composer update
 
-fresh:
-	echo fresh
+fresh: composer git
+
+git:
+	git pull
 
 install: 
 	echo install

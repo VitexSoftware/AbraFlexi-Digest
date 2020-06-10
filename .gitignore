@@ -10,3 +10,4 @@
 /tests/output/
 /vendor/
 /.idea/
+/debian/.debhelper/

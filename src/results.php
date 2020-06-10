@@ -12,9 +12,9 @@ define('EASE_APPNAME', 'FlexiBee Digest');
 
 require_once __DIR__.'/init.php';
 
-$oPage = new \Ease\TWB\WebPage($myCompanyName.' '._('FlexiBee digest'));
+$oPage = new \Ease\TWB4\WebPage($myCompanyName.' '._('FlexiBee digest'));
 
-$container = new \Ease\TWB\Container(new \Ease\Html\H1Tag(new \Ease\Html\ATag($myCompany->getApiURL(),
+$container = new \Ease\TWB4\Container(new \Ease\Html\H1Tag(new \Ease\Html\ATag($myCompany->getApiURL(),
     $myCompanyName).' '._('FlexiBee digest results')));
 
 
@@ -26,10 +26,10 @@ foreach (scandir($shared->getConfigValue('SAVETO')) as $file) {
 }
 
 
-$scopeTabs = new \Ease\TWB\Tabs('ScopeTabs');
+$scopeTabs = new \Ease\TWB4\Tabs('ScopeTabs');
 
 foreach ($reports as $scope => $reports) {
-    $reportTabs = new \Ease\TWB\Tabs( $scope . 'Reports');
+    $reportTabs = new \Ease\TWB4\Tabs( $scope . 'Reports');
     foreach ($reports as $reportName => $reportFile) {
         $reportTabs->addTab($reportName, str_replace('pure-table','table', file_get_contents($reportFile)));
     }

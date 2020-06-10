@@ -47,7 +47,7 @@ class PurchasePriceLowerThanSales extends \FlexiPeeHP\Digest\DigestModule implem
             ]);
 
 
-            $products = self::reindexArrayBy($products, 'provar');
+            $products = \Ease\Functions::reindexArrayBy($products, 'provar');
 
             krsort($products);
 

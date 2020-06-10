@@ -7,7 +7,7 @@ Priority: optional
 Homepage: https://github.com/VitexSoftware/FlexiBee-Digest
 
 Package: flexibee-digest
-Depends: ${misc:Depends}, php-flexibee-config, flexipeehp-bricks (>= 0.10), composer, php-cli, php-intl|php7.0-intl|php7.1-intl|php7.2-intl|php7.3-intl, locales-all
+Depends: ${misc:Depends}, php-flexibee-config, php-flexibee-bricks, composer, php-cli, php-intl, locales-all
 Suggests: flexibee-server
 Architecture: all
 Section: web

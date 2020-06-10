@@ -12,7 +12,7 @@ define('EASE_APPNAME', 'FlexiBee Digest');
 
 require_once __DIR__.'/init.php';
 
-$oPage = new \Ease\TWB\WebPage($myCompanyName.' '._('FlexiBee digest'));
+$oPage = new \Ease\TWB4\WebPage($myCompanyName.' '._('FlexiBee digest'));
 
 
 
@@ -75,14 +75,14 @@ $candidates[_('Yearly modules')]  = Digestor::getModules(constant('MODULE_YEARLY
 $candidates[_('Alltime modules')] = Digestor::getModules(constant('MODULE_ALLTIME_PATH'));
 
 
-$fromtoForm = new \Ease\TWB\Form('fromto');
+$fromtoForm = new \Ease\TWB4\Fourm('fromto');
 $fromtoForm->addTagClass('form-horizontal');
 
-$container = new \Ease\TWB\Container(new \Ease\Html\H1Tag(new \Ease\Html\ATag($myCompany->getApiURL(),
+$container = new \Ease\TWB4\Container(new \Ease\Html\H1Tag(new \Ease\Html\ATag($myCompany->getApiURL(),
             $myCompanyName).' '._('FlexiBee digest')));
 
 
-$formColumns = new \Ease\TWB\Row();
+$formColumns = new \Ease\TWB4\Row();
 $modulesCol  = $formColumns->addColumn(6, new \Ease\Html\H2Tag(_('Modules')));
 
 foreach ($candidates as $heading => $modules) {
@@ -91,7 +91,7 @@ foreach ($candidates as $heading => $modules) {
     foreach ($modules as $className => $classFile) {
         include_once $classFile;
         $module = new $className(null);
-        $modulesCol->addItem(new \Ease\TWB\Checkbox('modules['.$className.']',
+        $modulesCol->addItem(new \Ease\TWB4\Checkbox('modules['.$className.']',
                 $classFile, '&nbsp;'.$module->heading()));
     }
 }
@@ -138,35 +138,35 @@ $( "#lastyear" ).click(function() {
 
 ' );
 
-$optionsCol->addItem(new \Ease\TWB\LinkButton('#', _('Yesterday'), 'inverse',
+$optionsCol->addItem(new \Ease\TWB4\LinkButton('#', _('Yesterday'), 'inverse',
         ['id' => 'yesterday']));
-$optionsCol->addItem(new \Ease\TWB\LinkButton('#', _('Week'), 'inverse',
+$optionsCol->addItem(new \Ease\TWB4\LinkButton('#', _('Week'), 'inverse',
         ['id' => 'lastweek']));
-$optionsCol->addItem(new \Ease\TWB\LinkButton('#', _('Month'), 'inverse',
+$optionsCol->addItem(new \Ease\TWB4\LinkButton('#', _('Month'), 'inverse',
         ['id' => 'lastmonth']));
-$optionsCol->addItem(new \Ease\TWB\LinkButton('#', _('Year'), 'inverse',
+$optionsCol->addItem(new \Ease\TWB4\LinkButton('#', _('Year'), 'inverse',
         ['id' => 'lastyear']));
 
 
-$optionsCol->addItem(new \Ease\TWB\FormGroup(_('From'),
+$optionsCol->addItem(new \Ease\TWB4\FormGroup(_('From'),
         new \Ease\Html\InputDateTag('from', $from)));
 
-$optionsCol->addItem(new \Ease\TWB\FormGroup(_('To'),
+$optionsCol->addItem(new \Ease\TWB4\FormGroup(_('To'),
         new \Ease\Html\InputDateTag('to', $to)));
 
-$optionsCol->addItem(new \Ease\TWB\FormGroup(_('Theme name'),
+$optionsCol->addItem(new \Ease\TWB4\FormGroup(_('Theme name'),
         new \Ease\Html\SelectTag('theme', $themes)));
 
-$optionsCol->addItem(new \Ease\TWB\FormGroup(_('Output Directory'),
+$optionsCol->addItem(new \Ease\TWB4\FormGroup(_('Output Directory'),
         new \Ease\Html\InputTextTag('outdir', $shared->getConfigValue('SAVETO'))));
 
-$optionsCol->addItem(new \Ease\TWB\FormGroup(_('Send by mail to'),
+$optionsCol->addItem(new \Ease\TWB4\FormGroup(_('Send by mail to'),
         new \Ease\Html\InputEmailTag('recipient',
             $shared->getConfigValue('EASE_MAILTO'))));
 
 
 $fromtoForm->addItem($formColumns);
-$fromtoForm->addItem(new \Ease\TWB\SubmitButton(_('Generate digest'),
+$fromtoForm->addItem(new \Ease\TWB4\SubmitButton(_('Generate digest'),
         'success btn-lg btn-block',
         ['onClick' => "window.scrollTo(0, 0); $('#Preloader').css('visibility', 'visible');",
         'style' => 'height: 90%']));

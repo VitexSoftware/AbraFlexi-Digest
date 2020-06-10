@@ -5,7 +5,7 @@
 
 use FlexiPeeHP\Digest\DigestModule;
 use FlexiPeeHP\Digest\DigestModuleInterface;
-use FlexiPeeHP\Digest\DocumentLink;
+use FlexiPeeHP\ui\DocumentLink;
 use FlexiPeeHP\Digest\Table;
 
 /**

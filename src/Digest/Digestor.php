@@ -78,7 +78,7 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
         $prober->logBanner(' FlexiBee Digest '.self::getAppVersion().' '.$_SERVER['SCRIPT_FILENAME']);
         $infoRaw = $prober->getFlexiData();
         if (count($infoRaw) && !array_key_exists('success', $infoRaw)) {
-            $info      = self::reindexArrayBy($infoRaw, 'dbNazev');
+            $info      = \Ease\Functions::reindexArrayBy($infoRaw, 'dbNazev');
             $myCompany = $prober->getCompany();
             if (array_key_exists($myCompany, $info)) {
                 $return = new \Ease\Html\ATag($prober->url.'/c/'.$myCompany,
