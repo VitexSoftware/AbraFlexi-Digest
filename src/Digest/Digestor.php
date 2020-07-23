@@ -1,4 +1,5 @@
 <?php
+
 /**
  * FlexiBee Digest Engine
  *
@@ -13,8 +14,8 @@ namespace FlexiPeeHP\Digest;
  *
  * @author vitex
  */
-class Digestor extends \Ease\Html\DivTag
-{
+class Digestor extends \Ease\Html\DivTag {
+
     /**
      * Subject
      * @var string 
@@ -57,42 +58,40 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
      * 
      * @param string $subject
      */
-    public function __construct($subject)
-    {
+    public function __construct($subject) {
         parent::__construct();
         $this->subject = $subject;
         $this->addHeading($subject);
-        $this->shared  = \Ease\Shared::instanced();
+        $this->shared = \Ease\Shared::instanced();
     }
 
     /**
      * Digest page Heading
      */
-    public function addHeading($subject)
-    {
+    public function addHeading($subject) {
         $this->addItem(new \Ease\Html\ATag('', '', ['name' => 'index']));
         $this->addItem(new \FlexiPeeHP\ui\CompanyLogo(['align' => 'right', 'id' => 'companylogo',
-                'height' => '50', 'title' => _('Company logo')]));
+                    'height' => '50', 'title' => _('Company logo')]));
         $this->addItem(new \Ease\Html\H1Tag($subject));
-        $prober  = new \FlexiPeeHP\Company();
-        $prober->logBanner(' FlexiBee Digest '.self::getAppVersion().' '.$_SERVER['SCRIPT_FILENAME']);
+        $prober = new \FlexiPeeHP\Company();
+        $prober->logBanner(' FlexiBee Digest ' . self::getAppVersion() . ' ' . $_SERVER['SCRIPT_FILENAME']);
         $infoRaw = $prober->getFlexiData();
         if (count($infoRaw) && !array_key_exists('success', $infoRaw)) {
-            $info      = \Ease\Functions::reindexArrayBy($infoRaw, 'dbNazev');
+            $info = \Ease\Functions::reindexArrayBy($infoRaw, 'dbNazev');
             $myCompany = $prober->getCompany();
             if (array_key_exists($myCompany, $info)) {
-                $return = new \Ease\Html\ATag($prober->url.'/c/'.$myCompany,
-                    $info[$myCompany]['nazev']);
+                $return = new \Ease\Html\ATag($prober->url . '/c/' . $myCompany,
+                        $info[$myCompany]['nazev']);
             } else {
                 $return = new \Ease\Html\ATag($prober->getApiURL(),
-                    _('Connection Problem'));
+                        _('Connection Problem'));
             }
         }
 
         $this->addItem(new \Ease\Html\StrongTag($return,
-                ['class' => 'companylink']));
+                        ['class' => 'companylink']));
         $this->topMenu = $this->addItem(new \Ease\Html\DivTag(null,
-                ['class' => 'topmenu']));
+                        ['class' => 'topmenu']));
     }
 
     /**
@@ -100,14 +99,13 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
      * 
      * @param \DateInterval $interval
      */
-    public function dig($interval, $moduleDir)
-    {
+    public function dig($interval, $moduleDir) {
         $this->processModules(self::getModules($moduleDir), $interval);
 
         $this->addIndex();
         $this->addFoot();
 
-        $shared  = \Ease\Shared::instanced();
+        $shared = \Ease\Shared::instanced();
         $emailto = $shared->getConfigValue('EASE_MAILTO');
         if ($emailto) {
             $this->sendByMail($emailto);
@@ -124,8 +122,7 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
      * @param array $modules [classname=>filepath]
      * @param \DateTime|\DatePeriod $interval
      */
-    public function processModules($modules, $interval)
-    {
+    public function processModules($modules, $interval) {
         foreach ($modules as $class => $classFile) {
             include_once $classFile;
             $module = new $class($interval);
@@ -138,7 +135,7 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
                 }
             } else {
                 $this->addStatusMessage(sprintf(_('Module %s do not found results'),
-                        $class));
+                                $class));
                 if ($saveto) {
                     $module->fileCleanUP($saveto);
                 }
@@ -151,8 +148,7 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
      * 
      * @param string $moduleDir path
      */
-    public static function getModules($moduleDir)
-    {
+    public static function getModules($moduleDir) {
         $modules = [];
         if (is_array($moduleDir)) {
             foreach ($moduleDir as $module) {
@@ -160,21 +156,21 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
             }
         } else {
             if (is_dir($moduleDir)) {
-                $d     = dir($moduleDir);
+                $d = dir($moduleDir);
                 while (false !== ($entry = $d->read())) {
-                    if (is_file($moduleDir.'/'.$entry)) {
-                        $class           = pathinfo($entry, PATHINFO_FILENAME);
-                        $modules[$class] = realpath($moduleDir.'/'.$entry);
+                    if (is_file($moduleDir . '/' . $entry)) {
+                        $class = pathinfo($entry, PATHINFO_FILENAME);
+                        $modules[$class] = realpath($moduleDir . '/' . $entry);
                     }
                 }
                 $d->close();
             } else {
                 if (is_file($moduleDir)) {
-                    $class           = pathinfo($moduleDir, PATHINFO_FILENAME);
+                    $class = pathinfo($moduleDir, PATHINFO_FILENAME);
                     $modules[$class] = realpath($moduleDir);
                 } else {
-                    \Ease\Shared::instanced()->addStatusMessage(sprintf(_('Module dir %s is wrong'),
-                            $moduleDir), 'error');
+                    \Ease\Shared::logger()->addToLog('Digestor', sprintf(_('Module dir %s is wrong'),
+                                    $moduleDir), 'error');
                 }
             }
         }
@@ -185,34 +181,33 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
      * 
      * @param DigestModule $element
      */
-    public function addToIndex($element)
-    {
+    public function addToIndex($element) {
         $this->index[get_class($element)] = $element->heading();
     }
 
     /**
      * Add Index to digest
      */
-    public function addIndex()
-    {
+    public function addIndex() {
         $this->addItem(new \Ease\Html\H1Tag(new \Ease\Html\ATag('', _('Index'),
-                    ['name' => 'index2'])));
+                                ['name' => 'index2'])));
         $this->addItem(new \Ease\Html\HrTag());
 
         $index = new \Ease\Html\UlTag(null, ['class' => 'pure-menu-list']);
 
         foreach ($this->index as $class => $heading) {
-            $index->addItemSmart(new \Ease\Html\ATag('#'.$class, $heading,
-                    ['class' => 'pure-menu-link']),
-                ['class' => 'pure-menu-item', 'style' => 'height: inherit']);
+            $index->addItemSmart(new \Ease\Html\ATag('#' . $class, $heading,
+                            ['class' => 'pure-menu-link']),
+                    ['class' => 'pure-menu-item', 'style' => 'height: inherit']);
 
-            $this->topMenu->addItem(new \Ease\Html\ATag('#'.$class, $heading,
-                    ['class' => 'topmenu-item']));
+            $this->topMenu->addItem(new \Ease\Html\ATag('#' . $class, $heading,
+                            ['class' => 'topmenu-item']));
         }
 
         $this->addItem(new \Ease\Html\DivTag($index,
-                ['class' => 'pure-menu', 'css' => 'display: inline-block;']));
+                        ['class' => 'pure-menu', 'css' => 'display: inline-block;']));
     }
+
 //    /**
 //     * Include next element into current page (if not closed).
 //     *
@@ -231,8 +226,7 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
      * 
      * @param string $mailto
      */
-    public function sendByMail($mailto)
-    {
+    public function sendByMail($mailto) {
         $postman = new Mailer($mailto, $this->subject);
         $postman->addItem($this);
         $postman->send();
@@ -243,20 +237,18 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
      * 
      * @param string $saveTo directory
      */
-    public function saveToHtml($saveTo)
-    {
-        $filename = $saveTo.pathinfo($_SERVER['SCRIPT_FILENAME'],
-                PATHINFO_FILENAME).'.html';
-        $webPage  = new \Ease\Html\HtmlTag(new \Ease\Html\SimpleHeadTag([
-                new \Ease\Html\TitleTag($this->subject),
-                '<style>'.Digestor::$purecss.Digestor::getCustomCss().Digestor::getWebPageInlineCSS().'</style>']));
+    public function saveToHtml($saveTo) {
+        $filename = $saveTo . pathinfo($_SERVER['SCRIPT_FILENAME'],
+                        PATHINFO_FILENAME) . '.html';
+        $webPage = new \Ease\Html\HtmlTag(new \Ease\Html\SimpleHeadTag([
+                    new \Ease\Html\TitleTag($this->subject),
+                    '<style>' . Digestor::$purecss . Digestor::getCustomCss() . Digestor::getWebPageInlineCSS() . '</style>']));
         $webPage->addItem(new \Ease\Html\BodyTag($this));
         $this->addStatusMessage(sprintf(_('Saved to %s'), $filename),
-            file_put_contents($filename, $webPage->getRendered()) ? 'success' : 'error');
+                file_put_contents($filename, $webPage->getRendered()) ? 'success' : 'error');
     }
 
-    static public function getWebPageInlineCSS()
-    {
+    static public function getWebPageInlineCSS() {
 //        $easeShared = \Ease\Shared::webPage();
 //        if (isset($easeShared->cascadeStyles) && count($easeShared->cascadeStyles)) {
 //            $cascadeStyles = [];
@@ -274,11 +266,10 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
      * Obtain Custom CSS - THEME in digest.json
      * @return string
      */
-    public static function getCustomCss()
-    {
+    public static function getCustomCss() {
 
-        $theme   = \Ease\Shared::instanced()->getConfigValue('THEME');
-        $cssfile = constant('STYLE_DIR').'/'.$theme.'.css';
+        $theme = \Ease\Shared::instanced()->getConfigValue('THEME');
+        $cssfile = constant('STYLE_DIR') . '/' . $theme . '.css';
         return file_exists($cssfile) ? file_get_contents($cssfile) : '';
     }
 
@@ -286,27 +277,25 @@ normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */.pure-bu
      * Obtain Version of application
      * @return string
      */
-    static public function getAppVersion()
-    {
+    static public function getAppVersion() {
         $composerInfo = json_decode(file_get_contents('../composer.json'), true);
-        return array_key_exists('version', $composerInfo) ? $composerInfo['version']
-                : 'dev-master';
+        return array_key_exists('version', $composerInfo) ? $composerInfo['version'] : 'dev-master';
     }
 
     /**
      * Page Bottom
      */
-    public function addFoot()
-    {
+    public function addFoot() {
         $this->addItem(new \Ease\Html\HrTag());
-        $this->addItem(new \Ease\Html\ImgTag('data:image/svg+xml;base64,'.base64_encode(self::$logo),
-                'Logo', ['align' => 'right', 'width' => '50']));
+        $this->addItem(new \Ease\Html\ImgTag('data:image/svg+xml;base64,' . base64_encode(self::$logo),
+                        'Logo', ['align' => 'right', 'width' => '50']));
         $this->addItem(new \Ease\Html\SmallTag(new \Ease\Html\DivTag([_('Generated by'),
-                    '&nbsp;', new \Ease\Html\ATag('https://github.com/VitexSoftware/FlexiBee-Digest',
-                        _('FlexiBee Digest').' '._('version').' '.self::getAppVersion())])));
+                            '&nbsp;', new \Ease\Html\ATag('https://github.com/VitexSoftware/FlexiBee-Digest',
+                                    _('FlexiBee Digest') . ' ' . _('version') . ' ' . self::getAppVersion())])));
 
-        $this->addItem(new \Ease\Html\SmallTag(new \Ease\Html\DivTag([_('(G) 2018'),
-                    '&nbsp;', new \Ease\Html\ATag('https://www.vitexsoftware.cz/',
-                        'Vitex Software')])));
+        $this->addItem(new \Ease\Html\SmallTag(new \Ease\Html\DivTag([_('(G) 2018-2020'),
+                            '&nbsp;', new \Ease\Html\ATag('https://www.vitexsoftware.cz/',
+                                    'Vitex Software')])));
     }
+
 }
