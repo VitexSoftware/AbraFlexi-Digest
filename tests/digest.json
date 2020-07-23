@@ -1,6 +1,6 @@
 {
     "EASE_LOGGER": "syslog|console",
-    "THEME":  "happy",
+    "THEME": "happy",
     "SAVETO": "../tests/output/",
     "EASE_MAILTO": "info@vitexsoftware.cz",
     "DIGEST_FROM": "noreply@vitexsoftware.cz"

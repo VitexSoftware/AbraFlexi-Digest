@@ -1,14 +1,14 @@
 Source: flexibee-digest
-Build-Depends: debhelper (>= 7.0.50~),composer
-Standards-Version: 3.8.4
+Build-Depends: debhelper (>= 13~),composer
+Standards-Version: 4.3.0
 Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
 Uploaders: Vitex <vitex@hippy.cz>
 Priority: optional
 Homepage: https://github.com/VitexSoftware/FlexiBee-Digest
 
 Package: flexibee-digest
-Depends: ${misc:Depends}, php-flexibee-config, php-flexibee-bricks, composer, php-cli, php-intl, locales-all
-Suggests: flexibee-server
+Depends: ${misc:Depends}, php-flexibee-bricks, composer, php-cli, php-intl, locales-all
+Suggests: flexibee-server,php-flexibee-config
 Architecture: all
 Section: web
 Priority: optional

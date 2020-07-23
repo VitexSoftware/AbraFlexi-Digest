@@ -21,33 +21,38 @@
             "FlexiPeeHP\\Digest\\": "./Digest"
         }
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "/usr/share/php/EaseCore"
-        },
-        {
-            "type": "path",
-            "url": "/usr/share/php/FlexiPeeHP"
-        },
-        {
-            "type": "path",
-            "url": "/usr/share/php/FlexiPeeHPBricks"
-        }
-    ]
+  "repositories": [
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseCore/"
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseHtml/"
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/FlexiPeeHP/"
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseBricks/"
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseTWB4/"
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/FlexiPeeHPBricks/"
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseTWB4Widgets/"
+    },
+    {
+      "type": "path",
+      "url": "/usr/share/php/EaseTWB4WidgetsFlexiBee/"
+    }
+  ]
 }
-
-/* TODO
-  pear/pear_exception
-  pear/console_getopt
-  pear/pear-core-minimal
-  pear/mail_mime
-  pear/mail
-  vitexsoftware/ease-core
-  vitexsoftware/ease-html
-  vitexsoftware/ease-bootstrap4
-  spoje.net/flexibee
-  vitexsoftware/flexibee-bricks
-  vitexsoftware/ease-bootstrap4-widgets-flexibee
-  vitexsoftware/ease-bootstrap4-widgets
-*/
