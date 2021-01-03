@@ -4,7 +4,7 @@ Standards-Version: 4.3.0
 Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
 Uploaders: Vitex <vitex@hippy.cz>
 Priority: optional
-Homepage: https://github.com/VitexSoftware/FlexiBee-Digest
+Homepage: https://github.com/VitexSoftware/AbraFlexi-Digest
 
 Package: flexibee-digest
 Depends: ${misc:Depends}, php-flexibee-bricks, composer, php-cli, php-intl, locales-all
@@ -12,7 +12,7 @@ Suggests: flexibee-server,php-flexibee-config
 Architecture: all
 Section: web
 Priority: optional
-Description: digest for FlexiBee
- Prepare digest with accounting state of FlexiBee. Then save to file or send by
+Description: digest for AbraFlexi
+ Prepare digest with accounting state of AbraFlexi. Then save to file or send by
  email. Daily, weekly, monthly, yearly and all time.
 

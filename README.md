@@ -1,6 +1,6 @@
-![Package Logo](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-Digest/master/package-logo.png "Project Logo")
+![Package Logo](package-logo.png?raw=true "Project Logo")
 
-FlexiBee Digest generator
+AbraFlexi Digest generator
 =========================
 
 Features:
@@ -15,41 +15,42 @@ There are four scripts:
 
 |  File                                                     | Description                            |
 |-----------------------------------------------------------|----------------------------------------| 
-|  [flexibee-daydigest.php](src/flexibee-daydigest.php)     | Generate FlexiBee digest for one day   |
-|  [flexibee-weekdigest.php](src/flexibee-weekdigest.php)   | Generate FlexiBee digest for one week  |
-|  [flexibee-monthdigest.php](src/flexibee-monthdigest.php) | Generate FlexiBee digest for one month |
-|  [flexibee-yeardigest.php](src/flexibee-yeardigest.php)   | Generate FlexiBee digest for one year  |
-|  [flexibee-alltimedigest.php](src/flexibee-yeardigest.php)| Generate FlexiBee digest for all time  |
+|  [abraflexi-daydigest.php](src/abraflexi-daydigest.php)     | Generate AbraFlexi digest for one day   |
+|  [abraflexi-weekdigest.php](src/abraflexi-weekdigest.php)   | Generate AbraFlexi digest for one week  |
+|  [abraflexi-monthdigest.php](src/abraflexi-monthdigest.php) | Generate AbraFlexi digest for one month |
+|  [abraflexi-yeardigest.php](src/abraflexi-yeardigest.php)   | Generate AbraFlexi digest for one year  |
+|  [abraflexi-alltimedigest.php](src/abraflexi-yeardigest.php)| Generate AbraFlexi digest for all time  |
 
 
-![Example](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-Digest/master/weekdigest.png "Week Digest")
+![Example](weekdigest.png?raw=true "Week Digest")
 
 Debian/Ubuntu
 -------------
 
 Packages are availble. Please use repo :
 
-```        
-    wget -O - http://v.s.cz/info@vitexsoftware.cz.gpg.key|sudo apt-key add -
-    echo deb http://v.s.cz/ stable main | sudo tee /etc/apt/sources.list.d/vitexsoftware.list 
-    sudo apt update
-    sudo apt install flexibee-digest
+```shell
+sudo apt install lsb-release wget
+echo "deb http://repo.vitexsoftware.cz $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/vitexsoftware.list
+sudo wget -O /etc/apt/trusted.gpg.d/vitexsoftware.gpg http://repo.vitexsoftware.cz/keyring.gpg
+sudo apt update
+sudo apt install abraflexi-digest
 ```
 
 After package installation you can use this new commands:
 
-  * **flexibee-daydigest**      - Generate FlexiBee digest for one day
-  * **flexibee-monthdigest**    - Generate FlexiBee digest for one week
-  * **flexibee-weekdigest**     - Generate FlexiBee digest for one month
-  * **flexibee-yeardigest**     - Generate FlexiBee digest for one year
-  * **flexibee-alltimedigest**  - Generate FlexiBee digest for all time
+  * **abraflexi-daydigest**      - Generate AbraFlexi digest for one day
+  * **abraflexi-monthdigest**    - Generate AbraFlexi digest for one week
+  * **abraflexi-weekdigest**     - Generate AbraFlexi digest for one month
+  * **abraflexi-yeardigest**     - Generate AbraFlexi digest for one year
+  * **abraflexi-alltimedigest**  - Generate AbraFlexi digest for all time
 
 
 Konfigurace
 -----------
 
- * [/etc/flexibee/client.json](client.json)   - společná konfigurace připojení k FlexiBee serveru
- * [/etc/flexibee/digest.json](digest.json) - nastavení párovače:
+ * [/etc/abraflexi/client.json](client.json)   - společná konfigurace připojení k AbraFlexi serveru
+ * [/etc/abraflexi/digest.json](digest.json) - nastavení párovače:
 
 ```
     "EASE_LOGGER": "syslog|mail|console",         - how to log progress and results
@@ -64,7 +65,7 @@ Web interface
 
 We Also provide form to test Digest modules. Availble as [index.php](src/index.php)
 
-![Example](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-Digest/master/doc/CustomDigestForm.png "Week Digest")
+![Example](CustomDigestForm.png?raw=true "Week Digest")
 
 
 Modules
@@ -75,12 +76,12 @@ Digest is generated using modules located in [src/modules](src/modules)
 This Module add Company logo to Digest:
 
 ```php
-class Logo extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Digest\DigestModuleInterface
+class Logo extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
 
     public function dig()
     {
-        $configurator = new \FlexiPeeHP\Nastaveni();
+        $configurator = new \AbraFlexi\Nastaveni();
         $logoInfo     = $configurator->getFlexiData('1/logo');
         if (is_array($logoInfo) && isset($logoInfo[0])) {
             $this->addItem(new \Ease\Html\ImgTag('data:'.$logoInfo[0]['contentType'].';'.$logoInfo[0]['content@encoding'].','.$logoInfo[0]['content'],
@@ -130,7 +131,7 @@ Monthly Modules
 
  * DailyIncomeChart.php
 
-![Average Income](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-Digest/master/monthly-average-income-chart.png "Week Digest")
+![Average Income](https://raw.githubusercontent.com/VitexSoftware/AbraFlexi-Digest/master/monthly-average-income-chart.png "Week Digest")
 
 Yearly modules
 --------------
@@ -147,21 +148,22 @@ Dependencies
 
 Tento nástroj ke svojí funkci využívá následující knihovny:
 
- * [**EasePHP Framework**](https://github.com/VitexSoftware/EaseFramework) - pomocné funkce např. logování
- * [**FlexiPeeHP**](https://github.com/Spoje-NET/FlexiPeeHP)        - komunikace s [FlexiBee](https://flexibee.eu/)
- * [**FlexiPeeHP Bricks**](https://github.com/VitexSoftware/FlexiPeeHP-Bricks) - Company Logo image widget
+ * [**EasePHP Framework**](https://github.com/VitexSoftware/php-ease-core) - pomocné funkce např. logování
+ * [**AbraFlexi**](https://github.com/Spoje-NET/php-abraflexi)        - komunikace s [AbraFlexi](https://abraflexi.eu/)
+ * [**AbraFlexi Bricks**](https://github.com/VitexSoftware/php-abraflexi-bricks) - Company Logo image widget
 
 
 See also
 --------
 
-  * https://github.com/VitexSoftware/php-flexibee-reminder
-  * https://github.com/VitexSoftware/php-flexibee-matcher
+  * https://github.com/VitexSoftware/abraflexi-reminder
+  * https://github.com/VitexSoftware/php-abraflexi-matcher
+  * https://github.com/VitexSoftware/abraflexi-mailer
 
 Poděkování
 ----------
 
 Tento software by nevznikl pez podpory:
 
-[ ![Spoje.Net](https://raw.githubusercontent.com/VitexSoftware/FlexiBee-Digest/master/spojenet.gif "Spoje.Net s.r.o.") ](https://spoje.net/)
+[ ![Spoje.Net](spojenet.gif?raw=true "Spoje.Net s.r.o.") ](https://spoje.net/)
 
