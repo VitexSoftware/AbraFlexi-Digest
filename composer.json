@@ -1,5 +1,5 @@
 {
-    "name": "vitexsoftware/php-flexibee-digest",
+    "name": "vitexsoftware/flexibee-digest",
     "description": "Periodical FlexiBee digest.",
     "authors": [
         {
@@ -10,12 +10,11 @@
     "minimum-stability": "dev",
     "type": "project",
     "require": {
-        "vitexsoftware/ease-twbootstrap4-widgets-flexibee": "dev-master",
-        "vitexsoftware/ease-twbootstrap4-widgets": "dev-master"
+        "vitexsoftware/ease-twbootstrap4-widgets-flexibee": "dev-abraflexi"
     },
     "autoload": {
         "psr-4": {
-            "FlexiPeeHP\\Digest\\": "src/Digest/"
+            "AbraFlexi\\Digest\\": "src/Digest/"
         }
     }
 }

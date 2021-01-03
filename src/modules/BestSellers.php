@@ -1,4 +1,5 @@
 <?php
+
 /*
  * New Customers
  */
@@ -8,8 +9,8 @@
  *
  * @author vitex
  */
-class BestSellers extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Digest\DigestModuleInterface
-{
+class BestSellers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+
     /**
      * Column used to filter by date
      * @var string 
@@ -19,19 +20,18 @@ class BestSellers extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP
     /**
      * 
      */
-    public function dig()
-    {
-        $invoicer                     = new \FlexiPeeHP\FakturaVydana();
+    public function dig() {
+        $invoicer = new \AbraFlexi\FakturaVydana();
         $this->condition['relations'] = 'polozkyDokladu';
-        $this->condition['typDokl']   = FlexiPeeHP\FlexiBeeRO::code('FAKTURA');
-        $invoicesRaw                  = $invoicer->getColumnsFromFlexibee(['polozkyDokladu(cenik,nazev,sumZkl,typPolozkyK)',
+        $this->condition['typDokl'] = AbraFlexi\AbraFlexiRO::code('FAKTURA');
+        $invoicesRaw = $invoicer->getColumnsFromAbraFlexi(['polozkyDokladu(cenik,nazev,sumZkl,typPolozkyK)',
             'typDokl'], $this->condition, 'kod');
 
         $items = [];
         if (!empty($invoicesRaw)) {
             foreach ($invoicesRaw as $invoiceCode => $invoiceData) {
                 if (array_key_exists('polozkyDokladu', $invoiceData))
-                        foreach ($invoiceData['polozkyDokladu'] as $itemRaw) {
+                    foreach ($invoiceData['polozkyDokladu'] as $itemRaw) {
                         $items[] = $itemRaw;
                     }
             }
@@ -39,21 +39,20 @@ class BestSellers extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP
         if (empty($items)) {
             $this->addItem(_('none'));
         } else {
-            $topProductsTable = new \FlexiPeeHP\Digest\Table([_('Pricelist'),
+            $topProductsTable = new \AbraFlexi\Digest\Table([_('Pricelist'),
                 _('Quantity'), _('Total')]);
 
             $products = [];
-            $totals   = [];
+            $totals = [];
             foreach ($items as $item) {
                 if ($item['typPolozkyK'] != 'typPolozky.katalog') {
                     continue;
                 }
 
 
-                $itemIdent = !empty($item['cenik']) ? \FlexiPeeHP\FlexiBeeRO::uncode($item['cenik'])
-                        : $item['nazev'];
+                $itemIdent = !empty($item['cenik']) ? \AbraFlexi\AbraFlexiRO::uncode($item['cenik']) : $item['nazev'];
                 if (array_key_exists($itemIdent, $products)) {
-                    $products[$itemIdent] ++;
+                    $products[$itemIdent]++;
                 } else {
                     $products[$itemIdent] = 1;
                 }
@@ -67,14 +66,14 @@ class BestSellers extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP
 
             arsort($products);
 
-            $productor = new FlexiPeeHP\Cenik();
+            $productor = new AbraFlexi\Cenik();
 
             foreach ($products as $productCode => $productInfo) {
                 if ($products[$productCode] > 1) {
 
                     $productor->setMyKey($productCode);
                     $topProductsTable->addRowColumns([new \Ease\Html\ATag($productor->getApiURL(),
-                            $productCode), $products[$productCode],
+                                $productCode), $products[$productCode],
                         $totals[$productCode]]);
                 }
             }
@@ -82,14 +81,14 @@ class BestSellers extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP
             $this->addItem($topProductsTable);
 
             $this->addItem(new \Ease\Html\DivTag(sprintf(_('%d top products'),
-                    $topProductsTable->getItemsCount())));
+                                    $topProductsTable->getItemsCount())));
 
             return !empty($topProductsTable->getItemsCount());
         }
     }
 
-    public function heading()
-    {
+    public function heading() {
         return _('Best selling products');
     }
+
 }

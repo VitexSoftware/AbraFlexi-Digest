@@ -1,11 +1,12 @@
 <?php
+
 /**
  *  Purchase Price Lower Than Sales
  *
  * @author vitex
  */
-class PurchasePriceLowerThanSales extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Digest\DigestModuleInterface
-{
+class PurchasePriceLowerThanSales extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+
     /**
      * Which records we want to see ?
      * @param array $condition
@@ -15,11 +16,10 @@ class PurchasePriceLowerThanSales extends \FlexiPeeHP\Digest\DigestModule implem
     /**
      * 
      */
-    public function dig()
-    {
-        $pricer      = new \FlexiPeeHP\Cenik();
-        $productsRaw = $pricer->getColumnsFromFlexibee(['nazev', 'nakupCena', 'cenaZakl'],
-            $this->condition, 'kod');
+    public function dig() {
+        $pricer = new \AbraFlexi\Cenik();
+        $productsRaw = $pricer->getColumnsFromAbraFlexi(['nazev', 'nakupCena', 'cenaZakl'],
+                $this->condition, 'kod');
 
         $products = [];
         if (!empty($productsRaw)) {
@@ -38,14 +38,13 @@ class PurchasePriceLowerThanSales extends \FlexiPeeHP\Digest\DigestModule implem
         if (empty($products)) {
             $this->addItem(_('none'));
         } else {
-            $topProductsTable = new \FlexiPeeHP\Digest\Table([
+            $topProductsTable = new \AbraFlexi\Digest\Table([
                 _('Code'),
                 _('Name'),
                 _('Buy'),
                 _('Sell'),
                 _('Difference')
             ]);
-
 
             $products = \Ease\Functions::reindexArrayBy($products, 'provar');
 
@@ -60,7 +59,7 @@ class PurchasePriceLowerThanSales extends \FlexiPeeHP\Digest\DigestModule implem
                     $productInfo['nakupCena'],
                     $productInfo['cenaZakl'],
                     $productInfo['provar'],
-                    ]
+                        ]
                 );
             }
 
@@ -68,14 +67,14 @@ class PurchasePriceLowerThanSales extends \FlexiPeeHP\Digest\DigestModule implem
             $this->addItem($topProductsTable);
 
             $this->addItem(new \Ease\Html\DivTag(sprintf(_('%d disadvantageous products'),
-                        count($products))));
+                                    count($products))));
 
             return !empty($topProductsTable->getItemsCount());
         }
     }
 
-    public function heading()
-    {
+    public function heading() {
         return _('Product purchase price lower than sales');
     }
+
 }

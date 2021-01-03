@@ -1,13 +1,13 @@
 <?php
 
 /**
- * FlexiBee Digest - Dayly 
+ * AbraFlexi Digest - Dayly 
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
  * @copyright  (G) 2018-2020 Vitex Software
  */
 
-namespace FlexiPeeHP\Digest;
+namespace AbraFlexi\Digest;
 
 define('MODULE_PATH', './modules');
 define('MODULE_DAILY_PATH', './modules.daily');
@@ -31,7 +31,7 @@ if (file_exists('../client.json')) {
 if (file_exists('../digest.json')) {
     $shared->loadConfig('../digest.json', true);
 }
-$localer = new \Ease\Locale('cs_CZ', '../i18n', 'flexibee-digest');
+$localer = new \Ease\Locale('cs_CZ', '../i18n', 'abraflexi-digest');
 
-$myCompany = new \FlexiPeeHP\Company($shared->getConfigValue('FLEXIBEE_COMPANY'));
+$myCompany = new \AbraFlexi\Company($shared->getConfigValue('ABRAFLEXI_COMPANY'));
 $myCompanyName = $myCompany->getDataValue('nazev');

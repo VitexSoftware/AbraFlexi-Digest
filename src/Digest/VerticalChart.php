@@ -1,14 +1,14 @@
 <?php
 
-namespace FlexiPeeHP\Digest;
+namespace AbraFlexi\Digest;
 
 /**
  * Description of Vertical
  *
  * @author vitex
  */
-class VerticalChart extends \Ease\Html\UlTag
-{
+class VerticalChart extends \Ease\Html\UlTag {
+
     /**
      *
      * @var string 
@@ -20,15 +20,14 @@ class VerticalChart extends \Ease\Html\UlTag
      * @param array $axis
      * @param array $properties
      */
-    public function __construct($axis = [], $properties = array())
-    {
+    public function __construct($axis = [], $properties = array()) {
         parent::__construct(null, $properties);
         $this->addTagClass('chart');
         if (!empty($axis)) {
             $axisLi = new \Ease\Html\LiTag(null, ['class' => 'axis']);
             foreach ($axis as $axe) {
                 $axisLi->addItem(new \Ease\Html\DivTag($axe,
-                    ['class' => 'label']));
+                                ['class' => 'label']));
             }
             $this->addItem($axisLi);
         }
@@ -42,16 +41,16 @@ class VerticalChart extends \Ease\Html\UlTag
      * @param string $caption
      * @param string $addClass
      */
-    public function addBar($percent, $amount, $caption, $addClass)
-    {
+    public function addBar($percent, $amount, $caption, $addClass) {
         $bar = new \Ease\Html\LiTag(null,
-            ['class' => 'bar '.$addClass, 'style' => 'height: '.$percent.'px;', 'title' => $caption]);
+                ['class' => 'bar ' . $addClass, 'style' => 'height: ' . $percent . 'px;', 'title' => $caption]);
 
         $bar->addItem(new \Ease\Html\DivTag([$percent, new \Ease\Html\SpanTag('%')],
-            ['class' => 'percent']));
+                        ['class' => 'percent']));
 
         $bar->addItem(new \Ease\Html\DivTag($caption, ['class' => 'skill']));
 
         $this->addItem($bar);
     }
+
 }

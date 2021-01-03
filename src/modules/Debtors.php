@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Debts
  */
@@ -8,27 +9,25 @@
  *
  * @author vitex
  */
-class Debtors extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Digest\DigestModuleInterface
-{
+class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
 
-    public function dig()
-    {
-        $invoicer = new \FlexiPeeHP\FakturaVydana();
+    public function dig() {
+        $invoicer = new \AbraFlexi\FakturaVydana();
 
-        $cond = ['datSplat lte \''.\FlexiPeeHP\FlexiBeeRW::dateToFlexiDate(new \DateTime()).'\' AND (stavUhrK is null OR stavUhrK eq \'stavUhr.castUhr\') AND storno eq false'];
+        $cond = ['datSplat lte \'' . \AbraFlexi\AbraFlexiRW::dateToFlexiDate(new \DateTime()) . '\' AND (stavUhrK is null OR stavUhrK eq \'stavUhr.castUhr\') AND storno eq false'];
 
-        $faDatakturyRaw = $invoicer->getColumnsFromFlexiBee(['kod', 'firma', 'sumCelkem',
+        $faDatakturyRaw = $invoicer->getColumnsFromAbraFlexi(['kod', 'firma', 'sumCelkem',
             'sumCelkemMen', 'zbyvaUhradit', 'zbyvaUhraditMen', 'mena', 'datSplat'],
-            $cond);
+                $cond);
 
-        $invoicer->addStatusMessage("Faktur: ".count($faDatakturyRaw));
+        $invoicer->addStatusMessage("Faktur: " . count($faDatakturyRaw));
 
-        $totals           = [];
+        $totals = [];
         $totalsByCurrency = [];
-        $overdue          = [];
+        $overdue = [];
 
         foreach ($faDatakturyRaw as $faData) {
-            $currency                                         = self::getCurrency($faData);
+            $currency = self::getCurrency($faData);
             $invoicesByFirma[$faData['firma']][$faData['id']] = $faData;
 
             if (!isset($totals[$faData['firma']][$currency])) {
@@ -45,9 +44,9 @@ class Debtors extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Dig
             }
 
             $totals[$faData['firma']][$currency] += $amount;
-            $totalsByCurrency[$currency]         += $amount;
+            $totalsByCurrency[$currency] += $amount;
 
-            $oDays = \FlexiPeeHP\FakturaVydana::overdueDays($faData['datSplat']);
+            $oDays = \AbraFlexi\FakturaVydana::overdueDays($faData['datSplat']);
 
             if (array_key_exists($faData['firma'], $overdue)) {
                 if ($oDays > $overdue[$faData['firma']]) {
@@ -62,11 +61,10 @@ class Debtors extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Dig
         if (empty($invoicesByFirma)) {
             $this->addItem(_('none'));
         } else {
-            $adreser  = new FlexiPeeHP\Adresar(null, ['offline' => 'true']);
+            $adreser = new AbraFlexi\Adresar(null, ['offline' => 'true']);
             $invTable = new Ease\Html\TableTag(null, ['class' => 'pure-table']);
             $invTable->addRowHeaderColumns([_('Company'), _('Amount'), _('Overdue days'),
                 _('Invoices')]);
-
 
             foreach ($invoicesByFirma as $firma => $fakturyFirmy) {
 
@@ -75,23 +73,21 @@ class Debtors extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Dig
                     $invoicer->setMyKey($invoiceData['id']);
                     $currency = self::getCurrency($invoiceData);
 
-                    $overdueInvoice = \FlexiPeeHP\FlexiBeeRO::uncode($invoiceData['kod']);
+                    $overdueInvoice = \AbraFlexi\AbraFlexiRO::uncode($invoiceData['kod']);
 
                     $overdueInvoices->addItem(new Ease\Html\DivTag([new \Ease\Html\ATag($invoicer->getApiURL(),
-                            $overdueInvoice, ['css' => 'margin: 5px;']),
-                        '&nbsp;<small>'.( ($currency != 'CZK') ? $invoiceData['zbyvaUhraditMen']
-                                : $invoiceData['zbyvaUhradit']).' '.$currency.' '.\FlexiPeeHP\FakturaVydana::overdueDays($invoiceData['datSplat']).' '._('days').'</small>']
+                                        $overdueInvoice, ['css' => 'margin: 5px;']),
+                                '&nbsp;<small>' . ( ($currency != 'CZK') ? $invoiceData['zbyvaUhraditMen'] : $invoiceData['zbyvaUhradit']) . ' ' . $currency . ' ' . \AbraFlexi\FakturaVydana::overdueDays($invoiceData['datSplat']) . ' ' . _('days') . '</small>']
                     ));
                 }
 
                 $adreser->setMyKey($firma);
 
                 $nazevFirmy = array_key_exists('firma@showAs',
-                        current($fakturyFirmy)) ? current($fakturyFirmy)['firma@showAs']
-                        : \FlexiPeeHP\FlexiBeeRO::uncode($firma);
+                                current($fakturyFirmy)) ? current($fakturyFirmy)['firma@showAs'] : \AbraFlexi\AbraFlexiRO::uncode($firma);
 
                 $invTable->addRowColumns([new \Ease\Html\ATag($adreser->getApiURL(),
-                        $nazevFirmy), self::getTotalsDiv($totals[$firma]),
+                            $nazevFirmy), self::getTotalsDiv($totals[$firma]),
                     $overdue[$firma], $overdueInvoices]);
             }
 
@@ -103,8 +99,8 @@ class Debtors extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Dig
         return !empty($invoicesByFirma);
     }
 
-    function heading()
-    {
+    function heading() {
         return _('Debtors');
     }
+
 }

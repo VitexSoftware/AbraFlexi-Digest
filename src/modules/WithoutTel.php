@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Customers without notification phone number
  */
@@ -8,41 +9,39 @@
  *
  * @author vitex
  */
-class WithoutTel extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Digest\DigestModuleInterface
-{
+class WithoutTel extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
 
-    public function dig()
-    {
-        $addresser    = new \FlexiPeeHP\Adresar();
-        $withoutEmail = $addresser->getColumnsFromFlexibee(['nazev', 'kod', 'ulice',
+    public function dig() {
+        $addresser = new \AbraFlexi\Adresar();
+        $withoutEmail = $addresser->getColumnsFromAbraFlexi(['nazev', 'kod', 'ulice',
             'mesto', 'email'],
-            ['tel' => 'is empty', 'typVztahuK' => 'typVztahu.odberDodav']);
+                ['tel' => 'is empty', 'typVztahuK' => 'typVztahu.odberDodav']);
 
         if (empty($withoutEmail)) {
             $this->addItem(_('none'));
         } else {
-            $noTelTable = new \FlexiPeeHP\Digest\Table([_('Company'), _('Street'),
+            $noTelTable = new \AbraFlexi\Digest\Table([_('Company'), _('Street'),
                 _('City'),
                 _('Email')]);
-            $count      = 0;
+            $count = 0;
             foreach ($withoutEmail as $address) {
-                $addresser->setMyKey(\FlexiPeeHP\FlexiBeeRO::code($address['kod']));
+                $addresser->setMyKey(\AbraFlexi\AbraFlexiRO::code($address['kod']));
                 if (empty($addresser->getAnyPhoneNumber())) {
                     $count++;
                     $noTelTable->addRowColumns([new \Ease\Html\ATag($addresser->getApiURL(),
-                            $address['nazev']), $address['ulice'], $address['mesto'],
-                        new \Ease\Html\ATag('mailto:'.$address['email'],
-                            $address['email'])]);
+                                $address['nazev']), $address['ulice'], $address['mesto'],
+                        new \Ease\Html\ATag('mailto:' . $address['email'],
+                                $address['email'])]);
                 }
             }
             $this->addItem($noTelTable);
-            $this->addItem(_('Total').': '.$count);
+            $this->addItem(_('Total') . ': ' . $count);
         }
         return !empty($withoutEmail);
     }
 
-    function heading()
-    {
+    function heading() {
         return _('Customers without notification phone number');
     }
+
 }

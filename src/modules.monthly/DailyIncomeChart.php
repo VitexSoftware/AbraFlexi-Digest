@@ -5,8 +5,8 @@
  *
  * @author vitex
  */
-class DailyIncomeChart extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Digest\DigestModuleInterface
-{
+class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+
     public $timeColumn = 'datVyst';
 
     /**
@@ -26,7 +26,7 @@ class DailyIncomeChart extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
 
     /**
      *
-     * @var \FlexiPeeHP\Digest\VerticalChart 
+     * @var \AbraFlexi\Digest\VerticalChart 
      */
     public $incomeChart = null;
 
@@ -39,15 +39,14 @@ class DailyIncomeChart extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
     /**
      * 
      */
-    public function dig()
-    {
-        $banker   = new FlexiPeeHP\Banka();
+    public function dig() {
+        $banker = new AbraFlexi\Banka();
         $averages = [];
-        $incomes  = $banker->getColumnsFromFlexibee(['mena', 'sumCelkem', 'sumCelkemMen',
+        $incomes = $banker->getColumnsFromAbraFlexi(['mena', 'sumCelkem', 'sumCelkemMen',
             'datVyst'],
-            array_merge($this->condition,
-                ['typPohybuK' => 'typPohybu.prijem', 'storno' => false]));
-        $days     = [];
+                array_merge($this->condition,
+                        ['typPohybuK' => 'typPohybu.prijem', 'storno' => false]));
+        $days = [];
         if (empty($incomes)) {
             $this->addItem(_('none'));
         } else {
@@ -80,10 +79,9 @@ class DailyIncomeChart extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
             }
 
             foreach ($averages as $currency => $amounts) {
-                $this->average[$currency] = ceil(array_sum($averages[$currency])
-                    / count($averages[$currency]));
+                $this->average[$currency] = ceil(array_sum($averages[$currency]) / count($averages[$currency]));
                 $this->addItem(new Ease\Html\DivTag(sprintf(_('100%% - average income is %s %s'),
-                        $this->average[$currency], $currency)));
+                                        $this->average[$currency], $currency)));
             }
             $this->addChart(array_reverse($days));
         }
@@ -95,9 +93,8 @@ class DailyIncomeChart extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
      * 
      * @param array $days
      */
-    public function addChart($days)
-    {
-        $this->incomeChart = new \FlexiPeeHP\Digest\VerticalChart();
+    public function addChart($days) {
+        $this->incomeChart = new \AbraFlexi\Digest\VerticalChart();
 
         foreach ($days as $day => $currencies) {
             $this->addChartDay($day, $currencies);
@@ -111,8 +108,7 @@ class DailyIncomeChart extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
      * @param type $day
      * @param type $currencies
      */
-    public function addChartDay($day, $currencies)
-    {
+    public function addChartDay($day, $currencies) {
         foreach ($currencies as $curency => $amount) {
             $this->addChartCurrency($curency, $amount, $day);
         }
@@ -123,8 +119,7 @@ class DailyIncomeChart extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
      * @param type $currency
      * @param type $amount
      */
-    public function addChartCurrency($currency, $amount, $day)
-    {
+    public function addChartCurrency($currency, $amount, $day) {
         $this->addBar($currency, $amount, $day);
     }
 
@@ -133,23 +128,22 @@ class DailyIncomeChart extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
      * @param string $caption
      * @param integer $height
      */
-    public function addBar($caption, $amount, $day)
-    {
-        $maxAmount     = $this->average[$caption]; //100%
-        $procento      = $maxAmount / 100;
+    public function addBar($caption, $amount, $day) {
+        $maxAmount = $this->average[$caption]; //100%
+        $procento = $maxAmount / 100;
         $percentChange = $amount / $procento;
 
         $this->incomeChart->addBar(round($percentChange), $amount,
-            $amount.' '.$caption.' '.\FlexiPeeHP\FlexiBeeRO::flexiDateToDateTime($day)->format('d/m D'),
-            self::$currencyColor[$caption]);
+                $amount . ' ' . $caption . ' ' . \AbraFlexi\AbraFlexiRO::flexiDateToDateTime($day)->format('d/m D'),
+                self::$currencyColor[$caption]);
     }
 
     /**
      * Module heading
      * @return string
      */
-    public function heading()
-    {
+    public function heading() {
         return _('Incoming payments chart');
     }
+
 }

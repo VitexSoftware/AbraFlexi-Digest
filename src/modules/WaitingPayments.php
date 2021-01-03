@@ -1,4 +1,5 @@
 <?php
+
 /*
  * What we have to pay
  */
@@ -8,38 +9,36 @@
  *
  * @author vitex
  */
-class WaitingPayments extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Digest\DigestModuleInterface
-{
+class WaitingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
 
-    public function heading()
-    {
+    public function heading() {
         return _('We have to pay');
     }
+
     /**
      * Column used to filter by date
      * @var string 
      */
     public $timeColumn = 'datSplat';
 
-    public function dig()
-    {
-        $totals     = [];
-        $checker    = new \FlexiPeeHP\FakturaPrijata();
-        $inInvoices = $checker->getColumnsFromFlexibee(['kod', 'firma', 'sumCelkem',
+    public function dig() {
+        $totals = [];
+        $checker = new \AbraFlexi\FakturaPrijata();
+        $inInvoices = $checker->getColumnsFromAbraFlexi(['kod', 'firma', 'sumCelkem',
             'zbyvaUhradit', 'zbyvaUhraditMen', 'datSplat',
             'mena'],
-            array_merge($this->condition,
-                ["(stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr')",
-            'storno' => false]));
+                array_merge($this->condition,
+                        ["(stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr')",
+                            'storno' => false]));
 
         if (empty($inInvoices)) {
             $this->addItem(_('none'));
         } else {
-            $adreser  = new FlexiPeeHP\Adresar(null, ['offline' => 'true']);
-            $invTable = new \FlexiPeeHP\Digest\Table([_('Position'), _('Code'), _('Partner'),
+            $adreser = new AbraFlexi\Adresar(null, ['offline' => 'true']);
+            $invTable = new \AbraFlexi\Digest\Table([_('Position'), _('Code'), _('Partner'),
                 _('Due Days'),
                 _('Amount')]);
-            $pos      = 0;
+            $pos = 0;
 
             foreach ($inInvoices as $inInvoiceData) {
 
@@ -57,12 +56,12 @@ class WaitingPayments extends \FlexiPeeHP\Digest\DigestModule implements \FlexiP
                 $invTable->addRowColumns([
                     ++$pos,
                     new \Ease\Html\ATag($checker->getApiUrl(),
-                        $inInvoiceData['kod']),
+                            $inInvoiceData['kod']),
                     new \Ease\Html\ATag($adreser->getApiUrl(),
-                        empty($inInvoiceData['firma']) ? '' : $inInvoiceData['firma@showAs']),
-                    \FlexiPeeHP\FakturaVydana::overdueDays($inInvoiceData['datSplat']),
-                    $amount.' '.current(explode(':',
-                            $inInvoiceData['mena@showAs']))
+                            empty($inInvoiceData['firma']) ? '' : $inInvoiceData['firma@showAs']),
+                    \AbraFlexi\FakturaVydana::overdueDays($inInvoiceData['datSplat']),
+                    $amount . ' ' . current(explode(':',
+                                    $inInvoiceData['mena@showAs']))
                 ]);
 
                 if (array_key_exists($currency, $totals)) {
@@ -74,14 +73,14 @@ class WaitingPayments extends \FlexiPeeHP\Digest\DigestModule implements \FlexiP
             $this->addItem($invTable);
             $this->addItem(new Ease\Html\H3Tag(_('Total')));
             foreach ($totals as $currency => $amount) {
-                $this->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount).'&nbsp;'.$currency));
+                $this->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount) . '&nbsp;' . $currency));
             }
         }
         return !empty($inInvoices);
     }
 
-    public function functionName($param)
-    {
-        ['datSplat lte \''.\FlexiPeeHP\FlexiBeeRW::dateToFlexiDate(new \DateTime()).'\' AND (stavUhrK is null OR stavUhrK eq \'stavUhr.castUhr\') AND storno eq false'];
+    public function functionName($param) {
+        ['datSplat lte \'' . \AbraFlexi\AbraFlexiRW::dateToFlexiDate(new \DateTime()) . '\' AND (stavUhrK is null OR stavUhrK eq \'stavUhr.castUhr\') AND storno eq false'];
     }
+
 }

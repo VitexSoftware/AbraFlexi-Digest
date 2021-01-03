@@ -1,21 +1,19 @@
 <?php
 
 /**
- * FlexiBee Digest - Monthly 
+ * AbraFlexi Digest - Monthly 
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
  * @copyright  (G) 2018-2020 Vitex Software
  */
 
-namespace FlexiPeeHP\Digest;
+namespace AbraFlexi\Digest;
 
-define('EASE_APPNAME', 'FlexiBee Digest');
+define('EASE_APPNAME', 'AbraFlexi Digest');
 
 require_once __DIR__ . '/init.php';
 
-$oPage = new \Ease\TWB4\WebPage($myCompanyName . ' ' . _('FlexiBee digest'));
-
-
+$oPage = new \Ease\TWB4\WebPage($myCompanyName . ' ' . _('AbraFlexi digest'));
 
 $from = $oPage->getRequestValue('from');
 $to = $oPage->getRequestValue('to');
@@ -44,7 +42,7 @@ if ($oPage->isPosted()) {
     $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
 
     $subject = sprintf(
-            _('FlexiBee %s digest from %s to %s'), $myCompanyName,
+            _('AbraFlexi %s digest from %s to %s'), $myCompanyName,
             \strftime('%x', $period->getStartDate()->getTimestamp()),
             \strftime('%x', $period->getEndDate()->getTimestamp())
     );
@@ -76,12 +74,10 @@ $candidates[_('Monthly modules')] = Digestor::getModules(constant('MODULE_MONTHL
 $candidates[_('Yearly modules')] = Digestor::getModules(constant('MODULE_YEARLY_PATH'));
 $candidates[_('Alltime modules')] = Digestor::getModules(constant('MODULE_ALLTIME_PATH'));
 
-
 $fromtoForm = new \Ease\TWB4\Form(['name' => 'fromto', 'class' => 'form-horizontal']);
 
 $container = new \Ease\TWB4\Container(new \Ease\Html\H1Tag(new \Ease\Html\ATag($myCompany->getApiURL(),
-                        $myCompanyName) . ' ' . _('FlexiBee digest')));
-
+                        $myCompanyName) . ' ' . _('AbraFlexi digest')));
 
 $formColumns = new \Ease\TWB4\Row();
 $modulesCol = $formColumns->addColumn(6, new \Ease\Html\H2Tag(_('Modules')));
@@ -148,7 +144,6 @@ $optionsCol->addItem(new \Ease\TWB4\LinkButton('#', _('Month'), 'inverse',
 $optionsCol->addItem(new \Ease\TWB4\LinkButton('#', _('Year'), 'inverse',
                 ['id' => 'lastyear']));
 
-
 $optionsCol->addItem(new \Ease\TWB4\FormGroup(_('From'),
                 new \Ease\Html\InputDateTag('from', $from)));
 
@@ -165,7 +160,6 @@ $optionsCol->addItem(new \Ease\TWB4\FormGroup(_('Send by mail to'),
                 new \Ease\Html\InputEmailTag('recipient',
                         $shared->getConfigValue('EASE_MAILTO'))));
 
-
 $fromtoForm->addItem($formColumns);
 $fromtoForm->addItem(new \Ease\TWB4\SubmitButton(_('Generate digest'),
                 'success btn-lg btn-block',
@@ -173,7 +167,6 @@ $fromtoForm->addItem(new \Ease\TWB4\SubmitButton(_('Generate digest'),
             'style' => 'height: 90%']));
 
 $container->addItem($fromtoForm);
-
 
 $oPage->addItem($container);
 

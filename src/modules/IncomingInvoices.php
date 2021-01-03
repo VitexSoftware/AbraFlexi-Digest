@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Incoming Invoices accepted by us
  */
@@ -8,27 +9,26 @@
  *
  * @author vitex
  */
-class IncomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Digest\DigestModuleInterface
-{
+class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+
     /**
      * Column used to filter by date
      * @var string 
      */
     public $timeColumn = 'datVyst';
 
-    public function dig()
-    {
+    public function dig() {
         $totals = [];
 
-        $digger         = new \FlexiPeeHP\FakturaPrijata();
-        $inInvoicesData = $digger->getColumnsFromFlexibee(['kod', 'typDokl', 'sumCelkem','sumCelkemMen',
+        $digger = new \AbraFlexi\FakturaPrijata();
+        $inInvoicesData = $digger->getColumnsFromAbraFlexi(['kod', 'typDokl', 'sumCelkem', 'sumCelkemMen',
             'uhrazeno', 'storno', 'mena', 'juhSum', 'juhSumMen'],
-            $this->condition);
-        $accepted        = 0;
-        $invoicedRaw    = [];
-        $paid           = [];
-        $storno         = 0;
-        $totals         = [];
+                $this->condition);
+        $accepted = 0;
+        $invoicedRaw = [];
+        $paid = [];
+        $storno = 0;
+        $totals = [];
 
         $typDoklRaw = [];
         if (empty($inInvoicesData)) {
@@ -41,13 +41,12 @@ class IncomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
                 }
 
                 if (array_key_exists($outInvoiceData['typDokl'], $typDoklRaw)) {
-                    $typDoklRaw[$outInvoiceData['typDokl']] ++;
+                    $typDoklRaw[$outInvoiceData['typDokl']]++;
                 } else {
                     $typDoklRaw[$outInvoiceData['typDokl']] = 1;
                 }
 
-                $amount = ($outInvoiceData['mena'] == 'code:CZK') ? floatval($outInvoiceData['sumCelkem'])
-                        : floatval($outInvoiceData['sumCelkemMen']);
+                $amount = ($outInvoiceData['mena'] == 'code:CZK') ? floatval($outInvoiceData['sumCelkem']) : floatval($outInvoiceData['sumCelkemMen']);
 
                 if (array_key_exists($outInvoiceData['mena'], $invoicedRaw)) {
                     $invoicedRaw[$outInvoiceData['mena']] += $amount;
@@ -60,9 +59,8 @@ class IncomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
                 }
 
                 if (!array_key_exists($outInvoiceData['mena'],
-                        $totals[$outInvoiceData['typDokl']])) {
-                    $totals[$outInvoiceData['typDokl']][$outInvoiceData['mena']]
-                        = 0;
+                                $totals[$outInvoiceData['typDokl']])) {
+                    $totals[$outInvoiceData['typDokl']][$outInvoiceData['mena']] = 0;
                 }
 
                 $totals[$outInvoiceData['typDokl']][$outInvoiceData['mena']] += $amount;
@@ -70,20 +68,19 @@ class IncomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
 
             $invoiced = [];
             foreach ($invoicedRaw as $currencyCode => $amount) {
-                $invoiced[] = self::formatCurrency($amount).' '.FlexiPeeHP\FlexiBeeRO::uncode($currencyCode);
+                $invoiced[] = self::formatCurrency($amount) . ' ' . AbraFlexi\AbraFlexiRO::uncode($currencyCode);
             }
 
 
-            $inInvoicesTable = new \FlexiPeeHP\Digest\Table([_('Count'), _('Type'),
+            $inInvoicesTable = new \AbraFlexi\Digest\Table([_('Count'), _('Type'),
                 _('Total')]);
             foreach ($typDoklRaw as $type => $count) {
-                $inInvoicesTable->addRowColumns([$count, FlexiPeeHP\FlexiBeeRO::uncode($type),
+                $inInvoicesTable->addRowColumns([$count, AbraFlexi\AbraFlexiRO::uncode($type),
                     self::getTotalsDiv($totals[$type])]);
             }
 
 
             $inInvoicesTable->addRowFooterColumns([$accepted, 0, $invoiced]);
-
 
             $this->addItem($inInvoicesTable);
         }
@@ -91,8 +88,8 @@ class IncomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
         return !empty($inInvoicesData);
     }
 
-    public function heading()
-    {
+    public function heading() {
         return _('Incoming invoices');
     }
+
 }

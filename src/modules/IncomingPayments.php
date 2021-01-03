@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Incoming payments for us
  */
@@ -8,8 +9,8 @@
  *
  * @author vitex
  */
-class IncomingPayments extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Digest\DigestModuleInterface
-{
+class IncomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+
     public $timeColumn = 'datVyst';
 
     /**
@@ -17,13 +18,12 @@ class IncomingPayments extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
      * 
      * @return boolean
      */
-    public function dig()
-    {
-        $banker  = new FlexiPeeHP\Banka();
-        $incomes = $banker->getColumnsFromFlexibee(['mena', 'sumCelkem', 'sumCelkemMen'],
-            array_merge($this->condition,
-                ['typPohybuK' => 'typPohybu.prijem', 'storno' => false]));
-        $total   = [];
+    public function dig() {
+        $banker = new AbraFlexi\Banka();
+        $incomes = $banker->getColumnsFromAbraFlexi(['mena', 'sumCelkem', 'sumCelkemMen'],
+                array_merge($this->condition,
+                        ['typPohybuK' => 'typPohybu.prijem', 'storno' => false]));
+        $total = [];
         if (empty($incomes)) {
             $this->addItem(_('none'));
         } else {
@@ -43,14 +43,14 @@ class IncomingPayments extends \FlexiPeeHP\Digest\DigestModule implements \Flexi
                 }
             }
             foreach ($total as $currency => $amount) {
-                $this->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount).'&nbsp;'.$currency));
+                $this->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount) . '&nbsp;' . $currency));
             }
         }
         return !empty($incomes);
     }
 
-    public function heading()
-    {
+    public function heading() {
         return _('Incoming payments');
     }
+
 }

@@ -1,19 +1,19 @@
 <?php
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-namespace FlexiPeeHP\Digest;
+namespace AbraFlexi\Digest;
 
 /**
  * Description of Table
  *
  * @author vitex
  */
-class Table extends \Ease\Html\TableTag
-{
+class Table extends \Ease\Html\TableTag {
 
     /**
      * Digest Table
@@ -21,10 +21,10 @@ class Table extends \Ease\Html\TableTag
      * @param array $heading    TH Columns
      * @param array $properties
      */
-    public function __construct($thCols, $properties = array())
-    {
+    public function __construct($thCols, $properties = array()) {
         parent::__construct(null, $properties);
         $this->addRowHeaderColumns($thCols);
         $this->addTagClass('pure-table');
     }
+
 }

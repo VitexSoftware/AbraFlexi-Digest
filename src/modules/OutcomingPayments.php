@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Outcoming payments
  */
@@ -8,18 +9,17 @@
  *
  * @author vitex
  */
-class OutcomingPayments extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Digest\DigestModuleInterface
-{
+class OutcomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+
     public $timeColumn = 'datVyst';
 
-    public function dig()
-    {
-        $banker   = new FlexiPeeHP\Banka();
-        $outcomes = $banker->getColumnsFromFlexibee(['mena', 'sumCelkem',
+    public function dig() {
+        $banker = new AbraFlexi\Banka();
+        $outcomes = $banker->getColumnsFromAbraFlexi(['mena', 'sumCelkem',
             'sumCelkemMen'],
-            array_merge($this->condition,
-                ['typPohybuK' => 'typPohybu.vydej', 'storno' => false]));
-        $total    = [];
+                array_merge($this->condition,
+                        ['typPohybuK' => 'typPohybu.vydej', 'storno' => false]));
+        $total = [];
         if (empty($outcomes)) {
             $this->addItem(_('none'));
         } else {
@@ -39,7 +39,7 @@ class OutcomingPayments extends \FlexiPeeHP\Digest\DigestModule implements \Flex
                 }
             }
 
-            $totalsTable = new \FlexiPeeHP\Digest\Table([_('Amount'), _('Currency')]);
+            $totalsTable = new \AbraFlexi\Digest\Table([_('Amount'), _('Currency')]);
             foreach ($total as $currency => $amount) {
                 $totalsTable->addRowColumns([self::formatCurrency($amount), $currency]);
             }
@@ -51,8 +51,8 @@ class OutcomingPayments extends \FlexiPeeHP\Digest\DigestModule implements \Flex
      * 
      * @return string
      */
-    public function heading()
-    {
+    public function heading() {
         return _('Outcoming payments');
     }
+
 }

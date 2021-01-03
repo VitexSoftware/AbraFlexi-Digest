@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Outcoming Invoices
  */
@@ -8,25 +9,24 @@
  *
  * @author vitex
  */
-class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Digest\DigestModuleInterface
-{
+class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+
     /**
      * Column used to filter by date
      * @var string 
      */
     public $timeColumn = 'datVyst';
 
-    public function dig()
-    {
-        $digger          = new FlexiPeeHP\FakturaVydana();
-        $outInvoicesData = $digger->getColumnsFromFlexibee(['kod', 'typDokl', 'sumCelkem',
+    public function dig() {
+        $digger = new AbraFlexi\FakturaVydana();
+        $outInvoicesData = $digger->getColumnsFromAbraFlexi(['kod', 'typDokl', 'sumCelkem',
             'sumCelkemMen',
             'sumZalohy', 'sumZalohyMen', 'uhrazeno', 'storno', 'mena', 'juhSum',
             'juhSumMen'], $this->condition);
-        $exposed         = 0;
-        $invoicedRaw     = [];
-        $paid            = [];
-        $storno          = 0;
+        $exposed = 0;
+        $invoicedRaw = [];
+        $paid = [];
+        $storno = 0;
 
         $typDoklCounts = [];
         $typDoklTotals = [];
@@ -40,7 +40,7 @@ class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
                     $storno++;
                 }
                 $currency = self::getCurrency($outInvoiceData);
-                $typDokl  = $outInvoiceData['typDokl'];
+                $typDokl = $outInvoiceData['typDokl'];
 
                 if ($currency != 'CZK') {
                     $amount = floatval($outInvoiceData['sumCelkemMen']) + floatval($outInvoiceData['sumZalohyMen']);
@@ -57,10 +57,10 @@ class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
                 }
 
                 if (array_key_exists($typDokl, $typDoklCounts)) {
-                    $typDoklCounts[$typDokl] ++;
+                    $typDoklCounts[$typDokl]++;
                     $typDoklTotals[$typDokl][$currency] += $amount;
                 } else {
-                    $typDoklCounts[$typDokl]            = 1;
+                    $typDoklCounts[$typDokl] = 1;
                     $typDoklTotals[$typDokl][$currency] = $amount;
                 }
 
@@ -73,21 +73,20 @@ class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
 
             $tableHeader[] = _('Count');
             $tableHeader[] = _('Document type');
-            $currencies    = array_keys($invoicedRaw);
+            $currencies = array_keys($invoicedRaw);
             foreach ($currencies as $currencyCode) {
-                $tableHeader[] = _('Total').' '.\FlexiPeeHP\FlexiBeeRO::uncode($currencyCode);
+                $tableHeader[] = _('Total') . ' ' . \AbraFlexi\AbraFlexiRO::uncode($currencyCode);
             }
 
-            $outInvoicesTable = new \FlexiPeeHP\Digest\Table($tableHeader);
+            $outInvoicesTable = new \AbraFlexi\Digest\Table($tableHeader);
 
             foreach ($typDoklTotals as $typDokl => $typDoklTotal) {
-                $tableRow   = [$typDoklCounts[$typDokl]];
-                $tableRow[] = \FlexiPeeHP\FlexiBeeRO::uncode($typDokl);
+                $tableRow = [$typDoklCounts[$typDokl]];
+                $tableRow[] = \AbraFlexi\AbraFlexiRO::uncode($typDokl);
 
                 foreach ($currencies as $currencyCode) {
                     $tableRow[] = array_key_exists($currencyCode,
-                            $typDoklTotals[$typDokl]) ? $typDoklTotals[$typDokl][$currencyCode]
-                            : '';
+                                    $typDoklTotals[$typDokl]) ? $typDoklTotals[$typDokl][$currencyCode] : '';
                 }
 
                 $outInvoicesTable->addRowColumns($tableRow);
@@ -95,7 +94,7 @@ class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
 
             $tableFooter = [$exposed, count(array_keys($typDoklTotals))];
             foreach ($currencies as $currencyCode) {
-                $tableFooter[] = self::formatCurrency($invoicedRaw[$currencyCode]).' '.FlexiPeeHP\FlexiBeeRO::uncode($currencyCode);
+                $tableFooter[] = self::formatCurrency($invoicedRaw[$currencyCode]) . ' ' . AbraFlexi\AbraFlexiRO::uncode($currencyCode);
             }
             $outInvoicesTable->addRowFooterColumns($tableFooter);
 
@@ -109,8 +108,8 @@ class OutcomingInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
      * 
      * @return string
      */
-    public function heading()
-    {
+    public function heading() {
         return _('Outcoming invoices');
     }
+
 }

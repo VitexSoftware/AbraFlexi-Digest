@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Debts
  */
@@ -8,32 +9,31 @@
  *
  * @author vitex
  */
-class WaitingIncome extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Digest\DigestModuleInterface
-{
+class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+
     /**
      * Column used to filter by date
      * @var string 
      */
     public $timeColumn = 'datSplat';
 
-    public function dig()
-    {
-        $totals      = [];
-        $checker     = new \FlexiPeeHP\FakturaVydana();
-        $outInvoices = $checker->getColumnsFromFlexibee(['kod', 'firma', 'sumCelkem',
+    public function dig() {
+        $totals = [];
+        $checker = new \AbraFlexi\FakturaVydana();
+        $outInvoices = $checker->getColumnsFromAbraFlexi(['kod', 'firma', 'sumCelkem',
             'sumCelkemMen',
             'mena'],
-            array_merge($this->condition,
-                ["(stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr')",
-            'storno' => false]));
+                array_merge($this->condition,
+                        ["(stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr')",
+                            'storno' => false]));
 
         if (empty($outInvoices)) {
             $this->addItem(_('none'));
         } else {
-            $adreser  = new FlexiPeeHP\Adresar(null, ['offline' => 'true']);
-            $invTable = new \FlexiPeeHP\Digest\Table([_('Position'), _('Code'), _('Partner'),
+            $adreser = new AbraFlexi\Adresar(null, ['offline' => 'true']);
+            $invTable = new \AbraFlexi\Digest\Table([_('Position'), _('Code'), _('Partner'),
                 _('Amount')]);
-            $pos      = 0;
+            $pos = 0;
 
             foreach ($outInvoices as $outInvoiceData) {
                 $currency = self::getCurrency($outInvoiceData);
@@ -43,10 +43,10 @@ class WaitingIncome extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPee
                 $invTable->addRowColumns([
                     ++$pos,
                     new \Ease\Html\ATag($checker->getApiUrl(),
-                        $outInvoiceData['kod']),
+                            $outInvoiceData['kod']),
                     new \Ease\Html\ATag($adreser->getApiUrl(),
-                        empty($outInvoiceData['firma']) ? '' : $outInvoiceData['firma@showAs']),
-                    (($currency != 'CZK') ? $outInvoiceData['sumCelkemMen'] : $outInvoiceData['sumCelkem']).' '.$currency
+                            empty($outInvoiceData['firma']) ? '' : $outInvoiceData['firma@showAs']),
+                    (($currency != 'CZK') ? $outInvoiceData['sumCelkemMen'] : $outInvoiceData['sumCelkem']) . ' ' . $currency
                 ]);
 
                 if (array_key_exists($currency, $totals)) {
@@ -59,14 +59,14 @@ class WaitingIncome extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPee
 
             $this->addItem(new Ease\Html\H3Tag(_('Total')));
             foreach ($totals as $currency => $amount) {
-                $this->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount).'&nbsp;'.$currency));
+                $this->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount) . '&nbsp;' . $currency));
             }
         }
         return !empty($outInvoices);
     }
 
-    public function heading()
-    {
+    public function heading() {
         return _('Waiting Income');
     }
+
 }

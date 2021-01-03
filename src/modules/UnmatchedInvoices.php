@@ -1,11 +1,12 @@
 <?php
+
 /**
  * Incoming payments for us
  *
  * @author vitex
  */
-class UnmatchedInvoices extends \FlexiPeeHP\Digest\DigestModule implements \FlexiPeeHP\Digest\DigestModuleInterface
-{
+class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+
     public $timeColumn = 'datVyst';
 
     /**
@@ -13,23 +14,22 @@ class UnmatchedInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
      * 
      * @return boolean
      */
-    public function dig()
-    {
-        $invoicer  = new FlexiPeeHP\FakturaVydana();
-        $adresser  = new FlexiPeeHP\Adresar();
-        $proformas = $invoicer->getColumnsFromFlexibee(['kod', 'mena', 'popis', 'sumCelkem',
+    public function dig() {
+        $invoicer = new AbraFlexi\FakturaVydana();
+        $adresser = new AbraFlexi\Adresar();
+        $proformas = $invoicer->getColumnsFromAbraFlexi(['kod', 'mena', 'popis', 'sumCelkem',
             'sumCelkemMen', 'stavOdpocetK', 'typDokl', 'firma', 'datVyst'],
-            array_merge($this->condition,
-                ['typPohybuK' => 'typPohybu.prijem', 'storno' => false,
-                    'zuctovano' => false,
-                    'typDokl.typDoklK' => 'typDokladu.zalohFaktura',
-                    'stavUhrK' => 'stavUhr.uhrazeno']), 'datVyst');
-        $total     = [];
-        $totals    = [];
+                array_merge($this->condition,
+                        ['typPohybuK' => 'typPohybu.prijem', 'storno' => false,
+                            'zuctovano' => false,
+                            'typDokl.typDoklK' => 'typDokladu.zalohFaktura',
+                            'stavUhrK' => 'stavUhr.uhrazeno']), 'datVyst');
+        $total = [];
+        $totals = [];
         if (empty($proformas)) {
             $this->addItem(_('none'));
         } else {
-            $incomesTable = new \FlexiPeeHP\Digest\Table([_('Document'), _('Description'),
+            $incomesTable = new \AbraFlexi\Digest\Table([_('Document'), _('Description'),
                 _('Denunc state'), _('Document type'), _('Company'), _('Date'), _('Amount')]);
             foreach ($proformas as $proforma) {
 
@@ -44,23 +44,22 @@ class UnmatchedInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
                         unset($proforma['typDokl@ref']);
                         $adresser->takeData($proforma);
 
-                        $amount   = self::getAmount($proforma);
+                        $amount = self::getAmount($proforma);
                         $currency = self::getCurrency($proforma);
                         if (array_key_exists($currency, $total)) {
                             $total[$currency] += $amount;
-                            $totals[$currency] ++;
+                            $totals[$currency]++;
                         } else {
-                            $total[$currency]  = $amount;
+                            $total[$currency] = $amount;
                             $totals[$currency] = 1;
                         }
 
-                        $proforma['kod']   = new \FlexiPeeHP\Digest\DocumentLink($proforma['kod'],
-                            $invoicer);
+                        $proforma['kod'] = new \AbraFlexi\Digest\DocumentLink($proforma['kod'],
+                                $invoicer);
                         $proforma['price'] = self::getPrice($proforma);
 
-                        $proforma['firma'] = new FlexiPeeHP\Digest\CompanyLink($proforma['firma'],
-                            $adresser);
-
+                        $proforma['firma'] = new AbraFlexi\Digest\CompanyLink($proforma['firma'],
+                                $adresser);
 
                         unset($proforma['typDokl']);
                         unset($proforma['sumCelkem']);
@@ -80,14 +79,13 @@ class UnmatchedInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
             $this->addItem($incomesTable);
 
             foreach ($total as $currency => $amount) {
-                $this->addItem(new \Ease\Html\DivTag($totals[$currency].'x'.' '.self::formatCurrency($amount).'&nbsp;'.$currency));
+                $this->addItem(new \Ease\Html\DivTag($totals[$currency] . 'x' . ' ' . self::formatCurrency($amount) . '&nbsp;' . $currency));
             }
         }
         return !empty($total);
     }
 
-    public function heading()
-    {
+    public function heading() {
         return _('Non-deducted proformas');
     }
 
@@ -96,8 +94,8 @@ class UnmatchedInvoices extends \FlexiPeeHP\Digest\DigestModule implements \Flex
      * 
      * @return string
      */
-    public function description()
-    {
+    public function description() {
         return _('Non-deducted proformas');
     }
+
 }
