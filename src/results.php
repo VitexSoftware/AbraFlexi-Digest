@@ -31,7 +31,7 @@ $scopeTabs = new \Ease\TWB4\Tabs('ScopeTabs');
 foreach ($reports as $scope => $reports) {
     $reportTabs = new \Ease\TWB4\Tabs($scope . 'Reports');
     foreach ($reports as $reportName => $reportFile) {
-        $reportTabs->addTab($reportName, str_replace('pure-table', 'table', file_get_contents($reportFile)));
+        $reportTabs->addTab($reportName, str_replace('table', 'table', file_get_contents($reportFile)));
     }
     $scopeTabs->addTab($scope, $reportTabs);
 }

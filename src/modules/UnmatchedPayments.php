@@ -19,7 +19,7 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
      * @return boolean
      */
     public function dig() {
-        $banker = new AbraFlexi\Banka();
+        $banker = new AbraFlexi\Banka(null, ['nativeTypes' => false]);
         $adresser = new AbraFlexi\Adresar();
         $bucer = new AbraFlexi\Adresar(null,
                 ['evidence' => 'adresar-bankovni-ucet']);
@@ -56,12 +56,10 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
                     $total[$currency] = $amount;
                 }
 
-                $income['kod'] = new \AbraFlexi\Digest\DocumentLink($income['kod'],
-                        $banker);
-                $income['price'] = self::getPrice($income);
-
-                $income['firma'] = new AbraFlexi\Digest\CompanyLink($income['firma'],
-                        $adresser);
+                $income['kod'] = new \AbraFlexi\ui\DocumentLink($income['kod'], $banker);
+                $income['price'] = self::getAmount($income);
+                $adresser->setMyKey($adresser);
+                $income['firma'] = new \Ease\Html\ATag(array_key_exists('firma@showAs', $income) ?  $income['firma@showAs'] : '', $adresser->getApiUrl() . $income['firma']);
 
                 unset($income['id']);
                 unset($income['sumCelkem']);

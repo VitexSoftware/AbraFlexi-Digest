@@ -40,7 +40,7 @@ class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFl
      * 
      */
     public function dig() {
-        $banker = new AbraFlexi\Banka();
+        $banker = new AbraFlexi\Banka(null,['nativeTypes'=>false]);
         $averages = [];
         $incomes = $banker->getColumnsFromAbraFlexi(['mena', 'sumCelkem', 'sumCelkemMen',
             'datVyst'],

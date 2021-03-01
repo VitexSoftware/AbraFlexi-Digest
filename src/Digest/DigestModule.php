@@ -100,6 +100,17 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface {
     }
 
     /**
+     * Get Amount
+     * 
+     * @param array  $data
+     * 
+     * @return float
+     */
+    public static function getAmount(array $data) {
+        return array_key_exists('sumCelkem', $data) ? $data['sumCelkem'] : 0.0;
+    }
+    
+    /**
      * Format Czech Currency
      * 
      * @param float $price

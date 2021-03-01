@@ -18,13 +18,13 @@ class Table extends \Ease\Html\TableTag {
     /**
      * Digest Table
      * 
-     * @param array $heading    TH Columns
+     * @param array $thCols    TH Columns
      * @param array $properties
      */
     public function __construct($thCols, $properties = array()) {
         parent::__construct(null, $properties);
         $this->addRowHeaderColumns($thCols);
-        $this->addTagClass('pure-table');
+        $this->addTagClass('table');
     }
 
 }

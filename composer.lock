@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d9d4f9096879780e26fa2ffc16f3d202",
+    "content-hash": "24bb1a3ce10591805e39475500df5dfe",
     "packages": [
         {
             "name": "pear/console_getopt",
@@ -596,7 +596,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "vitexsoftware/ease-twbootstrap4-widgets-flexibee": 20
+        "vitexsoftware/ease-twbootstrap4-widgets-flexibee": 20,
+        "vitexsoftware/flexibee-bricks": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

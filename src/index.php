@@ -104,8 +104,7 @@ $themes = [];
 $d = dir(constant('STYLE_DIR'));
 while (false !== ($entry = $d->read())) {
     if (pathinfo($entry, PATHINFO_EXTENSION) == 'css') {
-        $themes[pathinfo($entry, PATHINFO_FILENAME)] = pathinfo($entry,
-                PATHINFO_FILENAME);
+        $themes[pathinfo($entry, PATHINFO_BASENAME)] = ucfirst(pathinfo(pathinfo($entry,PATHINFO_FILENAME),PATHINFO_FILENAME));
     }
 }
 $d->close();

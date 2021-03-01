@@ -65,7 +65,7 @@ class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
             $this->addItem(_('none'));
         } else {
             $adreser = new AbraFlexi\Adresar(null, ['offline' => 'true']);
-            $invTable = new Ease\Html\TableTag(null, ['class' => 'pure-table']);
+            $invTable = new Ease\Html\TableTag(null, ['class' => 'table']);
             $invTable->addRowHeaderColumns([_('Company'), _('Amount'), _('Overdue days'),
                 _('Invoices')]);
 

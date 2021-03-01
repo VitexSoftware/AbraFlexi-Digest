@@ -52,8 +52,7 @@ class OutcomingInvoicesHiddenToCustomer extends DigestModule implements DigestMo
                     $outInvoiceData['stavMailK'] = _('to send');
                 }
 
-                $outInvoiceData['firma@showAs'] = new DocumentLink(\AbraFlexi\RW::code($outInvoiceData['firma']),
-                        $addresser);
+                $outInvoiceData['firma@showAs'] = empty($outInvoiceData['firma']) ? '' : new DocumentLink(\AbraFlexi\RW::code($outInvoiceData['firma']), $addresser);
 
                 $outInvoiceData['kod'] = new DocumentLink(\AbraFlexi\RW::code($outInvoiceData['kod']),
                         $digger);

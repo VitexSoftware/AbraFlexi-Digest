@@ -12,3 +12,4 @@
 /.idea/
 /debian/.debhelper/
 /nbproject/
+/.env

@@ -16,7 +16,7 @@ define('MODULE_MONTHLY_PATH', './modules.monthly');
 define('MODULE_YEARLY_PATH', './modules.yearly');
 define('MODULE_ALLTIME_PATH', './modules.alltime');
 
-define('STYLE_DIR', './css');
+define('STYLE_DIR', './css/themes/');
 
 require_once '../vendor/autoload.php';
 $shared = \Ease\Shared::instanced();
@@ -27,5 +27,5 @@ if (file_exists('../.env')) {
 
 $localer = new \Ease\Locale('cs_CZ', '../i18n', 'abraflexi-digest');
 
-$myCompany = new \AbraFlexi\Company($shared->getConfigValue('ABRAFLEXI_COMPANY'));
+$myCompany = new \AbraFlexi\Company(\Ease\Functions::cfg('ABRAFLEXI_COMPANY'));
 $myCompanyName = $myCompany->getDataValue('nazev');
