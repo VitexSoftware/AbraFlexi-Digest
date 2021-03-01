@@ -79,8 +79,13 @@ $fromtoForm = new \Ease\TWB4\Form(['name' => 'fromto', 'class' => 'form-horizont
 $container = new \Ease\TWB4\Container(new \Ease\Html\H1Tag(new \Ease\Html\ATag($myCompany->getApiURL(),
                         $myCompanyName) . ' ' . _('AbraFlexi digest')));
 
+$container->addItem(new \AbraFlexi\ui\CompanyLogo());
+$container->addItem(new \AbraFlexi\ui\TWB4\StatusInfoBox());
+
 $formColumns = new \Ease\TWB4\Row();
 $modulesCol = $formColumns->addColumn(6, new \Ease\Html\H2Tag(_('Modules')));
+
+$modulesCol->addItem(new \Ease\Html\ATag('#', _('Check All'), ['onClick' => '$(\'input:checkbox\').prop(\'checked\', true);']));
 
 foreach ($candidates as $heading => $modules) {
     $modulesCol->addItem(new \Ease\Html\H3Tag($heading));
@@ -89,7 +94,7 @@ foreach ($candidates as $heading => $modules) {
         include_once $classFile;
         $module = new $className(null);
         $modulesCol->addItem(new \Ease\TWB4\Checkbox('modules[' . $className . ']',
-                        $classFile, '&nbsp;' . $module->heading()));
+                        $classFile, '&nbsp;' . $module->heading(), false, ['class' => 'module']));
     }
 }
 

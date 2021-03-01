@@ -134,7 +134,7 @@ class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFl
         $percentChange = $amount / $procento;
 
         $this->incomeChart->addBar(round($percentChange), $amount,
-                $amount . ' ' . $caption . ' ' . \AbraFlexi\AbraFlexiRO::flexiDateToDateTime($day)->format('d/m D'),
+                $amount . ' ' . $caption . ' ' . \AbraFlexi\RO::flexiDateToDateTime($day)->format('d/m D'),
                 self::$currencyColor[$caption]);
     }
 

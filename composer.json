@@ -10,7 +10,7 @@
     "minimum-stability": "dev",
     "type": "project",
     "require": {
-        "vitexsoftware/ease-twbootstrap4-widgets-flexibee": "dev-abraflexi"
+        "vitexsoftware/ease-twbootstrap4-widgets-flexibee": "* 9999999-dev"
     },
     "autoload": {
         "psr-4": {

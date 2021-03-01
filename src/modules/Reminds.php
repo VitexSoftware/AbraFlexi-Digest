@@ -47,16 +47,16 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
                 $this->countReminds($invoiceData);
 
                 $adreser->setMyKey($invoiceData['firma']);
-                $invoicer->setMyKey(\AbraFlexi\AbraFlexiRO::code($invoiceData['kod']));
+                $invoicer->setMyKey(\AbraFlexi\RO::code($invoiceData['kod']));
 
-                $nazevFirmy = array_key_exists('firma@showAs', $invoiceData) ? $invoiceData['firma@showAs'] : \AbraFlexi\AbraFlexiRO::uncode($invoiceData['firma']);
+                $nazevFirmy = array_key_exists('firma@showAs', $invoiceData) ? $invoiceData['firma@showAs'] : \AbraFlexi\RO::uncode($invoiceData['firma']);
 
                 $invTable->addRowColumns([
                     new \Ease\Html\ATag($adreser->getApiURL(), $nazevFirmy),
                     new \Ease\Html\ATag($invoicer->getApiURL(),
                             trim($invoiceData['kod'] . ' ' . $invoiceData['popis'])),
                     (($invoiceData['mena'] != 'code:CZK') ? $invoiceData['zbyvaUhraditMen'] : $invoiceData['zbyvaUhradit']) .
-                    ' ' . \AbraFlexi\AbraFlexiRO::uncode($invoiceData['mena']),
+                    ' ' . \AbraFlexi\RO::uncode($invoiceData['mena']),
                     empty($invoiceData['datUp1']) ? '' : $this->myDate($invoiceData['datUp1']),
                     empty($invoiceData['datUp2']) ? '' : $this->myDate($invoiceData['datUp2']),
                     empty($invoiceData['datSmir']) ? '' : $this->myDate($invoiceData['datSmir'])
@@ -97,7 +97,7 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
         if (!array_key_exists($column, $this->remids)) {
             $this->remids[$column] = 0;
         }
-        if (!empty($date) && $this->isMyDate(\AbraFlexi\AbraFlexiRO::flexiDateToDateTime($date))) {
+        if (!empty($date) && $this->isMyDate($date)) {
             if (array_key_exists($column, $this->remids)) {
                 $this->remids[$column]++;
             }
@@ -111,8 +111,8 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
      * 
      * @return mixed
      */
-    public function myDate($flexidate) {
-        if ($this->isMyDate(\AbraFlexi\AbraFlexiRO::flexiDateToDateTime($flexidate))) {
+    public function myDate(\DateTime $flexidate) {
+        if ($this->isMyDate($flexidate)) {
             $humanDate = new Ease\Html\StrongTag(self::humanDate($flexidate));
         } else {
             $humanDate = self::humanDate($flexidate);

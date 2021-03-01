@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "304993f2cf25638bfa3d060c15a8b4e6",
+    "content-hash": "d9d4f9096879780e26fa2ffc16f3d202",
     "packages": [
         {
             "name": "pear/console_getopt",
@@ -283,12 +283,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Spoje-NET/php-abraflexi.git",
-                "reference": "d9615b77eac60788c2271eae97e162919c28175f"
+                "reference": "4f714422f374162064129c6f5634bfac9b806c0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Spoje-NET/php-abraflexi/zipball/d9615b77eac60788c2271eae97e162919c28175f",
-                "reference": "d9615b77eac60788c2271eae97e162919c28175f",
+                "url": "https://api.github.com/repos/Spoje-NET/php-abraflexi/zipball/4f714422f374162064129c6f5634bfac9b806c0f",
+                "reference": "4f714422f374162064129c6f5634bfac9b806c0f",
                 "shasum": ""
             },
             "require": {
@@ -325,7 +325,13 @@
                 "issues": "https://github.com/Spoje-NET/php-abraflexi/issues",
                 "source": "https://github.com/Spoje-NET/php-abraflexi/tree/2.0"
             },
-            "time": "2020-12-04T23:02:48+00:00"
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/VitexSoftware",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2021-02-28T03:39:01+00:00"
         },
         {
             "name": "vitexsoftware/ease-core",
@@ -333,12 +339,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-ease-core.git",
-                "reference": "3c17b0aec9f0073603a109ebd6a17847b0c1f7ec"
+                "reference": "5e6a4357ab931697d3a68711cad6e7f849ed8569"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-core/zipball/3c17b0aec9f0073603a109ebd6a17847b0c1f7ec",
-                "reference": "3c17b0aec9f0073603a109ebd6a17847b0c1f7ec",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-core/zipball/5e6a4357ab931697d3a68711cad6e7f849ed8569",
+                "reference": "5e6a4357ab931697d3a68711cad6e7f849ed8569",
                 "shasum": ""
             },
             "require": {
@@ -378,7 +384,13 @@
                 "issues": "https://github.com/VitexSoftware/php-ease-core/issues",
                 "source": "https://github.com/VitexSoftware/php-ease-core/tree/main"
             },
-            "time": "2020-12-02T13:05:55+00:00"
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/VitexSoftware",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2021-02-13T22:59:23+00:00"
         },
         {
             "name": "vitexsoftware/ease-html",
@@ -386,12 +398,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-ease-html.git",
-                "reference": "675f988605af05666352efec8f0a93ffde60b48d"
+                "reference": "23a1d51fd808537dbe2cfa5bdfdbeb569d914de5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-html/zipball/675f988605af05666352efec8f0a93ffde60b48d",
-                "reference": "675f988605af05666352efec8f0a93ffde60b48d",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-html/zipball/23a1d51fd808537dbe2cfa5bdfdbeb569d914de5",
+                "reference": "23a1d51fd808537dbe2cfa5bdfdbeb569d914de5",
                 "shasum": ""
             },
             "require": {
@@ -423,7 +435,13 @@
                 "issues": "https://github.com/VitexSoftware/php-ease-html/issues",
                 "source": "https://github.com/VitexSoftware/php-ease-html/tree/main"
             },
-            "time": "2020-12-02T02:13:28+00:00"
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/VitexSoftware",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2021-02-13T22:59:44+00:00"
         },
         {
             "name": "vitexsoftware/ease-twbootstrap4",
@@ -431,12 +449,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-ease-twbootstrap4.git",
-                "reference": "a9a4a4e63272d708b869fbc8c9039d78ca01aa33"
+                "reference": "7464862e9ac495fdcc4d8c3398c8a39341d50453"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-twbootstrap4/zipball/a9a4a4e63272d708b869fbc8c9039d78ca01aa33",
-                "reference": "a9a4a4e63272d708b869fbc8c9039d78ca01aa33",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-twbootstrap4/zipball/7464862e9ac495fdcc4d8c3398c8a39341d50453",
+                "reference": "7464862e9ac495fdcc4d8c3398c8a39341d50453",
                 "shasum": ""
             },
             "require": {
@@ -467,7 +485,13 @@
                 "issues": "https://github.com/VitexSoftware/php-ease-twbootstrap4/issues",
                 "source": "https://github.com/VitexSoftware/php-ease-twbootstrap4/tree/main"
             },
-            "time": "2020-12-23T02:53:43+00:00"
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/VitexSoftware",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2021-02-13T23:02:42+00:00"
         },
         {
             "name": "vitexsoftware/ease-twbootstrap4-widgets-flexibee",
@@ -475,12 +499,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-ease-twbootstrap4-widgets-abraflexi.git",
-                "reference": "c78a565c7885e5e05fbcf516427aa497dc2ffe32"
+                "reference": "0167c0ee9b861c8624f63106702ce2fc566152ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-twbootstrap4-widgets-abraflexi/zipball/c78a565c7885e5e05fbcf516427aa497dc2ffe32",
-                "reference": "c78a565c7885e5e05fbcf516427aa497dc2ffe32",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-twbootstrap4-widgets-abraflexi/zipball/0167c0ee9b861c8624f63106702ce2fc566152ca",
+                "reference": "0167c0ee9b861c8624f63106702ce2fc566152ca",
                 "shasum": ""
             },
             "require": {
@@ -512,7 +536,13 @@
                 "issues": "https://github.com/VitexSoftware/php-ease-twbootstrap4-widgets-abraflexi/issues",
                 "source": "https://github.com/VitexSoftware/php-ease-twbootstrap4-widgets-abraflexi/tree/abraflexi"
             },
-            "time": "2021-01-03T01:20:05+00:00"
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/VitexSoftware",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2021-02-13T23:00:15+00:00"
         },
         {
             "name": "vitexsoftware/flexibee-bricks",
@@ -520,12 +550,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-abraflexi-bricks.git",
-                "reference": "edc6e23985d2f06ce4b7367fd256e692be818b88"
+                "reference": "f6650e7b225575f9d13e20a7072465ebbabde0be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-abraflexi-bricks/zipball/edc6e23985d2f06ce4b7367fd256e692be818b88",
-                "reference": "edc6e23985d2f06ce4b7367fd256e692be818b88",
+                "url": "https://api.github.com/repos/VitexSoftware/php-abraflexi-bricks/zipball/f6650e7b225575f9d13e20a7072465ebbabde0be",
+                "reference": "f6650e7b225575f9d13e20a7072465ebbabde0be",
                 "shasum": ""
             },
             "require": {
@@ -559,7 +589,7 @@
                 "issues": "https://github.com/VitexSoftware/php-abraflexi-bricks/issues",
                 "source": "https://github.com/VitexSoftware/php-abraflexi-bricks/tree/abraflexi"
             },
-            "time": "2020-12-22T22:10:12+00:00"
+            "time": "2021-01-04T02:30:42+00:00"
         }
     ],
     "packages-dev": [],

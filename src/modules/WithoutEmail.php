@@ -30,7 +30,7 @@ class WithoutEmail extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
                 _('Phone')]);
             $count = 0;
             foreach ($withoutEmail as $address) {
-                $addresser->setMyKey(\AbraFlexi\AbraFlexiRO::code($address['kod']));
+                $addresser->setMyKey(\AbraFlexi\RO::code($address['kod']));
                 if (empty($addresser->getNotificationEmailAddress())) {
                     $count++;
                     $noMailTable->addRowColumns([new \Ease\Html\ATag($addresser->getApiURL(),

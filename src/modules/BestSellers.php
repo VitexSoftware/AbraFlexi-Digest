@@ -23,7 +23,7 @@ class BestSellers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\D
     public function dig() {
         $invoicer = new \AbraFlexi\FakturaVydana();
         $this->condition['relations'] = 'polozkyDokladu';
-        $this->condition['typDokl'] = AbraFlexi\AbraFlexiRO::code('FAKTURA');
+        $this->condition['typDokl'] = AbraFlexi\RO::code('FAKTURA');
         $invoicesRaw = $invoicer->getColumnsFromAbraFlexi(['polozkyDokladu(cenik,nazev,sumZkl,typPolozkyK)',
             'typDokl'], $this->condition, 'kod');
 
@@ -50,7 +50,7 @@ class BestSellers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\D
                 }
 
 
-                $itemIdent = !empty($item['cenik']) ? \AbraFlexi\AbraFlexiRO::uncode($item['cenik']) : $item['nazev'];
+                $itemIdent = !empty($item['cenik']) ? \AbraFlexi\RO::uncode($item['cenik']) : $item['nazev'];
                 if (array_key_exists($itemIdent, $products)) {
                     $products[$itemIdent]++;
                 } else {

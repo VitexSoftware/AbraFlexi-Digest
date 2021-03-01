@@ -14,49 +14,52 @@ class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
     public function dig() {
         $invoicer = new \AbraFlexi\FakturaVydana();
 
-        $cond = ['datSplat lte \'' . \AbraFlexi\AbraFlexiRW::dateToFlexiDate(new \DateTime()) . '\' AND (stavUhrK is null OR stavUhrK eq \'stavUhr.castUhr\') AND storno eq false'];
+        $cond = ['datSplat lte \'' . \AbraFlexi\RW::dateToFlexiDate(new \DateTime()) . '\' AND (stavUhrK is null OR stavUhrK eq \'stavUhr.castUhr\') AND storno eq false'];
 
         $faDatakturyRaw = $invoicer->getColumnsFromAbraFlexi(['kod', 'firma', 'sumCelkem',
             'sumCelkemMen', 'zbyvaUhradit', 'zbyvaUhraditMen', 'mena', 'datSplat'],
                 $cond);
 
-        $invoicer->addStatusMessage("Faktur: " . count($faDatakturyRaw));
-
         $totals = [];
         $totalsByCurrency = [];
         $overdue = [];
 
-        foreach ($faDatakturyRaw as $faData) {
-            $currency = self::getCurrency($faData);
-            $invoicesByFirma[$faData['firma']][$faData['id']] = $faData;
+        if (empty($faDatakturyRaw)) {
+            $invoicer->addStatusMessage("Faktur: 0");
+        } else {
+            $invoicer->addStatusMessage("Faktur: " . count($faDatakturyRaw));
 
-            if (!isset($totals[$faData['firma']][$currency])) {
-                $totals[$faData['firma']][$currency] = 0;
-            }
-            if (!isset($totalsByCurrency[$currency])) {
-                $totalsByCurrency[$currency] = 0;
-            }
+            foreach ($faDatakturyRaw as $faData) {
+                $currency = self::getCurrency($faData);
+                $invoicesByFirma[$faData['firma']][$faData['id']] = $faData;
 
-            if ($currency != 'CZK') {
-                $amount = floatval($faData['zbyvaUhraditMen']);
-            } else {
-                $amount = floatval($faData['zbyvaUhradit']);
-            }
+                if (!isset($totals[$faData['firma']][$currency])) {
+                    $totals[$faData['firma']][$currency] = 0;
+                }
+                if (!isset($totalsByCurrency[$currency])) {
+                    $totalsByCurrency[$currency] = 0;
+                }
 
-            $totals[$faData['firma']][$currency] += $amount;
-            $totalsByCurrency[$currency] += $amount;
+                if ($currency != 'CZK') {
+                    $amount = floatval($faData['zbyvaUhraditMen']);
+                } else {
+                    $amount = floatval($faData['zbyvaUhradit']);
+                }
 
-            $oDays = \AbraFlexi\FakturaVydana::overdueDays($faData['datSplat']);
+                $totals[$faData['firma']][$currency] += $amount;
+                $totalsByCurrency[$currency] += $amount;
 
-            if (array_key_exists($faData['firma'], $overdue)) {
-                if ($oDays > $overdue[$faData['firma']]) {
+                $oDays = \AbraFlexi\FakturaVydana::overdueDays($faData['datSplat']);
+
+                if (array_key_exists($faData['firma'], $overdue)) {
+                    if ($oDays > $overdue[$faData['firma']]) {
+                        $overdue[$faData['firma']] = $oDays;
+                    }
+                } else {
                     $overdue[$faData['firma']] = $oDays;
                 }
-            } else {
-                $overdue[$faData['firma']] = $oDays;
             }
         }
-
 
         if (empty($invoicesByFirma)) {
             $this->addItem(_('none'));
@@ -73,7 +76,7 @@ class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
                     $invoicer->setMyKey($invoiceData['id']);
                     $currency = self::getCurrency($invoiceData);
 
-                    $overdueInvoice = \AbraFlexi\AbraFlexiRO::uncode($invoiceData['kod']);
+                    $overdueInvoice = \AbraFlexi\RO::uncode($invoiceData['kod']);
 
                     $overdueInvoices->addItem(new Ease\Html\DivTag([new \Ease\Html\ATag($invoicer->getApiURL(),
                                         $overdueInvoice, ['css' => 'margin: 5px;']),
@@ -84,7 +87,7 @@ class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
                 $adreser->setMyKey($firma);
 
                 $nazevFirmy = array_key_exists('firma@showAs',
-                                current($fakturyFirmy)) ? current($fakturyFirmy)['firma@showAs'] : \AbraFlexi\AbraFlexiRO::uncode($firma);
+                                current($fakturyFirmy)) ? current($fakturyFirmy)['firma@showAs'] : \AbraFlexi\RO::uncode($firma);
 
                 $invTable->addRowColumns([new \Ease\Html\ATag($adreser->getApiURL(),
                             $nazevFirmy), self::getTotalsDiv($totals[$firma]),

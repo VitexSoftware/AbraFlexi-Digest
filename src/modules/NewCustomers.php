@@ -32,7 +32,7 @@ class NewCustomers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
                 _('Email'), _('Phone')]);
 
             foreach ($newCustomersData as $pos => $newCustomerData) {
-                $digger->setMyKey(AbraFlexi\AbraFlexiRO::code($newCustomerData['kod']));
+                $digger->setMyKey(AbraFlexi\RO::code($newCustomerData['kod']));
                 $userTable->addRowColumns([
                     $pos,
                     new \Ease\Html\ATag($digger->getApiURL(),

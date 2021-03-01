@@ -80,7 +80,7 @@ class WaitingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFle
     }
 
     public function functionName($param) {
-        ['datSplat lte \'' . \AbraFlexi\AbraFlexiRW::dateToFlexiDate(new \DateTime()) . '\' AND (stavUhrK is null OR stavUhrK eq \'stavUhr.castUhr\') AND storno eq false'];
+        ['datSplat lte \'' . \AbraFlexi\RW::dateToFlexiDate(new \DateTime()) . '\' AND (stavUhrK is null OR stavUhrK eq \'stavUhr.castUhr\') AND storno eq false'];
     }
 
 }

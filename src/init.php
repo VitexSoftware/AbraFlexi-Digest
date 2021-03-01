@@ -20,17 +20,11 @@ define('STYLE_DIR', './css');
 
 require_once '../vendor/autoload.php';
 $shared = \Ease\Shared::instanced();
-if (file_exists('../client.json')) {
-    $shared->loadConfig('../client.json', true);
-} else {
-    foreach ($_ENV as $envKey => $envVal) {
-        $shared->setConfigValue($envKey, $envVal);
-    }
+
+if (file_exists('../.env')) {
+    $shared->loadConfig('../.env', true);
 }
 
-if (file_exists('../digest.json')) {
-    $shared->loadConfig('../digest.json', true);
-}
 $localer = new \Ease\Locale('cs_CZ', '../i18n', 'abraflexi-digest');
 
 $myCompany = new \AbraFlexi\Company($shared->getConfigValue('ABRAFLEXI_COMPANY'));

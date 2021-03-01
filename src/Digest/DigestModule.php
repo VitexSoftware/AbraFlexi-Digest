@@ -46,7 +46,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface {
                 foreach ($this->timeColumn as $timeColumn) {
                     $condParts[$timeColumn] = $interval;
                 }
-                $this->condition = [\AbraFlexi\AbraFlexiRO::flexiUrl($condParts,
+                $this->condition = [\AbraFlexi\RO::flexiUrl($condParts,
                             ' or ')];
             } else {
                 $this->condition = [$this->timeColumn => $interval];
@@ -96,7 +96,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface {
      */
     public static function getCurrency($data) {
         return array_key_exists('mena@showAs', $data) ? current(explode(':',
-                                $data['mena@showAs'])) : \AbraFlexi\AbraFlexiRO::uncode($data['mena']);
+                                $data['mena@showAs'])) : \AbraFlexi\RO::uncode($data['mena']);
     }
 
     /**
@@ -118,7 +118,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface {
      * @return string
      */
     public static function humanDate($flexiDate) {
-        return \AbraFlexi\AbraFlexiRW::flexiDateToDateTime($flexiDate)->format('d. m. Y');
+        return is_string($flexiDate) ? \AbraFlexi\RW::flexiDateToDateTime($flexiDate)->format('d. m. Y') : $flexiDate->format('d. m. Y');
     }
 
     /**
@@ -183,7 +183,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface {
     public static function getTotalsDiv(array $totals) {
         $total = new \Ease\Html\DivTag();
         foreach ($totals as $currency => $amount) {
-            $total->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount) . '&nbsp;' . \AbraFlexi\AbraFlexiRO::uncode($currency)));
+            $total->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount) . '&nbsp;' . \AbraFlexi\RO::uncode($currency)));
         }
         return $total;
     }

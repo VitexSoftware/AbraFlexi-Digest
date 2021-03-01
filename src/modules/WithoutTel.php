@@ -25,7 +25,7 @@ class WithoutTel extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Di
                 _('Email')]);
             $count = 0;
             foreach ($withoutEmail as $address) {
-                $addresser->setMyKey(\AbraFlexi\AbraFlexiRO::code($address['kod']));
+                $addresser->setMyKey(\AbraFlexi\RO::code($address['kod']));
                 if (empty($addresser->getAnyPhoneNumber())) {
                     $count++;
                     $noTelTable->addRowColumns([new \Ease\Html\ATag($addresser->getApiURL(),
