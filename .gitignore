@@ -13,3 +13,8 @@
 /debian/.debhelper/
 /nbproject/
 /.env
+/debian/flexibee-digest.debhelper.log
+/debian/abraflexi-digest.debhelper.log
+/debian/abraflexi-digest/
+/debian/abraflexi-digest.postrm.debhelper
+/debian/abraflexi-digest.substvars

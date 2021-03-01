@@ -1,5 +1,5 @@
 #!/bin/sh
-# preinst script for php-flexibee-digest
+# preinst script for php-abraflexi-digest
 
 set -e
 
@@ -7,7 +7,7 @@ set -e
 
     . /usr/share/debconf/confmodule
 
-    php-flexibee-checker
+    php-abraflexi-checker
 
   fi
 

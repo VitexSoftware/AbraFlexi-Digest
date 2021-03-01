@@ -5,16 +5,16 @@
 
 override_dh_install:
 	dh_install
-	sed -i -e 's/..\/i18n/\/usr\/share\/locale/g'            	        debian/flexibee-digest/usr/share/flexibee-digest/init.php
-	sed -i -e 's/..\/vendor/\/var\/lib\/php-flexibee-digest/g' 	        debian/flexibee-digest/usr/share/flexibee-digest/init.php
-	sed -i -e 's/\.\./\/etc\/flexibee/g'                                    debian/flexibee-digest/usr/share/flexibee-digest/init.php
-	sed -i -e 's/.\/modules.daily/\/usr\/lib\/flexibee-digest\/daily/g'     debian/flexibee-digest/usr/share/flexibee-digest/init.php
-	sed -i -e 's/.\/modules.weekly/\/usr\/lib\/flexibee-digest\/weekly/g'   debian/flexibee-digest/usr/share/flexibee-digest/init.php
-	sed -i -e 's/.\/modules.monthly/\/usr\/lib\/flexibee-digest\/monthly/g' debian/flexibee-digest/usr/share/flexibee-digest/init.php
-	sed -i -e 's/.\/modules.yearly/\/usr\/lib\/flexibee-digest\/yearly/g'   debian/flexibee-digest/usr/share/flexibee-digest/init.php
-	sed -i -e 's/.\/modules.alltime/\/usr\/lib\/flexibee-digest\/alltime/g' debian/flexibee-digest/usr/share/flexibee-digest/init.php
-	sed -i -e 's/.\/modules/\/usr\/lib\/flexibee-digest/g'                  debian/flexibee-digest/usr/share/flexibee-digest/init.php
-	sed -i -e 's/.\/css/\/usr\/share\/flexibee-digest\/themes/'             debian/flexibee-digest/usr/share/flexibee-digest/init.php
-	sed -i -e 's/..\/composer.json/\/usr\/share\/flexibee-digest\/composer.json/g' 	     debian/flexibee-digest/usr/share/flexibee-digest/Digest/Digestor.php
-	sed -i -e "s/__DIR__.'/'\/usr\/share\/flexibee-digest/g" 	debian/flexibee-digest/usr/share/flexibee-digest/index.php
-	sed -i -e "s/__DIR__.'/'\/usr\/share\/flexibee-digest/g" 	debian/flexibee-digest/usr/share/flexibee-digest/results.php
+	sed -i -e 's/..\/i18n/\/usr\/share\/locale/g'            	        debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
+	sed -i -e 's/..\/vendor/\/var\/lib\/php-abraflexi-digest/g' 	        debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
+	sed -i -e 's/\.\./\/etc\/abraflexi/g'                                    debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
+	sed -i -e 's/.\/modules.daily/\/usr\/lib\/abraflexi-digest\/daily/g'     debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
+	sed -i -e 's/.\/modules.weekly/\/usr\/lib\/abraflexi-digest\/weekly/g'   debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
+	sed -i -e 's/.\/modules.monthly/\/usr\/lib\/abraflexi-digest\/monthly/g' debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
+	sed -i -e 's/.\/modules.yearly/\/usr\/lib\/abraflexi-digest\/yearly/g'   debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
+	sed -i -e 's/.\/modules.alltime/\/usr\/lib\/abraflexi-digest\/alltime/g' debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
+	sed -i -e 's/.\/modules/\/usr\/lib\/abraflexi-digest/g'                  debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
+	sed -i -e 's/.\/css/\/usr\/share\/abraflexi-digest\/themes/'             debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
+	sed -i -e 's/..\/composer.json/\/usr\/share\/abraflexi-digest\/composer.json/g' 	     debian/abraflexi-digest/usr/share/abraflexi-digest/Digest/Digestor.php
+	sed -i -e "s/__DIR__.'/'\/usr\/share\/abraflexi-digest/g"               debian/abraflexi-digest/usr/share/abraflexi-digest/index.php
+	sed -i -e "s/__DIR__.'/'\/usr\/share\/abraflexi-digest/g"               debian/abraflexi-digest/usr/share/abraflexi-digest/results.php

@@ -1,4 +1,4 @@
-Source: flexibee-digest
+Source: abraflexi-digest
 Build-Depends: debhelper (>= 13~),composer
 Standards-Version: 4.3.0
 Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
@@ -6,9 +6,9 @@ Uploaders: Vitex <vitex@hippy.cz>
 Priority: optional
 Homepage: https://github.com/VitexSoftware/AbraFlexi-Digest
 
-Package: flexibee-digest
-Depends: ${misc:Depends}, php-flexibee-bricks, composer, php-cli, php-intl, locales-all
-Suggests: flexibee-server,php-flexibee-config
+Package: abraflexi-digest
+Depends: ${misc:Depends}, php-abraflexi-bricks, composer, php-cli, php-intl, locales-all
+Suggests: abraflexi-server,php-abraflexi-config
 Architecture: all
 Section: web
 Priority: optional

@@ -1,4 +1,4 @@
-flexibee-digest (1.17) UNRELEASED; urgency=medium
+abraflexi-digest (1.17) UNRELEASED; urgency=medium
 
   [ Vítězslav Dvořák ]
   * Do not show empty results
@@ -13,7 +13,7 @@ flexibee-digest (1.17) UNRELEASED; urgency=medium
 
  -- CyberVitexus <vitex@exiv.jinonice.czf>  Thu, 23 Jul 2020 18:58:01 +0200
 
-flexibee-digest (1.6) UNRELEASED; urgency=medium
+abraflexi-digest (1.6) UNRELEASED; urgency=medium
 
   * Warnings Fixed
   * Foregin currency fixed
@@ -21,7 +21,7 @@ flexibee-digest (1.6) UNRELEASED; urgency=medium
 
  -- Vítězslav Dvořák <info@vitexsoftware.cz>  Mon, 17 Dec 2018 03:41:04 +0100
 
-flexibee-digest (1.4.2) UNRELEASED; urgency=medium
+abraflexi-digest (1.4.2) UNRELEASED; urgency=medium
 
   [ Vítězslav Dvořák ]
   * Use 'is empty' to find unset emails and phone numbers
@@ -34,7 +34,7 @@ flexibee-digest (1.4.2) UNRELEASED; urgency=medium
 
  -- Vítězslav Dvořák <info@vitexsoftware.cz>  Tue, 27 Nov 2018 09:15:11 +0100
 
-flexibee-digest (1.1) experimental; urgency=medium
+abraflexi-digest (1.1) experimental; urgency=medium
 
   * Indexes
   * Customers without phone
@@ -43,7 +43,7 @@ flexibee-digest (1.1) experimental; urgency=medium
 
  -- Vítězslav Dvořák <vitex@develoid.jinonice.czf>  Tue, 30 Oct 2018 20:14:21 +0100
 
-flexibee-digest (1.0) experimental; urgency=medium
+abraflexi-digest (1.0) experimental; urgency=medium
 
   * Skins
   * Save to file
@@ -53,7 +53,7 @@ flexibee-digest (1.0) experimental; urgency=medium
 
  -- Vítězslav Dvořák <vitex@develoid.jinonice.czf>  Tue, 30 Oct 2018 20:14:21 +0100
 
-flexibee-digest (0.1) experimental; urgency=medium
+abraflexi-digest (0.1) experimental; urgency=medium
 
   * Initial release
 
