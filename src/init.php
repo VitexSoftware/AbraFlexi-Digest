@@ -21,8 +21,15 @@ define('STYLE_DIR', './css/themes/');
 require_once '../vendor/autoload.php';
 $shared = \Ease\Shared::instanced();
 
-if (file_exists('../.env')) {
-    $shared->loadConfig('../.env', true);
+if (\Ease\Document::isPosted()) {
+    define('ABRAFLEXI_URL', \Ease\Document::getPostValue('url'));
+    define('ABRAFLEXI_LOGIN', \Ease\Document::getPostValue('user'));
+    define('ABRAFLEXI_PASSWORD', \Ease\Document::getPostValue('password'));
+    define('ABRAFLEXI_COMPANY', \Ease\Document::getPostValue('company'));
+} else {
+    if (file_exists('../.env')) {
+        $shared->loadConfig('../.env', true);
+    }
 }
 
 $localer = new \Ease\Locale('cs_CZ', '../i18n', 'abraflexi-digest');

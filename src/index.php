@@ -37,7 +37,7 @@ if (empty($to)) {
 
 
 
-if ($oPage->isPosted()) {
+if (\Ease\Document::isPosted()) {
 
     $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
 
@@ -62,7 +62,7 @@ if ($oPage->isPosted()) {
     $oPage->addCss(Digestor::getWebPageInlineCSS());
     $oPage->setPageTitle($subject);
     $oPage->addItem($digestor);
-    $oPage->draw();
+ 
     exit();
 }
 
@@ -94,7 +94,7 @@ foreach ($candidates as $heading => $modules) {
         include_once $classFile;
         $module = new $className(null);
         $modulesCol->addItem(new \Ease\TWB4\Checkbox('modules[' . $className . ']',
-                        $classFile, '&nbsp;' . $module->heading(), false, ['class' => 'module']));
+                        $classFile, '&nbsp;' . $module->heading(), (isset($_REQUEST) && array_key_exists('modules', $_REQUEST) && array_key_exists($className, $_REQUEST['modules']))  , ['class' => 'module']));
     }
 }
 
@@ -104,7 +104,7 @@ $themes = [];
 $d = dir(constant('STYLE_DIR'));
 while (false !== ($entry = $d->read())) {
     if (pathinfo($entry, PATHINFO_EXTENSION) == 'css') {
-        $themes[pathinfo($entry, PATHINFO_BASENAME)] = ucfirst(pathinfo(pathinfo($entry,PATHINFO_FILENAME),PATHINFO_FILENAME));
+        $themes[pathinfo($entry, PATHINFO_BASENAME)] = ucfirst(pathinfo(pathinfo($entry, PATHINFO_FILENAME), PATHINFO_FILENAME));
     }
 }
 $d->close();
@@ -163,6 +163,8 @@ $optionsCol->addItem(new \Ease\TWB4\FormGroup(_('Output Directory'),
 $optionsCol->addItem(new \Ease\TWB4\FormGroup(_('Send by mail to'),
                 new \Ease\Html\InputEmailTag('recipient',
                         $shared->getConfigValue('EASE_MAILTO'))));
+
+$optionsCol->addItem(new \AbraFlexi\ui\TWB4\ConnectionForm($myCompany->getConnectionOptions()));
 
 $fromtoForm->addItem($formColumns);
 $fromtoForm->addItem(new \Ease\TWB4\SubmitButton(_('Generate digest'),
