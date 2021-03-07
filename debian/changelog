@@ -1,4 +1,4 @@
-abraflexi-digest (1.17) UNRELEASED; urgency=medium
+abraflexi-digest (1.18) UNRELEASED; urgency=medium
 
   [ Vítězslav Dvořák ]
   * Do not show empty results
@@ -10,8 +10,9 @@ abraflexi-digest (1.17) UNRELEASED; urgency=medium
   * Debian buster build
   * twbootstrap renamed to bootstrap
   * twbootstrap renamed to bootstrap
+  * Debian package update
 
- -- CyberVitexus <vitex@exiv.jinonice.czf>  Thu, 23 Jul 2020 18:58:01 +0200
+ -- CyberVitexus <vitex@exiv.jinonice.czf>  Sun, 07 Mar 2021 01:17:12 +0100
 
 abraflexi-digest (1.6) UNRELEASED; urgency=medium
 
