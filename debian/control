@@ -7,7 +7,7 @@ Priority: optional
 Homepage: https://github.com/VitexSoftware/AbraFlexi-Digest
 
 Package: abraflexi-digest
-Depends: ${misc:Depends}, php-abraflexi-bricks, composer, php-cli, php-intl, locales-all
+Depends: ${misc:Depends}, php-vitexsoftware-ease-bootstrap4-widgets-abraflexi, php-vitexsoftware-abraflexi-bricks, composer, php-cli, php-intl, locales-all
 Suggests: abraflexi-server,php-abraflexi-config
 Architecture: all
 Section: web

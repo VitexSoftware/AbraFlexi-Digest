@@ -1,6 +1,6 @@
 {
-    "name": "deb/flexibee-digest",
-    "description": "Invoice Digest for FlexiBee written in PHP",
+    "name": "deb/abraflexi-digest",
+    "description": "Invoice Digest for abraflexi written in PHP",
     "type": "project",
     "version": "1.2",
     "authors": [
@@ -10,15 +10,15 @@
         }
     ],
     "config": {
-        "vendor-dir": "/var/lib/php-flexibee-digest"
+        "vendor-dir": "/var/lib/php-abraflexi-digest"
     },
     "require": {
         "deb/ease-core": "*",
-        "deb/flexibee-bricks": "*"
+        "deb/abraflexi-bricks": "*"
     },
     "autoload": {
         "psr-4": {
-            "FlexiPeeHP\\Digest\\": "./Digest"
+            "AbraFlexi\\Digest\\": "./Digest"
         }
     },
   "repositories": [
@@ -32,7 +32,7 @@
     },
     {
       "type": "path",
-      "url": "/usr/share/php/FlexiPeeHP/"
+      "url": "/usr/share/php/AbraFlexi/"
     },
     {
       "type": "path",
@@ -44,7 +44,7 @@
     },
     {
       "type": "path",
-      "url": "/usr/share/php/FlexiPeeHPBricks/"
+      "url": "/usr/share/php/AbraFlexiBricks/"
     },
     {
       "type": "path",
@@ -52,7 +52,7 @@
     },
     {
       "type": "path",
-      "url": "/usr/share/php/EaseTWB4WidgetsFlexiBee/"
+      "url": "/usr/share/php/EaseTWB4WidgetsAbraFlexi/"
     }
   ]
 }
