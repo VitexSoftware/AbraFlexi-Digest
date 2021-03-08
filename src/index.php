@@ -164,7 +164,9 @@ $optionsCol->addItem(new \Ease\TWB4\FormGroup(_('Send by mail to'),
                 new \Ease\Html\InputEmailTag('recipient',
                         $shared->getConfigValue('EASE_MAILTO'))));
 
-$optionsCol->addItem(new \AbraFlexi\ui\TWB4\ConnectionForm($myCompany->getConnectionOptions()));
+if($shared->getConfigValue('SHOW_CONNECTION_FORM')){
+    $optionsCol->addItem(new \AbraFlexi\ui\TWB4\ConnectionForm($myCompany->getConnectionOptions()));
+}
 
 $fromtoForm->addItem($formColumns);
 $fromtoForm->addItem(new \Ease\TWB4\SubmitButton(_('Generate digest'),

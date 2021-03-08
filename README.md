@@ -46,18 +46,18 @@ After package installation you can use this new commands:
   * **abraflexi-alltimedigest**  - Generate AbraFlexi digest for all time
 
 
-Konfigurace
+Configuration
 -----------
 
- * [/etc/abraflexi/client.json](client.json)   - společná konfigurace připojení k AbraFlexi serveru
- * [/etc/abraflexi/digest.json](digest.json) - nastavení párovače:
-
+ * [/etc/abraflexi/.env](.env)   - Shared configuration file to override default Environment settings
+ 
 ```
     "EASE_LOGGER": "syslog|mail|console",         - how to log progress and results
     "EASE_MAILTO": "info@yourdomain.net",         - send digest mail
     "DIGEST_FROM": "noreply@vitexsoftware.cz",    - digest mail sender address 
     "THEME":  "happy",                            - additional css
     "SAVETO": "/var/tmp/"                         - save html digest to 
+    "SHOW_CONNECTION_FORM": "true"                - show custom server connection form
 ```
 
 Web interface 
@@ -146,7 +146,7 @@ none yet
 Dependencies
 ------------
 
-Tento nástroj ke svojí funkci využívá následující knihovny:
+Powered by:
 
  * [**EasePHP Framework**](https://github.com/VitexSoftware/php-ease-core) - pomocné funkce např. logování
  * [**AbraFlexi**](https://github.com/Spoje-NET/php-abraflexi)        - komunikace s [AbraFlexi](https://abraflexi.eu/)
@@ -158,7 +158,9 @@ See also
 
   * https://github.com/VitexSoftware/abraflexi-reminder
   * https://github.com/VitexSoftware/php-abraflexi-matcher
-  * https://github.com/VitexSoftware/abraflexi-mailer
+  * https://github.com/VitexSoftware/AbraFlexi-email-importer
+  * https://github.com/VitexSoftware/php-abraflexi-mailer
+  * https://github.com/VitexSoftware/AbraFlexi-Tools
 
 Poděkování
 ----------
