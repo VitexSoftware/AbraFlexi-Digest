@@ -17,7 +17,7 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
      * Count several reminds
      * @var array of int
      */
-    private $remids = ['datUp1' => [], 'datUp2' => [], 'datSmir' => []];
+    private $remids = ['datUp1' => 0, 'datUp2' => 0, 'datSmir' => 0];
 
     public function dig() {
         $invoicer = new \AbraFlexi\FakturaVydana();
@@ -75,7 +75,7 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
      * 
      * @param array $rowData
      */
-    public function countReminds($rowData) {
+    public function countReminds(array $rowData) {
         if (!empty($rowData['datUp1'])) {
             $this->countRemind($rowData['datUp1'], 'datUp1');
         }
@@ -90,10 +90,10 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
     /**
      * count date is within digest date interval 
      * 
-     * @param string $date
+     * @param \DateTime $date
      * @param string $column
      */
-    public function countRemind($date, $column) {
+    public function countRemind(\DateTime $date, string $column) {
         if (!array_key_exists($column, $this->remids)) {
             $this->remids[$column] = 0;
         }

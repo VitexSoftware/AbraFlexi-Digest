@@ -14,7 +14,8 @@
     },
     "require": {
         "deb/ease-core": "*",
-        "deb/abraflexi-bricks": "*"
+        "deb/abraflexi-bricks": "*",
+	"deb/ease-bootstrap4-widgets-abraflexi": "*"
     },
     "autoload": {
         "psr-4": {

@@ -15,7 +15,7 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
      * @return boolean
      */
     public function dig() {
-        $invoicer = new AbraFlexi\FakturaVydana();
+        $invoicer = new AbraFlexi\FakturaVydana(null,['nativeTypes'=>false]);
         $adresser = new AbraFlexi\Adresar();
         $proformas = $invoicer->getColumnsFromAbraFlexi(['kod', 'mena', 'popis', 'sumCelkem',
             'sumCelkemMen', 'stavOdpocetK', 'typDokl', 'firma', 'datVyst'],

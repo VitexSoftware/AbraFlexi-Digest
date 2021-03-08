@@ -63,7 +63,7 @@ if (\Ease\Document::isPosted()) {
     $oPage->setPageTitle($subject);
     $oPage->addItem($digestor);
  
-    exit();
+//    exit();
 }
 
 

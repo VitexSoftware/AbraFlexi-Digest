@@ -1,5 +1,6 @@
 debian/conf/composer.json       usr/share/abraflexi-digest/
-src/*			        usr/share/abraflexi-digest/
+debian/conf/abraflexi-digest.conf /etc/apache2/conf-available/
+src/*.php		        usr/share/abraflexi-digest/
 src/modules/*		        usr/lib/abraflexi-digest/
 #src/modules.daily/*	        usr/lib/abraflexi-digest/daily/
 #src/modules.weekly/*	        usr/lib/abraflexi-digest/weekly/
@@ -7,7 +8,8 @@ src/modules.monthly/*	        usr/lib/abraflexi-digest/monthly/
 #src/modules.yearly/*	        usr/lib/abraflexi-digest/yearly/
 #src/modules.alltime/*	        usr/lib/abraflexi-digest/alltime/
 src/Digest/*                    usr/share/abraflexi-digest/Digest/
-src/css/*.css                   usr/share/abraflexi-digest/themes/
+src/css/*.css                   usr/share/abraflexi-digest/css/
+src/css/themes/*.css            usr/share/abraflexi-digest/css/themes
 bin/*                           usr/bin/
 i18n/cs_CZ/LC_MESSAGES/*.mo     usr/share/locale/cs_CZ/LC_MESSAGES
 i18n/en_US/LC_MESSAGES/*.mo     usr/share/locale/en_US/LC_MESSAGES
