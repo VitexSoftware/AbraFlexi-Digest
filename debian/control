@@ -1,5 +1,5 @@
 Source: abraflexi-digest
-Build-Depends: debhelper (>= 13~),composer
+Build-Depends: debhelper (>= 13~),composer, jq, moreutils
 Standards-Version: 4.3.0
 Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
 Uploaders: Vitex <vitex@hippy.cz>

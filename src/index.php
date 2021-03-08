@@ -62,7 +62,7 @@ if (\Ease\Document::isPosted()) {
     $oPage->addCss(Digestor::getWebPageInlineCSS());
     $oPage->setPageTitle($subject);
     $oPage->addItem($digestor);
- 
+
 //    exit();
 }
 
@@ -94,7 +94,7 @@ foreach ($candidates as $heading => $modules) {
         include_once $classFile;
         $module = new $className(null);
         $modulesCol->addItem(new \Ease\TWB4\Checkbox('modules[' . $className . ']',
-                        $classFile, '&nbsp;' . $module->heading(), (isset($_REQUEST) && array_key_exists('modules', $_REQUEST) && array_key_exists($className, $_REQUEST['modules']))  , ['class' => 'module']));
+                        $classFile, '&nbsp;' . $module->heading(), (isset($_REQUEST) && array_key_exists('modules', $_REQUEST) && array_key_exists($className, $_REQUEST['modules'])), ['class' => 'module']));
     }
 }
 
@@ -164,7 +164,7 @@ $optionsCol->addItem(new \Ease\TWB4\FormGroup(_('Send by mail to'),
                 new \Ease\Html\InputEmailTag('recipient',
                         $shared->getConfigValue('EASE_MAILTO'))));
 
-if($shared->getConfigValue('SHOW_CONNECTION_FORM')){
+if ($shared->getConfigValue('SHOW_CONNECTION_FORM')) {
     $optionsCol->addItem(new \AbraFlexi\ui\TWB4\ConnectionForm($myCompany->getConnectionOptions()));
 }
 
@@ -178,5 +178,24 @@ $container->addItem($fromtoForm);
 
 $oPage->addItem($container);
 
+$composer = 'composer.json';
+if (!file_exists($composer)) {
+    $composer = '../' . $composer;
+}
+
+$appInfo = json_decode(file_get_contents($composer));
+
+$container = $oPage->setTagID('footer');
+
+$oPage->addItem('<hr>');
+$footrow = new \Ease\TWB4\Row();
+
+$author = 'Multi FlexiBee Setup v.: ' . $appInfo->version . '&nbsp;&nbsp; &copy; 2020 <a href="http://vitexsoftware.cz/">Vitex Software</a>';
+
+$footrow->addColumn(6, [$author]);
+
+$oPage->addItem(new \Ease\TWB4\Container($footrow));
+
 //$oPage->addItem(new \Ease\FuelUX\Loader("Preloader"));
 $oPage->draw();
+        

@@ -5,6 +5,7 @@
 
 override_dh_install:
 	dh_install
+	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'`'"'    debian/conf/composer.json | sponge debian/conf/composer.json
 	sed -i -e 's/..\/i18n/\/usr\/share\/locale/g'            	        debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
 	sed -i -e 's/..\/vendor/\/var\/lib\/php-abraflexi-digest/g' 	        debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
 	sed -i -e 's/\.\./\/etc\/abraflexi/g'                                    debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
