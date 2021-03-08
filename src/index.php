@@ -190,7 +190,7 @@ $container = $oPage->setTagID('footer');
 $oPage->addItem('<hr>');
 $footrow = new \Ease\TWB4\Row();
 
-$author = 'Multi FlexiBee Setup v.: ' . $appInfo->version . '&nbsp;&nbsp; &copy; 2020 <a href="http://vitexsoftware.cz/">Vitex Software</a>';
+$author = 'AbraFlexi Digest v.: ' . $appInfo->version . '&nbsp;&nbsp; &copy; 2018-2021 <a href="https://vitexsoftware.cz/">Vitex Software</a>';
 
 $footrow->addColumn(6, [$author]);
 
@@ -198,4 +198,3 @@ $oPage->addItem(new \Ease\TWB4\Container($footrow));
 
 //$oPage->addItem(new \Ease\FuelUX\Loader("Preloader"));
 $oPage->draw();
-        

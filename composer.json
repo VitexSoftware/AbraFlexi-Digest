@@ -1,6 +1,7 @@
 {
     "name": "vitexsoftware/abraflexi-digest",
     "description": "Periodical AbraFlexi digest.",
+    "version": "dev-main",
     "authors": [
         {
             "name": "Vitex",
