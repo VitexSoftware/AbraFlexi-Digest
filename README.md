@@ -1,7 +1,7 @@
 ![Package Logo](package-logo.png?raw=true "Project Logo")
 
 AbraFlexi Digest generator
-=========================
+==========================
 
 Features:
 
@@ -47,7 +47,7 @@ After package installation you can use this new commands:
 
 
 Configuration
------------
+-------------
 
  * [/etc/abraflexi/.env](.env)   - Shared configuration file to override default Environment settings
  
@@ -65,8 +65,9 @@ Web interface
 
 We Also provide form to test Digest modules. Availble as [index.php](src/index.php)
 
-![Example](CustomDigestForm.png?raw=true "Week Digest")
+![Example](form.png?raw=true "Week Digest")
 
+See in action: https://www.vitexsoftware.cz/abraflexi-digest/
 
 Modules
 =======

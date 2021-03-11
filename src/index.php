@@ -60,7 +60,7 @@ if (\Ease\Document::isPosted()) {
     $oPage->addCss(Digestor::getCustomCss());
     $oPage->addCss(Digestor::getWebPageInlineCSS());
     $oPage->setPageTitle($subject);
-    $oPage->addItem( new \Ease\TWB4\Container($digestor) );
+    $oPage->addItem(new \Ease\TWB4\Container($digestor));
 
 //    exit();
 }
@@ -78,7 +78,7 @@ $fromtoForm = new \Ease\TWB4\Form(['name' => 'fromto', 'class' => 'form-horizont
 $container = new \Ease\TWB4\Container(new \Ease\Html\H1Tag(new \Ease\Html\ATag($myCompany->getApiURL(),
                         $myCompanyName) . ' ' . _('AbraFlexi digest')));
 
-$container->addItem(new \AbraFlexi\ui\CompanyLogo(['class'=>'img-fluid']));
+$container->addItem(new \AbraFlexi\ui\CompanyLogo(['class' => 'img-fluid']));
 $container->addItem(new \AbraFlexi\ui\TWB4\StatusInfoBox());
 
 $formColumns = new \Ease\TWB4\Row();
@@ -191,11 +191,11 @@ $container = $oPage->setTagID('footer');
 $oPage->addItem('<hr>');
 $footrow = new \Ease\TWB4\Row();
 
-$author = 'AbraFlexi Digest v.: ' . $appInfo->version . '&nbsp;&nbsp; &copy; 2018-2021 <a href="https://vitexsoftware.cz/">Vitex Software</a>';
+$author = '<a href="https://github.com/VitexSoftware/AbraFlexi-Digest">AbraFlexi Digest</a> v.: ' . $appInfo->version . '&nbsp;&nbsp; &copy; 2018-2021 <a href="https://vitexsoftware.cz/">Vitex Software</a>';
 
 $footrow->addColumn(6, [$author]);
 
 $oPage->addItem(new \Ease\TWB4\Container($footrow));
 
-$oPage->addItem( new \AbraFlexi\Digest\SandClock() );
+$oPage->addItem(new \AbraFlexi\Digest\SandClock());
 $oPage->draw();
