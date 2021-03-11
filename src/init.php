@@ -22,11 +22,12 @@ require_once '../vendor/autoload.php';
 $shared = \Ease\Shared::instanced();
 
 if (\Ease\Document::isPosted() && \Ease\Document::getPostValue('url')) {
+    define('SHOW_CONNECTION_FORM',true);
     define('ABRAFLEXI_URL', \Ease\Document::getPostValue('url'));
     define('ABRAFLEXI_LOGIN', \Ease\Document::getPostValue('user'));
     define('ABRAFLEXI_PASSWORD', \Ease\Document::getPostValue('password'));
     define('ABRAFLEXI_COMPANY', \Ease\Document::getPostValue('company'));
-    define('SHOW_CONNECTION_FORM',true);
+    $shared->setConfigValue('EASE_MAILTO', \Ease\Document::getPostValue('recipient'));
 } else {
     if (file_exists('../.env')) {
         $shared->loadConfig('../.env', true);

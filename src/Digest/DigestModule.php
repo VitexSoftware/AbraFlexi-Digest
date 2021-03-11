@@ -184,6 +184,11 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface {
         return $result;
     }
 
+    public static function getPrice($data) {
+        return array_key_exists('sumCelkem', $data) ? $data['sumCelkem'] : 0 ;
+    }
+
+    
     /**
      * Return Totals for serveral currencies
      * 

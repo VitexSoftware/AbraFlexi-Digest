@@ -15,6 +15,7 @@
   "require": {
     "deb/ease-core": "*",
     "deb/abraflexi-bricks": "*",
+    "deb/ease-bootstrap4-widgets": "*",
     "deb/ease-bootstrap4-widgets-abraflexi": "*"
   },
   "autoload": {

@@ -172,7 +172,7 @@ if (\Ease\Functions::cfg('SHOW_CONNECTION_FORM')) {
 $fromtoForm->addItem($formColumns);
 $fromtoForm->addItem(new \Ease\TWB4\SubmitButton(_('Generate digest'),
                 'success btn-lg btn-block',
-                ['onClick' => "window.scrollTo(0, 0); $('#Preloader').css('visibility', 'visible');",
+                ['onClick' => "window.scrollTo(0, 0); $('#wrap').css('visibility', 'visible');",
             'style' => 'height: 90%']));
 
 $container->addItem($fromtoForm);
@@ -197,5 +197,5 @@ $footrow->addColumn(6, [$author]);
 
 $oPage->addItem(new \Ease\TWB4\Container($footrow));
 
-//$oPage->addItem(new \Ease\FuelUX\Loader("Preloader"));
+$oPage->addItem( new \AbraFlexi\Digest\SandClock() );
 $oPage->draw();
