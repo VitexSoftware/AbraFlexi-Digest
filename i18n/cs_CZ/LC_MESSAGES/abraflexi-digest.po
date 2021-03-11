@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-03-01 19:06+0100\n"
-"PO-Revision-Date: 2021-03-01 19:13+0100\n"
+"POT-Creation-Date: 2021-03-11 16:41+0100\n"
+"PO-Revision-Date: 2021-03-11 16:41+0100\n"
 "Last-Translator: Vítězslav Dvořák <info@vitexsoftware.cz>\n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -74,7 +74,6 @@ msgid "version"
 msgstr "verze"
 
 #: ../src/Digest/Digestor.php:284
-#| msgid "(G) 2018"
 msgid "(G) 2018-2021"
 msgstr "(G) 2018-2021"
 
@@ -103,7 +102,7 @@ msgstr "Týdenní %s FlexiBee souhrn od %s do %s"
 msgid "AbraFlexi %s Year digest from %s to %s"
 msgstr "Roční souhrn %s AbraFlexi  od %s do %s"
 
-#: ../src/index.php:16 ../src/index.php:80 ../src/results.php:16
+#: ../src/index.php:16 ../src/index.php:79 ../src/results.php:16
 msgid "AbraFlexi digest"
 msgstr "AbraFlexi Souhrn"
 
@@ -113,83 +112,83 @@ msgstr "AbraFlexi Souhrn"
 msgid "AbraFlexi %s digest from %s to %s"
 msgstr "FlexiBee %s souhrn od %s do %s"
 
-#: ../src/index.php:58
-msgid "New Digest"
-msgstr "Nový Souhrn"
-
-#: ../src/index.php:70
+#: ../src/index.php:69
 msgid "Common modules"
 msgstr "Univerzální moduly"
 
-#: ../src/index.php:71
+#: ../src/index.php:70
 msgid "Daily modules"
 msgstr "Denní moduly"
 
-#: ../src/index.php:72
+#: ../src/index.php:71
 msgid "Weekly modules"
 msgstr "Týdenní moduly"
 
-#: ../src/index.php:73
+#: ../src/index.php:72
 msgid "Monthly modules"
 msgstr "Měsíční moduly"
 
-#: ../src/index.php:74
+#: ../src/index.php:73
 msgid "Yearly modules"
 msgstr "Roční moduly"
 
-#: ../src/index.php:75
+#: ../src/index.php:74
 msgid "Alltime modules"
 msgstr "Moduly bez omezení času"
 
-#: ../src/index.php:86
+#: ../src/index.php:85
 msgid "Modules"
 msgstr "Moduly"
 
-#: ../src/index.php:88
+#: ../src/index.php:87
 msgid "Check All"
 msgstr "Zaškrtnout vše"
 
-#: ../src/index.php:101
+#: ../src/index.php:100
 msgid "Options"
 msgstr "Možnosti"
 
-#: ../src/index.php:142
+#: ../src/index.php:141
 msgid "Yesterday"
 msgstr "Včera"
 
-#: ../src/index.php:144
+#: ../src/index.php:143
 msgid "Week"
 msgstr "Týden"
 
-#: ../src/index.php:146
+#: ../src/index.php:145
 msgid "Month"
 msgstr "Měsíc"
 
-#: ../src/index.php:148
+#: ../src/index.php:147
 msgid "Year"
 msgstr "Rok"
 
-#: ../src/index.php:151
+#: ../src/index.php:150
 msgid "From"
 msgstr "Od"
 
-#: ../src/index.php:154
+#: ../src/index.php:153
 msgid "To"
 msgstr "Do"
 
-#: ../src/index.php:157
+#: ../src/index.php:156
 msgid "Theme name"
 msgstr "Jméno tématu"
 
-#: ../src/index.php:160
+#: ../src/index.php:159
 msgid "Output Directory"
 msgstr "Výstupní složka"
 
-#: ../src/index.php:163
+#: ../src/index.php:162
 msgid "Send by mail to"
 msgstr "Odešli mail k"
 
-#: ../src/index.php:168
+#: ../src/index.php:166
+msgid "Language select"
+msgstr "Volba jazyka"
+
+#: ../src/index.php:173
 msgid "Generate digest"
 msgstr "Vygeneruj report"
 
@@ -428,7 +427,7 @@ msgstr "Popis"
 
 #: ../src/modules/UnmatchedInvoices.php:33
 msgid "Denunc state"
-msgstr ""
+msgstr "Stav odpočtu"
 
 #: ../src/modules/UnmatchedInvoices.php:33
 #: ../src/modules/UnmatchedPayments.php:38
@@ -487,6 +486,9 @@ msgstr "Zákazníci bez notifikačního telefoního čísla"
 #: ../src/results.php:19
 msgid "AbraFlexi digest results"
 msgstr "Výsledky AbraFlexi souhrnu"
+
+#~ msgid "New Digest"
+#~ msgstr "Nový Souhrn"
 
 #~ msgid "Invoiced amount %s"
 #~ msgstr "Fakturovaná částka %s"

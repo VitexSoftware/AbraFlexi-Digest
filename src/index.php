@@ -55,8 +55,7 @@ if (\Ease\Document::isPosted()) {
 
     $digestor->dig($period, $oPage->getRequestValue('modules'));
 
-    $digestor->addItem(new \Ease\Html\ATag('index.php', _('New Digest')));
-
+//    $digestor->addItem(new \Ease\Html\ATag('index.php', _('New Digest')));
 //    $oPage->addCss(Digestor::$purecss);
     $oPage->addCss(Digestor::getCustomCss());
     $oPage->addCss(Digestor::getWebPageInlineCSS());
@@ -155,7 +154,7 @@ $optionsCol->addItem(new \Ease\TWB4\FormGroup(_('To'),
                 new \Ease\Html\InputDateTag('to', $to)));
 
 $optionsCol->addItem(new \Ease\TWB4\FormGroup(_('Theme name'),
-                new \Ease\Html\SelectTag('theme', $themes)));
+                new \Ease\Html\SelectTag('theme', $themes, $shared->getConfigValue('THEME'))));
 
 $optionsCol->addItem(new \Ease\TWB4\FormGroup(_('Output Directory'),
                 new \Ease\Html\InputTextTag('outdir', $shared->getConfigValue('SAVETO'))));
@@ -164,7 +163,9 @@ $optionsCol->addItem(new \Ease\TWB4\FormGroup(_('Send by mail to'),
                 new \Ease\Html\InputEmailTag('recipient',
                         $shared->getConfigValue('EASE_MAILTO'))));
 
-if ($shared->getConfigValue('SHOW_CONNECTION_FORM')) {
+$optionsCol->addItem(new \Ease\TWB4\FormGroup(_('Language select'), new \Ease\TWB4\Widgets\LangSelect()));
+
+if (\Ease\Functions::cfg('SHOW_CONNECTION_FORM')) {
     $optionsCol->addItem(new \AbraFlexi\ui\TWB4\ConnectionForm($myCompany->getConnectionOptions()));
 }
 

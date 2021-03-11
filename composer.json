@@ -12,6 +12,7 @@
     "type": "project",
     "require": {
         "vitexsoftware/ease-twbootstrap4-widgets-flexibee": "* 9999999-dev",
+        "vitexsoftware/ease-twbootstrap4-widgets": ">=1.3",
         "vitexsoftware/flexibee-bricks": "* dev-abraflexi"
     },
     "autoload": {

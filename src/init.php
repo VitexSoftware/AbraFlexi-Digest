@@ -4,7 +4,7 @@
  * AbraFlexi Digest - Dayly 
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2018-2020 Vitex Software
+ * @copyright  (G) 2018-2021 Vitex Software
  */
 
 namespace AbraFlexi\Digest;
@@ -21,11 +21,12 @@ define('STYLE_DIR', './css/themes/');
 require_once '../vendor/autoload.php';
 $shared = \Ease\Shared::instanced();
 
-if (\Ease\Document::isPosted()) {
+if (\Ease\Document::isPosted() && \Ease\Document::getPostValue('url')) {
     define('ABRAFLEXI_URL', \Ease\Document::getPostValue('url'));
     define('ABRAFLEXI_LOGIN', \Ease\Document::getPostValue('user'));
     define('ABRAFLEXI_PASSWORD', \Ease\Document::getPostValue('password'));
     define('ABRAFLEXI_COMPANY', \Ease\Document::getPostValue('company'));
+    define('SHOW_CONNECTION_FORM',true);
 } else {
     if (file_exists('../.env')) {
         $shared->loadConfig('../.env', true);
