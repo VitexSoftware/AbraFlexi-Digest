@@ -34,7 +34,7 @@ if (\Ease\Document::isPosted() && \Ease\Document::getPostValue('url')) {
     }
 }
 
-$localer = new \Ease\Locale('cs_CZ', '../i18n', 'abraflexi-digest');
+$localer = \Ease\Locale::singleton('cs_CZ', '../i18n', 'abraflexi-digest');
 
 $myCompany = new \AbraFlexi\Company(\Ease\Functions::cfg('ABRAFLEXI_COMPANY'));
 $myCompanyName = $myCompany->getDataValue('nazev');

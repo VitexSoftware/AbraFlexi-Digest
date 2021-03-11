@@ -60,7 +60,7 @@ if (\Ease\Document::isPosted()) {
     $oPage->addCss(Digestor::getCustomCss());
     $oPage->addCss(Digestor::getWebPageInlineCSS());
     $oPage->setPageTitle($subject);
-    $oPage->addItem($digestor);
+    $oPage->addItem( new \Ease\TWB4\Container($digestor) );
 
 //    exit();
 }

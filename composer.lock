@@ -340,12 +340,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-ease-core.git",
-                "reference": "cd2ab87958c5ec73511816a42d13e81ea364102e"
+                "reference": "5b26ea8643c5de399728fa2f81b2705c0cc0b76d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-core/zipball/cd2ab87958c5ec73511816a42d13e81ea364102e",
-                "reference": "cd2ab87958c5ec73511816a42d13e81ea364102e",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-core/zipball/5b26ea8643c5de399728fa2f81b2705c0cc0b76d",
+                "reference": "5b26ea8643c5de399728fa2f81b2705c0cc0b76d",
                 "shasum": ""
             },
             "require": {
@@ -383,7 +383,7 @@
             "homepage": "http://v.s.cz/ease.php",
             "support": {
                 "issues": "https://github.com/VitexSoftware/php-ease-core/issues",
-                "source": "https://github.com/VitexSoftware/php-ease-core/tree/1.12"
+                "source": "https://github.com/VitexSoftware/php-ease-core/tree/main"
             },
             "funding": [
                 {
@@ -391,7 +391,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-03-02T10:59:13+00:00"
+            "time": "2021-03-11T21:39:26+00:00"
         },
         {
             "name": "vitexsoftware/ease-html",
