@@ -78,7 +78,7 @@ $fromtoForm = new \Ease\TWB4\Form(['name' => 'fromto', 'class' => 'form-horizont
 $container = new \Ease\TWB4\Container(new \Ease\Html\H1Tag(new \Ease\Html\ATag($myCompany->getApiURL(),
                         $myCompanyName) . ' ' . _('AbraFlexi digest')));
 
-$container->addItem(new \AbraFlexi\ui\CompanyLogo());
+$container->addItem(new \AbraFlexi\ui\CompanyLogo(['class'=>'img-fluid']));
 $container->addItem(new \AbraFlexi\ui\TWB4\StatusInfoBox());
 
 $formColumns = new \Ease\TWB4\Row();
