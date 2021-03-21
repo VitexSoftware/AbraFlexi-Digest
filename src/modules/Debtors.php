@@ -96,8 +96,10 @@ class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
 
             $this->addItem($invTable);
 
-            $this->addItem(new \Ease\Html\H3Tag(_('Total')));
-            $this->addItem(self::getTotalsDiv($totalsByCurrency));
+            $totalRow=new \Ease\TWB4\Row();
+            $totalRow->addColumn(9);
+            $totalRow->addColumn(3,[new \Ease\Html\H3Tag(_('Total')),self::getTotalsDiv($totalsByCurrency)]);
+            $this->addItem($totalRow);
         }
         return !empty($invoicesByFirma);
     }
