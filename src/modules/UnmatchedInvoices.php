@@ -1,5 +1,7 @@
 <?php
 
+use Ease\Html\DivTag;
+
 /**
  * Incoming payments for us
  *
@@ -27,7 +29,7 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
         $total = [];
         $totals = [];
         if (empty($proformas)) {
-            $this->addItem(_('none'));
+            $this->addItem($this->cardBody(_('none')));
         } else {
             $incomesTable = new \AbraFlexi\Digest\Table([_('Document'), _('Description'),
                 _('Denunc state'), _('Document type'), _('Company'), _('Date'), _('Amount')]);
@@ -76,11 +78,15 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
                 }
             }
 
-            $this->addItem($incomesTable);
+            $currDiv = new DivTag();
+            
 
             foreach ($total as $currency => $amount) {
-                $this->addItem(new \Ease\Html\DivTag($totals[$currency] . 'x' . ' ' . self::formatCurrency($amount) . '&nbsp;' . $currency));
+                $currDiv->addItem(new \Ease\Html\DivTag($totals[$currency] . 'x' . ' ' . self::formatCurrency($amount) . '&nbsp;' . $currency));
             }
+
+            $this->addItem($this->cardBody([$incomesTable,$currDiv]));
+
         }
         return !empty($total);
     }

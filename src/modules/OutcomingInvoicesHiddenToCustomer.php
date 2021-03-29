@@ -84,7 +84,7 @@ class OutcomingInvoicesHiddenToCustomer extends DigestModule implements DigestMo
 
             $outInvoicesTable->addRowFooterColumns($tableFooter);
 
-            $this->addItem($outInvoicesTable);
+            $this->addItem( $this->cardBody($outInvoicesTable));
         }
         return !empty($outInvoicesData);
     }

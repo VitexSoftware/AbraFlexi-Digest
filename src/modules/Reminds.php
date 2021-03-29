@@ -66,7 +66,7 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
             $invTable->addRowFooterColumns([count($faDatakturyRaw), '', '', $this->remids['datUp1'],
                 $this->remids['datUp2'], $this->remids['datSmir']]);
 
-            $this->addItem($invTable);
+                $this->addItem($this->cardBody($invTable));
         }
         return !empty($faDatakturyRaw);
     }

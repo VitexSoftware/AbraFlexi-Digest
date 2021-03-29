@@ -9,6 +9,9 @@
 
 namespace AbraFlexi\Digest;
 
+use Ease\Html\ButtonTag;
+use Ease\Html\DivTag;
+
 /**
  * Description of DigestMod
  *
@@ -53,8 +56,9 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface {
             }
         }
         $this->timeInterval = $interval;
-        parent::__construct();
+        parent::__construct(null,['class'=>'card']);
         $this->setTagID(get_class($this));
+        $this->addCSS('.module-result {  border: 1px green solid; margin: 20px; padding: 20px }');
     }
 
     /**
@@ -63,10 +67,32 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface {
      * @return boolean
      */
     public function process() {
-        $this->addItem(new \Ease\Html\H2Tag(new \Ease\Html\ATag('#index',
-                                $this->heading(), ['name' => get_class($this)])));
+        $this->addItem(new \Ease\Html\DivTag(
+                                new \Ease\Html\H2Tag(
+                                    new \Ease\Html\ButtonTag($this->heading(), [
+                                        'class'=>'btn btn-link btn-block text-left',
+                                        'type'=>'button', 
+                                        'data-toggle'=>'collapse',
+                                        'data-target'=>'#collapse'.get_class($this),
+                                        'aria-expanded'=>'false',
+                                        'aria-controls'=>'collapse'.get_class($this)] ),
+                                    ['class'=>'mb-0']) , 
+                                    ['class'=>'card-header','id'=> 'heading' . get_class($this)]
+
+                                )
+                            );
+
         $this->addStatusMessage($this->heading());
-        return $this->dig();
+        return  $this->dig() ;
+    }
+
+    public function cardBody($content) {
+        return new \Ease\Html\DivTag(  new DivTag( $content , ['class'=>'card-body']  ) , [
+            'id'=> 'collapse' . get_class($this), 
+            'class'=>'collapse', 
+            'aria-labelledby'=>'heading'.get_class($this),
+            'data-parent'=>"#accordionExample"
+            ] );
     }
 
     /**

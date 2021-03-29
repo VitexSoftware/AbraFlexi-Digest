@@ -13,8 +13,8 @@ Features:
 
 There are four scripts:
 
-|  File                                                     | Description                            |
-|-----------------------------------------------------------|----------------------------------------| 
+|  File                                                       | Description                             |
+|-------------------------------------------------------------|-----------------------------------------| 
 |  [abraflexi-daydigest.php](src/abraflexi-daydigest.php)     | Generate AbraFlexi digest for one day   |
 |  [abraflexi-weekdigest.php](src/abraflexi-weekdigest.php)   | Generate AbraFlexi digest for one week  |
 |  [abraflexi-monthdigest.php](src/abraflexi-monthdigest.php) | Generate AbraFlexi digest for one month |

@@ -43,7 +43,9 @@ class OutcomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
             foreach ($total as $currency => $amount) {
                 $totalsTable->addRowColumns([self::formatCurrency($amount), $currency]);
             }
+            $this->addItem($this->cardBody($totalsTable));
         }
+        
         return !empty($outcomes);
     }
 

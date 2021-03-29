@@ -70,12 +70,17 @@ class WaitingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFle
                     $totals[$currency] = floatval($inInvoiceData['sumCelkem']);
                 }
             }
-            $this->addItem($invTable);
-            $this->addItem(new Ease\Html\H3Tag(_('Total')));
+
+            $currDiv = new \Ease\Html\DivTag();
+
+                        
             foreach ($totals as $currency => $amount) {
-                $this->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount) . '&nbsp;' . $currency));
-            }
+                 $currDiv->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount) . '&nbsp;' . $currency));
+                    
         }
+        $this->addItem($this->cardBody(new Ease\Html\H3Tag(_('Total')),[$invTable, $currDiv]));
+        }
+
         return !empty($inInvoices);
     }
 

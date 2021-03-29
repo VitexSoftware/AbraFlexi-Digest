@@ -66,8 +66,7 @@ class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
         } else {
             $adreser = new AbraFlexi\Adresar(null, ['offline' => 'true']);
             $invTable = new Ease\Html\TableTag(null, ['class' => 'table']);
-            $invTable->addRowHeaderColumns([_('Company'), _('Amount'), _('Overdue days'),
-                _('Invoices')]);
+            $invTable->addRowHeaderColumns([_('Company'), _('Overdue days'), _('Invoices'), _('Amount')]);
 
             foreach ($invoicesByFirma as $firma => $fakturyFirmy) {
 
@@ -89,15 +88,19 @@ class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
                 $nazevFirmy = array_key_exists('firma@showAs',
                                 current($fakturyFirmy)) ? current($fakturyFirmy)['firma@showAs'] : \AbraFlexi\RO::uncode($firma);
 
-                $invTable->addRowColumns([new \Ease\Html\ATag($adreser->getApiURL(),
-                            $nazevFirmy), self::getTotalsDiv($totals[$firma]),
-                    $overdue[$firma], $overdueInvoices]);
+                $invTable->addRowColumns([
+                    new \Ease\Html\ATag($adreser->getApiURL(), $nazevFirmy), 
+                    $overdue[$firma], 
+                    $overdueInvoices,
+                    self::getTotalsDiv($totals[$firma])
+                    ]
+                );
             }
 
-            $this->addItem($invTable);
+            $invTable->addRowFooterColumns(['','',_('Total'),self::getTotalsDiv($totalsByCurrency)]);
 
-            $this->addItem(new \Ease\Html\H3Tag(_('Total')));
-            $this->addItem(self::getTotalsDiv($totalsByCurrency));
+            $this->addItem( $this->cardBody( $invTable));
+
         }
         return !empty($invoicesByFirma);
     }

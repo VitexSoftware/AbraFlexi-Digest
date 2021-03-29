@@ -71,12 +71,13 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
                 unset($income['firma@showAs']);
                 $incomesTable->addRowColumns($income);
             }
-
-            $this->addItem($incomesTable);
-
+            $currDiv = new \Ease\Html\DivTag();
+           
             foreach ($total as $currency => $amount) {
-                $this->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount) . '&nbsp;' . $currency));
+                $currDiv->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount) . '&nbsp;' . $currency));
+            
             }
+            $this->addItem($this->cardBody([$incomesTable, $currDiv]));
         }
         return !empty($incomes);
     }

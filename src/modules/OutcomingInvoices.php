@@ -98,7 +98,7 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
             }
             $outInvoicesTable->addRowFooterColumns($tableFooter);
 
-            $this->addItem($outInvoicesTable);
+            $this->addItem( $this->cardBody($outInvoicesTable));
         }
         return !empty($outInvoicesData);
     }

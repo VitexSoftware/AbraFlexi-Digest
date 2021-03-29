@@ -39,9 +39,8 @@ class WithoutEmail extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
                                 $address['tel'])]);
                 }
             }
-            $this->addItem($noMailTable);
-            $this->addItem(_('Total') . ': ' . $count);
-        }
+            $this->addItem($this->cardBody([$noMailTable, _('Total') . ': ' . $count]));
+                    }
         return !empty($withoutEmail);
     }
 

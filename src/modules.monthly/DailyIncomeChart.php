@@ -78,29 +78,25 @@ class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFl
                 }
             }
 
+            $avg = new \Ease\Container();
             foreach ($averages as $currency => $amounts) {
                 $this->average[$currency] = ceil(array_sum($averages[$currency]) / count($averages[$currency]));
-                $this->addItem(new Ease\Html\DivTag(sprintf(_('100%% - average income is %s %s'),
+                $avg->addItem(new Ease\Html\DivTag(sprintf(_('100%% - average income is %s %s'),
                                         $this->average[$currency], $currency)));
             }
-            $this->addChart(array_reverse($days));
+
+            $this->incomeChart = new \AbraFlexi\Digest\VerticalChart();
+
+            foreach (array_reverse($days) as $day => $currencies) {
+                $this->addChartDay($day, $currencies);
+            }
+    
+            $this->addItem($this->cardBody([$avg,$this->incomeChart,'<br clear="all">']));
+
+
         }
 
         return !empty($incomes);
-    }
-
-    /**
-     * 
-     * @param array $days
-     */
-    public function addChart($days) {
-        $this->incomeChart = new \AbraFlexi\Digest\VerticalChart();
-
-        foreach ($days as $day => $currencies) {
-            $this->addChartDay($day, $currencies);
-        }
-        $this->addItem($this->incomeChart);
-        $this->addItem('<br clear="all">');
     }
 
     /**

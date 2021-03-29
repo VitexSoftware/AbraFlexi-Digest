@@ -45,10 +45,12 @@ class NewCustomers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
                 ]);
             }
 
-            $this->addItem($userTable);
 
-            $this->addItem(new \Ease\Html\DivTag(sprintf(_('%d new Customers'),
-                                    count($newCustomersData))));
+            $this->addItem( $this->cardBody(  
+                [ 
+                    $userTable, 
+                    new \Ease\Html\DivTag(sprintf(_('%d new Customers'),count($newCustomersData)))
+                ]  ));
         }
         return !empty($inInvoicesData);
     }

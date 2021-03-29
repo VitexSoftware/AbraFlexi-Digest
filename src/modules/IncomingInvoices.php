@@ -82,7 +82,7 @@ class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFl
 
             $inInvoicesTable->addRowFooterColumns([$accepted, 0, $invoiced]);
 
-            $this->addItem($inInvoicesTable);
+            $this->addItem( $this->cardBody($inInvoicesTable));
         }
 
         return !empty($inInvoicesData);

@@ -52,7 +52,7 @@ class Digestor extends \Ease\Html\DivTag {
      * @param string $subject
      */
     public function __construct($subject) {
-        parent::__construct();
+        parent::__construct(null,['class'=>'accordion', 'id'=>'accordionExample']);
         $this->subject = $subject;
         $this->addHeading($subject);
         $this->shared = \Ease\Shared::instanced();
@@ -121,7 +121,7 @@ class Digestor extends \Ease\Html\DivTag {
             $module = new $class($interval);
             $saveto = $this->shared->getConfigValue('SAVETO');
             if ($module->process()) {
-                $this->addItem(new \Ease\Html\HrTag());
+//                $this->addItem(new \Ease\Html\HrTag());
                 $this->addToIndex($this->addItem($module));
                 if ($saveto) {
                     $module->saveToHtml($saveto);
@@ -135,7 +135,7 @@ class Digestor extends \Ease\Html\DivTag {
             }
         }
     }
-
+    
     /**
      * Process All modules in specified Dir
      * 

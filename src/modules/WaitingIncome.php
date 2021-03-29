@@ -55,12 +55,13 @@ class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi
                     $totals[$currency] = floatval($outInvoiceData['sumCelkem']);
                 }
             }
-            $this->addItem($invTable);
 
-            $this->addItem(new Ease\Html\H3Tag(_('Total')));
-            foreach ($totals as $currency => $amount) {
-                $this->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount) . '&nbsp;' . $currency));
+            $currDiv = new \Ease\Html\DivTag();
+            
+                        foreach ($totals as $currency => $amount) {
+                $currDiv->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount) . '&nbsp;' . $currency));
             }
+            $this->addItem($this->cardBody(new Ease\Html\H3Tag(_('Total')),[$invTable, $currDiv]));
         }
         return !empty($outInvoices);
     }
