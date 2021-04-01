@@ -62,6 +62,8 @@ if (\Ease\Document::isPosted()) {
     $oPage->setPageTitle($subject);
     $oPage->addItem(new \Ease\TWB4\Container($digestor));
 
+    $oPage->addItem(new \Ease\TWB4\Container($digestor->printResults()));
+
 //    exit();
 }
 

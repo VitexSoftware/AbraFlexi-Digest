@@ -70,7 +70,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface {
         $this->addItem(new \Ease\Html\DivTag(
                                 new \Ease\Html\H2Tag(
                                     new \Ease\Html\ButtonTag($this->heading(), [
-                                        'class'=>'btn btn-link btn-block text-left',
+                                        'class'=>'btn btn-link btn-block text-left collapsed',
                                         'type'=>'button', 
                                         'data-toggle'=>'collapse',
                                         'data-target'=>'#collapse'.get_class($this),
@@ -89,7 +89,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface {
     public function cardBody($content) {
         return new \Ease\Html\DivTag(  new DivTag( $content , ['class'=>'card-body']  ) , [
             'id'=> 'collapse' . get_class($this), 
-            'class'=>'collapse', 
+            'class'=>'Xcollapse show', 
             'aria-labelledby'=>'heading'.get_class($this),
             'data-parent'=>"#accordionExample"
             ] );
