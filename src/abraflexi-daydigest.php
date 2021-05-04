@@ -19,4 +19,4 @@ $subject = \sprintf(_('AbraFlexi %s Daily digest for %s'), $myCompanyName,
         \strftime('%x', $period->getTimestamp()));
 
 $digestor = new Digestor($subject);
-$digestor->dig($period, [constant('MODULE_DAILY_PATH'), constant('MODULE_PATH')]);
+$digestor->dig($period, [\Ease\Functions::cfg('MODULE_DAILY_PATH'), \Ease\Functions::cfg('MODULE_PATH')]);
