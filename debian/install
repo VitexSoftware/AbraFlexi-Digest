@@ -1,5 +1,5 @@
-debian/conf/composer.json       usr/share/abraflexi-digest/
-debian/conf/abraflexi-digest.conf /etc/apache2/conf-available/
+debian/conf/composer.json       usr/lib/abraflexi-digest/
+#debian/conf/abraflexi-digest.conf /etc/apache2/conf-available/
 src/*.php		        usr/share/abraflexi-digest/
 src/modules/*		        usr/lib/abraflexi-digest/
 #src/modules.daily/*	        usr/lib/abraflexi-digest/daily/

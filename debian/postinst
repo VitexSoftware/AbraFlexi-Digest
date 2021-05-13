@@ -7,13 +7,10 @@ set -e
 
 db_get composer/WEB_USER
 WEBUSER=$RET
-mkdir -p /var/lib/multi-abraflexi-setup /var/lib/composer
-chown $WEBUSER /var/lib/multi-abraflexi-setup /var/lib/composer -R
-echo '{}' > /usr/lib/multi-abraflexi-setup/composer.lock
-chown $WEBUSER /usr/lib/multi-abraflexi-setup/composer.lock
-su - $WEBUSER -s /bin/bash -c 'COMPOSER_HOME="/var/lib/composer" composer -o install -d /var/lib/abraflexi-tools/'
-
-
-#DEBHELPER#
+mkdir -p /var/lib/abraflexi-digest /var/lib/composer
+chown $WEBUSER /var/lib/abraflexi-digest /var/lib/composer -R
+echo '{}' > /usr/lib/abraflexi-digest/composer.lock
+chown $WEBUSER /usr/lib/abraflexi-digest/composer.lock
+su - $WEBUSER -s /bin/bash -c 'COMPOSER_HOME="/var/lib/composer" composer -o update -d /usr/share/abraflexi-digest/'
 
 exit 0
