@@ -14,8 +14,9 @@ abraflexi-digest (1.25) UNRELEASED; urgency=medium
   * v1.20 release
   * Acordionized
   * FlexiBee renamed to AbraFlexi
+  * Debian package Fix
 
- -- CyberVitexus <vitex@exiv.jinonice.czf>  Wed, 05 May 2021 01:50:41 +0200
+ -- CyberVitexus <vitex@exiv.jinonice.czf>  Fri, 14 May 2021 21:48:00 +0200
 
 abraflexi-digest (1.6) UNRELEASED; urgency=medium
 
