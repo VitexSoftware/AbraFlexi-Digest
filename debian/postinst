@@ -4,6 +4,6 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-composer-debian abraflexi-diges
+composer-debian abraflexi-digest
 
 exit 0
