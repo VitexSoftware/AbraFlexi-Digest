@@ -1,5 +1,5 @@
 Source: abraflexi-digest
-Build-Depends: debhelper (>= 13~),composer, jq, moreutils
+Build-Depends: debhelper (>= 12~),composer, jq, moreutils
 Standards-Version: 4.3.0
 Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
 Uploaders: Vitex <vitex@hippy.cz>
@@ -8,7 +8,7 @@ Homepage: https://github.com/VitexSoftware/AbraFlexi-Digest
 
 Package: abraflexi-digest
 Depends: ${misc:Depends}, php-vitexsoftware-ease-bootstrap4-widgets, php-vitexsoftware-ease-bootstrap4-widgets-abraflexi, php-vitexsoftware-abraflexi-bricks, composer, php-cli, php-intl, locales-all
-Suggests: abraflexi-server,php-abraflexi-config
+Suggests: abraflexi-server,abraflexi-client-config
 Architecture: all
 Section: web
 Priority: optional

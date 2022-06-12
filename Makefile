@@ -1,3 +1,4 @@
+currentversion=$(shell dpkg-parsechangelog --show-field Version)
 repoversion=$(shell LANG=C aptitude show abraflexi-digest | grep Version: | awk '{print $$2}')
 nextversion=$(shell echo $(repoversion) | perl -ne 'chomp; print join(".", splice(@{[split/\./,$$_]}, 0, -1), map {++$$_} pop @{[split/\./,$$_]}), "\n";')
 
@@ -84,6 +85,15 @@ dtest:
         
 drun: dimage
 	docker run  -dit --name AbraFlexiDigest -p 2323:80 vitexsoftware/abraflexi-digest
+
+vagrant: deb
+	vagrant destroy -f
+	mkdir -p deb
+	debuild -us -uc
+	mv ../abraflexi-digest_$(currentversion)_all.deb deb
+	cd deb ; dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz; cd ..
+	vagrant up
+	sensible-browser http://localhost:8080/multi-abraflexi-setup?login=demo\&password=demo
 
 release:
 	echo Release v$(nextversion)
