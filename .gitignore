@@ -18,3 +18,4 @@
 /debian/abraflexi-digest/
 /debian/abraflexi-digest.postrm.debhelper
 /debian/abraflexi-digest.substvars
+/.php_cs.cache

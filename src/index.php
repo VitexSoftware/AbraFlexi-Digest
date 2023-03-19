@@ -1,10 +1,10 @@
 <?php
 
 /**
- * AbraFlexi Digest - Monthly 
+ * AbraFlexi Digest - Index page
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2018-2020 Vitex Software
+ * @copyright  (G) 2018-2023 Vitex Software
  */
 
 namespace AbraFlexi\Digest;
