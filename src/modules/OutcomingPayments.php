@@ -45,7 +45,7 @@ class OutcomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
             }
             $this->addItem($this->cardBody($totalsTable));
         }
-        
+
         return !empty($outcomes);
     }
 

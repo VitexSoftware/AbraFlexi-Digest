@@ -56,7 +56,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface {
             }
         }
         $this->timeInterval = $interval;
-        parent::__construct(null,['class'=>'card']);
+        parent::__construct(null, ['class' => 'card']);
         $this->setTagID(get_class($this));
         $this->addCSS('.module-result {  border: 1px green solid; margin: 20px; padding: 20px }');
     }
@@ -68,31 +68,30 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface {
      */
     public function process() {
         $this->addItem(new \Ease\Html\DivTag(
-                                new \Ease\Html\H2Tag(
-                                    new \Ease\Html\ButtonTag($this->heading(), [
-                                        'class'=>'btn btn-link btn-block text-left collapsed',
-                                        'type'=>'button', 
-                                        'data-toggle'=>'collapse',
-                                        'data-target'=>'#collapse'.get_class($this),
-                                        'aria-expanded'=>'false',
-                                        'aria-controls'=>'collapse'.get_class($this)] ),
-                                    ['class'=>'mb-0']) , 
-                                    ['class'=>'card-header','id'=> 'heading' . get_class($this)]
-
-                                )
-                            );
+                        new \Ease\Html\H2Tag(
+                                new \Ease\Html\ButtonTag($this->heading(), [
+                                    'class' => 'btn btn-link btn-block text-left collapsed',
+                                    'type' => 'button',
+                                    'data-toggle' => 'collapse',
+                                    'data-target' => '#collapse' . get_class($this),
+                                    'aria-expanded' => 'false',
+                                    'aria-controls' => 'collapse' . get_class($this)]),
+                                ['class' => 'mb-0']),
+                        ['class' => 'card-header', 'id' => 'heading' . get_class($this)]
+                )
+        );
 
         $this->addStatusMessage($this->heading());
-        return  $this->dig() ;
+        return $this->dig();
     }
 
     public function cardBody($content) {
-        return new \Ease\Html\DivTag(  new DivTag( $content , ['class'=>'card-body']  ) , [
-            'id'=> 'collapse' . get_class($this), 
-            'class'=>'Xcollapse show', 
-            'aria-labelledby'=>'heading'.get_class($this),
-            'data-parent'=>"#accordionExample"
-            ] );
+        return new \Ease\Html\DivTag(new DivTag($content, ['class' => 'card-body']), [
+            'id' => 'collapse' . get_class($this),
+            'class' => 'Xcollapse show',
+            'aria-labelledby' => 'heading' . get_class($this),
+            'data-parent' => "#accordionExample"
+        ]);
     }
 
     /**
@@ -135,7 +134,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface {
     public static function getAmount(array $data) {
         return array_key_exists('sumCelkem', $data) ? $data['sumCelkem'] : 0.0;
     }
-    
+
     /**
      * Format Czech Currency
      * 
@@ -211,10 +210,9 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface {
     }
 
     public static function getPrice($data) {
-        return array_key_exists('sumCelkem', $data) ? $data['sumCelkem'] : 0 ;
+        return array_key_exists('sumCelkem', $data) ? $data['sumCelkem'] : 0;
     }
 
-    
     /**
      * Return Totals for serveral currencies
      * 

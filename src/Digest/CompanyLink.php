@@ -1,15 +1,16 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * AbraFlexi Digest - CompanyLink class.
+ *
+ * @author Vítězslav Dvořák <info@vitexsoftware.cz>
+ * @copyright  2020-2023 Vitex Software
  */
 
 namespace AbraFlexi\Digest;
 
 /**
- * Description of DocumentLink
+ * Link to company
  *
  * @author vitex
  */
@@ -17,7 +18,7 @@ class CompanyLink extends \Ease\Html\ATag {
 
     public function __construct($code, $engine, $properties = []) {
         $engine->loadFromAbraFlexi($code);
-        parent::__construct($engine->getApiURL(),  $engine->getDataValue('nazev'), $properties);
+        parent::__construct($engine->getApiURL(), $engine->getDataValue('nazev'), $properties);
     }
 
 }

@@ -35,7 +35,7 @@ class WithoutTel extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Di
                 }
             }
             $this->addItem($this->cardBody([$noTelTable, _('Total') . ': ' . $count]));
-                    }
+        }
         return !empty($withoutEmail);
     }
 

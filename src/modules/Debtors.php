@@ -89,18 +89,17 @@ class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
                                 current($fakturyFirmy)) ? current($fakturyFirmy)['firma@showAs'] : \AbraFlexi\RO::uncode($firma);
 
                 $invTable->addRowColumns([
-                    new \Ease\Html\ATag($adreser->getApiURL(), $nazevFirmy), 
-                    $overdue[$firma], 
+                    new \Ease\Html\ATag($adreser->getApiURL(), $nazevFirmy),
+                    $overdue[$firma],
                     $overdueInvoices,
                     self::getTotalsDiv($totals[$firma])
-                    ]
+                        ]
                 );
             }
 
-            $invTable->addRowFooterColumns(['','',_('Total'),self::getTotalsDiv($totalsByCurrency)]);
+            $invTable->addRowFooterColumns(['', '', _('Total'), self::getTotalsDiv($totalsByCurrency)]);
 
-            $this->addItem( $this->cardBody( $invTable));
-
+            $this->addItem($this->cardBody($invTable));
         }
         return !empty($invoicesByFirma);
     }

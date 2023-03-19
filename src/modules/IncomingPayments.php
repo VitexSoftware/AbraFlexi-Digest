@@ -19,7 +19,7 @@ class IncomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFl
      * @return boolean
      */
     public function dig() {
-        $results =  new \Ease\Container();
+        $results = new \Ease\Container();
         $banker = new AbraFlexi\Banka();
         $incomes = $banker->getColumnsFromAbraFlexi(['mena', 'sumCelkem', 'sumCelkemMen'],
                 array_merge($this->condition,
@@ -48,7 +48,7 @@ class IncomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFl
             }
         }
 
-        $this->addItem($this->cardBody( $results )) ;
+        $this->addItem($this->cardBody($results));
 
         return !empty($incomes);
     }

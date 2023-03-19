@@ -14,6 +14,7 @@ namespace AbraFlexi\Digest;
  * @author vitex
  */
 class SandClock extends \Ease\Container {
+
     public function __construct() {
         $this->addItem('<svg id="wrap" width="300" height="300">
   
@@ -88,8 +89,8 @@ class SandClock extends \Ease\Container {
   </svg>
   
 </svg>');
-        
-    \Ease\TWB4\WebPage::singleton()->addCss('#wrap {
+
+        \Ease\TWB4\WebPage::singleton()->addCss('#wrap {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -99,10 +100,6 @@ class SandClock extends \Ease\Container {
   visibility: hidden;
   }
  ');
-        
-        
     }
-    
-    
-    
+
 }

@@ -59,7 +59,7 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
                 $income['kod'] = new \AbraFlexi\ui\DocumentLink($income['kod'], $banker);
                 $income['price'] = self::getAmount($income);
                 $adresser->setMyKey($adresser);
-                $income['firma'] = new \Ease\Html\ATag(array_key_exists('firma@showAs', $income) ?  $income['firma@showAs'] : '', $adresser->getApiUrl() . $income['firma']);
+                $income['firma'] = new \Ease\Html\ATag(array_key_exists('firma@showAs', $income) ? $income['firma@showAs'] : '', $adresser->getApiUrl() . $income['firma']);
 
                 unset($income['id']);
                 unset($income['sumCelkem']);
@@ -72,10 +72,9 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
                 $incomesTable->addRowColumns($income);
             }
             $currDiv = new \Ease\Html\DivTag();
-           
+
             foreach ($total as $currency => $amount) {
                 $currDiv->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount) . '&nbsp;' . $currency));
-            
             }
             $this->addItem($this->cardBody([$incomesTable, $currDiv]));
         }

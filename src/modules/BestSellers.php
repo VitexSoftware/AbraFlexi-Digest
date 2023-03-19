@@ -78,8 +78,8 @@ class BestSellers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\D
                 }
             }
 
-            $this->addItem(  $this->cardBody( [ $topProductsTable, new \Ease\Html\DivTag(sprintf(_('%d top products'),
-            $topProductsTable->getItemsCount())) ] ));
+            $this->addItem($this->cardBody([$topProductsTable, new \Ease\Html\DivTag(sprintf(_('%d top products'),
+                                        $topProductsTable->getItemsCount()))]));
 
             return !empty($topProductsTable->getItemsCount());
         }

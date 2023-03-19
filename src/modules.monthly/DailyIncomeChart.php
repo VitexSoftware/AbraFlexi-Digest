@@ -40,7 +40,7 @@ class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFl
      * 
      */
     public function dig() {
-        $banker = new AbraFlexi\Banka(null,['nativeTypes'=>false]);
+        $banker = new AbraFlexi\Banka(null, ['nativeTypes' => false]);
         $averages = [];
         $incomes = $banker->getColumnsFromAbraFlexi(['mena', 'sumCelkem', 'sumCelkemMen',
             'datVyst'],
@@ -90,10 +90,8 @@ class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFl
             foreach (array_reverse($days) as $day => $currencies) {
                 $this->addChartDay($day, $currencies);
             }
-    
-            $this->addItem($this->cardBody([$avg,$this->incomeChart,'<br clear="all">']));
 
-
+            $this->addItem($this->cardBody([$avg, $this->incomeChart, '<br clear="all">']));
         }
 
         return !empty($incomes);

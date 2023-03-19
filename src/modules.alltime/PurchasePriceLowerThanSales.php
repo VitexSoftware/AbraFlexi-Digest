@@ -64,8 +64,8 @@ class PurchasePriceLowerThanSales extends \AbraFlexi\Digest\DigestModule impleme
             }
 
 
-            $this->addItem($this->cardBody([ new \Ease\Html\DivTag(sprintf(_('%d disadvantageous products'),$products)), $topProductsTable ]));
-        
+            $this->addItem($this->cardBody([new \Ease\Html\DivTag(sprintf(_('%d disadvantageous products'), $products)), $topProductsTable]));
+
             return !empty($topProductsTable->getItemsCount());
         }
     }

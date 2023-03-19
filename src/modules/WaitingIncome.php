@@ -9,8 +9,7 @@
  *
  * @author vitex
  */
-class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
-{
+class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
 
     /**
      * Column used to filter by date
@@ -18,23 +17,22 @@ class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi
      */
     public $timeColumn = 'datSplat';
 
-    public function dig()
-    {
+    public function dig() {
         $totals = [];
         $checker = new \AbraFlexi\FakturaVydana();
         $outInvoices = $checker->getColumnsFromAbraFlexi(
-            [
-                'kod', 'firma', 'sumCelkem',
-                'sumCelkemMen',
-                'mena'
-            ],
-            array_merge(
-                $this->condition,
                 [
-                    "(stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr')",
-                    'storno' => false
-                ]
-            )
+                    'kod', 'firma', 'sumCelkem',
+                    'sumCelkemMen',
+                    'mena'
+                ],
+                array_merge(
+                        $this->condition,
+                        [
+                            "(stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr')",
+                            'storno' => false
+                        ]
+                )
         );
 
         if (empty($outInvoices)) {
@@ -55,12 +53,12 @@ class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi
                 $invTable->addRowColumns([
                     ++$pos,
                     new \Ease\Html\ATag(
-                        $checker->getApiUrl(),
-                        $outInvoiceData['kod']
+                            $checker->getApiUrl(),
+                            $outInvoiceData['kod']
                     ),
                     new \Ease\Html\ATag(
-                        $adreser->getApiUrl(),
-                        empty($outInvoiceData['firma']) ? '' : $outInvoiceData['firma@showAs']
+                            $adreser->getApiUrl(),
+                            empty($outInvoiceData['firma']) ? '' : $outInvoiceData['firma@showAs']
                     ),
                     (($currency != 'CZK') ? $outInvoiceData['sumCelkemMen'] : $outInvoiceData['sumCelkem']) . ' ' . $currency
                 ]);
@@ -77,13 +75,13 @@ class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi
             foreach ($totals as $currency => $amount) {
                 $currDiv->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount) . '&nbsp;' . $currency));
             }
-            $this->addItem($this->cardBody([new Ease\Html\H3Tag(_('Total') ),$invTable, $currDiv]));
+            $this->addItem($this->cardBody([new Ease\Html\H3Tag(_('Total')), $invTable, $currDiv]));
         }
         return !empty($outInvoices);
     }
 
-    public function heading()
-    {
+    public function heading() {
         return _('Waiting Income');
     }
+
 }

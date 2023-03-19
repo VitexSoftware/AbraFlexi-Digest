@@ -17,7 +17,7 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
      * @return boolean
      */
     public function dig() {
-        $invoicer = new AbraFlexi\FakturaVydana(null,['nativeTypes'=>false]);
+        $invoicer = new AbraFlexi\FakturaVydana(null, ['nativeTypes' => false]);
         $adresser = new AbraFlexi\Adresar();
         $proformas = $invoicer->getColumnsFromAbraFlexi(['kod', 'mena', 'popis', 'sumCelkem',
             'sumCelkemMen', 'stavOdpocetK', 'typDokl', 'firma', 'datVyst'],
@@ -79,14 +79,12 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
             }
 
             $currDiv = new DivTag();
-            
 
             foreach ($total as $currency => $amount) {
                 $currDiv->addItem(new \Ease\Html\DivTag($totals[$currency] . 'x' . ' ' . self::formatCurrency($amount) . '&nbsp;' . $currency));
             }
 
-            $this->addItem($this->cardBody([$incomesTable,$currDiv]));
-
+            $this->addItem($this->cardBody([$incomesTable, $currDiv]));
         }
         return !empty($total);
     }

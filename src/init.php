@@ -1,10 +1,10 @@
 <?php
 
 /**
- * AbraFlexi Digest - Dayly 
+ * AbraFlexi Digest - Init
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2018-2021 Vitex Software
+ * @copyright  (G) 2018-2023 Vitex Software
  */
 
 namespace AbraFlexi\Digest;
@@ -22,7 +22,7 @@ require_once '../vendor/autoload.php';
 $shared = \Ease\Shared::instanced();
 
 if (\Ease\Document::isPosted() && \Ease\Document::getPostValue('url')) {
-    define('SHOW_CONNECTION_FORM',true);
+    define('SHOW_CONNECTION_FORM', true);
     define('ABRAFLEXI_URL', \Ease\Document::getPostValue('url'));
     define('ABRAFLEXI_LOGIN', \Ease\Document::getPostValue('user'));
     define('ABRAFLEXI_PASSWORD', \Ease\Document::getPostValue('password'));

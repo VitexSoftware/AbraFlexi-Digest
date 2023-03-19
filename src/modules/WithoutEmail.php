@@ -40,7 +40,7 @@ class WithoutEmail extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
                 }
             }
             $this->addItem($this->cardBody([$noMailTable, _('Total') . ': ' . $count]));
-                    }
+        }
         return !empty($withoutEmail);
     }
 
