@@ -20,7 +20,7 @@
   },
   "autoload": {
     "psr-4": {
-      "AbraFlexi\\Digest\\": "./Digest"
+      "AbraFlexi\\Digest\\": "/usr/share/abraflexi-digest/Digest/"
     }
   },
   "repositories": [
