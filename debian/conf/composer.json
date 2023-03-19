@@ -10,7 +10,7 @@
     }
   ],
   "config": {
-    "vendor-dir": "/var/lib/abraflexi-digest"
+    "vendor-dir": "/var/lib/composer/abraflexi-digest"
   },
   "require": {
     "deb/ease-core": "*",
