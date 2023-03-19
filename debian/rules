@@ -16,6 +16,6 @@ override_dh_install:
 	sed -i -e 's/.\/modules.alltime/\/usr\/lib\/abraflexi-digest\/alltime/g' debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
 	sed -i -e 's/.\/modules/\/usr\/lib\/abraflexi-digest/g'                  debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
 	sed -i -e 's/.\/css/\/usr\/share\/abraflexi-digest\/css/'             debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
-	sed -i -e 's/..\/composer.json/\/usr\/share\/abraflexi-digest\/composer.json/g' 	     debian/abraflexi-digest/usr/share/abraflexi-digest/Digest/Digestor.php
+	sed -i -e 's/..\/composer.json/\/usr\/lib\/abraflexi-digest\/composer.json/g' 	     debian/abraflexi-digest/usr/share/abraflexi-digest/Digest/Digestor.php
 	sed -i -e "s/__DIR__.'/'\/usr\/share\/abraflexi-digest/g"               debian/abraflexi-digest/usr/share/abraflexi-digest/index.php
 	sed -i -e "s/__DIR__.'/'\/usr\/share\/abraflexi-digest/g"               debian/abraflexi-digest/usr/share/abraflexi-digest/results.php
