@@ -38,12 +38,11 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
                 _('Bank Account'), _('Company'), _('Date'), _('Amount')]);
             foreach ($incomes as $income) {
                 $adresser->dataReset();
-                if (empty($income['firma']) && !empty($income['buc'])) {
+                if (empty((string) $income['firma']) && !empty($income['buc'])) {
                     $candidates = $bucer->getColumnsFromAbraFlexi(['firma'],
                             ['buc' => $income['buc']]);
                     if (!empty($candidates)) {
-                        $income['firma'] = $candidates[0]['firma'];
-                        $income['firma@showAs'] = $candidates[0]['firma@showAs'];
+                        $income['firma'] = $candidates[0]['firma']->showAs;
                     }
                 }
                 $adresser->takeData($income);
@@ -56,19 +55,15 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
                     $total[$currency] = $amount;
                 }
 
-                $income['kod'] = new \AbraFlexi\ui\DocumentLink($income['kod'], $banker);
+                $income['kod'] = new \AbraFlexi\ui\DocumentLink('code:' . $income['kod'], $banker);
                 $income['price'] = self::getAmount($income);
                 $adresser->setMyKey($adresser);
-                $income['firma'] = new \Ease\Html\ATag(array_key_exists('firma@showAs', $income) ? $income['firma@showAs'] : '', $adresser->getApiUrl() . $income['firma']);
+                $income['firma'] = new \Ease\Html\ATag(empty($income['firma']->showAs) ? $adresser->getApiUrl() . $income['firma'] : $income['firma']->showAs);
 
                 unset($income['id']);
                 unset($income['sumCelkem']);
                 unset($income['sumCelkemMen']);
                 unset($income['mena']);
-                unset($income['mena@ref']);
-                unset($income['mena@showAs']);
-                unset($income['firma@ref']);
-                unset($income['firma@showAs']);
                 $incomesTable->addRowColumns($income);
             }
             $currDiv = new \Ease\Html\DivTag();

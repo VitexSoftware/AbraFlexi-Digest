@@ -58,7 +58,7 @@ class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi
                     ),
                     new \Ease\Html\ATag(
                             $adreser->getApiUrl(),
-                            empty($outInvoiceData['firma']) ? '' : $outInvoiceData['firma@showAs']
+                            (string)$outInvoiceData['firma']
                     ),
                     (($currency != 'CZK') ? $outInvoiceData['sumCelkemMen'] : $outInvoiceData['sumCelkem']) . ' ' . $currency
                 ]);

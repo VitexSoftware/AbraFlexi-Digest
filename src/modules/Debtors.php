@@ -31,10 +31,10 @@ class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
 
             foreach ($faDatakturyRaw as $faData) {
                 $currency = self::getCurrency($faData);
-                $invoicesByFirma[$faData['firma']][$faData['id']] = $faData;
+                $invoicesByFirma[(string)$faData['firma']][$faData['id']] = $faData;
 
-                if (!isset($totals[$faData['firma']][$currency])) {
-                    $totals[$faData['firma']][$currency] = 0;
+                if (!isset($totals[(string)$faData['firma']][$currency])) {
+                    $totals[(string)$faData['firma']][$currency] = 0;
                 }
                 if (!isset($totalsByCurrency[$currency])) {
                     $totalsByCurrency[$currency] = 0;
@@ -46,17 +46,17 @@ class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
                     $amount = floatval($faData['zbyvaUhradit']);
                 }
 
-                $totals[$faData['firma']][$currency] += $amount;
+                $totals[(string)$faData['firma']][$currency] += $amount;
                 $totalsByCurrency[$currency] += $amount;
 
                 $oDays = \AbraFlexi\FakturaVydana::overdueDays($faData['datSplat']);
 
-                if (array_key_exists($faData['firma'], $overdue)) {
-                    if ($oDays > $overdue[$faData['firma']]) {
-                        $overdue[$faData['firma']] = $oDays;
+                if (array_key_exists((string)$faData['firma'], $overdue)) {
+                    if ($oDays > $overdue[(string)$faData['firma']]) {
+                        $overdue[(string)$faData['firma']] = $oDays;
                     }
                 } else {
-                    $overdue[$faData['firma']] = $oDays;
+                    $overdue[(string)$faData['firma']] = $oDays;
                 }
             }
         }
@@ -85,8 +85,7 @@ class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
 
                 $adreser->setMyKey($firma);
 
-                $nazevFirmy = array_key_exists('firma@showAs',
-                                current($fakturyFirmy)) ? current($fakturyFirmy)['firma@showAs'] : \AbraFlexi\RO::uncode($firma);
+                $nazevFirmy = strlen(current($fakturyFirmy)['firma']->showAs) ? current($fakturyFirmy)['firma']->showAs : \AbraFlexi\RO::uncode($firma);
 
                 $invTable->addRowColumns([
                     new \Ease\Html\ATag($adreser->getApiURL(), $nazevFirmy),
