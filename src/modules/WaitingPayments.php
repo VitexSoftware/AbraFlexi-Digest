@@ -48,7 +48,7 @@ class WaitingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFle
                     $amount = floatval($inInvoiceData['zbyvaUhradit']);
                 }
 
-                $currency = current(explode(':', $inInvoiceData['mena@showAs']));
+                $currency = current(explode(':', $inInvoiceData['mena']->showAs));
 
                 $checker->setMyKey(urlencode($inInvoiceData['kod']));
                 $adreser->setMyKey($inInvoiceData['firma']);
@@ -58,10 +58,10 @@ class WaitingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFle
                     new \Ease\Html\ATag($checker->getApiUrl(),
                             $inInvoiceData['kod']),
                     new \Ease\Html\ATag($adreser->getApiUrl(),
-                            empty($inInvoiceData['firma']) ? '' : $inInvoiceData['firma@showAs']),
+                            empty($inInvoiceData['firma']) ? '' : $inInvoiceData['firma']->showAs),
                     \AbraFlexi\FakturaVydana::overdueDays($inInvoiceData['datSplat']),
                     $amount . ' ' . current(explode(':',
-                                    $inInvoiceData['mena@showAs']))
+                                    $inInvoiceData['mena']->showAs))
                 ]);
 
                 if (array_key_exists($currency, $totals)) {
