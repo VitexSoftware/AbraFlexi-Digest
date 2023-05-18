@@ -4,12 +4,15 @@
  * Incoming payments for us
  */
 
+namespace AbraFlexi\Digest\Modules;
+
 /**
  * Description of IncomingPayments
  *
  * @author vitex
  */
-class IncomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+class IncomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
+{
 
     public $timeColumn = 'datVyst';
 
@@ -18,9 +21,10 @@ class IncomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFl
      * 
      * @return boolean
      */
-    public function dig() {
+    public function dig()
+    {
         $results = new \Ease\Container();
-        $banker = new AbraFlexi\Banka();
+        $banker = new \AbraFlexi\Banka();
         $incomes = $banker->getColumnsFromAbraFlexi(['mena', 'sumCelkem', 'sumCelkemMen'],
                 array_merge($this->condition,
                         ['typPohybuK' => 'typPohybu.prijem', 'storno' => false]));
@@ -30,7 +34,6 @@ class IncomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFl
         } else {
             foreach ($incomes as $income) {
                 $currency = self::getCurrency($income);
-
                 if ($currency == 'CZK') {
                     $amount = floatval($income['sumCelkem']);
                 } else {
@@ -49,12 +52,11 @@ class IncomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFl
         }
 
         $this->addItem($this->cardBody($results));
-
         return !empty($incomes);
     }
 
-    public function heading() {
+    public function heading()
+    {
         return _('Incoming payments');
     }
-
 }

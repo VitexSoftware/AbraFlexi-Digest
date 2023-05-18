@@ -9,12 +9,12 @@
 
 namespace AbraFlexi\Digest;
 
-define('MODULE_PATH', './modules');
-define('MODULE_DAILY_PATH', './modules.daily');
-define('MODULE_WEEKLY_PATH', './modules.weekly');
-define('MODULE_MONTHLY_PATH', './modules.monthly');
-define('MODULE_YEARLY_PATH', './modules.yearly');
-define('MODULE_ALLTIME_PATH', './modules.alltime');
+define('MODULE_PATH', './Digest/Modules');
+define('MODULE_DAILY_PATH', './Digest/Modules/Daily');
+define('MODULE_WEEKLY_PATH', './Digest/Modules/Weekly');
+define('MODULE_MONTHLY_PATH', './Digest/Modules/Monthly');
+define('MODULE_YEARLY_PATH', './Digest/Modules/Yearly');
+define('MODULE_ALLTIME_PATH', './Digest/Modules/AllTime');
 
 define('STYLE_DIR', './css/themes/');
 

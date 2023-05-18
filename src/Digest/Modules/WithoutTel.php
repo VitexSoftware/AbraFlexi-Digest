@@ -4,19 +4,22 @@
  * Customers without notification phone number
  */
 
+namespace AbraFlexi\Digest\Modules;
+
 /**
  * Description of WaitingIncome
  *
  * @author vitex
  */
-class WithoutTel extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+class WithoutTel extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
+{
 
-    public function dig() {
+    public function dig()
+    {
         $addresser = new \AbraFlexi\Adresar();
         $withoutEmail = $addresser->getColumnsFromAbraFlexi(['nazev', 'kod', 'ulice',
             'mesto', 'email'],
                 ['tel' => 'is empty', 'typVztahuK' => 'typVztahu.odberDodav']);
-
         if (empty($withoutEmail)) {
             $this->addItem(_('none'));
         } else {
@@ -39,8 +42,8 @@ class WithoutTel extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Di
         return !empty($withoutEmail);
     }
 
-    function heading() {
+    function heading()
+    {
         return _('Customers without notification phone number');
     }
-
 }

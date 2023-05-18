@@ -3,6 +3,7 @@
 /*
  * What we have to pay
  */
+namespace AbraFlexi\Digest\Modules;
 
 /**
  * Description of WaitingPayments
@@ -21,6 +22,11 @@ class WaitingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFle
      */
     public $timeColumn = 'datSplat';
 
+    /**
+     * Dig Waiting Payments
+     * 
+     * @return type
+     */
     public function dig() {
         $totals = [];
         $checker = new \AbraFlexi\FakturaPrijata();
@@ -34,7 +40,7 @@ class WaitingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFle
         if (empty($inInvoices)) {
             $this->addItem(_('none'));
         } else {
-            $adreser = new AbraFlexi\Adresar(null, ['offline' => 'true']);
+            $adreser = new \AbraFlexi\Adresar(null, ['offline' => 'true']);
             $invTable = new \AbraFlexi\Digest\Table([_('Position'), _('Code'), _('Partner'),
                 _('Due Days'),
                 _('Amount')]);
@@ -82,6 +88,10 @@ class WaitingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFle
         return !empty($inInvoices);
     }
 
+    /**
+     * 
+     * @param type $param
+     */
     public function functionName($param) {
         ['datSplat lte \'' . \AbraFlexi\RW::dateToFlexiDate(new \DateTime()) . '\' AND (stavUhrK is null OR stavUhrK eq \'stavUhr.castUhr\') AND storno eq false'];
     }

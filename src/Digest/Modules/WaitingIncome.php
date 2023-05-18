@@ -3,6 +3,7 @@
 /*
  * Debts
  */
+namespace AbraFlexi\Digest\Modules;
 
 /**
  * Description of WaitingIncome
@@ -38,7 +39,7 @@ class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi
         if (empty($outInvoices)) {
             $this->addItem(_('none'));
         } else {
-            $adreser = new AbraFlexi\Adresar(null, ['offline' => 'true']);
+            $adreser = new \AbraFlexi\Adresar(null, ['offline' => 'true']);
             $invTable = new \AbraFlexi\Digest\Table([
                 _('Position'), _('Code'), _('Partner'),
                 _('Amount')
@@ -75,7 +76,7 @@ class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi
             foreach ($totals as $currency => $amount) {
                 $currDiv->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount) . '&nbsp;' . $currency));
             }
-            $this->addItem($this->cardBody([new Ease\Html\H3Tag(_('Total')), $invTable, $currDiv]));
+            $this->addItem($this->cardBody([new \Ease\Html\H3Tag(_('Total')), $invTable, $currDiv]));
         }
         return !empty($outInvoices);
     }

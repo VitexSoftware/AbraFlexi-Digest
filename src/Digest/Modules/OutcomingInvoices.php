@@ -3,6 +3,7 @@
 /*
  * Outcoming Invoices
  */
+namespace AbraFlexi\Digest\Modules;
 
 /**
  * Description of OutcomingInvoices
@@ -18,7 +19,7 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
     public $timeColumn = 'datVyst';
 
     public function dig() {
-        $digger = new AbraFlexi\FakturaVydana();
+        $digger = new \AbraFlexi\FakturaVydana();
         $outInvoicesData = $digger->getColumnsFromAbraFlexi(['kod', 'typDokl', 'sumCelkem',
             'sumCelkemMen',
             'sumZalohy', 'sumZalohyMen', 'uhrazeno', 'storno', 'mena', 'juhSum',
@@ -40,7 +41,7 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
                     $storno++;
                 }
                 $currency = self::getCurrency($outInvoiceData);
-                $typDokl = $outInvoiceData['typDokl'];
+                $typDokl = strval($outInvoiceData['typDokl']);
 
                 if ($currency != 'CZK') {
                     $amount = floatval($outInvoiceData['sumCelkemMen']) + floatval($outInvoiceData['sumZalohyMen']);
@@ -94,7 +95,7 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
 
             $tableFooter = [$exposed, count(array_keys($typDoklTotals))];
             foreach ($currencies as $currencyCode) {
-                $tableFooter[] = self::formatCurrency($invoicedRaw[$currencyCode]) . ' ' . AbraFlexi\RO::uncode($currencyCode);
+                $tableFooter[] = self::formatCurrency($invoicedRaw[$currencyCode]) . ' ' . \AbraFlexi\RO::uncode($currencyCode);
             }
             $outInvoicesTable->addRowFooterColumns($tableFooter);
 

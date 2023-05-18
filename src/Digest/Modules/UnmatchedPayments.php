@@ -3,6 +3,7 @@
 /*
  * Incoming payments for us
  */
+namespace AbraFlexi\Digest\Modules;
 
 /**
  * Description of IncomingPayments
@@ -19,9 +20,9 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
      * @return boolean
      */
     public function dig() {
-        $banker = new AbraFlexi\Banka(null, ['nativeTypes' => false]);
-        $adresser = new AbraFlexi\Adresar();
-        $bucer = new AbraFlexi\Adresar(null,
+        $banker = new \AbraFlexi\Banka(null, ['nativeTypes' => false]);
+        $adresser = new \AbraFlexi\Adresar();
+        $bucer = new \AbraFlexi\Adresar(null,
                 ['evidence' => 'adresar-bankovni-ucet']);
         $incomes = $banker->getColumnsFromAbraFlexi(['kod', 'mena', 'popis', 'sumCelkem',
             'sumCelkemMen',

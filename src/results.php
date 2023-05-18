@@ -4,7 +4,7 @@
  * AbraFlexi Digest - Monthly 
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2018 Vitex Software
+ * @copyright  (G) 2018-2023 Vitex Software
  */
 
 namespace AbraFlexi\Digest;

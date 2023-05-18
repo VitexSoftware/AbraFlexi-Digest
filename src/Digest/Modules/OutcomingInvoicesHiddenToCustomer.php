@@ -3,6 +3,7 @@
 /*
  * Outcoming Invoices
  */
+namespace AbraFlexi\Digest\Modules;
 
 use AbraFlexi\Digest\DigestModule;
 use AbraFlexi\Digest\DigestModuleInterface;

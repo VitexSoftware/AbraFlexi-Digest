@@ -13,10 +13,17 @@ define('EASE_APPNAME', 'AbraFlexiDayDigest');
 
 require_once __DIR__ . '/init.php';
 
-$period = new \DateTime();
+$period = new \DatePeriod( new \DateTime, new \DateInterval('P1D'), new \DateTime);
 
-$subject = \sprintf(_('AbraFlexi %s Daily digest for %s'), $myCompanyName,
-        \strftime('%x', $period->getTimestamp()));
+$fmt = datefmt_create(
+        'cs_CZ',
+        \IntlDateFormatter::FULL,
+        \IntlDateFormatter::FULL,
+        'Europe/Prague',
+        \IntlDateFormatter::GREGORIAN
+);
+
+$subject = \sprintf(_('AbraFlexi Daily digest for  %s %s'), $myCompanyName, datefmt_format($fmt, (new \DateTime)->getTimestamp()));
 
 $digestor = new Digestor($subject);
 $digestor->dig($period, [\Ease\Functions::cfg('MODULE_DAILY_PATH'), \Ease\Functions::cfg('MODULE_PATH')]);

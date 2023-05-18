@@ -4,24 +4,27 @@
  * Customers without notification email address
  */
 
+namespace AbraFlexi\Digest\Modules;
+
 /**
  * Find Customers Without Email
  *
  * @author vitex
  */
-class WithoutEmail extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+class WithoutEmail extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
+{
 
     /**
      * Find Customers Without Email
      * 
      * @return boolean
      */
-    public function dig() {
+    public function dig()
+    {
         $addresser = new \AbraFlexi\Adresar();
         $withoutEmail = $addresser->getColumnsFromAbraFlexi(['nazev', 'kod', 'ulice',
             'mesto', 'tel'],
                 ['email' => 'is empty', 'typVztahuK' => 'typVztahu.odberDodav']);
-
         if (empty($withoutEmail)) {
             $this->addItem(_('none'));
         } else {
@@ -44,8 +47,8 @@ class WithoutEmail extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
         return !empty($withoutEmail);
     }
 
-    function heading() {
+    function heading()
+    {
         return _('Customers without notification email address');
     }
-
 }

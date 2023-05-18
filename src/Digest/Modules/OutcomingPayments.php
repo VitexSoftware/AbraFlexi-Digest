@@ -3,6 +3,7 @@
 /*
  * Outcoming payments
  */
+namespace AbraFlexi\Digest\Modules;
 
 /**
  * Description of OutcomingPayments
@@ -14,7 +15,7 @@ class OutcomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
     public $timeColumn = 'datVyst';
 
     public function dig() {
-        $banker = new AbraFlexi\Banka();
+        $banker = new \AbraFlexi\Banka();
         $outcomes = $banker->getColumnsFromAbraFlexi(['mena', 'sumCelkem',
             'sumCelkemMen'],
                 array_merge($this->condition,

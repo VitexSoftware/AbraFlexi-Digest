@@ -6,27 +6,28 @@ namespace AbraFlexi\Digest;
  * AbraFlexi Digest Mailer
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2017-2021 Vitex Software
+ * @copyright  (G) 2017-2023 Vitex Software
  */
-class Mailer extends \Ease\HtmlMailer {
+class Mailer extends \Ease\HtmlMailer
+{
 
     /**
-     * 
+     * Digest Mailer
+     *
      * @param string $subject
      * @param \Ease\Container   $moduleDir
      */
-    public function __construct($sendTo, $subject) {
+    public function __construct($sendTo, $subject)
+    {
 
         $this->fromEmailAddress = \Ease\Functions::cfg('DIGEST_FROM');
         parent::__construct($sendTo, $subject);
-
         $this->htmlDocument = new \Ease\Html\HtmlTag(new \Ease\Html\SimpleHeadTag([
                     new \Ease\Html\TitleTag($this->emailSubject),
                     '<style>' . Digestor::$purecss .
                     Digestor::getCustomCss() .
                     Digestor::getWebPageInlineCSS() .
                     '</style>']));
-
         $this->htmlBody = $this->htmlDocument->addItem(new \Ease\Html\BodyTag());
     }
 
@@ -37,7 +38,8 @@ class Mailer extends \Ease\HtmlMailer {
      *
      * @return Ease\pointer|null ukazatel na vložený obsah
      */
-    public function &addItem($item, $pageItemName = null) {
+    public function &addItem($item, $pageItemName = null)
+    {
         $mailBody = '';
         if (is_object($item)) {
             if (is_object($this->htmlDocument)) {
@@ -57,8 +59,8 @@ class Mailer extends \Ease\HtmlMailer {
         return $mailBody;
     }
 
-    public function getCss() {
+    public function getCss()
+    {
         
     }
-
 }

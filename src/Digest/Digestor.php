@@ -17,7 +17,8 @@ use Ease\Html\PTag;
  *
  * @author vitex
  */
-class Digestor extends \Ease\Html\DivTag {
+class Digestor extends \Ease\Html\DivTag
+{
 
     /**
      * Subject
@@ -61,7 +62,8 @@ class Digestor extends \Ease\Html\DivTag {
      * 
      * @param string $subject
      */
-    public function __construct($subject) {
+    public function __construct($subject)
+    {
         parent::__construct(null, ['class' => 'Xaccordion', 'id' => 'accordionExample']);
         $this->subject = $subject;
         $this->addHeading($subject);
@@ -73,7 +75,8 @@ class Digestor extends \Ease\Html\DivTag {
      * @param string $timerName
      * @param boolean $writing Is this inset type opration ?          
      */
-    function timerStart($timerName) {
+    function timerStart($timerName)
+    {
         $this->benchmark[$timerName] = ['start' => microtime()];
     }
 
@@ -83,7 +86,8 @@ class Digestor extends \Ease\Html\DivTag {
      * @param string $timerName
      * @param boolean $writing           
      */
-    function timerStop($timerName) {
+    function timerStop($timerName)
+    {
         $this->benchmark[$timerName]['end'] = microtime();
     }
 
@@ -93,7 +97,8 @@ class Digestor extends \Ease\Html\DivTag {
      * 
      * @return string
      */
-    function timerValue($startEnd) {
+    function timerValue($startEnd)
+    {
         $time_start = explode(' ', $startEnd['start']);
         $time_end = explode(' ', $startEnd['end']);
         return number_format(($time_end[1] + $time_end[0] - ($time_start[1] + $time_start[0])), 3);
@@ -102,7 +107,8 @@ class Digestor extends \Ease\Html\DivTag {
     /**
      * Digest page Heading
      */
-    public function addHeading($subject) {
+    public function addHeading($subject)
+    {
         $this->addItem(new \Ease\Html\ATag('', '', ['name' => 'index']));
         $this->addItem(new \AbraFlexi\ui\CompanyLogo([
                     'align' => 'right', 'id' => 'companylogo',
@@ -141,20 +147,22 @@ class Digestor extends \Ease\Html\DivTag {
      * 
      * @param \DateInterval $interval
      */
-    public function dig($interval, $moduleDir) {
+    public function dig($interval, $moduleDir)
+    {
         $this->processModules(self::getModules($moduleDir), $interval);
-
         $this->addIndex();
         $this->addFoot();
-
-        $shared = \Ease\Shared::instanced();
-        $emailto = $shared->getConfigValue('EASE_MAILTO');
+        $emailto = \Ease\Functions::cfg('EASE_MAILTO');
         if ($emailto) {
             $this->sendByMail($emailto);
+        } else {
+            $this->addStatusMessage('EASE_MAILTO not defined - not sending result', 'debug');
         }
-        $saveto = $shared->getConfigValue('SAVETO');
+        $saveto = \Ease\Functions::cfg('SAVETO');
         if ($saveto) {
             $this->saveToHtml($saveto);
+        } else {
+            $this->addStatusMessage('SAVETO not defined - not saving result to file', 'debug');
         }
     }
 
@@ -164,14 +172,15 @@ class Digestor extends \Ease\Html\DivTag {
      * @param array $modules [classname=>filepath]
      * @param \DateTime|\DatePeriod $interval
      */
-    public function processModules($modules, $interval) {
+    public function processModules($modules, $interval)
+    {
         foreach ($modules as $class => $classFile) {
 
             $this->timerStart($class);
 
             include_once $classFile;
             $module = new $class($interval);
-            $saveto = $this->shared->getConfigValue('SAVETO');
+            $saveto = \Ease\Functions::cfg('SAVETO');
             if ($module->process()) {
                 //                $this->addItem(new \Ease\Html\HrTag());
                 $this->addToIndex($this->addItem($module));
@@ -197,7 +206,8 @@ class Digestor extends \Ease\Html\DivTag {
      * 
      * @param string $moduleDir path
      */
-    public static function getModules($moduleDir) {
+    public static function getModules($moduleDir)
+    {
         $modules = [];
         if (is_array($moduleDir)) {
             foreach ($moduleDir as $module) {
@@ -208,7 +218,7 @@ class Digestor extends \Ease\Html\DivTag {
                 $d = dir($moduleDir);
                 while (false !== ($entry = $d->read())) {
                     if (is_file($moduleDir . '/' . $entry)) {
-                        $class = pathinfo($entry, PATHINFO_FILENAME);
+                        $class = str_replace(['.','/'], ['\\AbraFlexi','\\'], $moduleDir) . '\\' . pathinfo($entry, PATHINFO_FILENAME);
                         if (pathinfo($entry, PATHINFO_EXTENSION) == 'php') {
                             $modules[$class] = realpath($moduleDir . '/' . $entry);
                         }
@@ -217,7 +227,7 @@ class Digestor extends \Ease\Html\DivTag {
                 $d->close();
             } else {
                 if (is_file($moduleDir)) {
-                    $class = pathinfo($moduleDir, PATHINFO_FILENAME);
+                    $class = str_replace(['.','/'], ['AbraFlexi\\Digest','\\'], $moduleDir) .'\\' .pathinfo($moduleDir, PATHINFO_FILENAME);
                     $modules[$class] = realpath($moduleDir);
                 } else {
                     \Ease\Shared::logger()->addToLog('Digestor', sprintf(_('Module dir %s is wrong'), $moduleDir), 'error');
@@ -231,23 +241,23 @@ class Digestor extends \Ease\Html\DivTag {
      * 
      * @param DigestModule $element
      */
-    public function addToIndex($element) {
+    public function addToIndex($element)
+    {
         $this->index[get_class($element)] = $element->heading();
     }
 
     /**
      * Add Index to digest
      */
-    public function addIndex() {
+    public function addIndex()
+    {
         $this->addItem(new \Ease\Html\H1Tag(new \Ease\Html\ATag(
                                 '',
                                 _('Index'),
                                 ['name' => 'index2']
         )));
         $this->addItem(new \Ease\Html\HrTag());
-
         $index = new \Ease\Html\NavTag(null, ['class' => 'nav']);
-
         foreach ($this->index as $class => $heading) {
             $index->addItem(new \Ease\Html\ATag('#' . $class, $heading, ['class' => 'nav-link btn btn-light']));
             $this->topMenu->addItem(new \Ease\Html\ATag('#' . $class, $heading, ['class' => 'nav-link btn btn-light']));
@@ -255,7 +265,6 @@ class Digestor extends \Ease\Html\DivTag {
 
         $this->addItem($index);
     }
-
     //    /**
     //     * Include next element into current page (if not closed).
     //     *
@@ -273,11 +282,14 @@ class Digestor extends \Ease\Html\DivTag {
      * Sent digest by mail 
      * 
      * @param string $mailto
+     * 
+     * @return boolean 
      */
-    public function sendByMail($mailto) {
+    public function sendByMail($mailto)
+    {
         $postman = new Mailer($mailto, $this->subject);
         $postman->addItem($this);
-        $postman->send();
+        return $postman->send() === true;
     }
 
     /**
@@ -285,11 +297,9 @@ class Digestor extends \Ease\Html\DivTag {
      * 
      * @param string $saveTo directory
      */
-    public function saveToHtml($saveTo) {
-        $filename = $saveTo . pathinfo(
-                        $_SERVER['SCRIPT_FILENAME'],
-                        PATHINFO_FILENAME
-                ) . '.html';
+    public function saveToHtml($saveTo)
+    {
+        $filename = $saveTo . pathinfo($_SERVER['SCRIPT_FILENAME'], PATHINFO_FILENAME) . '.html';
         $webPage = new \Ease\Html\HtmlTag(new \Ease\Html\SimpleHeadTag([
                     new \Ease\Html\TitleTag($this->subject),
                     '<style>' . Digestor::$purecss . Digestor::getCustomCss() . Digestor::getWebPageInlineCSS() . '</style>'
@@ -301,7 +311,8 @@ class Digestor extends \Ease\Html\DivTag {
         );
     }
 
-    static public function getWebPageInlineCSS() {
+    static public function getWebPageInlineCSS()
+    {
         //        $easeShared = \Ease\Shared::webPage();
         //        if (isset($easeShared->cascadeStyles) && count($easeShared->cascadeStyles)) {
         //            $cascadeStyles = [];
@@ -317,20 +328,23 @@ class Digestor extends \Ease\Html\DivTag {
 
     /**
      * Obtain Custom CSS - THEME in digest.json
+     * 
      * @return string
      */
-    public static function getCustomCss() {
-
-        $theme = \Ease\Shared::instanced()->getConfigValue('THEME');
-        $cssfile = constant('STYLE_DIR') . '/' . $theme;
-        return file_exists($cssfile) ? file_get_contents($cssfile) : '';
+    public static function getCustomCss()
+    {
+        $theme = \Ease\Functions::cfg('THEME', 'bootstrap.min.css');
+        $cssfile = \Ease\Functions::cfg('STYLE_DIR') . '/' . $theme;
+        return (file_exists($cssfile) && is_file($cssfile)) ? file_get_contents($cssfile) : '';
     }
 
     /**
      * Obtain Version of application
+     * 
      * @return string
      */
-    static public function getAppVersion() {
+    static public function getAppVersion()
+    {
         $composerInfo = json_decode(file_get_contents('../composer.json'), true);
         return array_key_exists('version', $composerInfo) ? $composerInfo['version'] : 'dev-master';
     }
@@ -338,7 +352,8 @@ class Digestor extends \Ease\Html\DivTag {
     /**
      * Page Bottom
      */
-    public function addFoot() {
+    public function addFoot()
+    {
         $this->addItem(new \Ease\Html\HrTag());
         $this->addItem(new \Ease\Html\ImgTag(
                         'data:image/svg+xml;base64,' . base64_encode(self::$logo),
@@ -352,9 +367,8 @@ class Digestor extends \Ease\Html\DivTag {
                                     _('AbraFlexi Digest') . ' ' . _('version') . ' ' . self::getAppVersion()
                             )
         ])));
-
         $this->addItem(new \Ease\Html\SmallTag(new \Ease\Html\DivTag([
-                            _('(G) 2018-2021'),
+                            _('(G) 2018-2023'),
                             '&nbsp;', new \Ease\Html\ATag(
                                     'https://www.vitexsoftware.cz/',
                                     'Vitex Software'
@@ -367,7 +381,8 @@ class Digestor extends \Ease\Html\DivTag {
      *
      * @return void
      */
-    public function printResults() {
+    public function printResults()
+    {
         $results = new DivTag();
         $results->addItem(new PTag(vsprintf("%-30s; %s; %s\n", ['operation', 'read time', 'write time'])));
         foreach (array_keys($this->benchmark) as $testName) {
@@ -378,5 +393,4 @@ class Digestor extends \Ease\Html\DivTag {
         }
         return $results;
     }
-
 }

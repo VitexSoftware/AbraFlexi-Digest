@@ -13,7 +13,8 @@ namespace AbraFlexi\Digest;
  *
  * @author vitex
  */
-class Table extends \Ease\Html\TableTag {
+class Table extends \Ease\Html\TableTag
+{
 
     /**
      * Digest Table
@@ -21,10 +22,10 @@ class Table extends \Ease\Html\TableTag {
      * @param array $thCols    TH Columns
      * @param array $properties
      */
-    public function __construct($thCols, $properties = array()) {
+    public function __construct($thCols, $properties = array())
+    {
         parent::__construct(null, $properties);
         $this->addRowHeaderColumns($thCols);
         $this->addTagClass('table');
     }
-
 }

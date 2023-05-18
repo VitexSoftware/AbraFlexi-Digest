@@ -1,15 +1,16 @@
 <?php
 
 /*
- * New Customers
+ * Best Sellers
  */
-
+namespace AbraFlexi\Digest\Modules;
 /**
  * Description of NewCustomers
  *
  * @author vitex
  */
-class BestSellers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+class BestSellers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
+{
 
     /**
      * Column used to filter by date
@@ -20,13 +21,13 @@ class BestSellers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\D
     /**
      * 
      */
-    public function dig() {
+    public function dig()
+    {
         $invoicer = new \AbraFlexi\FakturaVydana();
         $this->condition['relations'] = 'polozkyDokladu';
-        $this->condition['typDokl'] = AbraFlexi\RO::code('FAKTURA');
+        $this->condition['typDokl'] = \AbraFlexi\RO::code('FAKTURA');
         $invoicesRaw = $invoicer->getColumnsFromAbraFlexi(['polozkyDokladu(cenik,nazev,sumZkl,typPolozkyK)',
             'typDokl'], $this->condition, 'kod');
-
         $items = [];
         if (!empty($invoicesRaw)) {
             foreach ($invoicesRaw as $invoiceCode => $invoiceData) {
@@ -41,7 +42,6 @@ class BestSellers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\D
         } else {
             $topProductsTable = new \AbraFlexi\Digest\Table([_('Pricelist'),
                 _('Quantity'), _('Total')]);
-
             $products = [];
             $totals = [];
             foreach ($items as $item) {
@@ -65,9 +65,7 @@ class BestSellers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\D
             }
 
             arsort($products);
-
-            $productor = new AbraFlexi\Cenik();
-
+            $productor = new \AbraFlexi\Cenik();
             foreach ($products as $productCode => $productInfo) {
                 if ($products[$productCode] > 1) {
 
@@ -80,13 +78,12 @@ class BestSellers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\D
 
             $this->addItem($this->cardBody([$topProductsTable, new \Ease\Html\DivTag(sprintf(_('%d top products'),
                                         $topProductsTable->getItemsCount()))]));
-
             return !empty($topProductsTable->getItemsCount());
         }
     }
 
-    public function heading() {
+    public function heading()
+    {
         return _('Best selling products');
     }
-
 }

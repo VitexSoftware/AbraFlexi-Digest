@@ -3,6 +3,7 @@
 /*
  * Debts
  */
+namespace AbraFlexi\Digest\Modules;
 
 /**
  * Description of WaitingIncome
@@ -64,8 +65,8 @@ class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
         if (empty($invoicesByFirma)) {
             $this->addItem(_('none'));
         } else {
-            $adreser = new AbraFlexi\Adresar(null, ['offline' => 'true']);
-            $invTable = new Ease\Html\TableTag(null, ['class' => 'table']);
+            $adreser = new \AbraFlexi\Adresar(null, ['offline' => 'true']);
+            $invTable = new \Ease\Html\TableTag(null, ['class' => 'table']);
             $invTable->addRowHeaderColumns([_('Company'), _('Overdue days'), _('Invoices'), _('Amount')]);
 
             foreach ($invoicesByFirma as $firma => $fakturyFirmy) {
@@ -77,7 +78,7 @@ class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
 
                     $overdueInvoice = \AbraFlexi\RO::uncode($invoiceData['kod']);
 
-                    $overdueInvoices->addItem(new Ease\Html\DivTag([new \Ease\Html\ATag($invoicer->getApiURL(),
+                    $overdueInvoices->addItem(new \Ease\Html\DivTag([new \Ease\Html\ATag($invoicer->getApiURL(),
                                         $overdueInvoice, ['css' => 'margin: 5px;']),
                                 '&nbsp;<small>' . ( ($currency != 'CZK') ? $invoiceData['zbyvaUhraditMen'] : $invoiceData['zbyvaUhradit']) . ' ' . $currency . ' ' . \AbraFlexi\FakturaVydana::overdueDays($invoiceData['datSplat']) . ' ' . _('days') . '</small>']
                     ));

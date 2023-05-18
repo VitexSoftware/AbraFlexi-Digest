@@ -9,12 +9,7 @@ override_dh_install:
 	sed -i -e 's/..\/i18n/\/usr\/share\/locale/g'            	        debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
 	sed -i -e 's/..\/vendor/\/var\/lib\/composer\/abraflexi-digest/g' 	debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
 	sed -i -e 's/\.\./\/etc\/abraflexi/g'                                    debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
-	sed -i -e 's/.\/modules.daily/\/usr\/lib\/abraflexi-digest\/daily/g'     debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
-	sed -i -e 's/.\/modules.weekly/\/usr\/lib\/abraflexi-digest\/weekly/g'   debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
-	sed -i -e 's/.\/modules.monthly/\/usr\/lib\/abraflexi-digest\/monthly/g' debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
-	sed -i -e 's/.\/modules.yearly/\/usr\/lib\/abraflexi-digest\/yearly/g'   debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
-	sed -i -e 's/.\/modules.alltime/\/usr\/lib\/abraflexi-digest\/alltime/g' debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
-	sed -i -e 's/.\/modules/\/usr\/lib\/abraflexi-digest/g'                  debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
+	sed -i -e 's/\.\//\/usr\/lib\/abraflexi-digest\//'                  debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
 	sed -i -e 's/.\/css/\/usr\/share\/abraflexi-digest\/css/'             debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
 	sed -i -e 's/..\/composer.json/\/usr\/lib\/abraflexi-digest\/composer.json/g' 	     debian/abraflexi-digest/usr/share/abraflexi-digest/Digest/Digestor.php
 	sed -i -e "s/__DIR__.'/'\/usr\/share\/abraflexi-digest/g"               debian/abraflexi-digest/usr/share/abraflexi-digest/index.php

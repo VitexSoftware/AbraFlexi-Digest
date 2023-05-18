@@ -3,6 +3,7 @@
 /*
  * Incoming Invoices accepted by us
  */
+namespace AbraFlexi\Digest\Modules;
 
 /**
  * Description of IncomingInvoices
@@ -20,7 +21,7 @@ class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFl
     public function dig() {
         $totals = [];
 
-        $digger = new \AbraFlexi\FakturaPrijata();
+        $digger = new \AbraFlexi\FakturaPrijata(null,['nativeTypes'=>false]);
         $inInvoicesData = $digger->getColumnsFromAbraFlexi(['kod', 'typDokl', 'sumCelkem', 'sumCelkemMen',
             'uhrazeno', 'storno', 'mena', 'juhSum', 'juhSumMen'],
                 $this->condition);
@@ -68,14 +69,14 @@ class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFl
 
             $invoiced = [];
             foreach ($invoicedRaw as $currencyCode => $amount) {
-                $invoiced[] = self::formatCurrency($amount) . ' ' . AbraFlexi\RO::uncode($currencyCode);
+                $invoiced[] = self::formatCurrency($amount) . ' ' . \AbraFlexi\RO::uncode($currencyCode);
             }
 
 
             $inInvoicesTable = new \AbraFlexi\Digest\Table([_('Count'), _('Type'),
                 _('Total')]);
             foreach ($typDoklRaw as $type => $count) {
-                $inInvoicesTable->addRowColumns([$count, AbraFlexi\RO::uncode($type),
+                $inInvoicesTable->addRowColumns([$count, \AbraFlexi\RO::uncode($type),
                     self::getTotalsDiv($totals[$type])]);
             }
 

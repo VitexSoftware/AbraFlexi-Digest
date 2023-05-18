@@ -13,11 +13,12 @@ namespace AbraFlexi\Digest;
  *
  * @author vitex
  */
-class DocumentLink extends \Ease\Html\ATag {
+class DocumentLink extends \Ease\Html\ATag
+{
 
-    public function __construct($code, $engine, $properties = []) {
+    public function __construct($code, $engine, $properties = [])
+    {
         $engine->setMyKey($code);
         parent::__construct($engine->getApiURL(), $engine->getEvidence() . ':' . \AbraFlexi\RO::uncode($code), $properties);
     }
-
 }

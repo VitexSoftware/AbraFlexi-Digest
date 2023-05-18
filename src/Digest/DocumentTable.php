@@ -13,10 +13,11 @@ namespace AbraFlexi\Digest;
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
-class DocumentTable extends Table {
+class DocumentTable extends Table
+{
 
-    public function __construct($engine, $properties = array()) {
+    public function __construct($engine, $properties = array())
+    {
         parent::__construct([], $properties);
     }
-
 }

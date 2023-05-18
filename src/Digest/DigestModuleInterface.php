@@ -13,7 +13,8 @@ namespace AbraFlexi\Digest;
  *
  * @author vitex
  */
-interface DigestModuleInterface {
+interface DigestModuleInterface
+{
 
     public function heading();
 

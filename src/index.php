@@ -68,12 +68,12 @@ if (\Ease\Document::isPosted()) {
 }
 
 
-$candidates[_('Common modules')] = Digestor::getModules(constant('MODULE_PATH'));
-$candidates[_('Daily modules')] = Digestor::getModules(constant('MODULE_DAILY_PATH'));
-$candidates[_('Weekly modules')] = Digestor::getModules(constant('MODULE_WEEKLY_PATH'));
-$candidates[_('Monthly modules')] = Digestor::getModules(constant('MODULE_MONTHLY_PATH'));
-$candidates[_('Yearly modules')] = Digestor::getModules(constant('MODULE_YEARLY_PATH'));
-$candidates[_('Alltime modules')] = Digestor::getModules(constant('MODULE_ALLTIME_PATH'));
+$candidates[_('Common modules')] = Digestor::getModules(\Ease\Shared::cfg('MODULE_PATH'));
+$candidates[_('Daily modules')] = Digestor::getModules(\Ease\Shared::cfg('MODULE_DAILY_PATH'));
+$candidates[_('Weekly modules')] = Digestor::getModules(\Ease\Shared::cfg('MODULE_WEEKLY_PATH'));
+$candidates[_('Monthly modules')] = Digestor::getModules(\Ease\Shared::cfg('MODULE_MONTHLY_PATH'));
+$candidates[_('Yearly modules')] = Digestor::getModules(\Ease\Shared::cfg('MODULE_YEARLY_PATH'));
+$candidates[_('Alltime modules')] = Digestor::getModules(\Ease\Shared::cfg('MODULE_ALLTIME_PATH'));
 
 $fromtoForm = new \Ease\TWB4\Form(['name' => 'fromto', 'class' => 'form-horizontal']);
 

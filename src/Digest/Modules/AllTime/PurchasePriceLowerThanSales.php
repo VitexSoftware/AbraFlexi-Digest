@@ -1,11 +1,14 @@
 <?php
 
+namespace AbraFlexi\Digest\Modules\AllTime;
+
 /**
  *  Purchase Price Lower Than Sales
  *
  * @author vitex
  */
-class PurchasePriceLowerThanSales extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+class PurchasePriceLowerThanSales extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
+{
 
     /**
      * Which records we want to see ?
@@ -16,11 +19,11 @@ class PurchasePriceLowerThanSales extends \AbraFlexi\Digest\DigestModule impleme
     /**
      * 
      */
-    public function dig() {
+    public function dig()
+    {
         $pricer = new \AbraFlexi\Cenik();
         $productsRaw = $pricer->getColumnsFromAbraFlexi(['nazev', 'nakupCena', 'cenaZakl'],
                 $this->condition, 'kod');
-
         $products = [];
         if (!empty($productsRaw)) {
             foreach ($productsRaw as $productsCode => $productsData) {
@@ -45,11 +48,8 @@ class PurchasePriceLowerThanSales extends \AbraFlexi\Digest\DigestModule impleme
                 _('Sell'),
                 _('Difference')
             ]);
-
             $products = \Ease\Functions::reindexArrayBy($products, 'provar');
-
             krsort($products);
-
             foreach ($products as $productInfo) {
                 $productsCode = $productInfo['kod'];
                 $pricer->setMyKey($productsCode);
@@ -65,13 +65,12 @@ class PurchasePriceLowerThanSales extends \AbraFlexi\Digest\DigestModule impleme
 
 
             $this->addItem($this->cardBody([new \Ease\Html\DivTag(sprintf(_('%d disadvantageous products'), $products)), $topProductsTable]));
-
             return !empty($topProductsTable->getItemsCount());
         }
     }
 
-    public function heading() {
+    public function heading()
+    {
         return _('Product purchase price lower than sales');
     }
-
 }

@@ -1,4 +1,5 @@
 <?php
+namespace AbraFlexi\Digest\Modules;
 
 /**
  * Sent Reminds overview
@@ -30,7 +31,7 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
             $this->addItem(_('none'));
         } else {
             $invoicer->addStatusMessage("Faktur: " . count($faDatakturyRaw));
-            $adreser = new AbraFlexi\Adresar(null, ['offline' => 'true']);
+            $adreser = new \AbraFlexi\Adresar(null, ['offline' => 'true']);
             $invTable = new \AbraFlexi\Digest\Table([
                 _('Client'),
                 _('Invoice'),
@@ -113,7 +114,7 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
      */
     public function myDate(\DateTime $flexidate) {
         if ($this->isMyDate($flexidate)) {
-            $humanDate = new Ease\Html\StrongTag(self::humanDate($flexidate));
+            $humanDate = new \Ease\Html\StrongTag(self::humanDate($flexidate));
         } else {
             $humanDate = self::humanDate($flexidate);
         }

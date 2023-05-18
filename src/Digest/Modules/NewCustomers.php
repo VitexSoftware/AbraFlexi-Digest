@@ -3,6 +3,7 @@
 /*
  * New Customers
  */
+namespace AbraFlexi\Digest\Modules;
 
 /**
  * Description of NewCustomers
@@ -18,7 +19,7 @@ class NewCustomers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
     public $timeColumn = 'lastUpdate';
 
     public function dig() {
-        $digger = new AbraFlexi\Adresar();
+        $digger = new \AbraFlexi\Adresar();
         $newCustomersData = $digger->getColumnsFromAbraFlexi(['kod', 'nazev', 'tel',
             'email'], $this->condition);
 
@@ -32,7 +33,7 @@ class NewCustomers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
                 _('Email'), _('Phone')]);
 
             foreach ($newCustomersData as $pos => $newCustomerData) {
-                $digger->setMyKey(AbraFlexi\RO::code($newCustomerData['kod']));
+                $digger->setMyKey(\AbraFlexi\RO::code($newCustomerData['kod']));
                 $userTable->addRowColumns([
                     $pos,
                     new \Ease\Html\ATag($digger->getApiURL(),

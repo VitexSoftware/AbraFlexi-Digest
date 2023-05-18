@@ -1,13 +1,16 @@
 <?php
 
-use Ease\Html\DivTag;
+namespace AbraFlexi\Digest\Modules;
+
+use \Ease\Html\DivTag;
 
 /**
  * Incoming payments for us
  *
  * @author vitex
  */
-class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
+{
 
     public $timeColumn = 'datVyst';
 
@@ -16,9 +19,10 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
      * 
      * @return boolean
      */
-    public function dig() {
-        $invoicer = new AbraFlexi\FakturaVydana(null, ['nativeTypes' => false]);
-        $adresser = new AbraFlexi\Adresar();
+    public function dig()
+    {
+        $invoicer = new \AbraFlexi\FakturaVydana(null, ['nativeTypes' => false]);
+        $adresser = new \AbraFlexi\Adresar();
         $proformas = $invoicer->getColumnsFromAbraFlexi(['kod', 'mena', 'popis', 'sumCelkem',
             'sumCelkemMen', 'stavOdpocetK', 'typDokl', 'firma', 'datVyst'],
                 array_merge($this->condition,
@@ -39,13 +43,11 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
                     case 'stavOdp.komplet':
                     case 'stavOdp.vytvZdd':
                         break;
-
                     default:
                         unset($proforma['external-ids']);
                         unset($proforma['id']);
                         unset($proforma['typDokl@ref']);
                         $adresser->takeData($proforma);
-
                         $amount = self::getAmount($proforma);
                         $currency = self::getCurrency($proforma);
                         if (array_key_exists($currency, $total)) {
@@ -59,10 +61,8 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
                         $proforma['kod'] = new \AbraFlexi\Digest\DocumentLink($proforma['kod'],
                                 $invoicer);
                         $proforma['price'] = self::getPrice($proforma);
-
-                        $proforma['firma'] = new AbraFlexi\Digest\CompanyLink($proforma['firma'],
+                        $proforma['firma'] = new \AbraFlexi\Digest\CompanyLink($proforma['firma'],
                                 $adresser);
-
                         unset($proforma['typDokl']);
                         unset($proforma['sumCelkem']);
                         unset($proforma['sumCelkemMen']);
@@ -73,13 +73,11 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
                         unset($proforma['firma@ref']);
                         unset($proforma['firma@showAs']);
                         $incomesTable->addRowColumns($proforma);
-
                         break;
                 }
             }
 
             $currDiv = new DivTag();
-
             foreach ($total as $currency => $amount) {
                 $currDiv->addItem(new \Ease\Html\DivTag($totals[$currency] . 'x' . ' ' . self::formatCurrency($amount) . '&nbsp;' . $currency));
             }
@@ -89,7 +87,8 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
         return !empty($total);
     }
 
-    public function heading() {
+    public function heading()
+    {
         return _('Non-deducted proformas');
     }
 
@@ -98,8 +97,8 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
      * 
      * @return string
      */
-    public function description() {
+    public function description()
+    {
         return _('Non-deducted proformas');
     }
-
 }

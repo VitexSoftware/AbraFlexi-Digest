@@ -1,4 +1,4 @@
-abraflexi-digest (1.27) UNRELEASED; urgency=medium
+abraflexi-digest (1.28) UNRELEASED; urgency=medium
 
   [ Vítězslav Dvořák ]
   * Do not show empty results
@@ -16,7 +16,12 @@ abraflexi-digest (1.27) UNRELEASED; urgency=medium
   * FlexiBee renamed to AbraFlexi
   * Debian package Fix
 
- -- CyberVitexus <vitex@exiv.jinonice.czf>  Sat, 15 May 2021 10:17:10 +0200
+  [ vitex ]
+  * Small fixes
+
+  * php8.x ready
+
+ --  <vitex@pc-vyvoj.spojenet.local>  Fri, 19 May 2023 00:07:09 +0200
 
 abraflexi-digest (1.6) UNRELEASED; urgency=medium
 
