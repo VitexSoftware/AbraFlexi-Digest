@@ -4,7 +4,7 @@
  * AbraFlexi Digest Engine
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2018 Vitex Software
+ * @copyright  (G) 2018-2023 Vitex Software
  */
 
 namespace AbraFlexi\Digest;
@@ -237,6 +237,25 @@ class Digestor extends \Ease\Html\DivTag
         return $modules;
     }
 
+    /**
+     * Extract namespace name from class file
+     * 
+     * @param string $classFilePath 
+     * 
+     * @return string class namespace extracted
+     */
+    public static function getClassNamespace($classFilePath)
+    {
+        $namespace = '';
+        foreach (file($classFilePath) as $line) {
+            if (preg_match('/^namespace\s(.*);$/', $line, $matches)) {
+                $namespace = $matches[1];
+            }
+        }
+        return $namespace . '/';
+    }
+    
+    
     /**
      * 
      * @param DigestModule $element

@@ -15,12 +15,9 @@ define('MODULE_WEEKLY_PATH', './Digest/Modules/Weekly');
 define('MODULE_MONTHLY_PATH', './Digest/Modules/Monthly');
 define('MODULE_YEARLY_PATH', './Digest/Modules/Yearly');
 define('MODULE_ALLTIME_PATH', './Digest/Modules/AllTime');
-
 define('STYLE_DIR', './css/themes/');
-
 require_once '../vendor/autoload.php';
 $shared = \Ease\Shared::instanced();
-
 if (\Ease\Document::isPosted() && \Ease\Document::getPostValue('url')) {
     define('SHOW_CONNECTION_FORM', true);
     define('ABRAFLEXI_URL', \Ease\Document::getPostValue('url'));
@@ -35,6 +32,5 @@ if (\Ease\Document::isPosted() && \Ease\Document::getPostValue('url')) {
 }
 
 $localer = \Ease\Locale::singleton(null, '../i18n', 'abraflexi-digest');
-
 $myCompany = new \AbraFlexi\Company(\Ease\Functions::cfg('ABRAFLEXI_COMPANY'));
 $myCompanyName = $myCompany->getDataValue('nazev');
