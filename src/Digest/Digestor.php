@@ -218,7 +218,7 @@ class Digestor extends \Ease\Html\DivTag
                 $d = dir($moduleDir);
                 while (false !== ($entry = $d->read())) {
                     if (is_file($moduleDir . '/' . $entry)) {
-                        $class = str_replace(['.','/'], ['\\AbraFlexi','\\'], $moduleDir) . '\\' . pathinfo($entry, PATHINFO_FILENAME);
+                        $class = '\\'.self::getClassNamespace($moduleDir . '/' . $entry).'\\'.pathinfo($entry, PATHINFO_FILENAME);
                         if (pathinfo($entry, PATHINFO_EXTENSION) == 'php') {
                             $modules[$class] = realpath($moduleDir . '/' . $entry);
                         }
@@ -250,11 +250,11 @@ class Digestor extends \Ease\Html\DivTag
         foreach (file($classFilePath) as $line) {
             if (preg_match('/^namespace\s(.*);$/', $line, $matches)) {
                 $namespace = $matches[1];
+                break;
             }
         }
-        return $namespace . '/';
+        return $namespace;
     }
-    
     
     /**
      * 
