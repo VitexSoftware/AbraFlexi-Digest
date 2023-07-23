@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "82c179f73eef86eeac02344f641d1382",
+    "content-hash": "dc065dfe382da1d10d28094f6b167b89",
     "packages": [
         {
             "name": "pear/console_getopt",
@@ -131,12 +131,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pear/Mail_Mime.git",
-                "reference": "cc3eafbd3ea8de6cc1561e29b54633179daf437d"
+                "reference": "21407d491ccab3265fec2ad72fa6ad322cb290fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pear/Mail_Mime/zipball/cc3eafbd3ea8de6cc1561e29b54633179daf437d",
-                "reference": "cc3eafbd3ea8de6cc1561e29b54633179daf437d",
+                "url": "https://api.github.com/repos/pear/Mail_Mime/zipball/21407d491ccab3265fec2ad72fa6ad322cb290fd",
+                "reference": "21407d491ccab3265fec2ad72fa6ad322cb290fd",
                 "shasum": ""
             },
             "require": {
@@ -175,20 +175,149 @@
                 "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Mail_Mime",
                 "source": "https://github.com/pear/Mail_Mime"
             },
-            "time": "2022-01-02T09:21:50+00:00"
+            "time": "2023-05-31T09:41:30+00:00"
         },
         {
-            "name": "pear/pear-core-minimal",
-            "version": "v1.10.11",
+            "name": "pear/net_smtp",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/pear/pear-core-minimal.git",
-                "reference": "68d0d32ada737153b7e93b8d3c710ebe70ac867d"
+                "url": "https://github.com/pear/Net_SMTP.git",
+                "reference": "cfd963dc5cc73b4d64c7769e47dfa0f439dec536"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pear/pear-core-minimal/zipball/68d0d32ada737153b7e93b8d3c710ebe70ac867d",
-                "reference": "68d0d32ada737153b7e93b8d3c710ebe70ac867d",
+                "url": "https://api.github.com/repos/pear/Net_SMTP/zipball/cfd963dc5cc73b4d64c7769e47dfa0f439dec536",
+                "reference": "cfd963dc5cc73b4d64c7769e47dfa0f439dec536",
+                "shasum": ""
+            },
+            "require": {
+                "pear/net_socket": "@stable",
+                "pear/pear-core-minimal": "@stable",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "suggest": {
+                "pear/auth_sasl": "Install optionally via your project's composer.json"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Net": "./"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "./"
+            ],
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Jon Parise",
+                    "email": "jon@php.net",
+                    "homepage": "https://www.indelible.org",
+                    "role": "Lead"
+                },
+                {
+                    "name": "Chuck Hagenbuch",
+                    "email": "chuck@horde.org",
+                    "role": "Lead"
+                },
+                {
+                    "name": "Armin Graefe",
+                    "email": "schengawegga@gmail.com",
+                    "role": "Lead"
+                }
+            ],
+            "description": "An implementation of the SMTP protocol",
+            "homepage": "https://pear.github.io/Net_SMTP/",
+            "keywords": [
+                "email",
+                "mail",
+                "smtp"
+            ],
+            "support": {
+                "issues": "https://github.com/pear/Net_SMTP/issues",
+                "source": "https://github.com/pear/Net_SMTP"
+            },
+            "time": "2022-09-23T21:48:50+00:00"
+        },
+        {
+            "name": "pear/net_socket",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pear/Net_Socket.git",
+                "reference": "7482c62deab2c2685e00c221d97a83e17c795ef8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pear/Net_Socket/zipball/7482c62deab2c2685e00c221d97a83e17c795ef8",
+                "reference": "7482c62deab2c2685e00c221d97a83e17c795ef8",
+                "shasum": ""
+            },
+            "require": {
+                "pear/pear_exception": "@stable",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Net": "./"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "./"
+            ],
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Chuck Hagenbuch",
+                    "email": "chuck@horde.org",
+                    "role": "Lead"
+                },
+                {
+                    "name": "Stig Bakken",
+                    "email": "stig@php.net",
+                    "role": "Lead"
+                },
+                {
+                    "name": "Aleksander Machniak",
+                    "email": "alec@php.net",
+                    "role": "Lead"
+                }
+            ],
+            "description": "More info available on: http://pear.php.net/package/Net_Socket",
+            "support": {
+                "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Net_Socket",
+                "source": "https://github.com/pear/Net_Socket"
+            },
+            "time": "2017-04-13T17:16:44+00:00"
+        },
+        {
+            "name": "pear/pear-core-minimal",
+            "version": "v1.10.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pear/pear-core-minimal.git",
+                "reference": "aed862e95fd286c53cc546734868dc38ff4b5b1d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pear/pear-core-minimal/zipball/aed862e95fd286c53cc546734868dc38ff4b5b1d",
+                "reference": "aed862e95fd286c53cc546734868dc38ff4b5b1d",
                 "shasum": ""
             },
             "require": {
@@ -223,7 +352,7 @@
                 "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=PEAR",
                 "source": "https://github.com/pear/pear-core-minimal"
             },
-            "time": "2021-08-10T22:31:03+00:00"
+            "time": "2023-04-19T19:15:47+00:00"
         },
         {
             "name": "pear/pear_exception",
@@ -291,12 +420,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Spoje-NET/php-abraflexi.git",
-                "reference": "31cce9df0e1275771b58fa32f1cf430dd17df3eb"
+                "reference": "dbee2b5ab378c4a65373aa838d12a6bfead6e7a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Spoje-NET/php-abraflexi/zipball/31cce9df0e1275771b58fa32f1cf430dd17df3eb",
-                "reference": "31cce9df0e1275771b58fa32f1cf430dd17df3eb",
+                "url": "https://api.github.com/repos/Spoje-NET/php-abraflexi/zipball/dbee2b5ab378c4a65373aa838d12a6bfead6e7a5",
+                "reference": "dbee2b5ab378c4a65373aa838d12a6bfead6e7a5",
                 "shasum": ""
             },
             "require": {
@@ -311,8 +440,8 @@
             },
             "require-dev": {
                 "ext-iconv": "*",
-                "phing/phing": "^2",
-                "phpunit/phpunit": "^9"
+                "phing/phing": "*",
+                "phpunit/phpunit": "*"
             },
             "default-branch": true,
             "type": "library",
@@ -328,10 +457,10 @@
             "authors": [
                 {
                     "name": "Vítězslav Dvořák",
-                    "email": "vitex@arachne.cz"
+                    "email": "info@vitexsoftware.cz"
                 }
             ],
-            "description": "Library for easy interaction with czech accounting system FlexiBee.",
+            "description": "Library for easy interaction with czech economic system FlexiBee.",
             "keywords": [
                 "API-Client",
                 "AbraFlexi",
@@ -342,7 +471,7 @@
                 "issues": "https://github.com/Spoje-NET/php-abraflexi/issues",
                 "source": "https://github.com/Spoje-NET/php-abraflexi/tree/main"
             },
-            "time": "2023-01-24T19:47:02+00:00"
+            "time": "2023-07-11T07:31:44+00:00"
         },
         {
             "name": "vitexsoftware/abraflexi-bricks",
@@ -393,20 +522,72 @@
             "time": "2023-02-09T19:48:36+00:00"
         },
         {
+            "name": "vitexsoftware/ease-bootstrap4-widgets-abraflexi",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/VitexSoftware/php-ease-twbootstrap4-widgets-abraflexi.git",
+                "reference": "8f60fc46b69f0b7cff25dc7c9bfcf66d94e32cc3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-twbootstrap4-widgets-abraflexi/zipball/8f60fc46b69f0b7cff25dc7c9bfcf66d94e32cc3",
+                "reference": "8f60fc46b69f0b7cff25dc7c9bfcf66d94e32cc3",
+                "shasum": ""
+            },
+            "require": {
+                "vitexsoftware/abraflexi-bricks": ">=1.1",
+                "vitexsoftware/ease-twbootstrap4": ">=1.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AbraFlexi\\ui\\TWB4\\": "src/AbraFlexi/ui/TWB4"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vitex",
+                    "email": "info@vitexsoftware.cz"
+                }
+            ],
+            "description": "php-abraflexi extending classes and widgets",
+            "support": {
+                "issues": "https://github.com/VitexSoftware/php-ease-twbootstrap4-widgets-abraflexi/issues",
+                "source": "https://github.com/VitexSoftware/php-ease-twbootstrap4-widgets-abraflexi/tree/main"
+            },
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/VitexSoftware",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2022-12-07T10:25:39+00:00"
+        },
+        {
             "name": "vitexsoftware/ease-core",
             "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-ease-core.git",
-                "reference": "aa37dd4dd2e73f4925e8a56eef7e5f82cce69303"
+                "reference": "24870b3013760c36286d7831af335b65a03924f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-core/zipball/aa37dd4dd2e73f4925e8a56eef7e5f82cce69303",
-                "reference": "aa37dd4dd2e73f4925e8a56eef7e5f82cce69303",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-core/zipball/24870b3013760c36286d7831af335b65a03924f0",
+                "reference": "24870b3013760c36286d7831af335b65a03924f0",
                 "shasum": ""
             },
             "require": {
+                "composer-runtime-api": "*",
                 "ext-intl": "*",
                 "pear/mail": ">=1.3",
                 "pear/mail_mime": ">=1.10",
@@ -451,7 +632,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2023-02-28T13:46:28+00:00"
+            "time": "2023-07-21T16:44:44+00:00"
         },
         {
             "name": "vitexsoftware/ease-core-bricks",
@@ -459,12 +640,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-ease-bricks.git",
-                "reference": "fcbcaa008dcb0ceea41c641e97c877c51fc0410b"
+                "reference": "c9a5001cd69ffee152f4dc4be0379bd13d146d89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-bricks/zipball/fcbcaa008dcb0ceea41c641e97c877c51fc0410b",
-                "reference": "fcbcaa008dcb0ceea41c641e97c877c51fc0410b",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-bricks/zipball/c9a5001cd69ffee152f4dc4be0379bd13d146d89",
+                "reference": "c9a5001cd69ffee152f4dc4be0379bd13d146d89",
                 "shasum": ""
             },
             "require": {
@@ -504,7 +685,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2022-12-06T22:06:07+00:00"
+            "time": "2023-04-18T21:41:41+00:00"
         },
         {
             "name": "vitexsoftware/ease-html",
@@ -512,12 +693,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-ease-html.git",
-                "reference": "9f371449e89dbb0d2d2f952d253b1b987494e35a"
+                "reference": "af6a1d2de543523cb4d7c0dcb9c2636f26ff403b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-html/zipball/9f371449e89dbb0d2d2f952d253b1b987494e35a",
-                "reference": "9f371449e89dbb0d2d2f952d253b1b987494e35a",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-html/zipball/af6a1d2de543523cb4d7c0dcb9c2636f26ff403b",
+                "reference": "af6a1d2de543523cb4d7c0dcb9c2636f26ff403b",
                 "shasum": ""
             },
             "require": {
@@ -555,7 +736,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2023-03-19T20:50:58+00:00"
+            "time": "2023-03-22T20:35:52+00:00"
         },
         {
             "name": "vitexsoftware/ease-twbootstrap4",
@@ -613,12 +794,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-ease-twbootstrap4-widgets.git",
-                "reference": "4aef052890d83bc4fc7acde813dd6f302aed47d3"
+                "reference": "3feef23131ed2ef35f26f6220d620172bd6880c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-twbootstrap4-widgets/zipball/4aef052890d83bc4fc7acde813dd6f302aed47d3",
-                "reference": "4aef052890d83bc4fc7acde813dd6f302aed47d3",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-twbootstrap4-widgets/zipball/3feef23131ed2ef35f26f6220d620172bd6880c3",
+                "reference": "3feef23131ed2ef35f26f6220d620172bd6880c3",
                 "shasum": ""
             },
             "require": {
@@ -657,115 +838,81 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2022-12-20T23:03:47+00:00"
-        },
+            "time": "2023-04-12T17:21:39+00:00"
+        }
+    ],
+    "packages-dev": [
         {
-            "name": "vitexsoftware/ease-twbootstrap4-widgets-flexibee",
-            "version": "dev-main",
+            "name": "phpstan/phpstan",
+            "version": "1.11.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/VitexSoftware/php-ease-twbootstrap4-widgets-abraflexi.git",
-                "reference": "8f60fc46b69f0b7cff25dc7c9bfcf66d94e32cc3"
+                "url": "https://github.com/phpstan/phpstan.git",
+                "reference": "16cf5d2bcc0310ac77c4f3efe3456bee4e181030"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-twbootstrap4-widgets-abraflexi/zipball/8f60fc46b69f0b7cff25dc7c9bfcf66d94e32cc3",
-                "reference": "8f60fc46b69f0b7cff25dc7c9bfcf66d94e32cc3",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/16cf5d2bcc0310ac77c4f3efe3456bee4e181030",
+                "reference": "16cf5d2bcc0310ac77c4f3efe3456bee4e181030",
                 "shasum": ""
             },
             "require": {
-                "vitexsoftware/abraflexi-bricks": ">=1.1",
-                "vitexsoftware/ease-twbootstrap4": ">=1.1"
+                "php": "^7.2|^8.0"
             },
-            "require-dev": {
-                "phpunit/phpunit": "^9"
+            "conflict": {
+                "phpstan/phpstan-shim": "*"
             },
             "default-branch": true,
+            "bin": [
+                "phpstan",
+                "phpstan.phar"
+            ],
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "AbraFlexi\\ui\\TWB4\\": "src/AbraFlexi/ui/TWB4"
-                }
+                "files": [
+                    "bootstrap.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "authors": [
-                {
-                    "name": "Vitex",
-                    "email": "info@vitexsoftware.cz"
-                }
+            "description": "PHPStan - PHP Static Analysis Tool",
+            "keywords": [
+                "dev",
+                "static analysis"
             ],
-            "description": "php-abraflexi extending classes and widgets",
             "support": {
-                "issues": "https://github.com/VitexSoftware/php-ease-twbootstrap4-widgets-abraflexi/issues",
-                "source": "https://github.com/VitexSoftware/php-ease-twbootstrap4-widgets-abraflexi/tree/main"
+                "docs": "https://phpstan.org/user-guide/getting-started",
+                "forum": "https://github.com/phpstan/phpstan/discussions",
+                "issues": "https://github.com/phpstan/phpstan/issues",
+                "security": "https://github.com/phpstan/phpstan/security/policy",
+                "source": "https://github.com/phpstan/phpstan-src"
             },
             "funding": [
                 {
-                    "url": "https://www.patreon.com/VitexSoftware",
-                    "type": "patreon"
-                }
-            ],
-            "abandoned": "vitexsoftware/ease-twbootstrap4-widgets-abraflexi",
-            "time": "2022-12-07T10:25:39+00:00"
-        },
-        {
-            "name": "vitexsoftware/flexibee-bricks",
-            "version": "dev-abraflexi",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/VitexSoftware/php-abraflexi-bricks.git",
-                "reference": "d2e1e3b9ef14bee2115ebb9daf07a7830670d9ae"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-abraflexi-bricks/zipball/d2e1e3b9ef14bee2115ebb9daf07a7830670d9ae",
-                "reference": "d2e1e3b9ef14bee2115ebb9daf07a7830670d9ae",
-                "shasum": ""
-            },
-            "require": {
-                "spojenet/flexibee": "dev-main",
-                "vitexsoftware/ease-html": ">=1.25"
-            },
-            "require-dev": {
-                "codeception/codeception": "*",
-                "phpunit/phpunit": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "AbraFlexi\\ui\\": "src/AbraFlexi/ui",
-                    "AbraFlexi\\Bricks\\": "src/AbraFlexi/Bricks",
-                    "AbraFlexi\\Bricks\\ConvertRules\\": "src/AbraFlexi/Bricks/ConvertRules"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
+                    "url": "https://github.com/ondrejmirtes",
+                    "type": "github"
+                },
                 {
-                    "name": "Vitex",
-                    "email": "info@vitexsoftware.cz"
+                    "url": "https://github.com/phpstan",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/phpstan/phpstan",
+                    "type": "tidelift"
                 }
             ],
-            "description": "php-abraflexi extending classes and widgets",
-            "support": {
-                "issues": "https://github.com/VitexSoftware/php-abraflexi-bricks/issues",
-                "source": "https://github.com/VitexSoftware/php-abraflexi-bricks/tree/abraflexi"
-            },
-            "abandoned": "vitexsoftware/abraflexi-bricks",
-            "time": "2021-10-12T22:57:19+00:00"
+            "time": "2023-07-22T13:18:49+00:00"
         }
     ],
-    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "vitexsoftware/ease-twbootstrap4-widgets-flexibee": 20,
-        "vitexsoftware/flexibee-bricks": 20
+        "vitexsoftware/ease-bootstrap4-widgets-abraflexi": 20,
+        "vitexsoftware/abraflexi-bricks": 20,
+        "pear/net_smtp": 20,
+        "phpstan/phpstan": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

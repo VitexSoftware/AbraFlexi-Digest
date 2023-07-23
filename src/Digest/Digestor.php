@@ -386,6 +386,7 @@ class Digestor extends \Ease\Html\DivTag
                                     _('AbraFlexi Digest') . ' ' . _('version') . ' ' . self::getAppVersion()
                             )
         ])));
+        
         $this->addItem(new \Ease\Html\SmallTag(new \Ease\Html\DivTag([
                             _('(G) 2018-2023'),
                             '&nbsp;', new \Ease\Html\ATag(
@@ -393,6 +394,7 @@ class Digestor extends \Ease\Html\DivTag
                                     'Vitex Software'
                             )
         ])));
+        $this->addItem(new \Ease\Html\PTag(new \Ease\Html\SmallTag(\Ease\Shared::appName().' v'.\Ease\Shared::appVersion()) ));
     }
 
     /**
