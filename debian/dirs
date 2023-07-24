@@ -1,3 +1,2 @@
 /var/run/flexibee-digest/
-/usr/lib/abraflexi-digest/daily/
-
+/usr/lib/abraflexi-digest/Digest/Modules/Daily

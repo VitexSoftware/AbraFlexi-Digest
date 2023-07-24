@@ -230,7 +230,7 @@ class Digestor extends \Ease\Html\DivTag
                     $class = str_replace(['.','/'], ['AbraFlexi\\Digest','\\'], $moduleDir) .'\\' .pathinfo($moduleDir, PATHINFO_FILENAME);
                     $modules[$class] = realpath($moduleDir);
                 } else {
-                    \Ease\Shared::logger()->addToLog('Digestor', sprintf(_('Module dir %s is wrong'), $moduleDir), 'error');
+                    \Ease\Shared::logger()->addToLog('Digestor', sprintf(_('Module dir %s is wrong'), $moduleDir), 'warning');
                 }
             }
         }
