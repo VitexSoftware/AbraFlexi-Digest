@@ -1,8 +1,12 @@
 <?php
 
-/*
- * Outcoming payments
+/**
+ * AbraFlexi Digest - Outcoming payments
+ *
+ * @author     Vítězslav Dvořák <info@vitexsofware.cz>
+ * @copyright  (G) 2018-2023 Vitex Software
  */
+
 namespace AbraFlexi\Digest\Modules;
 
 /**
@@ -10,11 +14,13 @@ namespace AbraFlexi\Digest\Modules;
  *
  * @author vitex
  */
-class OutcomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+class OutcomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
+{
 
     public $timeColumn = 'datVyst';
 
-    public function dig() {
+    public function dig()
+    {
         $banker = new \AbraFlexi\Banka();
         $outcomes = $banker->getColumnsFromAbraFlexi(['mena', 'sumCelkem',
             'sumCelkemMen'],
@@ -26,7 +32,6 @@ class OutcomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
         } else {
             foreach ($outcomes as $outcome) {
                 $currency = self::getCurrency($outcome);
-
                 if ($currency != 'CZK') {
                     $amount = floatval($outcome['sumCelkemMen']);
                 } else {
@@ -54,8 +59,8 @@ class OutcomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
      * 
      * @return string
      */
-    public function heading() {
+    public function heading()
+    {
         return _('Outcoming payments');
     }
-
 }

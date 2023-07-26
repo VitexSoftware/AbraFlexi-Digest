@@ -4,12 +4,11 @@
  * AbraFlexi Digest
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2018 Vitex Software
+ * @copyright  (G) 2018-2023 Vitex Software
  */
 
 namespace AbraFlexi\Digest;
 
-use Ease\Html\ButtonTag;
 use Ease\Html\DivTag;
 
 /**
@@ -24,7 +23,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      * Which records we want to see ?
      * @param array $condition
      */
-    public $condition = [];
+    public $condition = ['limit' => 0];
 
     /**
      * Flexibe Evidence Column(s) used to filter by date
@@ -87,6 +86,13 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
         return $this->dig();
     }
 
+    /**
+     * Collapsible card div
+     * 
+     * @param mixed $content
+     * 
+     * @return DivTag
+     */
     public function cardBody($content)
     {
         return new \Ease\Html\DivTag(new DivTag($content, ['class' => 'card-body']), [
@@ -99,16 +105,18 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
 
     /**
      * Obtaining informations
+     * 
+     * @return boolean dig success
      */
     public function dig()
     {
         $this->addItem(new \Ease\Html\ATag('https://www.vitexsoftware.cz/cenik.php',
                         _('Please contact Vitex Software to make this module working.')));
-        return true;
+        return false;
     }
 
     /**
-     * Default Heading
+     * Default module Heading
      * 
      * @return string
      */

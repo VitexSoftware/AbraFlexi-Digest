@@ -1,8 +1,15 @@
 <?php
 
+/**
+ * AbraFlexi Digest - New Customers
+ *
+ * @author     Vítězslav Dvořák <info@vitexsofware.cz>
+ * @copyright  (G) 2018-2023 Vitex Software
+ */
 /*
  * New Customers
  */
+
 namespace AbraFlexi\Digest\Modules;
 
 /**
@@ -10,7 +17,8 @@ namespace AbraFlexi\Digest\Modules;
  *
  * @author vitex
  */
-class NewCustomers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+class NewCustomers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
+{
 
     /**
      * Column used to filter by date
@@ -18,20 +26,18 @@ class NewCustomers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
      */
     public $timeColumn = 'lastUpdate';
 
-    public function dig() {
+    public function dig()
+    {
         $digger = new \AbraFlexi\Adresar();
         $newCustomersData = $digger->getColumnsFromAbraFlexi(['kod', 'nazev', 'tel',
             'email'], $this->condition);
-
         $typDoklRaw = [];
-
         if (empty($newCustomersData)) {
             $this->addItem(_('none'));
         } else {
             $userTable = new \AbraFlexi\Digest\Table([_('Position'), _('Code'),
                 _('Name'),
                 _('Email'), _('Phone')]);
-
             foreach ($newCustomersData as $pos => $newCustomerData) {
                 $digger->setMyKey(\AbraFlexi\RO::code($newCustomerData['kod']));
                 $userTable->addRowColumns([
@@ -61,8 +67,8 @@ class NewCustomers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
      * 
      * @return string
      */
-    public function heading() {
+    public function heading()
+    {
         return _('New or updated customers');
     }
-
 }

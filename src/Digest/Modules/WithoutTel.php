@@ -1,19 +1,27 @@
 <?php
 
-/*
- * Customers without notification phone number
+/**
+ * AbraFlexi Digest - Customers without notification phone number
+ *
+ * @author     Vítězslav Dvořák <info@vitexsofware.cz>
+ * @copyright  (G) 2018-2023 Vitex Software
  */
 
 namespace AbraFlexi\Digest\Modules;
 
 /**
- * Description of WaitingIncome
+ *  Customers without notification phone number
  *
  * @author vitex
  */
 class WithoutTel extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
 
+    /**
+     * Search for Customers without notification phone number
+     * 
+     * @return boolean success
+     */
     public function dig()
     {
         $addresser = new \AbraFlexi\Adresar();

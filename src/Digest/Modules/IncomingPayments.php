@@ -1,7 +1,10 @@
 <?php
 
-/*
- * Incoming payments for us
+/**
+ * AbraFlexi Digest - Incoming payments for us
+ *
+ * @author     Vítězslav Dvořák <info@vitexsofware.cz>
+ * @copyright  (G) 2018-2023 Vitex Software
  */
 
 namespace AbraFlexi\Digest\Modules;

@@ -1,4 +1,12 @@
 <?php
+
+/**
+ * AbraFlexi Digest - Sent Reminds overview
+ *
+ * @author     Vítězslav Dvořák <info@vitexsofware.cz>
+ * @copyright  (G) 2018-2023 Vitex Software
+ */
+
 namespace AbraFlexi\Digest\Modules;
 
 /**
@@ -6,7 +14,8 @@ namespace AbraFlexi\Digest\Modules;
  *
  * @author vitex
  */
-class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
+{
 
     /**
      * Reminds dates
@@ -20,9 +29,9 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
      */
     private $remids = ['datUp1' => 0, 'datUp2' => 0, 'datSmir' => 0];
 
-    public function dig() {
+    public function dig()
+    {
         $invoicer = new \AbraFlexi\FakturaVydana();
-
         $faDatakturyRaw = $invoicer->getColumnsFromAbraFlexi(['kod', 'firma', 'popis',
             'sumCelkem', 'sumCelkemMen',
             'zbyvaUhradit', 'zbyvaUhraditMen', 'mena', 'datUp1', 'datUp2', 'datSmir'],
@@ -40,18 +49,13 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
                 _('Remind #2'),
                 _('Remind #3')
             ]);
-
             $overDues = [];
-
             foreach ($faDatakturyRaw as $invoice => $invoiceData) {
 
                 $this->countReminds($invoiceData);
-
                 $adreser->setMyKey($invoiceData['firma']);
                 $invoicer->setMyKey(\AbraFlexi\RO::code($invoiceData['kod']));
-
                 $nazevFirmy = array_key_exists('firma@showAs', $invoiceData) ? $invoiceData['firma@showAs'] : \AbraFlexi\RO::uncode($invoiceData['firma']);
-
                 $invTable->addRowColumns([
                     new \Ease\Html\ATag($adreser->getApiURL(), $nazevFirmy),
                     new \Ease\Html\ATag($invoicer->getApiURL(),
@@ -66,7 +70,6 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
 
             $invTable->addRowFooterColumns([count($faDatakturyRaw), '', '', $this->remids['datUp1'],
                 $this->remids['datUp2'], $this->remids['datSmir']]);
-
             $this->addItem($this->cardBody($invTable));
         }
         return !empty($faDatakturyRaw);
@@ -76,7 +79,8 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
      * 
      * @param array $rowData
      */
-    public function countReminds(array $rowData) {
+    public function countReminds(array $rowData)
+    {
         if (!empty($rowData['datUp1'])) {
             $this->countRemind($rowData['datUp1'], 'datUp1');
         }
@@ -94,7 +98,8 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
      * @param \DateTime $date
      * @param string $column
      */
-    public function countRemind(\DateTime $date, string $column) {
+    public function countRemind(\DateTime $date, string $column)
+    {
         if (!array_key_exists($column, $this->remids)) {
             $this->remids[$column] = 0;
         }
@@ -112,7 +117,8 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
      * 
      * @return mixed
      */
-    public function myDate(\DateTime $flexidate) {
+    public function myDate(\DateTime $flexidate)
+    {
         if ($this->isMyDate($flexidate)) {
             $humanDate = new \Ease\Html\StrongTag(self::humanDate($flexidate));
         } else {
@@ -125,8 +131,8 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
      * 
      * @return string
      */
-    function heading() {
+    function heading()
+    {
         return _('Reminds');
     }
-
 }

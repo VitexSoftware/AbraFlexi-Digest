@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * AbraFlexi Digest - Incoming payments for us
+ *
+ * @author     Vítězslav Dvořák <info@vitexsofware.cz>
+ * @copyright  (G) 2018-2023 Vitex Software
+ */
+
 namespace AbraFlexi\Digest\Modules;
 
 use \Ease\Html\DivTag;
@@ -87,6 +94,11 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
         return !empty($total);
     }
 
+    /**
+     * module Heading
+     * 
+     * @return string
+     */
     public function heading()
     {
         return _('Non-deducted proformas');

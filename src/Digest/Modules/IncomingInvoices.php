@@ -1,8 +1,12 @@
 <?php
 
-/*
- * Incoming Invoices accepted by us
+/**
+ * AbraFlexi Digest - Incoming Invoices accepted by us
+ *
+ * @author     Vítězslav Dvořák <info@vitexsofware.cz>
+ * @copyright  (G) 2018-2023 Vitex Software
  */
+
 namespace AbraFlexi\Digest\Modules;
 
 /**
@@ -10,7 +14,8 @@ namespace AbraFlexi\Digest\Modules;
  *
  * @author vitex
  */
-class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
+{
 
     /**
      * Column used to filter by date
@@ -18,10 +23,10 @@ class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFl
      */
     public $timeColumn = 'datVyst';
 
-    public function dig() {
+    public function dig()
+    {
         $totals = [];
-
-        $digger = new \AbraFlexi\FakturaPrijata(null,['nativeTypes'=>false]);
+        $digger = new \AbraFlexi\FakturaPrijata(null, ['nativeTypes' => false]);
         $inInvoicesData = $digger->getColumnsFromAbraFlexi(['kod', 'typDokl', 'sumCelkem', 'sumCelkemMen',
             'uhrazeno', 'storno', 'mena', 'juhSum', 'juhSumMen'],
                 $this->condition);
@@ -30,7 +35,6 @@ class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFl
         $paid = [];
         $storno = 0;
         $totals = [];
-
         $typDoklRaw = [];
         if (empty($inInvoicesData)) {
             $this->addStatusMessage(_('none'));
@@ -48,7 +52,6 @@ class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFl
                 }
 
                 $amount = ($outInvoiceData['mena'] == 'code:CZK') ? floatval($outInvoiceData['sumCelkem']) : floatval($outInvoiceData['sumCelkemMen']);
-
                 if (array_key_exists($outInvoiceData['mena'], $invoicedRaw)) {
                     $invoicedRaw[$outInvoiceData['mena']] += $amount;
                 } else {
@@ -82,15 +85,14 @@ class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFl
 
 
             $inInvoicesTable->addRowFooterColumns([$accepted, 0, $invoiced]);
-
             $this->addItem($this->cardBody($inInvoicesTable));
         }
 
         return !empty($inInvoicesData);
     }
 
-    public function heading() {
+    public function heading()
+    {
         return _('Incoming invoices');
     }
-
 }

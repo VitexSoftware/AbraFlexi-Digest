@@ -1,8 +1,12 @@
 <?php
 
-/*
- * Outcoming Invoices
+/**
+ * AbraFlexi Digest - Outcoming Invoices
+ *
+ * @author     Vítězslav Dvořák <info@vitexsofware.cz>
+ * @copyright  (G) 2018-2023 Vitex Software
  */
+
 namespace AbraFlexi\Digest\Modules;
 
 /**
@@ -10,7 +14,8 @@ namespace AbraFlexi\Digest\Modules;
  *
  * @author vitex
  */
-class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
+{
 
     /**
      * Column used to filter by date
@@ -18,7 +23,8 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
      */
     public $timeColumn = 'datVyst';
 
-    public function dig() {
+    public function dig()
+    {
         $digger = new \AbraFlexi\FakturaVydana();
         $outInvoicesData = $digger->getColumnsFromAbraFlexi(['kod', 'typDokl', 'sumCelkem',
             'sumCelkemMen',
@@ -28,10 +34,8 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
         $invoicedRaw = [];
         $paid = [];
         $storno = 0;
-
         $typDoklCounts = [];
         $typDoklTotals = [];
-
         if (empty($outInvoicesData)) {
             $this->addItem(_('none'));
         } else {
@@ -42,7 +46,6 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
                 }
                 $currency = self::getCurrency($outInvoiceData);
                 $typDokl = strval($outInvoiceData['typDokl']);
-
                 if ($currency != 'CZK') {
                     $amount = floatval($outInvoiceData['sumCelkemMen']) + floatval($outInvoiceData['sumZalohyMen']);
                 } else {
@@ -80,11 +83,9 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
             }
 
             $outInvoicesTable = new \AbraFlexi\Digest\Table($tableHeader);
-
             foreach ($typDoklTotals as $typDokl => $typDoklTotal) {
                 $tableRow = [$typDoklCounts[$typDokl]];
                 $tableRow[] = \AbraFlexi\RO::uncode($typDokl);
-
                 foreach ($currencies as $currencyCode) {
                     $tableRow[] = array_key_exists($currencyCode,
                                     $typDoklTotals[$typDokl]) ? $typDoklTotals[$typDokl][$currencyCode] : '';
@@ -98,7 +99,6 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
                 $tableFooter[] = self::formatCurrency($invoicedRaw[$currencyCode]) . ' ' . \AbraFlexi\RO::uncode($currencyCode);
             }
             $outInvoicesTable->addRowFooterColumns($tableFooter);
-
             $this->addItem($this->cardBody($outInvoicesTable));
         }
         return !empty($outInvoicesData);
@@ -109,8 +109,8 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
      * 
      * @return string
      */
-    public function heading() {
+    public function heading()
+    {
         return _('Outcoming invoices');
     }
-
 }

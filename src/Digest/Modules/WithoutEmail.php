@@ -1,7 +1,10 @@
 <?php
 
-/*
- * Customers without notification email address
+/**
+ * AbraFlexi Digest - Customers without notification email address
+ *
+ * @author     Vítězslav Dvořák <info@vitexsofware.cz>
+ * @copyright  (G) 2018-2023 Vitex Software
  */
 
 namespace AbraFlexi\Digest\Modules;
@@ -24,7 +27,7 @@ class WithoutEmail extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
         $addresser = new \AbraFlexi\Adresar();
         $withoutEmail = $addresser->getColumnsFromAbraFlexi(['nazev', 'kod', 'ulice',
             'mesto', 'tel'],
-                ['email' => 'is empty', 'typVztahuK' => 'typVztahu.odberDodav']);
+                array_merge($this->condition, ['email' => 'is empty', 'typVztahuK' => 'typVztahu.odberDodav']));
         if (empty($withoutEmail)) {
             $this->addItem(_('none'));
         } else {

@@ -1,16 +1,21 @@
 <?php
 
-/*
- * Incoming payments for us
+/**
+ * AbraFlexi Digest - Incoming payments for us
+ *
+ * @author     Vítězslav Dvořák <info@vitexsofware.cz>
+ * @copyright  (G) 2018-2023 Vitex Software
  */
+
 namespace AbraFlexi\Digest\Modules;
 
 /**
- * Description of IncomingPayments
+ * Payments without invoices
  *
  * @author vitex
  */
-class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface {
+class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
+{
 
     public $timeColumn = 'datVyst';
 
@@ -19,7 +24,8 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
      * 
      * @return boolean
      */
-    public function dig() {
+    public function dig()
+    {
         $banker = new \AbraFlexi\Banka(null, ['nativeTypes' => false]);
         $adresser = new \AbraFlexi\Adresar();
         $bucer = new \AbraFlexi\Adresar(null,
@@ -47,7 +53,6 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
                     }
                 }
                 $adresser->takeData($income);
-
                 $amount = self::getAmount($income);
                 $currency = self::getCurrency($income);
                 if (array_key_exists($currency, $total)) {
@@ -60,7 +65,6 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
                 $income['price'] = self::getAmount($income);
                 $adresser->setMyKey($adresser);
                 $income['firma'] = new \Ease\Html\ATag(empty($income['firma']->showAs) ? $adresser->getApiUrl() . $income['firma'] : $income['firma']->showAs);
-
                 unset($income['id']);
                 unset($income['sumCelkem']);
                 unset($income['sumCelkemMen']);
@@ -68,7 +72,6 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
                 $incomesTable->addRowColumns($income);
             }
             $currDiv = new \Ease\Html\DivTag();
-
             foreach ($total as $currency => $amount) {
                 $currDiv->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount) . '&nbsp;' . $currency));
             }
@@ -77,7 +80,8 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
         return !empty($incomes);
     }
 
-    public function heading() {
+    public function heading()
+    {
         return _('Unmatched payments');
     }
 
@@ -86,8 +90,8 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
      * 
      * @return string
      */
-    public function description() {
+    public function description()
+    {
         return _('Unrecognized and non-deducted earnings');
     }
-
 }

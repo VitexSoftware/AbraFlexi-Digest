@@ -1,9 +1,14 @@
 <?php
 
-/*
- * Best Sellers
+/**
+ * AbraFlexi Digest - Best Sellers
+ *
+ * @author     Vítězslav Dvořák <info@vitexsofware.cz>
+ * @copyright  (G) 2018-2023 Vitex Software
  */
+
 namespace AbraFlexi\Digest\Modules;
+
 /**
  * Description of NewCustomers
  *

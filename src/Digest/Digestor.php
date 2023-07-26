@@ -177,7 +177,6 @@ class Digestor extends \Ease\Html\DivTag
         foreach ($modules as $class => $classFile) {
 
             $this->timerStart($class);
-
             include_once $classFile;
             $module = new $class($interval);
             $saveto = \Ease\Functions::cfg('SAVETO');
@@ -218,7 +217,7 @@ class Digestor extends \Ease\Html\DivTag
                 $d = dir($moduleDir);
                 while (false !== ($entry = $d->read())) {
                     if (is_file($moduleDir . '/' . $entry)) {
-                        $class = '\\'.self::getClassNamespace($moduleDir . '/' . $entry).'\\'.pathinfo($entry, PATHINFO_FILENAME);
+                        $class = '\\' . self::getClassNamespace($moduleDir . '/' . $entry) . '\\' . pathinfo($entry, PATHINFO_FILENAME);
                         if (pathinfo($entry, PATHINFO_EXTENSION) == 'php') {
                             $modules[$class] = realpath($moduleDir . '/' . $entry);
                         }
@@ -227,7 +226,7 @@ class Digestor extends \Ease\Html\DivTag
                 $d->close();
             } else {
                 if (is_file($moduleDir)) {
-                    $class = str_replace(['.','/'], ['AbraFlexi\\Digest','\\'], $moduleDir) .'\\' .pathinfo($moduleDir, PATHINFO_FILENAME);
+                    $class = str_replace(['.', '/'], ['AbraFlexi\\Digest', '\\'], $moduleDir) . '\\' . pathinfo($moduleDir, PATHINFO_FILENAME);
                     $modules[$class] = realpath($moduleDir);
                 } else {
                     \Ease\Shared::logger()->addToLog('Digestor', sprintf(_('Module dir %s is wrong'), $moduleDir), 'warning');
@@ -255,7 +254,7 @@ class Digestor extends \Ease\Html\DivTag
         }
         return $namespace;
     }
-    
+
     /**
      * 
      * @param DigestModule $element
@@ -386,7 +385,6 @@ class Digestor extends \Ease\Html\DivTag
                                     _('AbraFlexi Digest') . ' ' . _('version') . ' ' . self::getAppVersion()
                             )
         ])));
-        
         $this->addItem(new \Ease\Html\SmallTag(new \Ease\Html\DivTag([
                             _('(G) 2018-2023'),
                             '&nbsp;', new \Ease\Html\ATag(
@@ -394,7 +392,7 @@ class Digestor extends \Ease\Html\DivTag
                                     'Vitex Software'
                             )
         ])));
-        $this->addItem(new \Ease\Html\PTag(new \Ease\Html\SmallTag(\Ease\Shared::appName().' v'.\Ease\Shared::appVersion()) ));
+        $this->addItem(new \Ease\Html\PTag(new \Ease\Html\SmallTag(\Ease\Shared::appName() . ' v' . \Ease\Shared::appVersion())));
     }
 
     /**
