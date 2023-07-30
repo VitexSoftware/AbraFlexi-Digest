@@ -13,4 +13,4 @@ define('EASE_APPNAME', 'AbraFlexiAllTimeDigest');
 require_once __DIR__ . '/init.php';
 $subject = sprintf(_('AbraFlexi %s Alltime'), $myCompanyName);
 $digestor = new Digestor($subject);
-$digestor->dig(null, [constant('MODULE_ALLTIME_PATH'), constant('MODULE_PATH')]);
+$digestor->dig($period, array_merge(\Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules'), \Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules\AllTime')));

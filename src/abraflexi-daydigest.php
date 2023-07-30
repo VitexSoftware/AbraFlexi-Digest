@@ -21,4 +21,4 @@ $fmt = datefmt_create(
 );
 $subject = \sprintf(_('AbraFlexi Daily digest for  %s %s'), $myCompanyName, datefmt_format($fmt, (new \DateTime)->getTimestamp()));
 $digestor = new Digestor($subject);
-$digestor->dig($period, [\Ease\Functions::cfg('MODULE_DAILY_PATH'), \Ease\Functions::cfg('MODULE_PATH')]);
+$digestor->dig($period, array_merge(\Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules'), \Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules\Daily')));

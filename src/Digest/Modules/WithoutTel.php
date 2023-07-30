@@ -25,31 +25,43 @@ class WithoutTel extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Di
     public function dig()
     {
         $addresser = new \AbraFlexi\Adresar();
-        $withoutEmail = $addresser->getColumnsFromAbraFlexi(['nazev', 'kod', 'ulice',
+        $withoutPhone = $addresser->getColumnsFromAbraFlexi(['nazev', 'kod', 'ulice',
             'mesto', 'email'],
-                ['tel' => 'is empty', 'typVztahuK' => 'typVztahu.odberDodav']);
-        if (empty($withoutEmail)) {
+                array_merge($this->condition, ['tel' => 'is empty', 'typVztahuK' => 'typVztahu.odberDodav']));
+        if (empty($withoutPhone)) {
             $this->addItem(_('none'));
         } else {
-            $noTelTable = new \AbraFlexi\Digest\Table([_('Company'), _('Street'),
+            $noTelTable = new \AbraFlexi\Digest\Table([
+                _('Company'),
+                _('Street'),
                 _('City'),
                 _('Email')]);
             $count = 0;
-            foreach ($withoutEmail as $address) {
+            foreach ($withoutPhone as $id => $address) {
                 $addresser->setMyKey(\AbraFlexi\RO::code($address['kod']));
-                if (empty($addresser->getAnyPhoneNumber())) {
+                $phoneNumber = $addresser->getAnyPhoneNumber();
+                if (empty($phoneNumber)) {
                     $count++;
                     $noTelTable->addRowColumns([new \Ease\Html\ATag($addresser->getApiURL(),
                                 $address['nazev']), $address['ulice'], $address['mesto'],
                         new \Ease\Html\ATag('mailto:' . $address['email'],
                                 $address['email'])]);
+                } else {
+                    unset($withoutPhone[$id]);
                 }
             }
-            $this->addItem($this->cardBody([$noTelTable, _('Total') . ': ' . $count]));
+            if (count($withoutPhone)) {
+                $this->addItem($this->cardBody([$noTelTable, _('Total') . ': ' . $count]));
+            }
         }
-        return !empty($withoutEmail);
+        return !empty($withoutPhone);
     }
 
+    /**
+     * Module Headnig
+     * 
+     * @return string
+     */
     function heading()
     {
         return _('Customers without notification phone number');

@@ -578,12 +578,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-ease-core.git",
-                "reference": "24870b3013760c36286d7831af335b65a03924f0"
+                "reference": "3184e4d44d20f2a8be65b6a871a23a915816557f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-core/zipball/24870b3013760c36286d7831af335b65a03924f0",
-                "reference": "24870b3013760c36286d7831af335b65a03924f0",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-core/zipball/3184e4d44d20f2a8be65b6a871a23a915816557f",
+                "reference": "3184e4d44d20f2a8be65b6a871a23a915816557f",
                 "shasum": ""
             },
             "require": {
@@ -632,7 +632,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2023-07-21T16:44:44+00:00"
+            "time": "2023-07-27T10:23:05+00:00"
         },
         {
             "name": "vitexsoftware/ease-core-bricks",
@@ -693,12 +693,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-ease-html.git",
-                "reference": "af6a1d2de543523cb4d7c0dcb9c2636f26ff403b"
+                "reference": "3c3999156dcce67c221d90e570b102db3dbfc7a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-html/zipball/af6a1d2de543523cb4d7c0dcb9c2636f26ff403b",
-                "reference": "af6a1d2de543523cb4d7c0dcb9c2636f26ff403b",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-html/zipball/3c3999156dcce67c221d90e570b102db3dbfc7a3",
+                "reference": "3c3999156dcce67c221d90e570b102db3dbfc7a3",
                 "shasum": ""
             },
             "require": {
@@ -736,7 +736,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2023-03-22T20:35:52+00:00"
+            "time": "2023-07-25T16:29:59+00:00"
         },
         {
             "name": "vitexsoftware/ease-twbootstrap4",
@@ -848,12 +848,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "16cf5d2bcc0310ac77c4f3efe3456bee4e181030"
+                "reference": "1b4eb06e778b5e29289fbe36df0481156f59f1c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/16cf5d2bcc0310ac77c4f3efe3456bee4e181030",
-                "reference": "16cf5d2bcc0310ac77c4f3efe3456bee4e181030",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/1b4eb06e778b5e29289fbe36df0481156f59f1c0",
+                "reference": "1b4eb06e778b5e29289fbe36df0481156f59f1c0",
                 "shasum": ""
             },
             "require": {
@@ -903,7 +903,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-22T13:18:49+00:00"
+            "time": "2023-07-30T00:37:38+00:00"
         }
     ],
     "aliases": [],

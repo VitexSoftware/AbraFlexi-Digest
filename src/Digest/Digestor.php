@@ -67,7 +67,6 @@ class Digestor extends \Ease\Html\DivTag
         parent::__construct(null, ['class' => 'Xaccordion', 'id' => 'accordionExample']);
         $this->subject = $subject;
         $this->addHeading($subject);
-        $this->shared = \Ease\Shared::instanced();
     }
 
     /**
@@ -146,10 +145,11 @@ class Digestor extends \Ease\Html\DivTag
      * Include all classes in modules directory
      * 
      * @param \DateInterval $interval
+     * @param array $modules List of Classess
      */
-    public function dig($interval, $moduleDir)
+    public function dig($interval, $modules)
     {
-        $this->processModules(self::getModules($moduleDir), $interval);
+        $this->processModules($modules, $interval);
         $this->addIndex();
         $this->addFoot();
         $emailto = \Ease\Functions::cfg('EASE_MAILTO');
@@ -177,7 +177,7 @@ class Digestor extends \Ease\Html\DivTag
         foreach ($modules as $class => $classFile) {
 
             $this->timerStart($class);
-            include_once $classFile;
+
             $module = new $class($interval);
             $saveto = \Ease\Functions::cfg('SAVETO');
             if ($module->process()) {
@@ -198,61 +198,6 @@ class Digestor extends \Ease\Html\DivTag
 
             $this->timerStop($class);
         }
-    }
-
-    /**
-     * Process All modules in specified Dir
-     * 
-     * @param string $moduleDir path
-     */
-    public static function getModules($moduleDir)
-    {
-        $modules = [];
-        if (is_array($moduleDir)) {
-            foreach ($moduleDir as $module) {
-                $modules = array_merge($modules, self::getModules($module));
-            }
-        } else {
-            if (is_dir($moduleDir)) {
-                $d = dir($moduleDir);
-                while (false !== ($entry = $d->read())) {
-                    if (is_file($moduleDir . '/' . $entry)) {
-                        $class = '\\' . self::getClassNamespace($moduleDir . '/' . $entry) . '\\' . pathinfo($entry, PATHINFO_FILENAME);
-                        if (pathinfo($entry, PATHINFO_EXTENSION) == 'php') {
-                            $modules[$class] = realpath($moduleDir . '/' . $entry);
-                        }
-                    }
-                }
-                $d->close();
-            } else {
-                if (is_file($moduleDir)) {
-                    $class = str_replace(['.', '/'], ['AbraFlexi\\Digest', '\\'], $moduleDir) . '\\' . pathinfo($moduleDir, PATHINFO_FILENAME);
-                    $modules[$class] = realpath($moduleDir);
-                } else {
-                    \Ease\Shared::logger()->addToLog('Digestor', sprintf(_('Module dir %s is wrong'), $moduleDir), 'warning');
-                }
-            }
-        }
-        return $modules;
-    }
-
-    /**
-     * Extract namespace name from class file
-     * 
-     * @param string $classFilePath 
-     * 
-     * @return string class namespace extracted
-     */
-    public static function getClassNamespace($classFilePath)
-    {
-        $namespace = '';
-        foreach (file($classFilePath) as $line) {
-            if (preg_match('/^namespace\s(.*);$/', $line, $matches)) {
-                $namespace = $matches[1];
-                break;
-            }
-        }
-        return $namespace;
     }
 
     /**

@@ -29,7 +29,4 @@ $subject = sprintf(
         \datefmt_format($fmt, $period->getEndDate()->getTimestamp())
 );
 $digestor = new Digestor($subject);
-$digestor->dig(
-        $period,
-        [constant('MODULE_YEARLY_PATH'), constant('MODULE_PATH')]
-);
+$digestor->dig($period, array_merge(\Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules'), \Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules\Yearly')));

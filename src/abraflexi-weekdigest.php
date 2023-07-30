@@ -22,14 +22,12 @@ $fmt = datefmt_create(
         'Europe/Prague',
         \IntlDateFormatter::GREGORIAN
 );
+$formatter = new \IntlDateFormatter(\Ease\Locale::$localeUsed, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
+$period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
 $subject = sprintf(
-        _('AbraFlexi %s Weekly digest from %s to %s'),
-        $myCompanyName,
-        \datefmt_format($fmt, $period->getStartDate()->getTimestamp()),
-        \datefmt_format($fmt, $period->getEndDate()->getTimestamp())
+        _('AbraFlexi %s Weekly digest from %s to %s'), $myCompanyName,
+        $formatter->format($period->getStartDate()->getTimestamp()),
+        $formatter->format($period->getEndDate()->getTimestamp())
 );
 $digestor = new Digestor($subject);
-$digestor->dig(
-        $period,
-        [constant('MODULE_WEEKLY_PATH'), constant('MODULE_PATH')]
-);
+$digestor->dig($period, array_merge(\Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules'), \Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules\Weekly')));

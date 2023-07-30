@@ -35,11 +35,12 @@ if (empty($to)) {
 
 if (\Ease\Document::isPosted()) {
 
+    $formatter = new \IntlDateFormatter(\Ease\Locale::$localeUsed, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
     $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
     $subject = sprintf(
             _('AbraFlexi %s digest from %s to %s'), $myCompanyName,
-            \strftime('%x', $period->getStartDate()->getTimestamp()),
-            \strftime('%x', $period->getEndDate()->getTimestamp())
+            $formatter->format($period->getStartDate()->getTimestamp()),
+            $formatter->format($period->getEndDate()->getTimestamp())
     );
     $digestor = new Digestor($subject);
     $shared->setConfigValue('EASE_MAILTO', $oPage->getRequestValue('recipient'));
@@ -56,13 +57,14 @@ if (\Ease\Document::isPosted()) {
 //    exit();
 }
 
-
-$candidates[_('Common modules')] = Digestor::getModules(\Ease\Shared::cfg('MODULE_PATH'));
-$candidates[_('Daily modules')] = Digestor::getModules(\Ease\Shared::cfg('MODULE_DAILY_PATH'));
-$candidates[_('Weekly modules')] = Digestor::getModules(\Ease\Shared::cfg('MODULE_WEEKLY_PATH'));
-$candidates[_('Monthly modules')] = Digestor::getModules(\Ease\Shared::cfg('MODULE_MONTHLY_PATH'));
-$candidates[_('Yearly modules')] = Digestor::getModules(\Ease\Shared::cfg('MODULE_YEARLY_PATH'));
-$candidates[_('Alltime modules')] = Digestor::getModules(\Ease\Shared::cfg('MODULE_ALLTIME_PATH'));
+$candidates = [
+    _('Common modules') => 'AbraFlexi\Digest\Modules',
+    _('Daily modules') => 'AbraFlexi\Digest\Modules\Daily',
+    _('Weekly modules') => 'AbraFlexi\Digest\Modules\Weekly',
+    _('Monthly modules') => 'AbraFlexi\Digest\Modules\Monthly',
+    _('Yearly modules') => 'AbraFlexi\Digest\Modules\Yearly',
+    _('Alltime modules') => 'AbraFlexi\Digest\Modules\AllTime'
+];
 $fromtoForm = new \Ease\TWB4\Form(['name' => 'fromto', 'class' => 'form-horizontal']);
 $container = new \Ease\TWB4\Container(new \Ease\Html\H1Tag(new \Ease\Html\ATag($myCompany->getApiURL(),
                         $myCompanyName) . ' ' . _('AbraFlexi digest')));
@@ -71,11 +73,14 @@ $container->addItem(new \AbraFlexi\ui\TWB4\StatusInfoBox());
 $formColumns = new \Ease\TWB4\Row();
 $modulesCol = $formColumns->addColumn(6, new \Ease\Html\H2Tag(_('Modules')));
 $modulesCol->addItem(new \Ease\Html\ATag('#', _('Check All'), ['onClick' => '$(\'input:checkbox\').prop(\'checked\', true);']));
-foreach ($candidates as $heading => $modules) {
+
+
+
+foreach ($candidates as $heading => $namespace) {
+    $modules = \Ease\Functions::loadClassesInNamespace($namespace);
     $modulesCol->addItem(new \Ease\Html\H3Tag($heading));
     asort($modules);
     foreach ($modules as $className => $classFile) {
-        include_once $classFile;
         $module = new $className(null);
         $modulesCol->addItem(new \Ease\TWB4\Checkbox('modules[' . $className . ']',
                         $classFile, '&nbsp;' . $module->heading(), (isset($_REQUEST) && array_key_exists('modules', $_REQUEST) && array_key_exists($className, $_REQUEST['modules'])), ['class' => 'module']));
@@ -151,16 +156,10 @@ $fromtoForm->addItem(new \Ease\TWB4\SubmitButton(_('Generate digest'),
             'style' => 'height: 90%']));
 $container->addItem($fromtoForm);
 $oPage->addItem($container);
-$composer = 'composer.json';
-if (!file_exists($composer)) {
-    $composer = '../' . $composer;
-}
-
-$appInfo = json_decode(file_get_contents($composer));
 $container = $oPage->setTagID('footer');
 $oPage->addItem('<hr>');
 $footrow = new \Ease\TWB4\Row();
-$author = '<a href="https://github.com/VitexSoftware/AbraFlexi-Digest">AbraFlexi Digest</a> v.: ' . $appInfo->version . '&nbsp;&nbsp; &copy; 2018-2021 <a href="https://vitexsoftware.cz/">Vitex Software</a>';
+$author = '<a href="https://github.com/VitexSoftware/AbraFlexi-Digest">AbraFlexi Digest</a> v.: ' . \Ease\Functions::appVersion() . '&nbsp;&nbsp; &copy; 2018-2023 <a href="https://vitexsoftware.cz/">Vitex Software</a>';
 $footrow->addColumn(6, [$author]);
 $oPage->addItem(new \Ease\TWB4\Container($footrow));
 $oPage->addItem(new \AbraFlexi\Digest\SandClock());
