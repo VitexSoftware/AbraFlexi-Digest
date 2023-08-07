@@ -21,12 +21,12 @@
   "autoload": {
     "psr-4": {
       "AbraFlexi\\Digest\\": "/usr/share/abraflexi-digest/Digest/",
-      "AbraFlexi\\Digest\\Modules\\": "/usr/share/abraflexi-digest/Digest/Modules/",
-      "AbraFlexi\\Digest\\Modules\\AllTime\\": "/usr/share/abraflexi-digest/Digest/Modules/AllTime",
-      "AbraFlexi\\Digest\\Modules\\Daily\\": "/usr/share/abraflexi-digest/Digest/Modules/Daily",
-      "AbraFlexi\\Digest\\Modules\\Weekly\\": "/usr/share/abraflexi-digest/Digest/Modules/Weekly",
-      "AbraFlexi\\Digest\\Modules\\Monthly\\": "/usr/share/abraflexi-digest/Digest/Modules/Monthly",
-      "AbraFlexi\\Digest\\Modules\\Yearly\\": "/usr/share/abraflexi-digest/Digest/Modules/Yearly"
+      "AbraFlexi\\Digest\\Modules\\": "/usr/lib/abraflexi-digest/Digest/Modules/",
+      "AbraFlexi\\Digest\\Modules\\AllTime\\": "/usr/lib/abraflexi-digest/Digest/Modules/AllTime",
+      "AbraFlexi\\Digest\\Modules\\Daily\\": "/usr/lib/abraflexi-digest/Digest/Modules/Daily",
+      "AbraFlexi\\Digest\\Modules\\Weekly\\": "/usr/lib/abraflexi-digest/Digest/Modules/Weekly",
+      "AbraFlexi\\Digest\\Modules\\Monthly\\": "/usr/lib/abraflexi-digest/Digest/Modules/Monthly",
+      "AbraFlexi\\Digest\\Modules\\Yearly\\": "/usr/lib/abraflexi-digest/Digest/Modules/Yearly"
     }
   },
   "repositories": [
