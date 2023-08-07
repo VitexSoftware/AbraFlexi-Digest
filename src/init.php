@@ -9,12 +9,6 @@
 
 namespace AbraFlexi\Digest;
 
-define('MODULE_PATH', './Digest/Modules');
-define('MODULE_DAILY_PATH', './Digest/Modules/Daily');
-define('MODULE_WEEKLY_PATH', './Digest/Modules/Weekly');
-define('MODULE_MONTHLY_PATH', './Digest/Modules/Monthly');
-define('MODULE_YEARLY_PATH', './Digest/Modules/Yearly');
-define('MODULE_ALLTIME_PATH', './Digest/Modules/AllTime');
 define('STYLE_DIR', './css/themes/');
 require_once '../vendor/autoload.php';
 $shared = \Ease\Shared::instanced();
@@ -26,8 +20,9 @@ if (\Ease\Document::isPosted() && \Ease\Document::getPostValue('url')) {
     define('ABRAFLEXI_COMPANY', \Ease\Document::getPostValue('company'));
     $shared->setConfigValue('EASE_MAILTO', \Ease\Document::getPostValue('recipient'));
 } else {
-    if (file_exists('../.env')) {
-        $shared->loadConfig('../.env', true);
+    $conffile = file_exists($argv[1]) ? $argv[1] :  '../.env';
+    if (file_exists($conffile)) {
+        $shared->loadConfig($conffile, true);
     }
 }
 

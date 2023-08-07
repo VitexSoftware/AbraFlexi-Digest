@@ -1,4 +1,4 @@
-abraflexi-digest (1.28) UNRELEASED; urgency=medium
+abraflexi-digest (1.29) UNRELEASED; urgency=medium
 
   [ Vítězslav Dvořák ]
   * Do not show empty results
@@ -8,7 +8,6 @@ abraflexi-digest (1.28) UNRELEASED; urgency=medium
 
   [ CyberVitexus ]
   * Debian buster build
-  * twbootstrap renamed to bootstrap
   * twbootstrap renamed to bootstrap
   * Debian package update
   * v1.20 release
@@ -20,8 +19,9 @@ abraflexi-digest (1.28) UNRELEASED; urgency=medium
   * Small fixes
 
   * php8.x ready
+  * try load first argument as configuration
 
- --  <vitex@pc-vyvoj.spojenet.local>  Fri, 19 May 2023 00:07:09 +0200
+ -- vitex <info@vitexsoftware.cz>  Mon, 07 Aug 2023 14:24:11 +0200
 
 abraflexi-digest (1.6) UNRELEASED; urgency=medium
 

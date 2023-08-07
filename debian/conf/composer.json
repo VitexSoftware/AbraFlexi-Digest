@@ -2,7 +2,7 @@
   "name": "deb/abraflexi-digest",
   "description": "Invoice Digest for abraflexi written in PHP",
   "type": "project",
-  "version": "1.27.1",
+  "version": "1.29",
   "authors": [
     {
       "name": "Vítězslav Dvořák",
@@ -20,7 +20,13 @@
   },
   "autoload": {
     "psr-4": {
-      "AbraFlexi\\Digest\\": "/usr/share/abraflexi-digest/Digest/"
+      "AbraFlexi\\Digest\\": "/usr/share/abraflexi-digest/Digest/",
+      "AbraFlexi\\Digest\\Modules\\": "/usr/share/abraflexi-digest/Digest/Modules/",
+      "AbraFlexi\\Digest\\Modules\\AllTime\\": "/usr/share/abraflexi-digest/Digest/Modules/AllTime",
+      "AbraFlexi\\Digest\\Modules\\Daily\\": "/usr/share/abraflexi-digest/Digest/Modules/Daily",
+      "AbraFlexi\\Digest\\Modules\\Weekly\\": "/usr/share/abraflexi-digest/Digest/Modules/Weekly",
+      "AbraFlexi\\Digest\\Modules\\Monthly\\": "/usr/share/abraflexi-digest/Digest/Modules/Monthly",
+      "AbraFlexi\\Digest\\Modules\\Yearly\\": "/usr/share/abraflexi-digest/Digest/Modules/Yearly"
     }
   },
   "repositories": [

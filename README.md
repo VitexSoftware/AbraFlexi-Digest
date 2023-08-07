@@ -50,6 +50,7 @@ Configuration
 -------------
 
  * [/etc/abraflexi/.env](.env)   - Shared configuration file to override default Environment settings
+ * add config file path as first parameter
  
 ```
     "EASE_LOGGER": "syslog|mail|console",         - how to log progress and results

@@ -159,7 +159,7 @@ $oPage->addItem($container);
 $container = $oPage->setTagID('footer');
 $oPage->addItem('<hr>');
 $footrow = new \Ease\TWB4\Row();
-$author = '<a href="https://github.com/VitexSoftware/AbraFlexi-Digest">AbraFlexi Digest</a> v.: ' . \Ease\Functions::appVersion() . '&nbsp;&nbsp; &copy; 2018-2023 <a href="https://vitexsoftware.cz/">Vitex Software</a>';
+$author = '<a href="https://github.com/VitexSoftware/AbraFlexi-Digest">AbraFlexi Digest</a> v.: ' . \Ease\Shared::appVersion() . '&nbsp;&nbsp; &copy; 2018-2023 <a href="https://vitexsoftware.cz/">Vitex Software</a>';
 $footrow->addColumn(6, [$author]);
 $oPage->addItem(new \Ease\TWB4\Container($footrow));
 $oPage->addItem(new \AbraFlexi\Digest\SandClock());
