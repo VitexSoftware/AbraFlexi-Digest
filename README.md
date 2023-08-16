@@ -1,15 +1,15 @@
-![Package Logo](package-logo.png?raw=true "Project Logo")
-
 AbraFlexi Digest generator
 ==========================
 
+![Package Logo](package-logo.png?raw=true "Project Logo")
+
 Features:
 
-  * **Extensible**             - you can write your own Digest modules
-  * **Static page export**     - Digest is saved to file
-  * **Send by eMail**          - Digest is send by email   
-  * **Skinable**               - You can choose or add custom css
-  * **Localised**              - Czech and English gettext localization   
+* **Extensible**             - you can write your own Digest modules
+* **Static page export**     - Digest is saved to file
+* **Send by eMail**          - Digest is send by email   
+* **Skinable**               - You can choose or add custom css
+* **Localised**              - Czech and English gettext localization   
 
 There are four scripts:
 
@@ -39,20 +39,19 @@ sudo apt install abraflexi-digest
 
 After package installation you can use this new commands:
 
-  * **abraflexi-daydigest**      - Generate AbraFlexi digest for one day
-  * **abraflexi-monthdigest**    - Generate AbraFlexi digest for one week
-  * **abraflexi-weekdigest**     - Generate AbraFlexi digest for one month
-  * **abraflexi-yeardigest**     - Generate AbraFlexi digest for one year
-  * **abraflexi-alltimedigest**  - Generate AbraFlexi digest for all time
-
+* **abraflexi-daydigest**      - Generate AbraFlexi digest for one day
+* **abraflexi-monthdigest**    - Generate AbraFlexi digest for one week
+* **abraflexi-weekdigest**     - Generate AbraFlexi digest for one month
+* **abraflexi-yeardigest**     - Generate AbraFlexi digest for one year
+* **abraflexi-alltimedigest**  - Generate AbraFlexi digest for all time
 
 Configuration
 -------------
 
- * [/etc/abraflexi/.env](.env)   - Shared configuration file to override default Environment settings
- * add config file path as first parameter
- 
-```
+* [/etc/abraflexi/.env](.env)   - Shared configuration file to override default Environment settings
+* add config file path as first parameter
+
+```env
     "EASE_LOGGER": "syslog|mail|console",         - how to log progress and results
     "EASE_MAILTO": "info@yourdomain.net",         - send digest mail
     "DIGEST_FROM": "noreply@vitexsoftware.cz",    - digest mail sender address 
@@ -61,7 +60,7 @@ Configuration
     "SHOW_CONNECTION_FORM": "true"                - show custom server connection form
 ```
 
-Web interface 
+Web interface
 -------------
 
 We Also provide form to test Digest modules. Availble as [index.php](src/index.php)
@@ -71,7 +70,7 @@ We Also provide form to test Digest modules. Availble as [index.php](src/index.p
 See in action: https://www.vitexsoftware.cz/abraflexi-digest/
 
 Modules
-=======
+-------
 
 Digest is generated using modules located in [src/modules](src/modules)
 
@@ -115,7 +114,6 @@ Applied in every case
 * WithoutEmail.php  
 * WithoutTel.php
 
-
 Daily Modules
 -------------
 
@@ -131,7 +129,7 @@ Monthly Modules
 
  Applied once per month
 
- * DailyIncomeChart.php
+* DailyIncomeChart.php
 
 ![Average Income](https://raw.githubusercontent.com/VitexSoftware/AbraFlexi-Digest/master/monthly-average-income-chart.png "Week Digest")
 
@@ -150,24 +148,22 @@ Dependencies
 
 Powered by:
 
- * [**EasePHP Framework**](https://github.com/VitexSoftware/php-ease-core) - pomocné funkce např. logování
- * [**AbraFlexi**](https://github.com/Spoje-NET/php-abraflexi)        - komunikace s [AbraFlexi](https://abraflexi.eu/)
- * [**AbraFlexi Bricks**](https://github.com/VitexSoftware/php-abraflexi-bricks) - Company Logo image widget
-
+* [**EasePHP Framework**](https://github.com/VitexSoftware/php-ease-core) - pomocné funkce např. logování
+* [**AbraFlexi**](https://github.com/Spoje-NET/php-abraflexi)        - komunikace s [AbraFlexi](https://abraflexi.eu/)
+* [**AbraFlexi Bricks**](https://github.com/VitexSoftware/php-abraflexi-bricks) - Company Logo image widget
 
 See also
 --------
 
-  * https://github.com/VitexSoftware/abraflexi-reminder
-  * https://github.com/VitexSoftware/php-abraflexi-matcher
-  * https://github.com/VitexSoftware/AbraFlexi-email-importer
-  * https://github.com/VitexSoftware/php-abraflexi-mailer
-  * https://github.com/VitexSoftware/AbraFlexi-Tools
+* https://github.com/VitexSoftware/abraflexi-reminder
+* https://github.com/VitexSoftware/php-abraflexi-matcher
+* https://github.com/VitexSoftware/AbraFlexi-email-importer
+* https://github.com/VitexSoftware/php-abraflexi-mailer
+* https://github.com/VitexSoftware/AbraFlexi-Tools
 
 Poděkování
 ----------
 
 Tento software by nevznikl pez podpory:
 
-[ ![Spoje.Net](spojenet.gif?raw=true "Spoje.Net s.r.o.") ](https://spoje.net/)
-
+[![Spoje.Net](spojenet.gif?raw=true "Spoje.Net s.r.o.")](https://spoje.net/)
