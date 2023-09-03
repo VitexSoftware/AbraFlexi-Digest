@@ -4,6 +4,27 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        {
+            "name": "Launch installed script",
+            "type": "php",
+            "request": "launch",
+            "program": "/usr/share/abraflexi-digest/abraflexi-daydigest.php",
+            "cwd": "${fileDirname}",
+            "externalConsole": false,
+            "port": 9003,
+            "env": {
+                "APP_DEBUG": "true",
+                "EASE_LOGGER": "syslog",
+                "EMAIL_FROM": "afdigest@localhost",
+                "SEND_INFO_TO": "admin@localhost",
+                "DIGEST_FROM": "afdigest@localhost",
+                "ABRAFLEXI_URL": "https://demo.flexibee.eu:5434",
+                "ABRAFLEXI_LOGIN": "winstrom",
+                "ABRAFLEXI_PASSWORD": "winstrom",
+                "ABRAFLEXI_COMPANY": "demo_de",
+                "ABRAFLEXI_CUSTOMER": "demo",
+            }
+        },
     {
         "name": "Launch current script in console",
         "type": "php",

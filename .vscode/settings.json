@@ -6,5 +6,21 @@
         "Flexi",
         "Vitex",
         "Vítězslav"
-    ]
+    ],
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#000000",
+        "activityBar.foreground": "#FBFBFB",
+        "activityBar.inactiveForeground": "#fbfbfb",
+        "activityBar.activeBorder": "#ffffff",
+        "activityBar.activeBackground": "#F41F4E",
+        "activityBar.border": "#F41F4E",
+        "titleBar.activeBackground": "#000000",
+        "titleBar.activeForeground": "#FBFBFB",
+        "titleBar.inactiveBackground": "#000000",
+        "titleBar.inactiveForeground": "#fbfbfb",
+        "titleBar.border": "#F41F4E",
+        "statusBar.background": "#000000",
+        "statusBar.foreground": "#FBFBFB",
+        "statusBar.border": "#F41F4E"
+    }
 }
