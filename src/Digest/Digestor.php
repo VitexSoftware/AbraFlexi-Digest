@@ -177,7 +177,6 @@ class Digestor extends \Ease\Html\DivTag
         foreach ($modules as $class => $classFile) {
 
             $this->timerStart($class);
-
             $module = new $class($interval);
             $saveto = \Ease\Functions::cfg('SAVETO');
             if ($module->process()) {
@@ -251,6 +250,9 @@ class Digestor extends \Ease\Html\DivTag
     public function sendByMail($mailto)
     {
         $postman = new Mailer($mailto, $this->subject);
+        $dirtyHack = new \Ease\Html\HtmlTag(new \Ease\Html\SimpleHeadTag([
+                    new \Ease\Html\TitleTag($this->subject),
+                    '<style>' . Digestor::$purecss . Digestor::getCustomCss() . Digestor::getWebPageInlineCSS() . '</style>']));
         $postman->addItem($this);
         return $postman->send() === true;
     }

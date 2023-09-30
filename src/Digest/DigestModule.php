@@ -58,7 +58,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
         }
         $this->timeInterval = $interval;
         parent::__construct(null, ['class' => 'card']);
-        $this->setTagID(get_class($this));
+        $this->setTagID('module'.get_class($this));
         $this->addCSS('.module-result {  border: 1px green solid; margin: 20px; padding: 20px }');
     }
 
@@ -69,6 +69,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      */
     public function process()
     {
+        $this->addItem(new \Ease\Html\ATag('','',['id'=>get_class($this)]));
         $this->addItem(new \Ease\Html\DivTag(
                         new \Ease\Html\H2Tag(
                                 new \Ease\Html\ButtonTag($this->heading(), [
