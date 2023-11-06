@@ -114,15 +114,21 @@ Applied in every case
 * WithoutEmail.php  
 * WithoutTel.php
 
+![Day Icon >](abraflexi-daydigest.svg?raw=true)
+
 Daily Modules
 -------------
 
 none yet
 
+![Week Icon >](abraflexi-weekdigest.svg?raw=true)
+
 Weekly Modules
 --------------
 
 none yet
+
+![Month Icon >](abraflexi-monthdigest.svg?raw=true)
 
 Monthly Modules
 ---------------
@@ -132,6 +138,8 @@ Monthly Modules
 * DailyIncomeChart.php
 
 ![Average Income](https://raw.githubusercontent.com/VitexSoftware/AbraFlexi-Digest/master/monthly-average-income-chart.png "Week Digest")
+
+![Year Icon >](abraflexi-yeardigest.svg?raw=true)
 
 Yearly modules
 --------------
