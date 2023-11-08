@@ -16,3 +16,12 @@ Description: digest for AbraFlexi
  Prepare digest with accounting state of AbraFlexi. Then save to file or send by
  email. Daily, weekly, monthly, yearly and all time.
 
+Package: multiflexi-abraflexi-digest
+Depends: multiflexi, abraflexi-digest
+Architecture: all
+Section: web
+Priority: optional
+Description: Add Ddigest for AbraFlexi to MultiFlexi
+ Instal or Update MultiFlexi App json definitons for
+ digests tools
+
