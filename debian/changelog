@@ -1,4 +1,4 @@
-abraflexi-digest (1.29) UNRELEASED; urgency=medium
+abraflexi-digest (1.30.0) UNRELEASED; urgency=medium
 
   [ Vítězslav Dvořák ]
   * Do not show empty results
@@ -20,8 +20,9 @@ abraflexi-digest (1.29) UNRELEASED; urgency=medium
 
   * php8.x ready
   * try load first argument as configuration
+  * import to MultiFlexi added
 
- -- vitex <info@vitexsoftware.cz>  Mon, 07 Aug 2023 14:24:11 +0200
+ -- vitex <info@vitexsoftware.cz>  Wed, 08 Nov 2023 19:55:01 +0100
 
 abraflexi-digest (1.6) UNRELEASED; urgency=medium
 

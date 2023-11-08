@@ -21,7 +21,7 @@ Depends: multiflexi, abraflexi-digest
 Architecture: all
 Section: web
 Priority: optional
-Description: Add Ddigest for AbraFlexi to MultiFlexi
- Instal or Update MultiFlexi App json definitons for
- digests tools
+Description: Add Digest for AbraFlexi to MultiFlexi
+ Instal or Update MultiFlexi App json definitions for
+ digest tools into MultiFlexi
 
