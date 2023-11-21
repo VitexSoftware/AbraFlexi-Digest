@@ -5,6 +5,7 @@
     "executable": "\/bin\/abraflexi-alltimedigest",
     "setup": "",
     "cmdparams": "",
+    "requirements": "AbraFlexi",
     "deploy": "sudo apt install abraflexi-digest",
     "homepage": "https:\/\/github.com\/VitexSoftware\/AbraFlexi-Digest\/",
     "environment": {
