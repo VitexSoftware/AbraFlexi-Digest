@@ -64,10 +64,10 @@ distributions.each {
             }
             stage('Run Test ' + distribution) {
                 environment {
-                    ABRAFLEXI_URL = ‘https://demo.flexibee.eu:5434’
-                    ABRAFLEXI_LOGIN = ‘winstrom’
-                    ABRAFLEXI_PASSWORD = ‘winstrom’
-                    ABRAFLEXI_COMPANY = ‘demo_de’
+                    ABRAFLEXI_URL = 'https://demo.flexibee.eu:5434'
+                    ABRAFLEXI_LOGIN = 'winstrom'
+                    ABRAFLEXI_PASSWORD = 'winstrom'
+                    ABRAFLEXI_COMPANY = 'demo_de'
                 }
                 buildImage.inside {
                     sh 'echo "${GREEN}ONE DAY DIGEST${ENDCOLOR}"'
