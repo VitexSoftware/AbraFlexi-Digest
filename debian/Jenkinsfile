@@ -53,6 +53,7 @@ distributions.each {
 
             stage('Test ' + distribution) {
                     environment {
+                        EASE_LOGGER = 'console'
                         ABRAFLEXI_URL = 'https://demo.flexibee.eu:5434'
                         ABRAFLEXI_LOGIN = 'winstrom'
                         ABRAFLEXI_PASSWORD = 'winstrom'
