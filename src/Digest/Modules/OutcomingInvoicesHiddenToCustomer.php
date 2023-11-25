@@ -31,8 +31,13 @@ class OutcomingInvoicesHiddenToCustomer extends DigestModule implements DigestMo
     public function dig()
     {
         $digger = new \AbraFlexi\FakturaVydana();
-        $outInvoicesData = $digger->getColumnsFromAbraFlexi(['kod', 'typDokl', 'firma',
-            'stavMailK', 'kontaktEmail'],
+        $outInvoicesData = $digger->getColumnsFromAbraFlexi([
+            'kod', 
+            'typDokl', 
+            'firma',
+            'stavMailK', 
+            'kontaktEmail'
+            ],
                 array_merge($this->condition,
                         ['((stavMailK eq \'stavMail.odeslat\') OR (stavMailK is empty))', 'storno' => false]));
         if (empty($outInvoicesData)) {
@@ -54,7 +59,7 @@ class OutcomingInvoicesHiddenToCustomer extends DigestModule implements DigestMo
                     $outInvoiceData['stavMailK'] = _('to send');
                 }
 
-                $outInvoiceData['firma@showAs'] = empty($outInvoiceData['firma']) ? '' : new DocumentLink(\AbraFlexi\RW::code($outInvoiceData['firma']), $addresser);
+                $outInvoiceData['firma'] = empty($outInvoiceData) ? '' : new DocumentLink($outInvoiceData['firma'], $addresser);
                 $outInvoiceData['kod'] = new DocumentLink(\AbraFlexi\RW::code($outInvoiceData['kod']),
                         $digger);
                 $outInvoiceData['custcontact'] = $addresser->getNotificationEmailAddress();
@@ -71,9 +76,6 @@ class OutcomingInvoicesHiddenToCustomer extends DigestModule implements DigestMo
                 unset($outInvoiceData['id']);
                 unset($outInvoiceData['external-ids']);
                 unset($outInvoiceData['typDokl']);
-                unset($outInvoiceData['typDokl@ref']);
-                unset($outInvoiceData['firma@ref']);
-                unset($outInvoiceData['stavMailK@showAs']);
                 unset($outInvoiceData['firma']);
                 $outInvoicesTable->addRowColumns($outInvoiceData);
             }
