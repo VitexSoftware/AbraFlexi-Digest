@@ -17,8 +17,8 @@ $end = new \DateTime();
 $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
 $fmt = datefmt_create(
         'cs_CZ',
-        \IntlDateFormatter::FULL,
-        \IntlDateFormatter::FULL,
+        \IntlDateFormatter::SHORT,
+        \IntlDateFormatter::NONE,
         'Europe/Prague',
         \IntlDateFormatter::GREGORIAN
 );

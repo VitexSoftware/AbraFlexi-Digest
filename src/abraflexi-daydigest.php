@@ -14,8 +14,8 @@ require_once __DIR__ . '/init.php';
 $period = new \DatePeriod(new \DateTime, new \DateInterval('P1D'), new \DateTime);
 $fmt = datefmt_create(
         'cs_CZ',
-        \IntlDateFormatter::FULL,
-        \IntlDateFormatter::FULL,
+        \IntlDateFormatter::SHORT,
+        \IntlDateFormatter::NONE,
         'Europe/Prague',
         \IntlDateFormatter::GREGORIAN
 );
