@@ -52,10 +52,6 @@ class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
                     $amount = floatval($faData['zbyvaUhradit']);
                 }
 
-                if($amount < 1){
-                    continue;
-                }
-                
                 $totals[(string) $faData['firma']][$currency] += $amount;
                 $totalsByCurrency[$currency] += $amount;
                 $oDays = \AbraFlexi\FakturaVydana::overdueDays($faData['datSplat']);
