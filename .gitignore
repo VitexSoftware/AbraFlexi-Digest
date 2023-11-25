@@ -20,3 +20,4 @@
 /debian/abraflexi-digest.substvars
 /.php_cs.cache
 .env
+/debian/multiflexi-abraflexi-digest

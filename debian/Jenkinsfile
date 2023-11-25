@@ -71,15 +71,15 @@ distributions.each {
                 }
                 buildImage.inside {
                     sh 'echo "${GREEN}ONE DAY DIGEST${ENDCOLOR}"'
-                    sh 'abraflexi-daydigest'
+                    sh '/usr/bin/abraflexi-daydigest'
                     sh 'echo "${GREEN}ONE WEEK DIGEST${ENDCOLOR}"'
-                    sh 'abraflexi-weekdigest'
+                    sh '/usr/bin/abraflexi-weekdigest'
                     sh 'echo "${GREEN}ONEMONTH DIGEST${ENDCOLOR}"'
-                    sh 'abraflexi-monthdigest'
+                    sh '/usr/bin/abraflexi-monthdigest'
                     sh 'echo "${GREEN}ONE YEAR DIGEST${ENDCOLOR}"'
-                    sh 'abraflexi-yeardigest'
+                    sh '/usr/bin/abraflexi-yeardigest'
                     sh 'echo "${GREEN}ALL TIME DIGEST${ENDCOLOR}"'
-                    sh 'abraflexi-alltimedigest'
+                    sh '/usr/bin/abraflexi-alltimedigest'
                 }
             }
             stage('Copy artifacts ' + distribution ) {
