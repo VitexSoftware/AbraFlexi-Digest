@@ -17,11 +17,10 @@ Description: digest for AbraFlexi
  email. Daily, weekly, monthly, yearly and all time.
 
 Package: multiflexi-abraflexi-digest
-Depends: multiflexi, abraflexi-digest
+Depends: abraflexi-digest, multiflexi
 Architecture: all
 Section: web
 Priority: optional
 Description: Add Digest for AbraFlexi to MultiFlexi
  Instal or Update MultiFlexi App json definitions for
  digest tools into MultiFlexi
-
