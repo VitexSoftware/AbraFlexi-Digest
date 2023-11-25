@@ -52,6 +52,12 @@ distributions.each {
             }
 
             stage('Test ' + distribution) {
+                    environment {
+                        ABRAFLEXI_URL = 'https://demo.flexibee.eu:5434'
+                        ABRAFLEXI_LOGIN = 'winstrom'
+                        ABRAFLEXI_PASSWORD = 'winstrom'
+                        ABRAFLEXI_COMPANY = 'demo_de'
+                    }
                 buildImage.inside {
                     def debconf_debug = 0 //Set to "5" or "developer" to debug debconf
                     sh 'cd $WORKSPACE/dist/debian/ ; dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz; cd $WORKSPACE'
@@ -59,23 +65,11 @@ distributions.each {
                     sh 'sudo apt-get update --allow-releaseinfo-change'
                     sh 'echo "INSTALATION"'
                     sh 'IFS="\n\b"; for package in  `ls $WORKSPACE/dist/debian/ | grep .deb | grep -v dbgsym | awk -F_ \'{print \$1}\'` ; do  echo -e "${GREEN} installing ${package} on `lsb_release -sc` ${ENDCOLOR} " ; sudo  DEBIAN_FRONTEND=noninteractive DEBCONF_DEBUG=' + debconf_debug  + ' apt-get -y install $package ; abraflexi-daydigest;  done;'
+
+                    sh 'EASE_LOGGER="console" ABRAFLEXI_URL="https://demo.flexibee.eu:5434" ABRAFLEXI_LOGIN="winstrom" ABRAFLEXI_PASSWORD="winstrom" ABRAFLEXI_COMPANY="demo_de" abraflexi-daydigest && abraflexi-weekdigest && abraflexi-monthdigest && abraflexi-yeardigest && abraflexi-alltimedigest'
+
                     stash includes: 'dist/**', name: 'dist-' + distroCodename
-                    environment {
-                        ABRAFLEXI_URL = 'https://demo.flexibee.eu:5434'
-                        ABRAFLEXI_LOGIN = 'winstrom'
-                        ABRAFLEXI_PASSWORD = 'winstrom'
-                        ABRAFLEXI_COMPANY = 'demo_de'
-                    }
-                    sh 'echo "${GREEN}ONE DAY DIGEST${ENDCOLOR}"'
-                    sh '/usr/bin/abraflexi-daydigest'
-                    sh 'echo "${GREEN}ONE WEEK DIGEST${ENDCOLOR}"'
-                    sh 'abraflexi-weekdigest'
-                    sh 'echo "${GREEN}ONEMONTH DIGEST${ENDCOLOR}"'
-                    sh 'abraflexi-monthdigest'
-                    sh 'echo "${GREEN}ONE YEAR DIGEST${ENDCOLOR}"'
-                    sh 'abraflexi-yeardigest'
-                    sh 'echo "${GREEN}ALL TIME DIGEST${ENDCOLOR}"'
-                    sh 'abraflexi-alltimedigest'
+
                 }
             }
             stage('Copy artifacts ' + distribution ) {
