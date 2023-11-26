@@ -25,9 +25,9 @@ class WithoutEmail extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
     {
         $addresser = new \AbraFlexi\Adresar();
         if (\Ease\Shared::cfg('DIGEST_CHECK_SUPPLIER_CONTACT', false)) {
-            $this->condition[] = '(typVztahuK=typVztahu.odberDodav OR typVztahuK=typVztahu.dodavatel OR typVztahuK=typVztahu.odberatel)';
+            $this->condition[] = "(typVztahuK='typVztahu.odberDodav' OR typVztahuK='typVztahu.dodavatel' OR typVztahuK='typVztahu.odberatel')";
         } else {
-            $this->condition[] = '(typVztahuK=typVztahu.odberDodav OR typVztahuK=typVztahu.odberatel)';
+            $this->condition[] = "(typVztahuK='typVztahu.odberDodav' OR typVztahuK='typVztahu.odberatel')";
         }
 
         $withoutEmail = $addresser->getColumnsFromAbraFlexi(
