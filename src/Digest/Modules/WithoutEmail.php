@@ -25,9 +25,15 @@ class WithoutEmail extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
     public function dig()
     {
         $addresser = new \AbraFlexi\Adresar();
+        if (\Eease\Shared::cfg('DIGEST_CHECK_SUPPLIER_CONTACT',false)) {
+            $this->condition[] = 'AND (typVztahuK=typVztahu.odberDodav OR typVztahuK=typVztahu.dodavatel OR typVztahuK=typVztahu.odberatel)';
+        } else {
+            $this->condition[] = 'AND (typVztahuK=typVztahu.odberDodav OR typVztahuK=typVztahu.odberatel)';
+        }
+         
         $withoutEmail = $addresser->getColumnsFromAbraFlexi(['nazev', 'kod', 'ulice',
             'mesto', 'tel'],
-                array_merge($this->condition, ['email' => 'is empty', 'typVztahuK' => 'typVztahu.odberDodav']));
+                array_merge($this->condition, ['email' => 'is empty']));
         if (empty($withoutEmail)) {
             $this->addItem(_('none'));
         } else {

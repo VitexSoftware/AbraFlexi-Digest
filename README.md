@@ -52,12 +52,13 @@ Configuration
 * add config file path as first parameter
 
 ```env
-    "EASE_LOGGER": "syslog|mail|console",         - how to log progress and results
-    "EASE_MAILTO": "info@yourdomain.net",         - send digest mail
-    "DIGEST_FROM": "noreply@vitexsoftware.cz",    - digest mail sender address 
-    "THEME":  "happy",                            - additional css
-    "SAVETO": "/var/tmp/"                         - save html digest to 
-    "SHOW_CONNECTION_FORM": "true"                - show custom server connection form
+EASE_LOGGER="syslog|mail|console"         - how to log progress and results
+EASE_MAILTO="info@yourdomain.net"         - send digest mail
+DIGEST_FROM="noreply@vitexsoftware.cz"    - digest mail sender address 
+THEME="happy",                            - additional css
+SAVETO="/var/tmp/"                        - save html digest to 
+SHOW_CONNECTION_FORM="true"               - show custom server connection form (web only)
+DIGEST_CHECK_SUPPLIER_CONTACT=false       - Do not notify if the supplier does not have contact details 
 ```
 
 Web interface
