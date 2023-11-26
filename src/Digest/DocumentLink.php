@@ -15,7 +15,6 @@ namespace AbraFlexi\Digest;
  */
 class DocumentLink extends \Ease\Html\ATag
 {
-
     public function __construct($code, $engine, $properties = [])
     {
         $engine->setMyKey($code);

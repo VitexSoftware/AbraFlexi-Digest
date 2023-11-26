@@ -16,10 +16,9 @@ namespace AbraFlexi\Digest\Modules;
  */
 class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
-
     /**
      * Column used to filter by date
-     * @var string 
+     * @var string
      */
     public $timeColumn = 'datVyst';
 
@@ -27,9 +26,11 @@ class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFl
     {
         $totals = [];
         $digger = new \AbraFlexi\FakturaPrijata(null, ['nativeTypes' => false]);
-        $inInvoicesData = $digger->getColumnsFromAbraFlexi(['kod', 'typDokl', 'sumCelkem', 'sumCelkemMen',
+        $inInvoicesData = $digger->getColumnsFromAbraFlexi(
+            ['kod', 'typDokl', 'sumCelkem', 'sumCelkemMen',
             'uhrazeno', 'storno', 'mena', 'juhSum', 'juhSumMen'],
-                $this->condition);
+            $this->condition
+        );
         $accepted = 0;
         $invoicedRaw = [];
         $paid = [];
@@ -62,8 +63,12 @@ class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFl
                     $totals[$outInvoiceData['typDokl']] = [];
                 }
 
-                if (!array_key_exists($outInvoiceData['mena'],
-                                $totals[$outInvoiceData['typDokl']])) {
+                if (
+                    !array_key_exists(
+                        $outInvoiceData['mena'],
+                        $totals[$outInvoiceData['typDokl']]
+                    )
+                ) {
                     $totals[$outInvoiceData['typDokl']][$outInvoiceData['mena']] = 0;
                 }
 

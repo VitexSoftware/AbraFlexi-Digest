@@ -9,7 +9,7 @@
 
 namespace AbraFlexi\Digest\Modules;
 
-use \Ease\Html\DivTag;
+use Ease\Html\DivTag;
 
 /**
  * Incoming payments for us
@@ -18,25 +18,29 @@ use \Ease\Html\DivTag;
  */
 class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
-
     public $timeColumn = 'datVyst';
 
     /**
      * Process Incoming payments
-     * 
+     *
      * @return boolean
      */
     public function dig()
     {
         $invoicer = new \AbraFlexi\FakturaVydana(null, ['nativeTypes' => false]);
         $adresser = new \AbraFlexi\Adresar();
-        $proformas = $invoicer->getColumnsFromAbraFlexi(['kod', 'mena', 'popis', 'sumCelkem',
+        $proformas = $invoicer->getColumnsFromAbraFlexi(
+            ['kod', 'mena', 'popis', 'sumCelkem',
             'sumCelkemMen', 'stavOdpocetK', 'typDokl', 'firma', 'datVyst'],
-                array_merge($this->condition,
-                        ['typPohybuK' => 'typPohybu.prijem', 'storno' => false,
+            array_merge(
+                $this->condition,
+                ['typPohybuK' => 'typPohybu.prijem', 'storno' => false,
                             'zuctovano' => false,
                             'typDokl.typDoklK' => 'typDokladu.zalohFaktura',
-                            'stavUhrK' => 'stavUhr.uhrazeno']), 'datVyst');
+                'stavUhrK' => 'stavUhr.uhrazeno']
+            ),
+            'datVyst'
+        );
         $total = [];
         $totals = [];
         if (empty($proformas)) {
@@ -45,7 +49,6 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
             $incomesTable = new \AbraFlexi\Digest\Table([_('Document'), _('Description'),
                 _('Denunc state'), _('Document type'), _('Company'), _('Date'), _('Amount')]);
             foreach ($proformas as $proforma) {
-
                 switch ($proforma['stavOdpocetK']) {
                     case 'stavOdp.komplet':
                     case 'stavOdp.vytvZdd':
@@ -65,11 +68,15 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
                             $totals[$currency] = 1;
                         }
 
-                        $proforma['kod'] = new \AbraFlexi\Digest\DocumentLink($proforma['kod'],
-                                $invoicer);
+                        $proforma['kod'] = new \AbraFlexi\Digest\DocumentLink(
+                            $proforma['kod'],
+                            $invoicer
+                        );
                         $proforma['price'] = self::getPrice($proforma);
-                        $proforma['firma'] = new \AbraFlexi\Digest\CompanyLink($proforma['firma'],
-                                $adresser);
+                        $proforma['firma'] = new \AbraFlexi\Digest\CompanyLink(
+                            $proforma['firma'],
+                            $adresser
+                        );
                         unset($proforma['typDokl']);
                         unset($proforma['sumCelkem']);
                         unset($proforma['sumCelkemMen']);
@@ -96,7 +103,7 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
 
     /**
      * module Heading
-     * 
+     *
      * @return string
      */
     public function heading()
@@ -106,7 +113,7 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
 
     /**
      * Default Description
-     * 
+     *
      * @return string
      */
     public function description()

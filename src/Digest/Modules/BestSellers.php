@@ -16,15 +16,14 @@ namespace AbraFlexi\Digest\Modules;
  */
 class BestSellers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
-
     /**
      * Column used to filter by date
-     * @var string 
+     * @var string
      */
     public $timeColumn = 'datVyst';
 
     /**
-     * 
+     *
      */
     public function dig()
     {
@@ -36,10 +35,11 @@ class BestSellers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\D
         $items = [];
         if (!empty($invoicesRaw)) {
             foreach ($invoicesRaw as $invoiceCode => $invoiceData) {
-                if (array_key_exists('polozkyDokladu', $invoiceData))
+                if (array_key_exists('polozkyDokladu', $invoiceData)) {
                     foreach ($invoiceData['polozkyDokladu'] as $itemRaw) {
                         $items[] = $itemRaw;
                     }
+                }
             }
         }
         if (empty($items)) {
@@ -73,16 +73,19 @@ class BestSellers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\D
             $productor = new \AbraFlexi\Cenik();
             foreach ($products as $productCode => $productInfo) {
                 if ($products[$productCode] > 1) {
-
                     $productor->setMyKey($productCode);
-                    $topProductsTable->addRowColumns([new \Ease\Html\ATag($productor->getApiURL(),
-                                $productCode), $products[$productCode],
+                    $topProductsTable->addRowColumns([new \Ease\Html\ATag(
+                        $productor->getApiURL(),
+                        $productCode
+                    ), $products[$productCode],
                         $totals[$productCode]]);
                 }
             }
 
-            $this->addItem($this->cardBody([$topProductsTable, new \Ease\Html\DivTag(sprintf(_('%d top products'),
-                                        $topProductsTable->getItemsCount()))]));
+            $this->addItem($this->cardBody([$topProductsTable, new \Ease\Html\DivTag(sprintf(
+                _('%d top products'),
+                $topProductsTable->getItemsCount()
+            ))]));
             return !empty($topProductsTable->getItemsCount());
         }
     }

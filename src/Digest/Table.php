@@ -15,10 +15,9 @@ namespace AbraFlexi\Digest;
  */
 class Table extends \Ease\Html\TableTag
 {
-
     /**
      * Digest Table
-     * 
+     *
      * @param array $thCols    TH Columns
      * @param array $properties
      */

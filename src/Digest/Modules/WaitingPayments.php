@@ -16,10 +16,9 @@ namespace AbraFlexi\Digest\Modules;
  */
 class WaitingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
-
     /**
      * Module heading
-     * 
+     *
      * @return string
      */
     public function heading()
@@ -29,25 +28,29 @@ class WaitingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFle
 
     /**
      * Column used to filter by date
-     * @var string 
+     * @var string
      */
     public $timeColumn = 'datSplat';
 
     /**
      * Dig Waiting Payments
-     * 
+     *
      * @return type
      */
     public function dig()
     {
         $totals = [];
         $checker = new \AbraFlexi\FakturaPrijata();
-        $inInvoices = $checker->getColumnsFromAbraFlexi(['kod', 'firma', 'sumCelkem',
+        $inInvoices = $checker->getColumnsFromAbraFlexi(
+            ['kod', 'firma', 'sumCelkem',
             'zbyvaUhradit', 'zbyvaUhraditMen', 'datSplat',
             'mena'],
-                array_merge($this->condition,
-                        ["(stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr')",
-                            'storno' => false]));
+            array_merge(
+                $this->condition,
+                ["(stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr')",
+                'storno' => false]
+            )
+        );
         if (empty($inInvoices)) {
             $this->addItem(_('none'));
         } else {
@@ -57,7 +60,6 @@ class WaitingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFle
                 _('Amount')]);
             $pos = 0;
             foreach ($inInvoices as $inInvoiceData) {
-
                 if (self::getCurrency($inInvoiceData) != 'CZK') {
                     $amount = floatval($inInvoiceData['zbyvaUhraditMen']);
                 } else {
@@ -69,13 +71,19 @@ class WaitingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFle
                 $adreser->setMyKey($inInvoiceData['firma']);
                 $invTable->addRowColumns([
                     ++$pos,
-                    new \Ease\Html\ATag($checker->getApiUrl(),
-                            $inInvoiceData['kod']),
-                    new \Ease\Html\ATag($adreser->getApiUrl(),
-                            empty($inInvoiceData['firma']) ? '' : $inInvoiceData['firma']->showAs),
+                    new \Ease\Html\ATag(
+                        $checker->getApiUrl(),
+                        $inInvoiceData['kod']
+                    ),
+                    new \Ease\Html\ATag(
+                        $adreser->getApiUrl(),
+                        empty($inInvoiceData['firma']) ? '' : $inInvoiceData['firma']->showAs
+                    ),
                     \AbraFlexi\FakturaVydana::overdueDays($inInvoiceData['datSplat']),
-                    $amount . ' ' . current(explode(':',
-                                    $inInvoiceData['mena']->showAs))
+                    $amount . ' ' . current(explode(
+                        ':',
+                        $inInvoiceData['mena']->showAs
+                    ))
                 ]);
                 if (array_key_exists($currency, $totals)) {
                     $totals[$currency] += floatval($inInvoiceData['sumCelkem']);
@@ -95,7 +103,7 @@ class WaitingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFle
     }
 
     /**
-     * 
+     *
      * @param type $param
      */
     public function functionName($param)

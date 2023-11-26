@@ -16,16 +16,19 @@ namespace AbraFlexi\Digest\Modules;
  */
 class OutcomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
-
     public $timeColumn = 'datVyst';
 
     public function dig()
     {
         $banker = new \AbraFlexi\Banka();
-        $outcomes = $banker->getColumnsFromAbraFlexi(['mena', 'sumCelkem',
+        $outcomes = $banker->getColumnsFromAbraFlexi(
+            ['mena', 'sumCelkem',
             'sumCelkemMen'],
-                array_merge($this->condition,
-                        ['typPohybuK' => 'typPohybu.vydej', 'storno' => false]));
+            array_merge(
+                $this->condition,
+                ['typPohybuK' => 'typPohybu.vydej', 'storno' => false]
+            )
+        );
         $total = [];
         if (empty($outcomes)) {
             $this->addItem(_('none'));
@@ -56,7 +59,7 @@ class OutcomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
     }
 
     /**
-     * 
+     *
      * @return string
      */
     public function heading()

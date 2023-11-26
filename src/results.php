@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AbraFlexi Digest - Monthly 
+ * AbraFlexi Digest - Monthly
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
  * @copyright  (G) 2018-2023 Vitex Software
@@ -12,8 +12,10 @@ namespace AbraFlexi\Digest;
 define('EASE_APPNAME', 'AbraFlexi Digest');
 require_once __DIR__ . '/init.php';
 $oPage = new \Ease\TWB4\WebPage($myCompanyName . ' ' . _('AbraFlexi digest'));
-$container = new \Ease\TWB4\Container(new \Ease\Html\H1Tag(new \Ease\Html\ATag($myCompany->getApiURL(),
-                        $myCompanyName) . ' ' . _('AbraFlexi digest results')));
+$container = new \Ease\TWB4\Container(new \Ease\Html\H1Tag(new \Ease\Html\ATag(
+    $myCompany->getApiURL(),
+    $myCompanyName
+) . ' ' . _('AbraFlexi digest results')));
 $reports = [];
 foreach (scandir($shared->getConfigValue('SAVETO')) as $file) {
     if (preg_match('/^abraflexi-(.*)digest_(.*).html/', $file, $matches)) {

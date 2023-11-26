@@ -16,19 +16,20 @@ namespace AbraFlexi\Digest\Modules;
  */
 class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
-
     /**
      * Who does no pay its bills ?
-     * 
+     *
      * @return boolean success
      */
     public function dig()
     {
         $invoicer = new \AbraFlexi\FakturaVydana();
         $cond = ['datSplat lte \'' . \AbraFlexi\RW::dateToFlexiDate(new \DateTime()) . '\' AND (stavUhrK is null OR stavUhrK eq \'stavUhr.castUhr\') AND storno eq false', 'limit' => 0];
-        $faDatakturyRaw = $invoicer->getColumnsFromAbraFlexi(['kod', 'firma', 'sumCelkem',
+        $faDatakturyRaw = $invoicer->getColumnsFromAbraFlexi(
+            ['kod', 'firma', 'sumCelkem',
             'sumCelkemMen', 'zbyvaUhradit', 'zbyvaUhraditMen', 'mena', 'datSplat'],
-                $cond);
+            $cond
+        );
         $totals = [];
         $totalsByCurrency = [];
         $overdue = [];
@@ -72,16 +73,17 @@ class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
             $invTable = new \Ease\Html\TableTag(null, ['class' => 'table']);
             $invTable->addRowHeaderColumns([_('Company'), _('Overdue days'), _('Invoices'), _('Amount')]);
             foreach ($invoicesByFirma as $firma => $fakturyFirmy) {
-
                 $overdueInvoices = new \Ease\Html\DivTag();
                 foreach ($fakturyFirmy as $invoiceData) {
                     $invoicer->setMyKey($invoiceData['id']);
                     $currency = self::getCurrency($invoiceData);
                     $overdueInvoice = \AbraFlexi\RO::uncode($invoiceData['kod']);
-                    $overdueInvoices->addItem(new \Ease\Html\DivTag([new \Ease\Html\ATag($invoicer->getApiURL(),
-                                        $overdueInvoice, ['css' => 'margin: 5px;']),
-                                '&nbsp;<small>' . ( ($currency != 'CZK') ? $invoiceData['zbyvaUhraditMen'] : $invoiceData['zbyvaUhradit']) . ' ' . $currency . ' ' . \AbraFlexi\FakturaVydana::overdueDays($invoiceData['datSplat']) . ' ' . _('days') . '</small>']
-                    ));
+                    $overdueInvoices->addItem(new \Ease\Html\DivTag([new \Ease\Html\ATag(
+                        $invoicer->getApiURL(),
+                        $overdueInvoice,
+                        ['css' => 'margin: 5px;']
+                    ),
+                                '&nbsp;<small>' . ( ($currency != 'CZK') ? $invoiceData['zbyvaUhraditMen'] : $invoiceData['zbyvaUhradit']) . ' ' . $currency . ' ' . \AbraFlexi\FakturaVydana::overdueDays($invoiceData['datSplat']) . ' ' . _('days') . '</small>']));
                 }
 
                 $adreser->setMyKey($firma);
@@ -91,8 +93,7 @@ class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
                     $overdue[$firma],
                     $overdueInvoices,
                     self::getTotalsDiv($totals[$firma])
-                        ]
-                );
+                        ]);
             }
 
             $invTable->addRowFooterColumns(['', '', _('Total'), self::getTotalsDiv($totalsByCurrency)]);

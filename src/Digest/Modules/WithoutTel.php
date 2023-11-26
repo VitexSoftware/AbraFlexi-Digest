@@ -16,29 +16,30 @@ namespace AbraFlexi\Digest\Modules;
  */
 class WithoutTel extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
-
     /**
      * Search for Customers without notification phone number
-     * 
+     *
      * @return boolean success
      */
     public function dig()
     {
-        if (\Ease\Shared::cfg('DIGEST_CHECK_SUPPLIER_CONTACT',false)) {
-            $this->condition[] = 'AND (typVztahuK=typVztahu.odberDodav OR typVztahuK=typVztahu.dodavatel OR typVztahuK=typVztahu.odberatel)';
+        if (\Ease\Shared::cfg('DIGEST_CHECK_SUPPLIER_CONTACT', false)) {
+            $this->condition[] = '(typVztahuK=typVztahu.odberDodav OR typVztahuK=typVztahu.dodavatel OR typVztahuK=typVztahu.odberatel)';
         } else {
-            $this->condition[] = 'AND (typVztahuK=typVztahu.odberDodav OR typVztahuK=typVztahu.odberatel)';
+            $this->condition[] = '(typVztahuK=typVztahu.odberDodav OR typVztahuK=typVztahu.odberatel)';
         }
-        
+
         $addresser = new \AbraFlexi\Adresar();
-        $withoutPhone = $addresser->getColumnsFromAbraFlexi([
-            'nazev', 
-            'kod', 
+        $withoutPhone = $addresser->getColumnsFromAbraFlexi(
+            [
+            'nazev',
+            'kod',
             'ulice',
-            'mesto', 
+            'mesto',
             'email'
             ],
-                array_merge($this->condition, ['tel is empty AND mobil is empty']));
+            array_merge($this->condition, ['tel is empty AND mobil is empty'])
+        );
         if (empty($withoutPhone)) {
             $this->addItem(_('none'));
         } else {
@@ -53,10 +54,14 @@ class WithoutTel extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Di
                 $phoneNumber = $addresser->getAnyPhoneNumber();
                 if (empty($phoneNumber)) {
                     $count++;
-                    $noTelTable->addRowColumns([new \Ease\Html\ATag($addresser->getApiURL(),
-                                $address['nazev']), $address['ulice'], $address['mesto'],
-                        new \Ease\Html\ATag('mailto:' . $address['email'],
-                                $address['email'])]);
+                    $noTelTable->addRowColumns([new \Ease\Html\ATag(
+                        $addresser->getApiURL(),
+                        $address['nazev']
+                    ), $address['ulice'], $address['mesto'],
+                        new \Ease\Html\ATag(
+                            'mailto:' . $address['email'],
+                            $address['email']
+                        )]);
                 } else {
                     unset($withoutPhone[$id]);
                 }
@@ -70,7 +75,7 @@ class WithoutTel extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Di
 
     /**
      * Module Headnig
-     * 
+     *
      * @return string
      */
     function heading()

@@ -16,7 +16,6 @@ namespace AbraFlexi\Digest;
  */
 class CompanyLink extends \Ease\Html\ATag
 {
-
     /**
      * Link to company
      *

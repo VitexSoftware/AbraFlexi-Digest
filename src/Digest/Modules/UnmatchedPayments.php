@@ -16,27 +16,33 @@ namespace AbraFlexi\Digest\Modules;
  */
 class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
-
     public $timeColumn = 'datVyst';
 
     /**
      * Process Incoming payments
-     * 
+     *
      * @return boolean
      */
     public function dig()
     {
         $banker = new \AbraFlexi\Banka(null, ['nativeTypes' => false]);
         $adresser = new \AbraFlexi\Adresar();
-        $bucer = new \AbraFlexi\Adresar(null,
-                ['evidence' => 'adresar-bankovni-ucet']);
-        $incomes = $banker->getColumnsFromAbraFlexi(['kod', 'mena', 'popis', 'sumCelkem',
+        $bucer = new \AbraFlexi\Adresar(
+            null,
+            ['evidence' => 'adresar-bankovni-ucet']
+        );
+        $incomes = $banker->getColumnsFromAbraFlexi(
+            ['kod', 'mena', 'popis', 'sumCelkem',
             'sumCelkemMen',
             'buc', 'firma', 'datVyst'],
-                array_merge($this->condition,
-                        ['typPohybuK' => 'typPohybu.prijem', 'storno' => false,
+            array_merge(
+                $this->condition,
+                ['typPohybuK' => 'typPohybu.prijem', 'storno' => false,
                             'zuctovano' => false,
-                            'sparovano' => false]), 'datVyst');
+                'sparovano' => false]
+            ),
+            'datVyst'
+        );
         $total = [];
         if (empty($incomes)) {
             $this->addItem(_('none'));
@@ -46,8 +52,10 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
             foreach ($incomes as $income) {
                 $adresser->dataReset();
                 if (empty((string) $income['firma']) && !empty($income['buc'])) {
-                    $candidates = $bucer->getColumnsFromAbraFlexi(['firma'],
-                            ['buc' => $income['buc']]);
+                    $candidates = $bucer->getColumnsFromAbraFlexi(
+                        ['firma'],
+                        ['buc' => $income['buc']]
+                    );
                     if (!empty($candidates)) {
                         $income['firma'] = $candidates[0]['firma']->showAs;
                     }
@@ -87,7 +95,7 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
 
     /**
      * Default Description
-     * 
+     *
      * @return string
      */
     public function description()

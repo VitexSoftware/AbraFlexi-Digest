@@ -9,7 +9,6 @@ namespace AbraFlexi\Digest\Modules\AllTime;
  */
 class PurchasePriceLowerThanSales extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
-
     /**
      * Which records we want to see ?
      * @param array $condition
@@ -17,13 +16,16 @@ class PurchasePriceLowerThanSales extends \AbraFlexi\Digest\DigestModule impleme
     public $condition = ['nakupCena' => 'is not empty', 'cenaZakl' => 'is not empty'];
 
     /**
-     * 
+     *
      */
     public function dig()
     {
         $pricer = new \AbraFlexi\Cenik();
-        $productsRaw = $pricer->getColumnsFromAbraFlexi(['nazev', 'nakupCena', 'cenaZakl'],
-                $this->condition, 'kod');
+        $productsRaw = $pricer->getColumnsFromAbraFlexi(
+            ['nazev', 'nakupCena', 'cenaZakl'],
+            $this->condition,
+            'kod'
+        );
         $products = [];
         if (!empty($productsRaw)) {
             foreach ($productsRaw as $productsCode => $productsData) {
@@ -59,8 +61,7 @@ class PurchasePriceLowerThanSales extends \AbraFlexi\Digest\DigestModule impleme
                     $productInfo['nakupCena'],
                     $productInfo['cenaZakl'],
                     $productInfo['provar'],
-                        ]
-                );
+                        ]);
             }
 
 

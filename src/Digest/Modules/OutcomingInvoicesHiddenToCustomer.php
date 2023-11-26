@@ -21,29 +21,31 @@ use AbraFlexi\Digest\Table;
  */
 class OutcomingInvoicesHiddenToCustomer extends DigestModule implements DigestModuleInterface
 {
-
     /**
      * Column used to filter by date
-     * @var string 
+     * @var string
      */
     public $timeColumn = 'datVyst';
 
     public function dig()
     {
         $digger = new \AbraFlexi\FakturaVydana();
-        $outInvoicesData = $digger->getColumnsFromAbraFlexi([
-            'kod', 
-            'typDokl', 
+        $outInvoicesData = $digger->getColumnsFromAbraFlexi(
+            [
+            'kod',
+            'typDokl',
             'firma',
-            'stavMailK', 
+            'stavMailK',
             'kontaktEmail'
             ],
-                array_merge($this->condition,
-                        ['((stavMailK eq \'stavMail.odeslat\') OR (stavMailK is empty))', 'storno' => false]));
+            array_merge(
+                $this->condition,
+                ['((stavMailK eq \'stavMail.odeslat\') OR (stavMailK is empty))', 'storno' => false]
+            )
+        );
         if (empty($outInvoicesData)) {
             $this->addItem(_('none'));
         } else {
-
             $addresser = new \AbraFlexi\Adresar();
             $tableHeader[] = _('Code');
             $tableHeader[] = _('Document subject');
@@ -53,23 +55,28 @@ class OutcomingInvoicesHiddenToCustomer extends DigestModule implements DigestMo
             $tableHeader[] = _('Customer\'s Contact');
             $outInvoicesTable = new Table($tableHeader);
             foreach ($outInvoicesData as $outInvoiceData) {
-
                 $addresser->setMyKey($outInvoiceData['firma']);
                 if (!empty($outInvoiceData['stavMailK'])) {
                     $outInvoiceData['stavMailK'] = _('to send');
                 }
 
                 $outInvoiceData['firma'] = empty($outInvoiceData) ? '' : new DocumentLink($outInvoiceData['firma'], $addresser);
-                $outInvoiceData['kod'] = new DocumentLink(\AbraFlexi\RW::code($outInvoiceData['kod']),
-                        $digger);
+                $outInvoiceData['kod'] = new DocumentLink(
+                    \AbraFlexi\RW::code($outInvoiceData['kod']),
+                    $digger
+                );
                 $outInvoiceData['custcontact'] = $addresser->getNotificationEmailAddress();
                 if (!empty($outInvoiceData['kontaktEmail'])) {
-                    $outInvoiceData['kontaktEmail'] = new \Ease\Html\ATag('mailto:' . $outInvoiceData['kontaktEmail'],
-                            $outInvoiceData['kontaktEmail']);
+                    $outInvoiceData['kontaktEmail'] = new \Ease\Html\ATag(
+                        'mailto:' . $outInvoiceData['kontaktEmail'],
+                        $outInvoiceData['kontaktEmail']
+                    );
                 }
                 if (!empty($outInvoiceData['custcontact'])) {
-                    $outInvoiceData['custcontact'] = new \Ease\Html\ATag('mailto:' . $outInvoiceData['custcontact'],
-                            $outInvoiceData['custcontact']);
+                    $outInvoiceData['custcontact'] = new \Ease\Html\ATag(
+                        'mailto:' . $outInvoiceData['custcontact'],
+                        $outInvoiceData['custcontact']
+                    );
                 }
 
 
@@ -90,7 +97,7 @@ class OutcomingInvoicesHiddenToCustomer extends DigestModule implements DigestMo
 
     /**
      * "Outcoming invoices" heading
-     * 
+     *
      * @return string
      */
     public function heading()
@@ -100,6 +107,5 @@ class OutcomingInvoicesHiddenToCustomer extends DigestModule implements DigestMo
 
     public function description()
     {
-        
     }
 }

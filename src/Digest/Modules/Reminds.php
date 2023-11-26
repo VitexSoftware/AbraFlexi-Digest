@@ -16,10 +16,9 @@ namespace AbraFlexi\Digest\Modules;
  */
 class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
-
     /**
      * Reminds dates
-     * @var array 
+     * @var array
      */
     public $timeColumn = ['datUp1', 'datUp2', 'datSmir'];
 
@@ -32,10 +31,12 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
     public function dig()
     {
         $invoicer = new \AbraFlexi\FakturaVydana();
-        $faDatakturyRaw = $invoicer->getColumnsFromAbraFlexi(['kod', 'firma', 'popis',
+        $faDatakturyRaw = $invoicer->getColumnsFromAbraFlexi(
+            ['kod', 'firma', 'popis',
             'sumCelkem', 'sumCelkemMen',
             'zbyvaUhradit', 'zbyvaUhraditMen', 'mena', 'datUp1', 'datUp2', 'datSmir'],
-                $this->condition);
+            $this->condition
+        );
         if (empty($faDatakturyRaw)) {
             $this->addItem(_('none'));
         } else {
@@ -51,15 +52,16 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
             ]);
             $overDues = [];
             foreach ($faDatakturyRaw as $invoice => $invoiceData) {
-
                 $this->countReminds($invoiceData);
                 $adreser->setMyKey($invoiceData['firma']);
                 $invoicer->setMyKey(\AbraFlexi\RO::code($invoiceData['kod']));
                 $nazevFirmy = array_key_exists('firma@showAs', $invoiceData) ? $invoiceData['firma@showAs'] : \AbraFlexi\RO::uncode($invoiceData['firma']);
                 $invTable->addRowColumns([
                     new \Ease\Html\ATag($adreser->getApiURL(), $nazevFirmy),
-                    new \Ease\Html\ATag($invoicer->getApiURL(),
-                            trim($invoiceData['kod'] . ' ' . $invoiceData['popis'])),
+                    new \Ease\Html\ATag(
+                        $invoicer->getApiURL(),
+                        trim($invoiceData['kod'] . ' ' . $invoiceData['popis'])
+                    ),
                     (($invoiceData['mena'] != 'code:CZK') ? $invoiceData['zbyvaUhraditMen'] : $invoiceData['zbyvaUhradit']) .
                     ' ' . \AbraFlexi\RO::uncode($invoiceData['mena']),
                     empty($invoiceData['datUp1']) ? '' : $this->myDate($invoiceData['datUp1']),
@@ -76,7 +78,7 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
     }
 
     /**
-     * 
+     *
      * @param array $rowData
      */
     public function countReminds(array $rowData)
@@ -93,8 +95,8 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
     }
 
     /**
-     * count date is within digest date interval 
-     * 
+     * count date is within digest date interval
+     *
      * @param \DateTime $date
      * @param string $column
      */
@@ -112,9 +114,9 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
 
     /**
      * bold Date in digest interval
-     * 
+     *
      * @param string $flexidate
-     * 
+     *
      * @return mixed
      */
     public function myDate(\DateTime $flexidate)
@@ -128,7 +130,7 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
     }
 
     /**
-     * 
+     *
      * @return string
      */
     function heading()

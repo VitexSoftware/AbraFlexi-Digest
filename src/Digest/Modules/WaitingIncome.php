@@ -16,16 +16,15 @@ namespace AbraFlexi\Digest\Modules;
  */
 class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
-
     /**
      * Column used to filter by date
-     * @var string 
+     * @var string
      */
     public $timeColumn = 'datSplat';
 
     /**
      * Seach for invoices
-     * 
+     *
      * @return boolean
      */
     public function dig()
@@ -33,18 +32,18 @@ class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi
         $totals = [];
         $checker = new \AbraFlexi\FakturaVydana();
         $outInvoices = $checker->getColumnsFromAbraFlexi(
-                [
+            [
                     'kod', 'firma', 'sumCelkem',
                     'sumCelkemMen',
                     'mena'
                 ],
-                array_merge(
-                        $this->condition,
-                        [
+            array_merge(
+                $this->condition,
+                [
                             "(stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr')",
                             'storno' => false
                         ]
-                )
+            )
         );
         if (empty($outInvoices)) {
             $this->addItem(_('none'));
@@ -62,12 +61,12 @@ class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi
                 $invTable->addRowColumns([
                     ++$pos,
                     new \Ease\Html\ATag(
-                            $checker->getApiUrl(),
-                            $outInvoiceData['kod']
+                        $checker->getApiUrl(),
+                        $outInvoiceData['kod']
                     ),
                     new \Ease\Html\ATag(
-                            $adreser->getApiUrl(),
-                            (string) $outInvoiceData['firma']
+                        $adreser->getApiUrl(),
+                        (string) $outInvoiceData['firma']
                     ),
                     (($currency != 'CZK') ? $outInvoiceData['sumCelkemMen'] : $outInvoiceData['sumCelkem']) . ' ' . $currency
                 ]);

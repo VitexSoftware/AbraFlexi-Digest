@@ -15,7 +15,6 @@ namespace AbraFlexi\Digest;
  */
 class SandClock extends \Ease\Container
 {
-
     public function __construct()
     {
         $this->addItem('<svg id="wrap" width="300" height="300">

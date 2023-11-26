@@ -10,7 +10,6 @@ namespace AbraFlexi\Digest;
  */
 class Mailer extends \Ease\HtmlMailer
 {
-
     /**
      * Digest Mailer
      *
@@ -48,7 +47,6 @@ class Mailer extends \Ease\HtmlMailer
                 }
                 $mailBody = $this->htmlBody->addItem($item, $pageItemName);
             } else {
-
                 $mailBody = $this->htmlDocument;
             }
         } else {
@@ -61,6 +59,5 @@ class Mailer extends \Ease\HtmlMailer
 
     public function getCss()
     {
-        
     }
 }

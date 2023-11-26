@@ -6,6 +6,7 @@
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
  * @copyright  (G) 2018-2023 Vitex Software
  */
+
 /*
  * New Customers
  */
@@ -19,10 +20,9 @@ namespace AbraFlexi\Digest\Modules;
  */
 class NewCustomers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
-
     /**
      * Column used to filter by date
-     * @var string 
+     * @var string
      */
     public $timeColumn = 'lastUpdate';
 
@@ -42,29 +42,36 @@ class NewCustomers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
                 $digger->setMyKey(\AbraFlexi\RO::code($newCustomerData['kod']));
                 $userTable->addRowColumns([
                     $pos,
-                    new \Ease\Html\ATag($digger->getApiURL(),
-                            $newCustomerData['kod']),
+                    new \Ease\Html\ATag(
+                        $digger->getApiURL(),
+                        $newCustomerData['kod']
+                    ),
                     $newCustomerData['nazev'],
-                    new \Ease\Html\ATag('mailto:' . $newCustomerData['email'],
-                            $newCustomerData['email']),
-                    new \Ease\Html\ATag('callto:' . $newCustomerData['tel'],
-                            $newCustomerData['tel'])
+                    new \Ease\Html\ATag(
+                        'mailto:' . $newCustomerData['email'],
+                        $newCustomerData['email']
+                    ),
+                    new \Ease\Html\ATag(
+                        'callto:' . $newCustomerData['tel'],
+                        $newCustomerData['tel']
+                    )
                 ]);
             }
 
 
             $this->addItem($this->cardBody(
-                            [
+                [
                                 $userTable,
                                 new \Ease\Html\DivTag(sprintf(_('%d new Customers'), count($newCustomersData)))
-            ]));
+                            ]
+            ));
         }
         return !empty($inInvoicesData);
     }
 
     /**
      * "New or updated customers" heading
-     * 
+     *
      * @return string
      */
     public function heading()

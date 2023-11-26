@@ -16,10 +16,9 @@ namespace AbraFlexi\Digest\Modules;
  */
 class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
-
     /**
      * Column used to filter by date
-     * @var string 
+     * @var string
      */
     public $timeColumn = 'datVyst';
 
@@ -87,8 +86,10 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
                 $tableRow = [$typDoklCounts[$typDokl]];
                 $tableRow[] = \AbraFlexi\RO::uncode($typDokl);
                 foreach ($currencies as $currencyCode) {
-                    $tableRow[] = array_key_exists($currencyCode,
-                                    $typDoklTotals[$typDokl]) ? $typDoklTotals[$typDokl][$currencyCode] : '';
+                    $tableRow[] = array_key_exists(
+                        $currencyCode,
+                        $typDoklTotals[$typDokl]
+                    ) ? $typDoklTotals[$typDokl][$currencyCode] : '';
                 }
 
                 $outInvoicesTable->addRowColumns($tableRow);
@@ -106,7 +107,7 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
 
     /**
      * "Outcoming invoices" heading
-     * 
+     *
      * @return string
      */
     public function heading()

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AbraFlexi Digest
  *
@@ -15,7 +16,6 @@ namespace AbraFlexi\Digest\Modules\Monthly;
  */
 class WeeklyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
-
     public $timeColumn = 'datVyst';
 
     /**
@@ -29,33 +29,37 @@ class WeeklyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraF
       $peach:         lighten($orange, 20%);
       $grape:         #ab64f4;
 
-     * @var array 
+     * @var array
      */
     public static $currencyColor = ['CZK' => 'lime', 'EUR' => 'grape', 'USD' => 'teal'];
 
     /**
      *
-     * @var \AbraFlexi\Digest\VerticalChart 
+     * @var \AbraFlexi\Digest\VerticalChart
      */
     public $incomeChart = null;
 
     /**
      * 100% of chart
-     * @var array 
+     * @var array
      */
     private $average = [];
 
     /**
-     * 
+     *
      */
     public function dig()
     {
         $banker = new \AbraFlexi\Banka(null, ['nativeTypes' => false]);
         $averages = [];
-        $incomes = $banker->getColumnsFromAbraFlexi(['mena', 'sumCelkem', 'sumCelkemMen',
+        $incomes = $banker->getColumnsFromAbraFlexi(
+            ['mena', 'sumCelkem', 'sumCelkemMen',
             'datVyst'],
-                array_merge($this->condition,
-                        ['typPohybuK' => 'typPohybu.prijem', 'storno' => false]));
+            array_merge(
+                $this->condition,
+                ['typPohybuK' => 'typPohybu.prijem', 'storno' => false]
+            )
+        );
         $days = [];
         if (empty($incomes)) {
             $this->addItem(_('none'));
@@ -91,8 +95,11 @@ class WeeklyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraF
             $avg = new \Ease\Container();
             foreach ($averages as $currency => $amounts) {
                 $this->average[$currency] = ceil(array_sum($averages[$currency]) / count($averages[$currency]));
-                $avg->addItem(new \Ease\Html\DivTag(sprintf(_('100%% - average income is %s %s'),
-                                        $this->average[$currency], $currency)));
+                $avg->addItem(new \Ease\Html\DivTag(sprintf(
+                    _('100%% - average income is %s %s'),
+                    $this->average[$currency],
+                    $currency
+                )));
             }
 
             $this->incomeChart = new \AbraFlexi\Digest\VerticalChart();
@@ -107,7 +114,7 @@ class WeeklyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraF
     }
 
     /**
-     * 
+     *
      * @param type $day
      * @param type $currencies
      */
@@ -119,7 +126,7 @@ class WeeklyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraF
     }
 
     /**
-     * 
+     *
      * @param type $currency
      * @param type $amount
      */
@@ -129,7 +136,7 @@ class WeeklyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraF
     }
 
     /**
-     * 
+     *
      * @param string $caption
      * @param integer $height
      */
@@ -138,9 +145,12 @@ class WeeklyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraF
         $maxAmount = $this->average[$caption]; //100%
         $procento = $maxAmount / 100;
         $percentChange = $amount / $procento;
-        $this->incomeChart->addBar(round($percentChange), $amount,
-                $amount . ' ' . $caption . ' ' . \AbraFlexi\RO::flexiDateToDateTime($day)->format('d/m D'),
-                self::$currencyColor[$caption]);
+        $this->incomeChart->addBar(
+            round($percentChange),
+            $amount,
+            $amount . ' ' . $caption . ' ' . \AbraFlexi\RO::flexiDateToDateTime($day)->format('d/m D'),
+            self::$currencyColor[$caption]
+        );
     }
 
     /**

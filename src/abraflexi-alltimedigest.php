@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AbraFlexi Digest - Yearly 
+ * AbraFlexi Digest - Yearly
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
  * @copyright  (G) 2018 Vitex Software

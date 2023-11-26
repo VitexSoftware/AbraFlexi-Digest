@@ -34,13 +34,13 @@ if (empty($to)) {
 
 
 if (\Ease\Document::isPosted()) {
-
     $formatter = new \IntlDateFormatter(\Ease\Locale::$localeUsed, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
     $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
     $subject = sprintf(
-            _('AbraFlexi %s digest from %s to %s'), $myCompanyName,
-            $formatter->format($period->getStartDate()->getTimestamp()),
-            $formatter->format($period->getEndDate()->getTimestamp())
+        _('AbraFlexi %s digest from %s to %s'),
+        $myCompanyName,
+        $formatter->format($period->getStartDate()->getTimestamp()),
+        $formatter->format($period->getEndDate()->getTimestamp())
     );
     $digestor = new Digestor($subject);
     $shared->setConfigValue('EASE_MAILTO', $oPage->getRequestValue('recipient'));
@@ -66,8 +66,10 @@ $candidates = [
     _('Alltime modules') => 'AbraFlexi\Digest\Modules\AllTime'
 ];
 $fromtoForm = new \Ease\TWB4\Form(['name' => 'fromto', 'class' => 'form-horizontal']);
-$container = new \Ease\TWB4\Container(new \Ease\Html\H1Tag(new \Ease\Html\ATag($myCompany->getApiURL(),
-                        $myCompanyName) . ' ' . _('AbraFlexi digest')));
+$container = new \Ease\TWB4\Container(new \Ease\Html\H1Tag(new \Ease\Html\ATag(
+    $myCompany->getApiURL(),
+    $myCompanyName
+) . ' ' . _('AbraFlexi digest')));
 $container->addItem(new \AbraFlexi\ui\CompanyLogo(['class' => 'img-fluid']));
 $container->addItem(new \AbraFlexi\ui\TWB4\StatusInfoBox());
 $formColumns = new \Ease\TWB4\Row();
@@ -82,8 +84,13 @@ foreach ($candidates as $heading => $namespace) {
     asort($modules);
     foreach ($modules as $className => $classFile) {
         $module = new $className(null);
-        $modulesCol->addItem(new \Ease\TWB4\Checkbox('modules[' . $className . ']',
-                        $classFile, '&nbsp;' . $module->heading(), (isset($_REQUEST) && array_key_exists('modules', $_REQUEST) && array_key_exists($className, $_REQUEST['modules'])), ['class' => 'module']));
+        $modulesCol->addItem(new \Ease\TWB4\Checkbox(
+            'modules[' . $className . ']',
+            $classFile,
+            '&nbsp;' . $module->heading(),
+            (isset($_REQUEST) && array_key_exists('modules', $_REQUEST) && array_key_exists($className, $_REQUEST['modules'])),
+            ['class' => 'module']
+        ));
     }
 }
 
@@ -125,35 +132,65 @@ $( "#lastyear" ).click(function() {
 });
 
 ');
-$optionsCol->addItem(new \Ease\TWB4\LinkButton('#', _('Yesterday'), 'inverse',
-                ['id' => 'yesterday']));
-$optionsCol->addItem(new \Ease\TWB4\LinkButton('#', _('Week'), 'inverse',
-                ['id' => 'lastweek']));
-$optionsCol->addItem(new \Ease\TWB4\LinkButton('#', _('Month'), 'inverse',
-                ['id' => 'lastmonth']));
-$optionsCol->addItem(new \Ease\TWB4\LinkButton('#', _('Year'), 'inverse',
-                ['id' => 'lastyear']));
-$optionsCol->addItem(new \Ease\TWB4\FormGroup(_('From'),
-                new \Ease\Html\InputDateTag('from', $from)));
-$optionsCol->addItem(new \Ease\TWB4\FormGroup(_('To'),
-                new \Ease\Html\InputDateTag('to', $to)));
-$optionsCol->addItem(new \Ease\TWB4\FormGroup(_('Theme name'),
-                new \Ease\Html\SelectTag('theme', $themes, $shared->getConfigValue('THEME'))));
-$optionsCol->addItem(new \Ease\TWB4\FormGroup(_('Output Directory'),
-                new \Ease\Html\InputTextTag('outdir', $shared->getConfigValue('SAVETO'))));
-$optionsCol->addItem(new \Ease\TWB4\FormGroup(_('Send by mail to'),
-                new \Ease\Html\InputEmailTag('recipient',
-                        $shared->getConfigValue('EASE_MAILTO'))));
+$optionsCol->addItem(new \Ease\TWB4\LinkButton(
+    '#',
+    _('Yesterday'),
+    'inverse',
+    ['id' => 'yesterday']
+));
+$optionsCol->addItem(new \Ease\TWB4\LinkButton(
+    '#',
+    _('Week'),
+    'inverse',
+    ['id' => 'lastweek']
+));
+$optionsCol->addItem(new \Ease\TWB4\LinkButton(
+    '#',
+    _('Month'),
+    'inverse',
+    ['id' => 'lastmonth']
+));
+$optionsCol->addItem(new \Ease\TWB4\LinkButton(
+    '#',
+    _('Year'),
+    'inverse',
+    ['id' => 'lastyear']
+));
+$optionsCol->addItem(new \Ease\TWB4\FormGroup(
+    _('From'),
+    new \Ease\Html\InputDateTag('from', $from)
+));
+$optionsCol->addItem(new \Ease\TWB4\FormGroup(
+    _('To'),
+    new \Ease\Html\InputDateTag('to', $to)
+));
+$optionsCol->addItem(new \Ease\TWB4\FormGroup(
+    _('Theme name'),
+    new \Ease\Html\SelectTag('theme', $themes, $shared->getConfigValue('THEME'))
+));
+$optionsCol->addItem(new \Ease\TWB4\FormGroup(
+    _('Output Directory'),
+    new \Ease\Html\InputTextTag('outdir', $shared->getConfigValue('SAVETO'))
+));
+$optionsCol->addItem(new \Ease\TWB4\FormGroup(
+    _('Send by mail to'),
+    new \Ease\Html\InputEmailTag(
+        'recipient',
+        $shared->getConfigValue('EASE_MAILTO')
+    )
+));
 $optionsCol->addItem(new \Ease\TWB4\FormGroup(_('Language select'), new \Ease\TWB4\Widgets\LangSelect()));
 if (\Ease\Functions::cfg('SHOW_CONNECTION_FORM')) {
     $optionsCol->addItem(new \AbraFlexi\ui\TWB4\ConnectionForm($myCompany->getConnectionOptions()));
 }
 
 $fromtoForm->addItem($formColumns);
-$fromtoForm->addItem(new \Ease\TWB4\SubmitButton(_('Generate digest'),
-                'success btn-lg btn-block',
-                ['onClick' => "window.scrollTo(0, 0); $('#wrap').css('visibility', 'visible');",
-            'style' => 'height: 90%']));
+$fromtoForm->addItem(new \Ease\TWB4\SubmitButton(
+    _('Generate digest'),
+    'success btn-lg btn-block',
+    ['onClick' => "window.scrollTo(0, 0); $('#wrap').css('visibility', 'visible');",
+    'style' => 'height: 90%']
+));
 $container->addItem($fromtoForm);
 $oPage->addItem($container);
 $container = $oPage->setTagID('footer');
