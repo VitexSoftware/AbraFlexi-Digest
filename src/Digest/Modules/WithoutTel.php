@@ -24,7 +24,7 @@ class WithoutTel extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Di
      */
     public function dig()
     {
-        if (\Eease\Shared::cfg('DIGEST_CHECK_SUPPLIER_CONTACT',false)) {
+        if (\Ease\Shared::cfg('DIGEST_CHECK_SUPPLIER_CONTACT',false)) {
             $this->condition[] = 'AND (typVztahuK=typVztahu.odberDodav OR typVztahuK=typVztahu.dodavatel OR typVztahuK=typVztahu.odberatel)';
         } else {
             $this->condition[] = 'AND (typVztahuK=typVztahu.odberDodav OR typVztahuK=typVztahu.odberatel)';
