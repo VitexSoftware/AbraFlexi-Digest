@@ -9,5 +9,11 @@ set -e
 # Iterate over all json files inf usr/lib/abraflexi-digest/multiflexi
 for file in `ls /usr/lib/abraflexi-digest/multiflexi/*.json`
 do
-	multiflexi-json-app-remover $file
+echo	multiflexi-json-app-remover $file
 done
+
+echo debug ============================
+echo $@
+echo $0
+
+env
