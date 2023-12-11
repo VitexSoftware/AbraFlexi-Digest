@@ -19,6 +19,7 @@
     "autoload": {
         "psr-4": {
             "AbraFlexi\\Digest\\": "src/Digest/",
+            "AbraFlexi\\Digest\\Outlook\\": "src/Digest/Outlook/",
             "AbraFlexi\\Digest\\Modules\\": "src/Digest/Modules/",
             "AbraFlexi\\Digest\\Modules\\AllTime\\": "src/Digest/Modules/AllTime",
             "AbraFlexi\\Digest\\Modules\\Monthly\\": "src/Digest/Modules/Monthly"

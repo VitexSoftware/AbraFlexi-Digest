@@ -66,7 +66,7 @@ class NewCustomers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
                             ]
             ));
         }
-        return !empty($inInvoicesData);
+        return !empty($newCustomersData);
     }
 
     /**

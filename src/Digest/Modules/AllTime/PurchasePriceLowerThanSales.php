@@ -42,6 +42,7 @@ class PurchasePriceLowerThanSales extends \AbraFlexi\Digest\DigestModule impleme
         }
         if (empty($products)) {
             $this->addItem(_('none'));
+            return false;
         } else {
             $topProductsTable = new \AbraFlexi\Digest\Table([
                 _('Code'),

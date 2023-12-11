@@ -115,8 +115,8 @@ class WeeklyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraF
 
     /**
      *
-     * @param type $day
-     * @param type $currencies
+     * @param string $day
+     * @param array  $currencies
      */
     public function addChartDay($day, $currencies)
     {
@@ -127,8 +127,9 @@ class WeeklyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraF
 
     /**
      *
-     * @param type $currency
-     * @param type $amount
+     * @param string $currency
+     * @param float  $amount
+     *
      */
     public function addChartCurrency($currency, $amount, $day)
     {
@@ -138,7 +139,8 @@ class WeeklyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraF
     /**
      *
      * @param string $caption
-     * @param integer $height
+     * @param float  $amount
+     * @param string $day     Description
      */
     public function addBar($caption, $amount, $day)
     {
@@ -155,6 +157,7 @@ class WeeklyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraF
 
     /**
      * Module heading
+     *
      * @return string
      */
     public function heading()

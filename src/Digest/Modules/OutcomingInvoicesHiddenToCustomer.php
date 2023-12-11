@@ -102,7 +102,7 @@ class OutcomingInvoicesHiddenToCustomer extends DigestModule implements DigestMo
      */
     public function heading()
     {
-        return _('Outcoming invoices not notified to customer');
+        return _('Issued invoices not notified to the client');
     }
 
     public function description()

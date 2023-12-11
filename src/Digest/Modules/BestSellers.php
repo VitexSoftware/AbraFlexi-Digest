@@ -44,6 +44,7 @@ class BestSellers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\D
         }
         if (empty($items)) {
             $this->addItem(_('none'));
+            return false;
         } else {
             $topProductsTable = new \AbraFlexi\Digest\Table([_('Pricelist'),
                 _('Quantity'), _('Total')]);

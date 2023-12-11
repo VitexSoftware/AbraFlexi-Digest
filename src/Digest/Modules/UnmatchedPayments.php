@@ -88,6 +88,9 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
         return !empty($incomes);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function heading()
     {
         return _('Unmatched payments');

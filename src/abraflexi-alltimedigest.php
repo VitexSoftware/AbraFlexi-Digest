@@ -9,7 +9,7 @@
 
 namespace AbraFlexi\Digest;
 
-define('EASE_APPNAME', 'AbraFlexiAllTimeDigest');
+define('EASE_APPNAME', 'AbraFlexi All Time Digest');
 require_once __DIR__ . '/init.php';
 $subject = sprintf(_('AbraFlexi %s Alltime'), $myCompanyName);
 $digestor = new Digestor($subject);

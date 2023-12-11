@@ -7,6 +7,8 @@
  * @copyright  (G) 2017 Vitex Software
  */
 
+declare(strict_types=1);
+
 namespace AbraFlexi\Digest;
 
 /**
@@ -15,7 +17,24 @@ namespace AbraFlexi\Digest;
  */
 interface DigestModuleInterface
 {
-    public function heading();
+    /**
+     * Default module Heading
+     *
+     * @return string
+     */
+    public function heading(): string;
 
-    public function dig();
+    /**
+     * Obtaining informations
+     *
+     * @return boolean dig success
+     */
+    public function dig(): bool;
+
+    /**
+     * Return Pure data (no markup)
+     *
+     * @return array
+     */
+    public function digJson(): array;
 }

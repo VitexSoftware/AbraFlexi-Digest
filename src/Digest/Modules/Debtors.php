@@ -9,12 +9,17 @@
 
 namespace AbraFlexi\Digest\Modules;
 
+use AbraFlexi\Digest\DigestModule;
+use AbraFlexi\Digest\DigestModuleInterface;
+use AbraFlexi\Digest\Outlook\TableTag;
+use DateTime;
+
 /**
  * Description of WaitingIncome
  *
  * @author vitex
  */
-class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
+class Debtors extends DigestModule implements DigestModuleInterface
 {
     /**
      * Who does no pay its bills ?
@@ -24,7 +29,7 @@ class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
     public function dig()
     {
         $invoicer = new \AbraFlexi\FakturaVydana();
-        $cond = ['datSplat lte \'' . \AbraFlexi\RW::dateToFlexiDate(new \DateTime()) . '\' AND (stavUhrK is null OR stavUhrK eq \'stavUhr.castUhr\') AND storno eq false', 'limit' => 0];
+        $cond = ['datSplat lte \'' . \AbraFlexi\RW::dateToFlexiDate(new DateTime()) . '\' AND (stavUhrK is null OR stavUhrK eq \'stavUhr.castUhr\') AND storno eq false', 'limit' => 0];
         $faDatakturyRaw = $invoicer->getColumnsFromAbraFlexi(
             ['kod', 'firma', 'sumCelkem',
             'sumCelkemMen', 'zbyvaUhradit', 'zbyvaUhraditMen', 'mena', 'datSplat'],
@@ -70,7 +75,7 @@ class Debtors extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
             $this->addItem(_('none'));
         } else {
             $adreser = new \AbraFlexi\Adresar(null, ['offline' => 'true']);
-            $invTable = new \Ease\Html\TableTag(null, ['class' => 'table']);
+            $invTable = new TableTag(null, ['class' => 'table']);
             $invTable->addRowHeaderColumns([_('Company'), _('Overdue days'), _('Invoices'), _('Amount')]);
             foreach ($invoicesByFirma as $firma => $fakturyFirmy) {
                 $overdueInvoices = new \Ease\Html\DivTag();

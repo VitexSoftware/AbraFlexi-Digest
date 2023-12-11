@@ -115,8 +115,8 @@ class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFl
 
     /**
      *
-     * @param type $day
-     * @param type $currencies
+     * @param string $day
+     * @param array $currencies
      */
     public function addChartDay($day, $currencies)
     {
@@ -127,8 +127,9 @@ class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFl
 
     /**
      *
-     * @param type $currency
-     * @param type $amount
+     * @param string $currency
+     * @param float  $amount
+     * @param string $day Description
      */
     public function addChartCurrency($currency, $amount, $day)
     {
@@ -137,8 +138,9 @@ class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFl
 
     /**
      *
-     * @param string $caption
-     * @param integer $height
+     * @param string  $caption
+     * @param float   $amount
+     * @param string  $day Description
      */
     public function addBar($caption, $amount, $day)
     {
@@ -155,6 +157,7 @@ class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFl
 
     /**
      * Module heading
+     *
      * @return string
      */
     public function heading()
