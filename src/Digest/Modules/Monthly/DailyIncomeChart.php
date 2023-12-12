@@ -146,7 +146,7 @@ class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFl
     {
         $maxAmount = $this->average[$caption]; //100%
         $procento = $maxAmount / 100;
-        $percentChange = $amount / $procento;
+        $percentChange = $amount ? $amount / $procento : 0;
         $this->incomeChart->addBar(
             round($percentChange),
             $amount,
