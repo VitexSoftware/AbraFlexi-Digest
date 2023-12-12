@@ -48,7 +48,7 @@ class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFl
     /**
      *
      */
-    public function dig()
+    public function dig(): bool
     {
         $banker = new \AbraFlexi\Banka(null, ['nativeTypes' => false]);
         $averages = [];
@@ -160,7 +160,7 @@ class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFl
      *
      * @return string
      */
-    public function heading()
+    public function heading(): string
     {
         return _('Incoming payments chart');
     }

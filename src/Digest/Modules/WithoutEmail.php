@@ -21,7 +21,7 @@ class WithoutEmail extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
      *
      * @return boolean
      */
-    public function dig()
+    public function dig(): bool
     {
         $addresser = new \AbraFlexi\Adresar();
         if (\Ease\Shared::cfg('DIGEST_CHECK_SUPPLIER_CONTACT', false)) {
@@ -61,7 +61,7 @@ class WithoutEmail extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
         return !empty($withoutEmail);
     }
 
-    function heading()
+    function heading(): string
     {
         return _('Customers without notification email address');
     }

@@ -22,7 +22,7 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
      */
     public $timeColumn = 'datVyst';
 
-    public function dig()
+    public function dig(): bool
     {
         $digger = new \AbraFlexi\FakturaVydana();
         $outInvoicesData = $digger->getColumnsFromAbraFlexi(['kod', 'typDokl', 'sumCelkem',
@@ -110,7 +110,7 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
      *
      * @return string
      */
-    public function heading()
+    public function heading(): string
     {
         return _('Outcoming invoices');
     }

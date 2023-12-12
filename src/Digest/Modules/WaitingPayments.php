@@ -21,7 +21,7 @@ class WaitingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFle
      *
      * @return string
      */
-    public function heading()
+    public function heading(): string
     {
         return _('We have to pay');
     }
@@ -37,7 +37,7 @@ class WaitingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFle
      *
      * @return boolean
      */
-    public function dig()
+    public function dig(): bool
     {
         $totals = [];
         $checker = new \AbraFlexi\FakturaPrijata();

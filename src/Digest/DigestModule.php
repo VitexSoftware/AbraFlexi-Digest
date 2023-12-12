@@ -110,7 +110,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      *
      * @return boolean dig success
      */
-    public function dig()
+    public function dig(): bool
     {
         $this->addItem(new \Ease\Html\ATag(
             'https://www.vitexsoftware.cz/cenik.php',
@@ -124,7 +124,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      *
      * @return array
      */
-    public function digJson()
+    public function digJson(): array
     {
         $this->addStatusMessage(_('Module does not support JSON mode'), 'debug');
         return [];
@@ -135,7 +135,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      *
      * @return string
      */
-    public function heading()
+    public function heading(): string
     {
         return _('No heading set');
     }

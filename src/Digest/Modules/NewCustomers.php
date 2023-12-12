@@ -26,7 +26,7 @@ class NewCustomers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
      */
     public $timeColumn = 'lastUpdate';
 
-    public function dig()
+    public function dig(): bool
     {
         $digger = new \AbraFlexi\Adresar();
         $newCustomersData = $digger->getColumnsFromAbraFlexi(['kod', 'nazev', 'tel',
@@ -74,7 +74,7 @@ class NewCustomers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
      *
      * @return string
      */
-    public function heading()
+    public function heading(): string
     {
         return _('New or updated customers');
     }

@@ -27,7 +27,7 @@ class OutcomingInvoicesHiddenToCustomer extends DigestModule implements DigestMo
      */
     public $timeColumn = 'datVyst';
 
-    public function dig()
+    public function dig(): bool
     {
         $digger = new \AbraFlexi\FakturaVydana();
         $outInvoicesData = $digger->getColumnsFromAbraFlexi(
@@ -100,7 +100,7 @@ class OutcomingInvoicesHiddenToCustomer extends DigestModule implements DigestMo
      *
      * @return string
      */
-    public function heading()
+    public function heading(): string
     {
         return _('Issued invoices not notified to the client');
     }

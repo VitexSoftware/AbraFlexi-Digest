@@ -48,7 +48,7 @@ class WeeklyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraF
     /**
      *
      */
-    public function dig()
+    public function dig(): bool
     {
         $banker = new \AbraFlexi\Banka(null, ['nativeTypes' => false]);
         $averages = [];
@@ -160,7 +160,7 @@ class WeeklyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraF
      *
      * @return string
      */
-    public function heading()
+    public function heading(): string
     {
         return _('Incoming payments chart');
     }

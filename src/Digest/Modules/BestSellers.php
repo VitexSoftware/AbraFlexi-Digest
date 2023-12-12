@@ -25,7 +25,7 @@ class BestSellers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\D
     /**
      *
      */
-    public function dig()
+    public function dig(): bool
     {
         $invoicer = new \AbraFlexi\FakturaVydana();
         $this->condition['relations'] = 'polozkyDokladu';
@@ -91,7 +91,7 @@ class BestSellers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\D
         }
     }
 
-    public function heading()
+    public function heading(): string
     {
         return _('Best selling products');
     }

@@ -21,7 +21,7 @@ class WithoutTel extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Di
      *
      * @return boolean success
      */
-    public function dig()
+    public function dig(): bool
     {
         if (\Ease\Shared::cfg('DIGEST_CHECK_SUPPLIER_CONTACT', false)) {
             $this->condition[] = "(typVztahuK='typVztahu.odberDodav' OR typVztahuK='typVztahu.dodavatel' OR typVztahuK='typVztahu.odberatel')";
@@ -78,7 +78,7 @@ class WithoutTel extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Di
      *
      * @return string
      */
-    function heading()
+    function heading(): string
     {
         return _('Customers without notification phone number');
     }

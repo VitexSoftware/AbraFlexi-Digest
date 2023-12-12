@@ -23,7 +23,7 @@ class IncomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFl
      *
      * @return boolean
      */
-    public function dig()
+    public function dig(): bool
     {
         $results = new \Ease\Container();
         $banker = new \AbraFlexi\Banka();
@@ -61,7 +61,7 @@ class IncomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFl
         return !empty($incomes);
     }
 
-    public function heading()
+    public function heading(): string
     {
         return _('Incoming payments');
     }

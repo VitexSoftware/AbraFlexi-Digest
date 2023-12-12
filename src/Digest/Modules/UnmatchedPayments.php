@@ -23,7 +23,7 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
      *
      * @return boolean
      */
-    public function dig()
+    public function dig(): bool
     {
         $banker = new \AbraFlexi\Banka(null, ['nativeTypes' => false]);
         $adresser = new \AbraFlexi\Adresar();
@@ -91,7 +91,7 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
     /**
      * @inheritDoc
      */
-    public function heading()
+    public function heading(): string
     {
         return _('Unmatched payments');
     }

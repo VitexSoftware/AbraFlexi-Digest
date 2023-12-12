@@ -26,7 +26,7 @@ class Debtors extends DigestModule implements DigestModuleInterface
      *
      * @return boolean success
      */
-    public function dig()
+    public function dig(): bool
     {
         $invoicer = new \AbraFlexi\FakturaVydana();
         $cond = ['datSplat lte \'' . \AbraFlexi\RW::dateToFlexiDate(new DateTime()) . '\' AND (stavUhrK is null OR stavUhrK eq \'stavUhr.castUhr\') AND storno eq false', 'limit' => 0];
@@ -107,7 +107,7 @@ class Debtors extends DigestModule implements DigestModuleInterface
         return !empty($invoicesByFirma);
     }
 
-    function heading()
+    public function heading(): string
     {
         return _('Debtors');
     }
