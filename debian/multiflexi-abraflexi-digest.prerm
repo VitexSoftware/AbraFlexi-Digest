@@ -1,19 +1,24 @@
 #!/bin/sh
-# prerm script for php-abraflexi-digest
+# prerm script for multiflexi-abraflexi-digest
 set -e
-
 . /usr/share/debconf/confmodule
+case "$1" in
+    remove)
+        APPLICATION=`echo $DPKG_MAINTSCRIPT_PACKAGE | sed 's/multiflexi-//'`
+        for file in `ls /usr/lib/$APPLICATION/multiflexi/*.json`
+        do
+          multiflexi-json-app-remover $file
+        done
+    ;;
 
-#cat /etc/multiflexi/multiflexi.env
+    upgrade|deconfigure)
+    ;;
 
-# Iterate over all json files inf usr/lib/abraflexi-digest/multiflexi
-for file in `ls /usr/lib/abraflexi-digest/multiflexi/*.json`
-do
-echo	multiflexi-json-app-remover $file
-done
+    failed-upgrade)
+    ;;
 
-echo debug ============================
-echo $@
-echo $0
-
-env
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
