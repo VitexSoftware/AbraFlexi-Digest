@@ -11,7 +11,7 @@ namespace AbraFlexi\Digest;
 
 define('EASE_APPNAME', 'AbraFlexiAllTimeDigest');
 require_once __DIR__ . '/init.php';
-$subject = sprintf(_('AbraFlexi %s Alltime'), $myCompanyName);
+$subject = sprintf(_('AbraFlexi %s Alltime Digest'), $myCompanyName);
 $digestor = new Digestor($subject);
 $start = new \DateTime();
 $start->modify('-10 years');

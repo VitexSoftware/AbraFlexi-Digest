@@ -9,7 +9,7 @@
 
 namespace AbraFlexi\Digest;
 
-define('EASE_APPNAME', 'AbraFlexiMonthDigest');
+define('EASE_APPNAME', 'AbraFlexi MonthDigest');
 require_once __DIR__ . '/init.php';
 $start = new \DateTime();
 $start->modify('-1 month');
