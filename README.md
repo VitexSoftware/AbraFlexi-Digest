@@ -176,3 +176,12 @@ Poděkování
 Tento software by nevznikl pez podpory:
 
 [![Spoje.Net](spojenet.gif?raw=true "Spoje.Net s.r.o.")](https://spoje.net/)
+
+
+MultiFlexi
+----------
+
+AbraFlexi Digest is ready for run as [MultiFlexi](https://multiflexi.eu) application.
+See the full list of ready-to-run applications within the MultiFlexi platform on the [application list page](https://www.multiflexi.eu/apps.php).
+
+[![MultiFlexi App](https://github.com/VitexSoftware/MultiFlexi/blob/main/doc/multiflexi-app.svg)](https://www.multiflexi.eu/apps.php)
