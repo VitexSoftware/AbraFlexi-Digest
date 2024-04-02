@@ -15,8 +15,11 @@ namespace AbraFlexi\Digest;
  */
 class DocumentTable extends Table
 {
+    public $engine;
+
     public function __construct($engine, $properties = array())
     {
         parent::__construct([], $properties);
+        $this->engine = $engine;
     }
 }

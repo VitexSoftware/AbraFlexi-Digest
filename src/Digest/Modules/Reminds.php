@@ -28,13 +28,13 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
      */
     private $remids = ['datUp1' => 0, 'datUp2' => 0, 'datSmir' => 0];
 
-    public function dig()
+    public function dig(): bool
     {
         $invoicer = new \AbraFlexi\FakturaVydana();
         $faDatakturyRaw = $invoicer->getColumnsFromAbraFlexi(
             ['kod', 'firma', 'popis',
-            'sumCelkem', 'sumCelkemMen',
-            'zbyvaUhradit', 'zbyvaUhraditMen', 'mena', 'datUp1', 'datUp2', 'datSmir'],
+                    'sumCelkem', 'sumCelkemMen',
+                    'zbyvaUhradit', 'zbyvaUhraditMen', 'mena', 'datUp1', 'datUp2', 'datSmir'],
             $this->condition
         );
         if (empty($faDatakturyRaw)) {
@@ -105,7 +105,7 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
         if (!array_key_exists($column, $this->remids)) {
             $this->remids[$column] = 0;
         }
-        if (!empty($date) && $this->isMyDate($date)) {
+        if ($this->isMyDate($date)) {
             if (array_key_exists($column, $this->remids)) {
                 $this->remids[$column]++;
             }
@@ -115,7 +115,7 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
     /**
      * bold Date in digest interval
      *
-     * @param string $flexidate
+     * @param \DateTime $flexidate
      *
      * @return mixed
      */
@@ -133,7 +133,7 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
      *
      * @return string
      */
-    function heading()
+    function heading(): string
     {
         return _('Reminds');
     }

@@ -25,7 +25,7 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
      *
      * @return boolean
      */
-    public function dig()
+    public function dig(): bool
     {
         $invoicer = new \AbraFlexi\FakturaVydana(null, ['nativeTypes' => false]);
         $adresser = new \AbraFlexi\Adresar();
@@ -106,7 +106,7 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
      *
      * @return string
      */
-    public function heading()
+    public function heading(): string
     {
         return _('Non-deducted proformas');
     }

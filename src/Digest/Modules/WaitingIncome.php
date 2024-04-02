@@ -27,7 +27,7 @@ class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi
      *
      * @return boolean
      */
-    public function dig()
+    public function dig(): bool
     {
         $totals = [];
         $checker = new \AbraFlexi\FakturaVydana();
@@ -86,7 +86,7 @@ class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi
         return !empty($outInvoices);
     }
 
-    public function heading()
+    public function heading(): string
     {
         return _('Waiting Income');
     }

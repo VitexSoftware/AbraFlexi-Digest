@@ -19,6 +19,7 @@ $fmt = datefmt_create(
     'Europe/Prague',
     \IntlDateFormatter::GREGORIAN
 );
-$subject = \sprintf(_('AbraFlexi Daily digest for  %s %s'), $myCompanyName, datefmt_format($fmt, (new \DateTime())->getTimestamp()));
+$subject = \sprintf(_('AbraFlexi Daily digest for  %s'), $myCompanyName);
 $digestor = new Digestor($subject);
+$digestor->addItem(new \Ease\Html\DivTag(datefmt_format($fmt, (new \DateTime())->getTimestamp())));
 $digestor->dig($period, array_merge(\Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules'), \Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules\Daily')));

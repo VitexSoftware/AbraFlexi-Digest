@@ -110,7 +110,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      *
      * @return boolean dig success
      */
-    public function dig()
+    public function dig(): bool
     {
         $this->addItem(new \Ease\Html\ATag(
             'https://www.vitexsoftware.cz/cenik.php',
@@ -120,11 +120,22 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
     }
 
     /**
+     * Return Pure data (no markup)
+     *
+     * @return array
+     */
+    public function digJson(): array
+    {
+        $this->addStatusMessage(_('Module does not support JSON mode'), 'debug');
+        return [];
+    }
+
+    /**
      * Default module Heading
      *
      * @return string
      */
-    public function heading()
+    public function heading(): string
     {
         return _('No heading set');
     }
@@ -183,9 +194,9 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
     /**
      * Is Date between dates
      *
-     * @param DateTime $date Date that is to be checked if it falls between $startDate and $endDate
-     * @param DateTime $startDate Date should be after this date to return true
-     * @param DateTime $endDate Date should be before this date to return true
+     * @param \DateTime $date Date that is to be checked if it falls between $startDate and $endDate
+     * @param \DateTime $startDate Date should be after this date to return true
+     * @param \DateTime $endDate Date should be before this date to return true
      *
      * return bool
      */
@@ -200,8 +211,8 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
     /**
      * Is datw within date interval
      *
-     * @param \AbraFlexi\Digest\DateTime $date
-     * @param \DateInterval               $interval
+     * @param \DateTim    $date
+     * @param \DatePeriod $interval
      *
      * @return boolean
      */
@@ -219,7 +230,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
     /**
      * Is date subject of digest ?
      *
-     * @param \AbraFlexi\Digest\DateTime $date
+     * @param \DateTime $date
      *
      * @return boolean
      */

@@ -36,6 +36,57 @@ class Digestor extends \Ease\Html\DivTag
      * @var string
      */
     static $purecss = '';
+    static $msocss = '    /* Remove space around the email design. */
+
+   html,
+
+   body {
+
+       margin: 0 auto !important;
+
+       padding: 0 !important;
+
+       height: 100% !important;
+
+       width: 100% !important;
+
+   }
+
+   /* Stop Outlook resizing small text. */
+
+   * {
+
+       -ms-text-size-adjust: 100%;
+
+   }
+
+   /* Stop Outlook from adding extra spacing to tables. */
+
+   table,
+
+   td {
+
+       mso-table-lspace: 0pt !important;
+
+       mso-table-rspace: 0pt !important;
+
+   }
+
+   /* Use a better rendering method when resizing images in Outlook IE. */
+
+   img {
+
+       -ms-interpolation-mode:bicubic;
+
+   }
+
+ /* Prevent Windows 10 Mail from underlining links. Styles for underlined links should be inline. */
+
+   a {
+
+       text-decoration: none;
+
+   }';
 
     /**
      * App Logo
@@ -69,9 +120,8 @@ class Digestor extends \Ease\Html\DivTag
     }
 
     /**
-     *
+     * Start Timer by name
      * @param string $timerName
-     * @param boolean $writing Is this inset type opration ?
      */
     function timerStart($timerName)
     {
@@ -82,7 +132,6 @@ class Digestor extends \Ease\Html\DivTag
      * Cout the time pass
      *
      * @param string $timerName
-     * @param boolean $writing
      */
     function timerStop($timerName)
     {
@@ -173,10 +222,10 @@ class Digestor extends \Ease\Html\DivTag
      */
     public function processModules($modules, $interval)
     {
+        $saveto = \Ease\Functions::cfg('DIGEST_SAVETO', false);
         foreach ($modules as $class => $classFile) {
             $this->timerStart($class);
             $module = new $class($interval);
-            $saveto = \Ease\Functions::cfg('SAVETO');
             if ($module->process()) {
                 //                $this->addItem(new \Ease\Html\HrTag());
                 $this->addToIndex($this->addItem($module));
@@ -220,11 +269,15 @@ class Digestor extends \Ease\Html\DivTag
         $index = new \Ease\Html\NavTag(null, ['class' => 'nav']);
         foreach ($this->index as $class => $heading) {
             $index->addItem(new \Ease\Html\ATag('#' . $class, $heading, ['class' => 'nav-link btn btn-light']));
-            $this->topMenu->addItem(new \Ease\Html\ATag('#' . $class, $heading, ['class' => 'nav-link btn btn-light']));
+            $this->topMenu->addItem(new \Ease\Html\ATag('#' . $class, $heading, [
+                        'class' => 'nav-link btn btn-light',
+                        'style' => 'display: inline-block;'
+            ]));
         }
 
         $this->addItem($index);
     }
+
     //    /**
     //     * Include next element into current page (if not closed).
     //     *
@@ -248,9 +301,6 @@ class Digestor extends \Ease\Html\DivTag
     public function sendByMail($mailto)
     {
         $postman = new Mailer($mailto, $this->subject);
-        $dirtyHack = new \Ease\Html\HtmlTag(new \Ease\Html\SimpleHeadTag([
-                    new \Ease\Html\TitleTag($this->subject),
-                    '<style>' . Digestor::$purecss . Digestor::getCustomCss() . Digestor::getWebPageInlineCSS() . '</style>']));
         $postman->addItem($this);
         return $postman->send() === true;
     }

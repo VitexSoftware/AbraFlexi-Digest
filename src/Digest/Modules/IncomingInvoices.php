@@ -22,7 +22,7 @@ class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFl
      */
     public $timeColumn = 'datVyst';
 
-    public function dig()
+    public function dig(): bool
     {
         $totals = [];
         $digger = new \AbraFlexi\FakturaPrijata(null, ['nativeTypes' => false]);
@@ -96,7 +96,7 @@ class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFl
         return !empty($inInvoicesData);
     }
 
-    public function heading()
+    public function heading(): string
     {
         return _('Incoming invoices');
     }

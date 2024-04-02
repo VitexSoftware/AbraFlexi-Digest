@@ -18,7 +18,7 @@ class OutcomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
 {
     public $timeColumn = 'datVyst';
 
-    public function dig()
+    public function dig(): bool
     {
         $banker = new \AbraFlexi\Banka();
         $outcomes = $banker->getColumnsFromAbraFlexi(
@@ -62,7 +62,7 @@ class OutcomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
      *
      * @return string
      */
-    public function heading()
+    public function heading(): string
     {
         return _('Outcoming payments');
     }

@@ -3,6 +3,7 @@ debian/conf/composer.json       usr/lib/abraflexi-digest/
 src/*.php		        usr/share/abraflexi-digest/
 src/Digest/*                    usr/share/abraflexi-digest/Digest/
 src/Digest/Modules/*		usr/lib/abraflexi-digest/Digest/Modules/
+src/Digest/Outlook/*		usr/lib/abraflexi-digest/Digest/Outlook/
 src/Digest/Modules/AllTime/*    usr/lib/abraflexi-digest/Digest/Modules/AllTime/
 #empty yet src/Digest/Modules/Daily/*	    usr/lib/abraflexi-digest/Digest/Modules/Daily/
 src/Digest/Modules/Weekly/*    usr/lib/abraflexi-digest/Digest/Modules/Weekly/

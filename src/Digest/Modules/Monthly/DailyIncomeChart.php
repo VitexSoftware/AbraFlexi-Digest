@@ -48,7 +48,7 @@ class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFl
     /**
      *
      */
-    public function dig()
+    public function dig(): bool
     {
         $banker = new \AbraFlexi\Banka(null, ['nativeTypes' => false]);
         $averages = [];
@@ -115,8 +115,8 @@ class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFl
 
     /**
      *
-     * @param type $day
-     * @param type $currencies
+     * @param string $day
+     * @param array $currencies
      */
     public function addChartDay($day, $currencies)
     {
@@ -127,8 +127,9 @@ class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFl
 
     /**
      *
-     * @param type $currency
-     * @param type $amount
+     * @param string $currency
+     * @param float  $amount
+     * @param string $day Description
      */
     public function addChartCurrency($currency, $amount, $day)
     {
@@ -137,14 +138,15 @@ class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFl
 
     /**
      *
-     * @param string $caption
-     * @param integer $height
+     * @param string  $caption
+     * @param float   $amount
+     * @param string  $day Description
      */
     public function addBar($caption, $amount, $day)
     {
         $maxAmount = $this->average[$caption]; //100%
         $procento = $maxAmount / 100;
-        $percentChange = $amount / $procento;
+        $percentChange = $amount ? $amount / $procento : 0;
         $this->incomeChart->addBar(
             round($percentChange),
             $amount,
@@ -155,9 +157,10 @@ class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFl
 
     /**
      * Module heading
+     *
      * @return string
      */
-    public function heading()
+    public function heading(): string
     {
         return _('Incoming payments chart');
     }

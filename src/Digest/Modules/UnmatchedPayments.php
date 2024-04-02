@@ -23,7 +23,7 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
      *
      * @return boolean
      */
-    public function dig()
+    public function dig(): bool
     {
         $banker = new \AbraFlexi\Banka(null, ['nativeTypes' => false]);
         $adresser = new \AbraFlexi\Adresar();
@@ -70,13 +70,15 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
                 }
 
                 $income['kod'] = new \AbraFlexi\ui\DocumentLink('code:' . $income['kod'], $banker);
-                $income['price'] = self::getAmount($income);
+                $income['price'] = self::getAmount($income) . ' ' . $currency;
                 $adresser->setMyKey($adresser);
-                $income['firma'] = new \Ease\Html\ATag(empty($income['firma']->showAs) ? $adresser->getApiUrl() . $income['firma'] : $income['firma']->showAs);
+//                $income['firma'] = new \Ease\Html\ATag(empty($income['firma']->showAs) ? $adresser->getApiUrl() . $income['firma'] : $income['firma']->showAs);
                 unset($income['id']);
                 unset($income['sumCelkem']);
                 unset($income['sumCelkemMen']);
                 unset($income['mena']);
+                unset($income['mena@ref']);
+                unset($income['mena@showAs']);
                 $incomesTable->addRowColumns($income);
             }
             $currDiv = new \Ease\Html\DivTag();
@@ -88,7 +90,10 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
         return !empty($incomes);
     }
 
-    public function heading()
+    /**
+     * @inheritDoc
+     */
+    public function heading(): string
     {
         return _('Unmatched payments');
     }

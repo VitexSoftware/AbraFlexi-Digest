@@ -11,9 +11,11 @@ namespace AbraFlexi\Digest;
 /**
  * Description of Table
  *
+ * @deprecated since version 1.0 - use Outlook\TableTag instead
+ *
  * @author vitex
  */
-class Table extends \Ease\Html\TableTag
+class Table extends Outlook\TableTag
 {
     /**
      * Digest Table

@@ -18,7 +18,7 @@ class PurchasePriceLowerThanSales extends \AbraFlexi\Digest\DigestModule impleme
     /**
      *
      */
-    public function dig()
+    public function dig(): bool
     {
         $pricer = new \AbraFlexi\Cenik();
         $productsRaw = $pricer->getColumnsFromAbraFlexi(
@@ -42,6 +42,7 @@ class PurchasePriceLowerThanSales extends \AbraFlexi\Digest\DigestModule impleme
         }
         if (empty($products)) {
             $this->addItem(_('none'));
+            return false;
         } else {
             $topProductsTable = new \AbraFlexi\Digest\Table([
                 _('Code'),
@@ -70,7 +71,7 @@ class PurchasePriceLowerThanSales extends \AbraFlexi\Digest\DigestModule impleme
         }
     }
 
-    public function heading()
+    public function heading(): string
     {
         return _('Product purchase price lower than sales');
     }
