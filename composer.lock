@@ -690,19 +690,20 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-ease-html.git",
-                "reference": "992cc72e4a7bd07b49c0ba2f9688c8d8aaaf7ad8"
+                "reference": "5341e9d93ce377b98da631f720029a8a4c620cce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-html/zipball/992cc72e4a7bd07b49c0ba2f9688c8d8aaaf7ad8",
-                "reference": "992cc72e4a7bd07b49c0ba2f9688c8d8aaaf7ad8",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-html/zipball/5341e9d93ce377b98da631f720029a8a4c620cce",
+                "reference": "5341e9d93ce377b98da631f720029a8a4c620cce",
                 "shasum": ""
             },
             "require": {
-                "vitexsoftware/ease-core": ">= 1.8"
+                "vitexsoftware/ease-core": ">= 1.41"
             },
             "require-dev": {
-                "phpunit/phpunit": "*"
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^10.0"
             },
             "default-branch": true,
             "type": "library",
@@ -733,7 +734,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2024-02-28T18:38:38+00:00"
+            "time": "2024-04-03T13:36:48+00:00"
         },
         {
             "name": "vitexsoftware/ease-twbootstrap4",
@@ -845,12 +846,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "c07eb69fcbf008a0f06fdcfaf2a58a4aa3388dee"
+                "reference": "99524504454fc229e3c1036a38518c97595b43a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/c07eb69fcbf008a0f06fdcfaf2a58a4aa3388dee",
-                "reference": "c07eb69fcbf008a0f06fdcfaf2a58a4aa3388dee",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/99524504454fc229e3c1036a38518c97595b43a7",
+                "reference": "99524504454fc229e3c1036a38518c97595b43a7",
                 "shasum": ""
             },
             "require": {
@@ -894,13 +895,9 @@
                 {
                     "url": "https://github.com/phpstan",
                     "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/phpstan/phpstan",
-                    "type": "tidelift"
                 }
             ],
-            "time": "2024-04-02T10:25:50+00:00"
+            "time": "2024-04-04T07:56:14+00:00"
         }
     ],
     "aliases": [],
@@ -915,5 +912,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
