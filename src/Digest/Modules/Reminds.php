@@ -18,7 +18,7 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
 {
     /**
      * Reminds dates
-     * @var array
+     * @var array<string>
      */
     public $timeColumn = ['datUp1', 'datUp2', 'datSmir'];
 

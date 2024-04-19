@@ -16,8 +16,17 @@ namespace AbraFlexi\Digest\Modules;
  */
 class OutcomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
+    /**
+     * 
+     * @var string
+     */
     public $timeColumn = 'datVyst';
 
+    /**
+     * Check outgoung Payments 
+     * 
+     * @return bool
+     */
     public function dig(): bool
     {
         $banker = new \AbraFlexi\Banka();

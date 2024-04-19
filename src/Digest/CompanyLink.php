@@ -21,7 +21,7 @@ class CompanyLink extends \Ease\Html\ATag
      *
      * @param string        $code
      * @param \AbraFlexi\RO $engine
-     * @param array         $properties
+     * @param array<string> $properties
      */
     public function __construct($code, $engine, $properties = [])
     {
