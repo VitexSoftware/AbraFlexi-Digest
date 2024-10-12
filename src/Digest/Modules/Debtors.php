@@ -94,7 +94,7 @@ class Debtors extends DigestModule implements DigestModuleInterface
                 foreach ($fakturyFirmy as $invoiceData) {
                     $invoicer->setMyKey($invoiceData['id']);
                     $currency = self::getCurrency($invoiceData);
-                    $overdueInvoice = \AbraFlexi\RO::uncode($invoiceData['kod']);
+                    $overdueInvoice = \AbraFlexi\Functions::uncode((string)$invoiceData['kod']);
                     $overdueInvoices->addItem(new \Ease\Html\DivTag([new \Ease\Html\ATag(
                         $invoicer->getApiURL(),
                         $overdueInvoice,
@@ -105,7 +105,7 @@ class Debtors extends DigestModule implements DigestModuleInterface
 
                 $adreser->setMyKey($firma);
                 $invoice = current($fakturyFirmy);
-                $nazevFirmy = is_object($invoice['firma']) && $invoice['firma']->showAs ? $invoice->showAs : \AbraFlexi\RO::uncode((string)$firma);
+                $nazevFirmy = array_key_exists('firma', $invoice) && is_object($invoice['firma']) && $invoice['firma']->showAs ? $invoice->showAs : \AbraFlexi\Functions::uncode((string)(string)$firma);
                 $invTable->addRowColumns([
                     new \Ease\Html\ATag($adreser->getApiURL(), $nazevFirmy),
                     $overdue[$firma],

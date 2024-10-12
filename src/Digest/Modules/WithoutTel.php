@@ -58,7 +58,7 @@ class WithoutTel extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Di
             $count = 0;
 
             foreach ($withoutPhone as $id => $address) {
-                $addresser->setMyKey(\AbraFlexi\RO::code($address['kod']));
+                $addresser->setMyKey(\AbraFlexi\Functions::code((string)$address['kod']));
                 $phoneNumber = $addresser->getAnyPhoneNumber();
 
                 if (empty($phoneNumber)) {

@@ -156,7 +156,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      */
     public static function getCurrency($data)
     {
-        return \AbraFlexi\RO::uncode((string) $data['mena']);
+        return \AbraFlexi\Functions::uncode((string)(string) $data['mena']);
     }
 
     /**
@@ -271,7 +271,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
         $total = new \Ease\Html\DivTag();
 
         foreach ($totals as $currency => $amount) {
-            $total->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount).'&nbsp;'.\AbraFlexi\RO::uncode($currency)));
+            $total->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount).'&nbsp;'.\AbraFlexi\Functions::uncode((string)$currency)));
         }
 
         return $total;

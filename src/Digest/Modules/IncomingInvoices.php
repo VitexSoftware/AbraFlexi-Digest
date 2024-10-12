@@ -87,14 +87,14 @@ class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFl
             $invoiced = [];
 
             foreach ($invoicedRaw as $currencyCode => $amount) {
-                $invoiced[] = self::formatCurrency($amount).' '.\AbraFlexi\RO::uncode($currencyCode);
+                $invoiced[] = self::formatCurrency($amount).' '.\AbraFlexi\Functions::uncode((string)$currencyCode);
             }
 
             $inInvoicesTable = new \AbraFlexi\Digest\Table([_('Count'), _('Type'),
                 _('Total')]);
 
             foreach ($typDoklRaw as $type => $count) {
-                $inInvoicesTable->addRowColumns([$count, \AbraFlexi\RO::uncode($type),
+                $inInvoicesTable->addRowColumns([$count, \AbraFlexi\Functions::uncode((string)$type),
                     self::getTotalsDiv($totals[$type])]);
             }
 
