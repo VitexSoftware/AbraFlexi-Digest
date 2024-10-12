@@ -15,12 +15,16 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest\Modules\Monthly;
 
+use AbraFlexi\Digest\DigestModule;
+use AbraFlexi\Digest\DigestModuleInterface;
+use AbraFlexi\Digest\VerticalChart;
+
 /**
  * Description of DailyIncomeChart.
  *
  * @author vitex
  */
-class WeeklyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
+class WeeklyIncomeChart extends DigestModule implements DigestModuleInterface
 {
     public $timeColumn = 'datVyst';
 
@@ -36,7 +40,7 @@ class WeeklyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraF
      * $grape:         #ab64f4;.
      */
     public static array $currencyColor = ['CZK' => 'lime', 'EUR' => 'grape', 'USD' => 'teal'];
-    public \AbraFlexi\Digest\VerticalChart $incomeChart = null;
+    public VerticalChart $incomeChart;
 
     /**
      * 100% of chart.
@@ -101,7 +105,7 @@ class WeeklyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraF
                 )));
             }
 
-            $this->incomeChart = new \AbraFlexi\Digest\VerticalChart();
+            $this->incomeChart = new VerticalChart();
 
             foreach (array_reverse($days) as $day => $currencies) {
                 $this->addChartDay($day, $currencies);
