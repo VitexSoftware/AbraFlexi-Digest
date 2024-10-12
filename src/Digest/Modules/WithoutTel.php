@@ -1,25 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * AbraFlexi Digest - Customers without notification phone number
+ * This file is part of the AbraFlexi-Digest package
  *
- * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2018-2023 Vitex Software
+ * https://github.com/VitexSoftware/AbraFlexi-Digest/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AbraFlexi\Digest\Modules;
 
 /**
- *  Customers without notification phone number
+ *  Customers without notification phone number.
  *
  * @author vitex
  */
 class WithoutTel extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
     /**
-     * Search for Customers without notification phone number
+     * Search for Customers without notification phone number.
      *
-     * @return boolean success
+     * @return bool success
      */
     public function dig(): bool
     {
@@ -32,14 +38,15 @@ class WithoutTel extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Di
         $addresser = new \AbraFlexi\Adresar();
         $withoutPhone = $addresser->getColumnsFromAbraFlexi(
             [
-            'nazev',
-            'kod',
-            'ulice',
-            'mesto',
-            'email'
+                'nazev',
+                'kod',
+                'ulice',
+                'mesto',
+                'email',
             ],
-            array_merge($this->condition, ['tel is empty AND mobil is empty'])
+            array_merge($this->condition, ['tel is empty AND mobil is empty']),
         );
+
         if (empty($withoutPhone)) {
             $this->addItem(_('none'));
         } else {
@@ -49,36 +56,38 @@ class WithoutTel extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Di
                 _('City'),
                 _('Email')]);
             $count = 0;
+
             foreach ($withoutPhone as $id => $address) {
                 $addresser->setMyKey(\AbraFlexi\RO::code($address['kod']));
                 $phoneNumber = $addresser->getAnyPhoneNumber();
+
                 if (empty($phoneNumber)) {
-                    $count++;
+                    ++$count;
                     $noTelTable->addRowColumns([new \Ease\Html\ATag(
                         $addresser->getApiURL(),
-                        $address['nazev']
+                        $address['nazev'],
                     ), $address['ulice'], $address['mesto'],
                         new \Ease\Html\ATag(
-                            'mailto:' . $address['email'],
-                            $address['email']
+                            'mailto:'.$address['email'],
+                            $address['email'],
                         )]);
                 } else {
                     unset($withoutPhone[$id]);
                 }
             }
-            if (count($withoutPhone)) {
-                $this->addItem($this->cardBody([$noTelTable, _('Total') . ': ' . $count]));
+
+            if (\count($withoutPhone)) {
+                $this->addItem($this->cardBody([$noTelTable, _('Total').': '.$count]));
             }
         }
+
         return !empty($withoutPhone);
     }
 
     /**
-     * Module Headnig
-     *
-     * @return string
+     * Module Headnig.
      */
-    function heading(): string
+    public function heading(): string
     {
         return _('Customers without notification phone number');
     }

@@ -1,16 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * AbraFlexi Digest - Weekly
+ * This file is part of the AbraFlexi-Digest package
  *
- * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2018 Vitex Software
+ * https://github.com/VitexSoftware/AbraFlexi-Digest/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AbraFlexi\Digest;
 
-define('EASE_APPNAME', 'AbraFlexi WeekDigest');
-require_once __DIR__ . '/init.php';
+\define('EASE_APPNAME', 'AbraFlexi WeekDigest');
+
+require_once __DIR__.'/init.php';
 $start = new \DateTime();
 $start->modify('-1 week');
 $end = new \DateTime();
@@ -20,7 +27,7 @@ $fmt = datefmt_create(
     \IntlDateFormatter::SHORT,
     \IntlDateFormatter::NONE,
     'Europe/Prague',
-    \IntlDateFormatter::GREGORIAN
+    \IntlDateFormatter::GREGORIAN,
 );
 $formatter = new \IntlDateFormatter(\Ease\Locale::$localeUsed, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
 $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
@@ -30,7 +37,7 @@ $digestor = new Digestor($subject);
 $digestor->addItem(new \Ease\Html\DivTag(sprintf(
     _('from %s to %s'),
     $formatter->format($period->getStartDate()->getTimestamp()),
-    $formatter->format($period->getEndDate()->getTimestamp())
+    $formatter->format($period->getEndDate()->getTimestamp()),
 )));
 
 $digestor->dig($period, array_merge(\Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules'), \Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules\Weekly')));

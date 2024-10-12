@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * AbraFlexi Digest - Debtors
+ * This file is part of the AbraFlexi-Digest package
  *
- * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2018-2023 Vitex Software
+ * https://github.com/VitexSoftware/AbraFlexi-Digest/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AbraFlexi\Digest\Modules;
@@ -12,10 +18,9 @@ namespace AbraFlexi\Digest\Modules;
 use AbraFlexi\Digest\DigestModule;
 use AbraFlexi\Digest\DigestModuleInterface;
 use AbraFlexi\Digest\Outlook\TableTag;
-use DateTime;
 
 /**
- * Description of WaitingIncome
+ * Description of WaitingIncome.
  *
  * @author vitex
  */
@@ -24,44 +29,49 @@ class Debtors extends DigestModule implements DigestModuleInterface
     /**
      * Who does no pay its bills ?
      *
-     * @return boolean success
+     * @return bool success
      */
     public function dig(): bool
     {
         $invoicer = new \AbraFlexi\FakturaVydana();
-        $cond = ['datSplat lte \'' . \AbraFlexi\RW::dateToFlexiDate(new DateTime()) . '\' AND (stavUhrK is null OR stavUhrK eq \'stavUhr.castUhr\') AND storno eq false', 'limit' => 0];
+        $cond = ['datSplat lte \''.\AbraFlexi\RW::dateToFlexiDate(new \DateTime()).'\' AND (stavUhrK is null OR stavUhrK eq \'stavUhr.castUhr\') AND storno eq false', 'limit' => 0];
         $faDatakturyRaw = $invoicer->getColumnsFromAbraFlexi(
             ['kod', 'firma', 'sumCelkem',
-            'sumCelkemMen', 'zbyvaUhradit', 'zbyvaUhraditMen', 'mena', 'datSplat'],
-            $cond
+                'sumCelkemMen', 'zbyvaUhradit', 'zbyvaUhraditMen', 'mena', 'datSplat'],
+            $cond,
         );
         $totals = [];
         $totalsByCurrency = [];
         $overdue = [];
+
         if (empty($faDatakturyRaw)) {
-            $invoicer->addStatusMessage("Faktur: 0");
+            $invoicer->addStatusMessage(sprintf(_('Invoices: %d'), 0));
         } else {
-            $invoicer->addStatusMessage("Faktur: " . count($faDatakturyRaw));
+            $invoicer->addStatusMessage(sprintf(_('Invoices: %d'), \count($faDatakturyRaw)));
+
             foreach ($faDatakturyRaw as $faData) {
                 $currency = self::getCurrency($faData);
                 $invoicesByFirma[(string) $faData['firma']][$faData['id']] = $faData;
+
                 if (!isset($totals[(string) $faData['firma']][$currency])) {
                     $totals[(string) $faData['firma']][$currency] = 0;
                 }
+
                 if (!isset($totalsByCurrency[$currency])) {
                     $totalsByCurrency[$currency] = 0;
                 }
 
-                if ($currency != 'CZK') {
-                    $amount = floatval($faData['zbyvaUhraditMen']);
+                if ($currency !== 'CZK') {
+                    $amount = (float) $faData['zbyvaUhraditMen'];
                 } else {
-                    $amount = floatval($faData['zbyvaUhradit']);
+                    $amount = (float) $faData['zbyvaUhradit'];
                 }
 
                 $totals[(string) $faData['firma']][$currency] += $amount;
                 $totalsByCurrency[$currency] += $amount;
                 $oDays = \AbraFlexi\FakturaVydana::overdueDays($faData['datSplat']);
-                if (array_key_exists((string) $faData['firma'], $overdue)) {
+
+                if (\array_key_exists((string) $faData['firma'], $overdue)) {
                     if ($oDays > $overdue[(string) $faData['firma']]) {
                         $overdue[(string) $faData['firma']] = $oDays;
                     }
@@ -77,8 +87,10 @@ class Debtors extends DigestModule implements DigestModuleInterface
             $adreser = new \AbraFlexi\Adresar(null, ['offline' => 'true']);
             $invTable = new TableTag(null, ['class' => 'table']);
             $invTable->addRowHeaderColumns([_('Company'), _('Overdue days'), _('Invoices'), _('Amount')]);
+
             foreach ($invoicesByFirma as $firma => $fakturyFirmy) {
                 $overdueInvoices = new \Ease\Html\DivTag();
+
                 foreach ($fakturyFirmy as $invoiceData) {
                     $invoicer->setMyKey($invoiceData['id']);
                     $currency = self::getCurrency($invoiceData);
@@ -86,24 +98,25 @@ class Debtors extends DigestModule implements DigestModuleInterface
                     $overdueInvoices->addItem(new \Ease\Html\DivTag([new \Ease\Html\ATag(
                         $invoicer->getApiURL(),
                         $overdueInvoice,
-                        ['css' => 'margin: 5px;']
+                        ['css' => 'margin: 5px;'],
                     ),
-                                '&nbsp;<small>' . ( ($currency != 'CZK') ? $invoiceData['zbyvaUhraditMen'] : $invoiceData['zbyvaUhradit']) . ' ' . $currency . ' ' . \AbraFlexi\FakturaVydana::overdueDays($invoiceData['datSplat']) . ' ' . _('days') . '</small>']));
+                        '&nbsp;<small>'.(($currency !== 'CZK') ? $invoiceData['zbyvaUhraditMen'] : $invoiceData['zbyvaUhradit']).' '.$currency.' '.\AbraFlexi\FakturaVydana::overdueDays($invoiceData['datSplat']).' '._('days').'</small>']));
                 }
 
                 $adreser->setMyKey($firma);
-                $nazevFirmy = strlen(current($fakturyFirmy)['firma']->showAs) ? current($fakturyFirmy)['firma']->showAs : \AbraFlexi\RO::uncode($firma);
+                $nazevFirmy = \strlen(current($fakturyFirmy)['firma']->showAs) ? current($fakturyFirmy)['firma']->showAs : \AbraFlexi\RO::uncode($firma);
                 $invTable->addRowColumns([
                     new \Ease\Html\ATag($adreser->getApiURL(), $nazevFirmy),
                     $overdue[$firma],
                     $overdueInvoices,
-                    self::getTotalsDiv($totals[$firma])
-                        ]);
+                    self::getTotalsDiv($totals[$firma]),
+                ]);
             }
 
             $invTable->addRowFooterColumns(['', '', _('Total'), self::getTotalsDiv($totalsByCurrency)]);
             $this->addItem($this->cardBody($invTable));
         }
+
         return !empty($invoicesByFirma);
     }
 

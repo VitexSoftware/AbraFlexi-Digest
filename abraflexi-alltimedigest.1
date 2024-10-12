@@ -1,0 +1,43 @@
+.TH ABRAFLEXI-ALLTIMEDIGEST 1 "October 2023" "1.0" "AbraFlexi Digest Manual"
+.SH NAME
+abraflexi-alltimedigest \- Generate a comprehensive digest report from AbraFlexi
+
+.SH SYNOPSIS
+.B abraflexi-alltimedigest
+.RI [ options ]
+
+.SH DESCRIPTION
+.B abraflexi-alltimedigest
+is a command-line tool that generates a comprehensive digest report from the AbraFlexi system. This tool aggregates data over all time periods to provide a detailed summary.
+
+.SH OPTIONS
+.TP
+.B \-h, \-\-help
+Display help information and exit.
+
+.TP
+.B \-o, \-\-output
+Specify the output file for the digest report. If not specified, the report will be printed to standard output.
+
+.TP
+.B \-c, \-\-config
+Specify the configuration file to use. If not specified, the default configuration will be used.
+
+.SH EXAMPLES
+.TP
+Generate a digest report and print to standard output:
+.B abraflexi-alltimedigest
+
+.TP
+Generate a digest report and save to a file:
+.B abraflexi-alltimedigest \-o report.txt
+
+.TP
+Generate a digest report using a specific configuration file:
+.B abraflexi-alltimedigest \-c custom_config.json
+
+.SH AUTHOR
+Written by Vitex Software.
+
+.SH COPYRIGHT
+This is free software; see the source for copying conditions. There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.

@@ -1,23 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * AbraFlexi Digest - CompanyLink class.
+ * This file is part of the AbraFlexi-Digest package
  *
- * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2020-2023 Vitex Software
+ * https://github.com/VitexSoftware/AbraFlexi-Digest/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AbraFlexi\Digest;
 
 /**
- * Link to company
+ * Link to company.
  *
  * @author vitex
  */
 class CompanyLink extends \Ease\Html\ATag
 {
     /**
-     * Link to company
+     * Link to company.
      *
      * @param string        $code
      * @param \AbraFlexi\RO $engine

@@ -16,8 +16,8 @@
     "deb/ease-core": "*",
     "deb/abraflexi": "*",
     "deb/abraflexi-bricks": "*",
-    "deb/ease-bootstrap4-widgets": "*",
-    "deb/ease-bootstrap4-widgets-abraflexi": "*"
+    "deb/ease-bootstrap5-widgets": "*",
+    "deb/ease-bootstrap5-widgets-abraflexi": "*"
   },
   "autoload": {
     "psr-4": {
@@ -50,7 +50,7 @@
     },
     {
       "type": "path",
-      "url": "/usr/share/php/EaseTWB4/"
+      "url": "/usr/share/php/EaseTWB5/"
     },
     {
       "type": "path",
@@ -58,11 +58,11 @@
     },
     {
       "type": "path",
-      "url": "/usr/share/php/EaseTWB4Widgets/"
+      "url": "/usr/share/php/EaseTWB5Widgets/"
     },
     {
       "type": "path",
-      "url": "/usr/share/php/EaseTWB4WidgetsAbraFlexi/"
+      "url": "/usr/share/php/EaseTWB5WidgetsAbraFlexi/"
     }
   ]
 }

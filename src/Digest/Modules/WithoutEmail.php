@@ -1,29 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * AbraFlexi Digest - Customers without notification email address
+ * This file is part of the AbraFlexi-Digest package
  *
- * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2018-2023 Vitex Software
+ * https://github.com/VitexSoftware/AbraFlexi-Digest/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AbraFlexi\Digest\Modules;
 
 /**
- * Find Customers Without Email
+ * Find Customers Without Email.
  *
  * @author vitex
  */
 class WithoutEmail extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
     /**
-     * Find Customers Without Email
-     *
-     * @return boolean
+     * Find Customers Without Email.
      */
     public function dig(): bool
     {
         $addresser = new \AbraFlexi\Adresar();
+
         if (\Ease\Shared::cfg('DIGEST_CHECK_SUPPLIER_CONTACT', false)) {
             $this->condition[] = "(typVztahuK='typVztahu.odberDodav' OR typVztahuK='typVztahu.dodavatel' OR typVztahuK='typVztahu.odberatel')";
         } else {
@@ -32,9 +37,10 @@ class WithoutEmail extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
 
         $withoutEmail = $addresser->getColumnsFromAbraFlexi(
             ['nazev', 'kod', 'ulice',
-            'mesto', 'tel'],
-            array_merge($this->condition, ['email' => 'is empty'])
+                'mesto', 'tel'],
+            array_merge($this->condition, ['email' => 'is empty']),
         );
+
         if (empty($withoutEmail)) {
             $this->addItem(_('none'));
         } else {
@@ -42,26 +48,30 @@ class WithoutEmail extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
                 _('City'),
                 _('Phone')]);
             $count = 0;
+
             foreach ($withoutEmail as $address) {
                 $addresser->setMyKey(\AbraFlexi\RO::code($address['kod']));
+
                 if (empty($addresser->getNotificationEmailAddress())) {
-                    $count++;
+                    ++$count;
                     $noMailTable->addRowColumns([new \Ease\Html\ATag(
                         $addresser->getApiURL(),
-                        $address['nazev']
+                        $address['nazev'],
                     ), $address['ulice'], $address['mesto'],
                         new \Ease\Html\ATag(
-                            'callto:' . $address['tel'],
-                            $address['tel']
+                            'callto:'.$address['tel'],
+                            $address['tel'],
                         )]);
                 }
             }
-            $this->addItem($this->cardBody([$noMailTable, _('Total') . ': ' . $count]));
+
+            $this->addItem($this->cardBody([$noMailTable, _('Total').': '.$count]));
         }
+
         return !empty($withoutEmail);
     }
 
-    function heading(): string
+    public function heading(): string
     {
         return _('Customers without notification email address');
     }

@@ -1,31 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * AbraFlexi Digest - WaitingIncome
+ * This file is part of the AbraFlexi-Digest package
  *
- * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2018-2023 Vitex Software
+ * https://github.com/VitexSoftware/AbraFlexi-Digest/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AbraFlexi\Digest\Modules;
 
 /**
- * Income we wait for
+ * Income we wait for.
  *
  * @author vitex
  */
 class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
-    /**
-     * Column used to filter by date
-     * @var string
-     */
-    public $timeColumn = 'datSplat';
+    public function __construct(\DatePeriod $interval)
+    {
+        $this->timeColumn = 'datSplat';
+        parent::__construct($interval);
+    }
 
     /**
-     * Seach for invoices
-     *
-     * @return boolean
+     * Search for invoices.
      */
     public function dig(): bool
     {
@@ -33,27 +37,29 @@ class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi
         $checker = new \AbraFlexi\FakturaVydana();
         $outInvoices = $checker->getColumnsFromAbraFlexi(
             [
-                    'kod', 'firma', 'sumCelkem',
-                    'sumCelkemMen',
-                    'mena'
-                ],
+                'kod', 'firma', 'sumCelkem',
+                'sumCelkemMen',
+                'mena',
+            ],
             array_merge(
                 $this->condition,
                 [
-                            "(stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr')",
-                            'storno' => false
-                        ]
-            )
+                    "(stavUhrK is null OR stavUhrK eq 'stavUhr.castUhr')",
+                    'storno' => false,
+                ],
+            ),
         );
+
         if (empty($outInvoices)) {
             $this->addItem(_('none'));
         } else {
             $adreser = new \AbraFlexi\Adresar(null, ['offline' => 'true']);
             $invTable = new \AbraFlexi\Digest\Table([
                 _('Position'), _('Code'), _('Partner'),
-                _('Amount')
+                _('Amount'),
             ]);
             $pos = 0;
+
             foreach ($outInvoices as $outInvoiceData) {
                 $currency = self::getCurrency($outInvoiceData);
                 $checker->setMyKey(urlencode($outInvoiceData['kod']));
@@ -62,27 +68,31 @@ class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi
                     ++$pos,
                     new \Ease\Html\ATag(
                         $checker->getApiUrl(),
-                        $outInvoiceData['kod']
+                        $outInvoiceData['kod'],
                     ),
                     new \Ease\Html\ATag(
                         $adreser->getApiUrl(),
-                        (string) $outInvoiceData['firma']
+                        (string) $outInvoiceData['firma'],
                     ),
-                    (($currency != 'CZK') ? $outInvoiceData['sumCelkemMen'] : $outInvoiceData['sumCelkem']) . ' ' . $currency
+                    (($currency !== 'CZK') ? $outInvoiceData['sumCelkemMen'] : $outInvoiceData['sumCelkem']).' '.$currency,
                 ]);
-                if (array_key_exists($currency, $totals)) {
-                    $totals[$currency] += floatval($outInvoiceData['sumCelkem']);
+
+                if (\array_key_exists($currency, $totals)) {
+                    $totals[$currency] += (float) $outInvoiceData['sumCelkem'];
                 } else {
-                    $totals[$currency] = floatval($outInvoiceData['sumCelkem']);
+                    $totals[$currency] = (float) $outInvoiceData['sumCelkem'];
                 }
             }
 
             $currDiv = new \Ease\Html\DivTag();
+
             foreach ($totals as $currency => $amount) {
-                $currDiv->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount) . '&nbsp;' . $currency));
+                $currDiv->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount).'&nbsp;'.$currency));
             }
+
             $this->addItem($this->cardBody([new \Ease\Html\H3Tag(_('Total')), $invTable, $currDiv]));
         }
+
         return !empty($outInvoices);
     }
 

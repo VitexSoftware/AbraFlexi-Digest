@@ -1,0 +1,45 @@
+.TH ABRAFLEXI-MONTHDIGEST 1 "October 2023" "1.0" "User Commands"
+.SH NAME
+abraflexi-monthdigest \- Generate a monthly digest report from AbraFlexi
+
+.SH SYNOPSIS
+.B abraflexi-monthdigest
+[\fIOPTION\fR]...
+
+.SH DESCRIPTION
+.B abraflexi-monthdigest
+is a command-line tool that generates a monthly digest report from the AbraFlexi system.
+
+.SH OPTIONS
+.TP
+.B \-h, \-\-help
+Display help information and exit.
+
+.TP
+.B \-v, \-\-version
+Display version information and exit.
+
+.TP
+.B \-o, \-\-output \fIFILE\fR
+Specify the output file for the digest report. If not specified, the report will be printed to standard output.
+
+.TP
+.B \-c, \-\-config \fIFILE\fR
+Specify the configuration file to use. If not specified, the default configuration will be used.
+
+.SH EXAMPLES
+.TP
+Generate a monthly digest report and print to standard output:
+.B
+abraflexi-monthdigest
+
+.TP
+Generate a monthly digest report and save to a file:
+.B
+abraflexi-monthdigest \-o report.txt
+
+.SH AUTHOR
+Written by Vitex Software.
+
+.SH COPYRIGHT
+This is free software; see the source for copying conditions. There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.

@@ -1,48 +1,55 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * AbraFlexi Digest - Outcoming Invoices
+ * This file is part of the AbraFlexi-Digest package
  *
- * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2018-2023 Vitex Software
+ * https://github.com/VitexSoftware/AbraFlexi-Digest/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AbraFlexi\Digest\Modules;
 
 use AbraFlexi\Digest\DigestModule;
 use AbraFlexi\Digest\DigestModuleInterface;
-use AbraFlexi\ui\DocumentLink;
 use AbraFlexi\Digest\Table;
+use AbraFlexi\ui\DocumentLink;
 
 /**
- * Description of OutcomingInvoices
+ * Description of OutcomingInvoices.
  *
  * @author vitex
  */
 class OutcomingInvoicesHiddenToCustomer extends DigestModule implements DigestModuleInterface
 {
-    /**
-     * Column used to filter by date
-     * @var string
-     */
-    public $timeColumn = 'datVyst';
+    public function __construct(\DatePeriod $interval)
+    {
+        $this->timeColumn = 'datVyst';
+        parent::__construct($interval);
+    }
 
     public function dig(): bool
     {
         $digger = new \AbraFlexi\FakturaVydana();
         $outInvoicesData = $digger->getColumnsFromAbraFlexi(
             [
-            'kod',
-            'typDokl',
-            'firma',
-            'stavMailK',
-            'kontaktEmail'
+                'kod',
+                'typDokl',
+                'firma',
+                'stavMailK',
+                'kontaktEmail',
             ],
             array_merge(
                 $this->condition,
-                ['((stavMailK eq \'stavMail.odeslat\') OR (stavMailK is empty))', 'storno' => false]
-            )
+                ['((stavMailK eq \'stavMail.odeslat\') OR (stavMailK is empty))', 'storno' => false],
+            ),
         );
+
         if (empty($outInvoicesData)) {
             $this->addItem(_('none'));
         } else {
@@ -54,58 +61,57 @@ class OutcomingInvoicesHiddenToCustomer extends DigestModule implements DigestMo
             $tableHeader[] = _('Document Contact');
             $tableHeader[] = _('Customer\'s Contact');
             $outInvoicesTable = new Table($tableHeader);
+
             foreach ($outInvoicesData as $outInvoiceData) {
                 $addresser->setMyKey($outInvoiceData['firma']);
+
                 if (!empty($outInvoiceData['stavMailK'])) {
                     $outInvoiceData['stavMailK'] = _('to send');
                 }
 
-                $outInvoiceData['firma'] = empty($outInvoiceData) ? '' : new DocumentLink($outInvoiceData['firma'], $addresser);
+                $outInvoiceData['firma'] = empty($outInvoiceData) ? '' : new DocumentLink((string) $outInvoiceData['firma'], $addresser);
                 $outInvoiceData['kod'] = new DocumentLink(
                     \AbraFlexi\RW::code($outInvoiceData['kod']),
-                    $digger
+                    $digger,
                 );
                 $outInvoiceData['custcontact'] = $addresser->getNotificationEmailAddress();
+
                 if (!empty($outInvoiceData['kontaktEmail'])) {
                     $outInvoiceData['kontaktEmail'] = new \Ease\Html\ATag(
-                        'mailto:' . $outInvoiceData['kontaktEmail'],
-                        $outInvoiceData['kontaktEmail']
+                        'mailto:'.$outInvoiceData['kontaktEmail'],
+                        $outInvoiceData['kontaktEmail'],
                     );
                 }
+
                 if (!empty($outInvoiceData['custcontact'])) {
                     $outInvoiceData['custcontact'] = new \Ease\Html\ATag(
-                        'mailto:' . $outInvoiceData['custcontact'],
-                        $outInvoiceData['custcontact']
+                        'mailto:'.$outInvoiceData['custcontact'],
+                        $outInvoiceData['custcontact'],
                     );
                 }
 
+                unset($outInvoiceData['id'], $outInvoiceData['external-ids'], $outInvoiceData['typDokl'], $outInvoiceData['firma']);
 
-                unset($outInvoiceData['id']);
-                unset($outInvoiceData['external-ids']);
-                unset($outInvoiceData['typDokl']);
-                unset($outInvoiceData['firma']);
                 $outInvoicesTable->addRowColumns($outInvoiceData);
             }
 
-            $tableFooter = [count($outInvoicesData) . ' ' . _('items'), '', '', '', '',
-                ''];
+            $tableFooter = [\count($outInvoicesData).' '._('items'), '', '', '', '', ''];
             $outInvoicesTable->addRowFooterColumns($tableFooter);
             $this->addItem($this->cardBody($outInvoicesTable));
         }
+
         return !empty($outInvoicesData);
     }
 
     /**
-     * "Outcoming invoices" heading
-     *
-     * @return string
+     * "Outgoing invoices" heading.
      */
     public function heading(): string
     {
         return _('Issued invoices not notified to the client');
     }
 
-    public function description()
+    public function description(): void
     {
     }
 }

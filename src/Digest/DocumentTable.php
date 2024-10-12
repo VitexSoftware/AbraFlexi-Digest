@@ -1,15 +1,22 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+declare(strict_types=1);
+
+/**
+ * This file is part of the AbraFlexi-Digest package
+ *
+ * https://github.com/VitexSoftware/AbraFlexi-Digest/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AbraFlexi\Digest;
 
 /**
- * Description of DocumentTable
+ * Description of DocumentTable.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
@@ -17,7 +24,7 @@ class DocumentTable extends Table
 {
     public $engine;
 
-    public function __construct($engine, $properties = array())
+    public function __construct($engine, $properties = [])
     {
         parent::__construct([], $properties);
         $this->engine = $engine;

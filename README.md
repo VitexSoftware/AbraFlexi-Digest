@@ -1,7 +1,7 @@
-AbraFlexi Digest generator
-==========================
+Digest for AbraFlexi  
+====================
 
-![Package Logo](package-logo.png?raw=true "Project Logo")
+![Digest for AbraFlexi](social-preview.svg?raw=true "Digest for AbraFlexi")
 
 Features:
 
@@ -152,15 +152,6 @@ Alltime modules
 
 none yet
 
-Dependencies
-------------
-
-Powered by:
-
-* [**EasePHP Framework**](https://github.com/VitexSoftware/php-ease-core) - pomocné funkce např. logování
-* [**AbraFlexi**](https://github.com/Spoje-NET/php-abraflexi)        - komunikace s [AbraFlexi](https://abraflexi.eu/)
-* [**AbraFlexi Bricks**](https://github.com/VitexSoftware/php-abraflexi-bricks) - Company Logo image widget
-
 See also
 --------
 
@@ -170,10 +161,10 @@ See also
 * https://github.com/VitexSoftware/php-abraflexi-mailer
 * https://github.com/VitexSoftware/AbraFlexi-Tools
 
-Poděkování
+Thanks
 ----------
 
-Tento software by nevznikl pez podpory:
+This software would not be created without the support of:
 
 [![Spoje.Net](spojenet.gif?raw=true "Spoje.Net s.r.o.")](https://spoje.net/)
 
@@ -181,7 +172,7 @@ Tento software by nevznikl pez podpory:
 MultiFlexi
 ----------
 
-AbraFlexi Digest is ready for run as [MultiFlexi](https://multiflexi.eu) application.
+Digest for AbraFlexi is ready for run as [MultiFlexi](https://multiflexi.eu) application.
 See the full list of ready-to-run applications within the MultiFlexi platform on the [application list page](https://www.multiflexi.eu/apps.php).
 
 [![MultiFlexi App](https://github.com/VitexSoftware/MultiFlexi/blob/main/doc/multiflexi-app.svg)](https://www.multiflexi.eu/apps.php)

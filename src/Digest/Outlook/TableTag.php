@@ -3,16 +3,20 @@
 declare(strict_types=1);
 
 /**
- * Html Table with Outlook tweaks
+ * This file is part of the AbraFlexi-Digest package
  *
- * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * https://github.com/VitexSoftware/AbraFlexi-Digest/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AbraFlexi\Digest\Outlook;
 
 /**
- * Description of TableTag
+ * Description of TableTag.
  *
  * @author vitex
  */

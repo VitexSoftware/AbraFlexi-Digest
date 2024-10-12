@@ -1,16 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * AbraFlexi Digest - Incoming payments for us
+ * This file is part of the AbraFlexi-Digest package
  *
- * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2018-2023 Vitex Software
+ * https://github.com/VitexSoftware/AbraFlexi-Digest/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AbraFlexi\Digest\Modules;
 
 /**
- * Description of IncomingPayments
+ * Description of IncomingPayments.
  *
  * @author vitex
  */
@@ -19,9 +25,7 @@ class IncomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFl
     public $timeColumn = 'datVyst';
 
     /**
-     * Process Incoming payments
-     *
-     * @return boolean
+     * Process Incoming payments.
      */
     public function dig(): bool
     {
@@ -31,33 +35,37 @@ class IncomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFl
             ['mena', 'sumCelkem', 'sumCelkemMen'],
             array_merge(
                 $this->condition,
-                ['typPohybuK' => 'typPohybu.prijem', 'storno' => false]
-            )
+                ['typPohybuK' => 'typPohybu.prijem', 'storno' => false],
+            ),
         );
         $total = [];
+
         if (empty($incomes)) {
             $this->addItem(_('none'));
         } else {
             foreach ($incomes as $income) {
                 $currency = self::getCurrency($income);
-                if ($currency == 'CZK') {
-                    $amount = floatval($income['sumCelkem']);
+
+                if ($currency === 'CZK') {
+                    $amount = (float) $income['sumCelkem'];
                 } else {
-                    $amount = floatval($income['sumCelkemMen']);
+                    $amount = (float) $income['sumCelkemMen'];
                 }
 
-                if (array_key_exists($currency, $total)) {
+                if (\array_key_exists($currency, $total)) {
                     $total[$currency] += $amount;
                 } else {
                     $total[$currency] = $amount;
                 }
             }
+
             foreach ($total as $currency => $amount) {
-                $results->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount) . '&nbsp;' . $currency));
+                $results->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount).'&nbsp;'.$currency));
             }
         }
 
         $this->addItem($this->cardBody($results));
+
         return !empty($incomes);
     }
 

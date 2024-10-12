@@ -1,0 +1,47 @@
+.TH ABRAFLEXI-DAYDIGEST 1 "October 2023" "1.0" "AbraFlexi Day Digest Manual"
+.SH NAME
+abraflexi-daydigest \- Generate daily digest reports for AbraFlexi
+
+.SH SYNOPSIS
+.B abraflexi-daydigest
+[\fIoptions\fR]
+
+.SH DESCRIPTION
+.B abraflexi-daydigest
+is a command-line tool designed to generate daily digest reports for the AbraFlexi system. It collects and summarizes data from the AbraFlexi API and presents it in a readable format.
+
+.SH OPTIONS
+.TP
+.B \-h, \-\-help
+Display help information and exit.
+
+.TP
+.B \-v, \-\-version
+Display version information and exit.
+
+.TP
+.B \-c, \-\-config \fIfile\fR
+Specify the configuration file to use.
+
+.TP
+.B \-o, \-\-output \fIfile\fR
+Specify the output file for the generated report.
+
+.SH EXAMPLES
+.TP
+Generate a daily digest report using the default configuration:
+.B abraflexi-daydigest
+
+.TP
+Generate a daily digest report with a specified configuration file:
+.B abraflexi-daydigest \-c /path/to/config
+
+.TP
+Generate a daily digest report and save it to a specified output file:
+.B abraflexi-daydigest \-o /path/to/output
+
+.SH AUTHOR
+Written by Vitex Software.
+
+.SH COPYRIGHT
+This is free software; see the source for copying conditions. There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.

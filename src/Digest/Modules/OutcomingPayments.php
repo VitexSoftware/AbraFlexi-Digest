@@ -1,56 +1,62 @@
 <?php
 
+declare(strict_types=1);
+
 /**
- * AbraFlexi Digest - Outcoming payments
+ * This file is part of the AbraFlexi-Digest package
  *
- * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2018-2023 Vitex Software
+ * https://github.com/VitexSoftware/AbraFlexi-Digest/
+ *
+ * (c) Vítězslav Dvořák <http://vitexsoftware.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace AbraFlexi\Digest\Modules;
 
 /**
- * Description of OutcomingPayments
+ * Description of OutcomingPayments.
  *
  * @author vitex
  */
 class OutcomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
-    /**
-     * 
-     * @var string
-     */
-    public $timeColumn = 'datVyst';
+    public function __construct(\DatePeriod $interval)
+    {
+        $this->timeColumn = 'datVyst';
+        parent::__construct($interval);
+    }
 
     /**
-     * Check outgoung Payments 
-     * 
-     * @return bool
+     * Check outgoing Payments.
      */
     public function dig(): bool
     {
         $banker = new \AbraFlexi\Banka();
         $outcomes = $banker->getColumnsFromAbraFlexi(
             ['mena', 'sumCelkem',
-            'sumCelkemMen'],
+                'sumCelkemMen'],
             array_merge(
                 $this->condition,
-                ['typPohybuK' => 'typPohybu.vydej', 'storno' => false]
-            )
+                ['typPohybuK' => 'typPohybu.vydej', 'storno' => false],
+            ),
         );
         $total = [];
+
         if (empty($outcomes)) {
             $this->addItem(_('none'));
         } else {
             foreach ($outcomes as $outcome) {
                 $currency = self::getCurrency($outcome);
-                if ($currency != 'CZK') {
-                    $amount = floatval($outcome['sumCelkemMen']);
+
+                if ($currency !== 'CZK') {
+                    $amount = (float) $outcome['sumCelkemMen'];
                 } else {
-                    $amount = floatval($outcome['sumCelkem']);
+                    $amount = (float) $outcome['sumCelkem'];
                 }
 
-                if (array_key_exists($currency, $total)) {
+                if (\array_key_exists($currency, $total)) {
                     $total[$currency] += $amount;
                 } else {
                     $total[$currency] = $amount;
@@ -58,19 +64,17 @@ class OutcomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
             }
 
             $totalsTable = new \AbraFlexi\Digest\Table([_('Amount'), _('Currency')]);
+
             foreach ($total as $currency => $amount) {
                 $totalsTable->addRowColumns([self::formatCurrency($amount), $currency]);
             }
+
             $this->addItem($this->cardBody($totalsTable));
         }
 
         return !empty($outcomes);
     }
 
-    /**
-     *
-     * @return string
-     */
     public function heading(): string
     {
         return _('Outcoming payments');

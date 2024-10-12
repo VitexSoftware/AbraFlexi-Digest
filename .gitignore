@@ -22,3 +22,4 @@
 .env
 /debian/multiflexi-abraflexi-digest
 /tests/.phpunit.result.cache
+/.build/
