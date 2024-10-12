@@ -2,7 +2,7 @@
   "name": "deb/abraflexi-digest",
   "description": "Invoice Digest for abraflexi written in PHP",
   "type": "project",
-  "version": "1.30.2",
+  "version": "1.31.0",
   "authors": [
     {
       "name": "Vítězslav Dvořák",
