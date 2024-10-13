@@ -19,7 +19,7 @@ namespace AbraFlexi\Digest;
  * AbraFlexi Digest Mailer.
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2017-2023 Vitex Software
+ * @copyright  (G) 2017-2024 Vitex Software
  */
 class Mailer extends \Ease\HtmlMailer
 {
@@ -31,7 +31,7 @@ class Mailer extends \Ease\HtmlMailer
      */
     public function __construct($sendTo, $subject)
     {
-        $this->fromEmailAddress = \Ease\Functions::cfg('DIGEST_FROM');
+        $this->fromEmailAddress = \Ease\Functions::cfg('DIGEST_FROM','digest@'. gethostname());
         parent::__construct($sendTo, $subject);
         $this->htmlDocument = new \Ease\Html\HtmlTag(
             [<<<'EOD'

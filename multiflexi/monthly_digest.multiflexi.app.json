@@ -47,6 +47,12 @@
             "defval": "happy",
             "required": false
         },
+        "DIGEST_FROM": { 
+            "type": "text",
+            "description": "Diget sender addres",
+            "defval": "",
+            "required": true
+        },
         "EASE_MAILTO": {
             "type": "text",
             "description": "sending result",

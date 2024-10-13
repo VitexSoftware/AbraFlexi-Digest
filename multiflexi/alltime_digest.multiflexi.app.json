@@ -58,6 +58,12 @@
             "description": "saving result to file",
             "defval": "",
             "required": false
+        },
+        "DIGEST_FROM": { 
+            "type": "text",
+            "description": "Diget sender addres",
+            "defval": "",
+            "required": true
         }
     },
     "multiflexi": "1.7.2"
