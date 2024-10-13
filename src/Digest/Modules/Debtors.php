@@ -105,7 +105,7 @@ class Debtors extends DigestModule implements DigestModuleInterface
 
                 $adreser->setMyKey($firma);
                 $invoice = current($fakturyFirmy);
-                $nazevFirmy = array_key_exists('firma', $invoice) && is_object($invoice['firma']) && $invoice['firma']->showAs ? $invoice->showAs : \AbraFlexi\Functions::uncode((string)(string)$firma);
+                $nazevFirmy = array_key_exists('firma', $invoice) && is_object($invoice['firma']) && $invoice['firma']->showAs ? $invoice['firma']->showAs : \AbraFlexi\Functions::uncode((string)$firma);
                 $invTable->addRowColumns([
                     new \Ease\Html\ATag($adreser->getApiURL(), $nazevFirmy),
                     $overdue[$firma],
