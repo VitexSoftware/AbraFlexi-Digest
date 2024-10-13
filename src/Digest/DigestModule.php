@@ -171,12 +171,8 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
 
     /**
      * Format Czech Currency.
-     *
-     * @param float $price
-     *
-     * @return string
      */
-    public static function formatCurrency($price)
+    public static function formatCurrency(float $price): string
     {
         return number_format($price, 2, ',', ' ');
     }
@@ -271,7 +267,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
         $total = new \Ease\Html\DivTag();
 
         foreach ($totals as $currency => $amount) {
-            $total->addItem(new \Ease\Html\DivTag(self::formatCurrency($amount).'&nbsp;'.\AbraFlexi\Functions::uncode((string)$currency)));
+            $total->addItem(new \Ease\Html\DivTag(self::formatCurrency((float)$amount).'&nbsp;'.\AbraFlexi\Functions::uncode((string)$currency)));
         }
 
         return $total;

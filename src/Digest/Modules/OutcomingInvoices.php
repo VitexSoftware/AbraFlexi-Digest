@@ -111,7 +111,7 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
             $tableFooter = [$exposed, \count(array_keys($typDoklTotals))];
 
             foreach ($currencies as $currencyCode) {
-                $tableFooter[] = self::formatCurrency($invoicedRaw[$currencyCode]).' '.\AbraFlexi\Functions::uncode((string)$currencyCode);
+                $tableFooter[] = self::formatCurrency((float)$invoicedRaw[$currencyCode]).' '.\AbraFlexi\Functions::uncode((string)$currencyCode);
             }
 
             $outInvoicesTable->addRowFooterColumns($tableFooter);
