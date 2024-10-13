@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest;
 
-\define('EASE_APPNAME', 'AbraFlexi Year Digest');
+\define('EASE_APPNAME', 'AbraFlexi 🎆 Digest');
 
 require_once __DIR__.'/init.php';
 
@@ -30,7 +30,7 @@ $fmt = datefmt_create(
     'Europe/Prague',
     \IntlDateFormatter::GREGORIAN,
 );
-$subject = sprintf(_('AbraFlexi %s Year digest'), $myCompanyName);
+$subject = sprintf(_('AbraFlexi %s 🎆 Year digest'), $myCompanyName);
 $digestor = new Digestor($subject);
 $formatter = new \IntlDateFormatter(\Ease\Locale::$localeUsed, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
 $digestor->addItem(new \Ease\Html\DivTag(sprintf(
