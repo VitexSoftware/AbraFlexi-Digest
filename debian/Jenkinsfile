@@ -53,6 +53,7 @@ distributions.each {
 
             stage('Test ' + distribution) {
                 buildImage.inside {
+                    def debconf_debug = 0 //Set to "5" or "developer" to debug debconf
                     def abraflexi_env = 'APP_DEBUG=true EASE_LOGGER="console" ABRAFLEXI_URL="https://demo.flexibee.eu:5434" ABRAFLEXI_LOGIN="winstrom" ABRAFLEXI_PASSWORD="winstrom" ABRAFLEXI_COMPANY="demo_de" '
                     withEnv([abraflexi_env]) {
                         println "ABRAFLEXI_ENV: " + abraflexi_env
