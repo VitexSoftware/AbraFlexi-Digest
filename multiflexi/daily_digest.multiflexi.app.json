@@ -50,11 +50,13 @@
         "EASE_MAILTO": {
             "type": "text",
             "description": "sending result",
+            "defval": "",
             "required": false
         },
         "SAVETO": { 
             "type": "text",
             "description": "saving result to file",
+            "defval": "",
             "required": false
         }
         
