@@ -14,6 +14,7 @@ declare(strict_types=1);
  */
 
 namespace AbraFlexi\Digest\Modules;
+use AbraFlexi\ui\DocumentLink;
 
 /**
  * Payments without invoices.
@@ -79,7 +80,7 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
                     $total[$currency] = $amount;
                 }
 
-                $income['kod'] = new \AbraFlexi\ui\DocumentLink('code:'.$income['kod'], $banker);
+                $income['kod'] = new DocumentLink($banker,'code:'.$income['kod']);
                 $income['price'] = self::getAmount($income).' '.$currency;
                 $adresser->setMyKey($adresser);
                 //                $income['firma'] = new \Ease\Html\ATag(empty($income['firma']->showAs) ? $adresser->getApiUrl() . $income['firma'] : $income['firma']->showAs);
