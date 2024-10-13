@@ -168,7 +168,11 @@ EOD;
         $this->addItem(new \Ease\Html\H1Tag($subject));
         $prober = new \AbraFlexi\Company();
         $prober->logBanner(' AbraFlexi Digest '.\Ease\Shared::appVersion().' '.$_SERVER['SCRIPT_FILENAME']);
-        $infoRaw = $prober->getFlexiData();
+        try {
+            $infoRaw = $prober->getFlexiData();
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
 
         if (!empty($infoRaw) && !\array_key_exists('success', $infoRaw)) {
             $info = \Ease\Functions::reindexArrayBy($infoRaw, 'dbNazev');
