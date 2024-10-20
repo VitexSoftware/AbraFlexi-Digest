@@ -208,8 +208,7 @@ EOD;
         $this->processModules($modules, $probePeriod);
         $this->addIndex();
         $this->addFoot();
-        $emailto = \Ease\Functions::cfg('EASE_MAILTO');
-
+        $emailto = \Ease\Functions::cfg('DIGEST_MAILTO',\Ease\Functions::cfg('EASE_MAILTO',''));
         if ($emailto) {
             $this->sendByMail($emailto);
         } else {

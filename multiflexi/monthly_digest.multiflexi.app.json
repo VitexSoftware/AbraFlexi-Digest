@@ -53,7 +53,7 @@
             "defval": "",
             "required": true
         },
-        "EASE_MAILTO": {
+        "DIGEST_MAILTO": {
             "type": "text",
             "description": "sending result",
             "defval": "",
