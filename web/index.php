@@ -28,7 +28,7 @@ if (empty($from)) {
     $from = $start->format('Y-m-d');
 } else {
     [$year, $month, $day] = explode('-', $from);
-    $start->setDate($year, $month, $day);
+    $start->setDate((int)$year, (int)$month, (int)$day);
 }
 
 $end = new \DateTime();
@@ -37,7 +37,7 @@ if (empty($to)) {
     $to = date('Y-m-d');
 } else {
     [$year, $month, $day] = explode('-', $to);
-    $end->setDate($year, $month, $day);
+    $end->setDate((int)$year, (int)$month, (int)$day);
 }
 
 if (\Ease\Document::isPosted()) {
@@ -103,7 +103,7 @@ foreach ($candidates as $heading => $namespace) {
 
 $optionsCol = $formColumns->addColumn(6, new \Ease\Html\H2Tag(_('Options')));
 $themes = [];
-$d = dir(\Ease\Functions::cfg('STYLE_DIR','../src/css/themes/'));
+$d = dir(\Ease\Shared::cfg('STYLE_DIR','../src/css/themes/'));
 
 while (false !== ($entry = $d->read())) {
     if (pathinfo($entry, \PATHINFO_EXTENSION) === 'css') {
@@ -177,7 +177,7 @@ $optionsCol->addItem(new \Ease\TWB5\FormGroup(
 ));
 $optionsCol->addItem(new \Ease\TWB5\FormGroup(
                 _('Theme name'),
-                new \Ease\Html\SelectTag('theme', $themes, $shared->getConfigValue('THEME')),
+                new \Ease\Html\SelectTag('theme', $themes, (string)$shared->getConfigValue('THEME')),
 ));
 $optionsCol->addItem(new \Ease\TWB5\FormGroup(
                 _('Output Directory'),
@@ -192,7 +192,7 @@ $optionsCol->addItem(new \Ease\TWB5\FormGroup(
 ));
 $optionsCol->addItem(new \Ease\TWB5\FormGroup(_('Language select'), new \Ease\Html\Widgets\LangSelect('lang',[])));
 
-if (\Ease\Functions::cfg('SHOW_CONNECTION_FORM')) {
+if (\Ease\Shared::cfg('SHOW_CONNECTION_FORM')) {
     $optionsCol->addItem(new \AbraFlexi\ui\TWB5\ConnectionForm($myCompany->getConnectionOptions()));
 }
 

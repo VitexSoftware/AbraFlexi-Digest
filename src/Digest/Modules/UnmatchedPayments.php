@@ -14,6 +14,7 @@ declare(strict_types=1);
  */
 
 namespace AbraFlexi\Digest\Modules;
+
 use AbraFlexi\ui\DocumentLink;
 
 /**
@@ -80,7 +81,7 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
                     $total[$currency] = $amount;
                 }
 
-                $income['kod'] = new DocumentLink($banker,'code:'.$income['kod']);
+                $income['kod'] = new DocumentLink($banker, 'code:'.$income['kod']);
                 $income['price'] = self::getAmount($income).' '.$currency;
                 $adresser->setMyKey($adresser);
                 //                $income['firma'] = new \Ease\Html\ATag(empty($income['firma']->showAs) ? $adresser->getApiUrl() . $income['firma'] : $income['firma']->showAs);
@@ -92,7 +93,7 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
             $currDiv = new \Ease\Html\DivTag();
 
             foreach ($total as $currency => $amount) {
-                $currDiv->addItem(new \Ease\Html\DivTag(self::formatCurrency((float)$amount).'&nbsp;'.$currency));
+                $currDiv->addItem(new \Ease\Html\DivTag(self::formatCurrency((float) $amount).'&nbsp;'.$currency));
             }
 
             $this->addItem($this->cardBody([$incomesTable, $currDiv]));

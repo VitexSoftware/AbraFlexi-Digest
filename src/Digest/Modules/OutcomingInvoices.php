@@ -89,14 +89,14 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
             $currencies = array_keys($invoicedRaw);
 
             foreach ($currencies as $currencyCode) {
-                $tableHeader[] = _('Total').' '.\AbraFlexi\Functions::uncode((string)$currencyCode);
+                $tableHeader[] = _('Total').' '.\AbraFlexi\Functions::uncode((string) $currencyCode);
             }
 
             $outInvoicesTable = new \AbraFlexi\Digest\Table($tableHeader);
 
             foreach ($typDoklTotals as $typDokl => $typDoklTotal) {
                 $tableRow = [$typDoklCounts[$typDokl]];
-                $tableRow[] = \AbraFlexi\Functions::uncode((string)$typDokl);
+                $tableRow[] = \AbraFlexi\Functions::uncode((string) $typDokl);
 
                 foreach ($currencies as $currencyCode) {
                     $tableRow[] = \array_key_exists(
@@ -111,7 +111,7 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
             $tableFooter = [$exposed, \count(array_keys($typDoklTotals))];
 
             foreach ($currencies as $currencyCode) {
-                $tableFooter[] = self::formatCurrency((float)$invoicedRaw[$currencyCode]).' '.\AbraFlexi\Functions::uncode((string)$currencyCode);
+                $tableFooter[] = self::formatCurrency((float) $invoicedRaw[$currencyCode]).' '.\AbraFlexi\Functions::uncode((string) $currencyCode);
             }
 
             $outInvoicesTable->addRowFooterColumns($tableFooter);

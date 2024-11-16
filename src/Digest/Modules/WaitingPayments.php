@@ -103,7 +103,7 @@ class WaitingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFle
         $currDiv = new \Ease\Html\DivTag();
 
         foreach ($totals as $currency => $amount) {
-            $currDiv->addItem(new \Ease\Html\DivTag(self::formatCurrency((float)$amount).'&nbsp;'.$currency));
+            $currDiv->addItem(new \Ease\Html\DivTag(self::formatCurrency((float) $amount).'&nbsp;'.$currency));
         }
 
         $this->addItem($this->cardBody([new \Ease\Html\H3Tag(_('Total')), $invTable, $currDiv]));

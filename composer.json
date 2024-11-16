@@ -12,9 +12,9 @@
     "type": "project",
     "require": {
         "vitexsoftware/ease-bootstrap5-widgets-abraflexi": "* 9999999-dev",
-        "vitexsoftware/ease-bootstrap5-widgets": "dev-main",
-        "vitexsoftware/abraflexi-bricks": "* dev-main",
-        "pear/net_smtp": "dev-master",
+        "vitexsoftware/ease-bootstrap5-widgets": "* 9999999-dev",
+        "vitexsoftware/abraflexi-bricks": "^1.1",
+        "pear/net_smtp": "^1.12",
         "vitexsoftware/ease-core-bricks": "dev-master",
         "vitexsoftware/ease-html-widgets": "dev-main"
     },

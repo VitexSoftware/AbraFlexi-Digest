@@ -14,8 +14,8 @@ declare(strict_types=1);
  */
 
 namespace AbraFlexi\Digest\Modules;
-use AbraFlexi\ui\DocumentLink;
 
+use AbraFlexi\ui\DocumentLink;
 use Ease\Html\DivTag;
 
 /**
@@ -76,7 +76,7 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
                             $totals[$currency] = 1;
                         }
 
-                        $proforma['kod'] = new DocumentLink($invoicer,$proforma['kod']);
+                        $proforma['kod'] = new DocumentLink($invoicer, $proforma['kod']);
                         $proforma['price'] = self::getPrice($proforma);
                         $proforma['firma'] = new \AbraFlexi\Digest\CompanyLink(
                             $proforma['firma'],
@@ -93,7 +93,7 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
             $currDiv = new DivTag();
 
             foreach ($total as $currency => $amount) {
-                $currDiv->addItem(new \Ease\Html\DivTag($totals[$currency].'x '.self::formatCurrency((float)$amount).'&nbsp;'.$currency));
+                $currDiv->addItem(new \Ease\Html\DivTag($totals[$currency].'x '.self::formatCurrency((float) $amount).'&nbsp;'.$currency));
             }
 
             $this->addItem($this->cardBody([$incomesTable, $currDiv]));

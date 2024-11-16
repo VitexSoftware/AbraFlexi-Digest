@@ -141,11 +141,11 @@ EOD;
     }
 
     /**
-     * @param array $startEnd
+     * @param array<string> $startEnd
      *
      * @return string
      */
-    public function timerValue(string $startEnd)
+    public function timerValue(array $startEnd)
     {
         $time_start = explode(' ', $startEnd['start']);
         $time_end = explode(' ', $startEnd['end']);
@@ -168,10 +168,10 @@ EOD;
         $this->addItem(new \Ease\Html\H1Tag($subject));
         $prober = new \AbraFlexi\Company();
         $prober->logBanner(' AbraFlexi Digest '.\Ease\Shared::appVersion().' '.$_SERVER['SCRIPT_FILENAME']);
+
         try {
             $infoRaw = $prober->getFlexiData();
         } catch (Exception $exc) {
-            
             echo $exc->getTraceAsString();
         }
 
@@ -208,14 +208,15 @@ EOD;
         $this->processModules($modules, $probePeriod);
         $this->addIndex();
         $this->addFoot();
-        $emailto = \Ease\Functions::cfg('DIGEST_MAILTO',\Ease\Functions::cfg('EASE_MAILTO',''));
+        $emailto = \Ease\Shared::cfg('DIGEST_MAILTO', \Ease\Shared::cfg('EASE_MAILTO', ''));
+
         if ($emailto) {
             $this->sendByMail($emailto);
         } else {
             $this->addStatusMessage('EASE_MAILTO not defined - not sending result', 'debug');
         }
 
-        $saveto = \Ease\Functions::cfg('SAVETO');
+        $saveto = \Ease\Shared::cfg('SAVETO');
 
         if ($saveto) {
             $this->saveToHtml($saveto);
@@ -232,7 +233,7 @@ EOD;
      */
     public function processModules(array $modules, \DatePeriod $interval): void
     {
-        $saveto = \Ease\Functions::cfg('DIGEST_SAVETO', false);
+        $saveto = \Ease\Shared::cfg('DIGEST_SAVETO', false);
 
         foreach ($modules as $class => $classFile) {
             $this->timerStart($class);
@@ -361,8 +362,8 @@ EOD;
      */
     public static function getCustomCss()
     {
-        $theme = \Ease\Functions::cfg('THEME', 'bootstrap.min.css');
-        $cssfile = \Ease\Functions::cfg('STYLE_DIR').'/'.$theme;
+        $theme = \Ease\Shared::cfg('THEME', 'bootstrap.min.css');
+        $cssfile = \Ease\Shared::cfg('STYLE_DIR').'/'.$theme;
 
         return (file_exists($cssfile) && is_file($cssfile)) ? file_get_contents($cssfile) : '';
     }

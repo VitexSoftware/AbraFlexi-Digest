@@ -29,8 +29,12 @@ $fmt = datefmt_create(
     'Europe/Prague',
     \IntlDateFormatter::GREGORIAN,
 );
+
+$myCompany = new \AbraFlexi\Company(\Ease\Shared::cfg('ABRAFLEXI_COMPANY'));
+$myCompanyName = $myCompany->getDataValue('nazev');
+
 $subject = sprintf(
-    _('AbraFlexi %s 🌜ly digest from %s to %s'),
+    _('AbraFlexi %s 🌜 monthly digest from %s to %s'),
     $myCompanyName,
     \datefmt_format($fmt, $period->getStartDate()->getTimestamp()),
     \datefmt_format($fmt, $period->getEndDate()->getTimestamp()),

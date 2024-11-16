@@ -24,27 +24,6 @@ There are four scripts:
 
 ![Example](weekdigest.png?raw=true "Week Digest")
 
-Debian/Ubuntu
--------------
-
-Packages are availble. Please use repo :
-
-```shell
-sudo apt install lsb-release wget
-echo "deb http://repo.vitexsoftware.cz $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/vitexsoftware.list
-sudo wget -O /etc/apt/trusted.gpg.d/vitexsoftware.gpg http://repo.vitexsoftware.cz/keyring.gpg
-sudo apt update
-sudo apt install abraflexi-digest
-```
-
-After package installation you can use this new commands:
-
-* **abraflexi-daydigest**      - Generate AbraFlexi digest for one day
-* **abraflexi-monthdigest**    - Generate AbraFlexi digest for one week
-* **abraflexi-weekdigest**     - Generate AbraFlexi digest for one month
-* **abraflexi-yeardigest**     - Generate AbraFlexi digest for one year
-* **abraflexi-alltimedigest**  - Generate AbraFlexi digest for all time
-
 Configuration
 -------------
 
@@ -168,7 +147,6 @@ This software would not be created without the support of:
 
 [![Spoje.Net](spojenet.gif?raw=true "Spoje.Net s.r.o.")](https://spoje.net/)
 
-
 MultiFlexi
 ----------
 
@@ -176,3 +154,23 @@ Digest for AbraFlexi is ready for run as [MultiFlexi](https://multiflexi.eu) app
 See the full list of ready-to-run applications within the MultiFlexi platform on the [application list page](https://www.multiflexi.eu/apps.php).
 
 [![MultiFlexi App](https://github.com/VitexSoftware/MultiFlexi/blob/main/doc/multiflexi-app.svg)](https://www.multiflexi.eu/apps.php)
+
+Debian/Ubuntu
+-------------
+
+Packages are availble. Please use repo :
+
+```shell
+wget -qO- https://repo.vitexsoftware.com/keyring.gpg | sudo tee /etc/apt/trusted.gpg.d/vitexsoftware.gpg
+echo "deb [signed-by=/etc/apt/trusted.gpg.d/vitexsoftware.gpg]  https://repo.vitexsoftware.com  $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/vitexsoftware.list
+sudo apt updatesudo apt update
+sudo apt install abraflexi-digest
+```
+
+After package installation you can use this new commands:
+
+* **abraflexi-daydigest**      - Generate AbraFlexi digest for one day
+* **abraflexi-monthdigest**    - Generate AbraFlexi digest for one week
+* **abraflexi-weekdigest**     - Generate AbraFlexi digest for one month
+* **abraflexi-yeardigest**     - Generate AbraFlexi digest for one year
+* **abraflexi-alltimedigest**  - Generate AbraFlexi digest for all time

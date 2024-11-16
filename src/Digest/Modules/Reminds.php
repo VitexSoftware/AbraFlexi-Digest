@@ -63,8 +63,8 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
             foreach ($faDatakturyRaw as $invoice => $invoiceData) {
                 $this->countReminds($invoiceData);
                 $adreser->setMyKey($invoiceData['firma']);
-                $invoicer->setMyKey(\AbraFlexi\Functions::code((string)$invoiceData['kod']));
-                $nazevFirmy = \AbraFlexi\Functions::uncode((string)(string)$invoiceData['firma']);
+                $invoicer->setMyKey(\AbraFlexi\Functions::code((string) $invoiceData['kod']));
+                $nazevFirmy = \AbraFlexi\Functions::uncode((string) (string) $invoiceData['firma']);
                 $invTable->addRowColumns([
                     new \Ease\Html\ATag($adreser->getApiURL(), $nazevFirmy),
                     new \Ease\Html\ATag(
@@ -72,7 +72,7 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
                         trim($invoiceData['kod'].' '.$invoiceData['popis']),
                     ),
                     (($invoiceData['mena'] !== 'code:CZK') ? $invoiceData['zbyvaUhraditMen'] : $invoiceData['zbyvaUhradit']).
-                    ' '.\AbraFlexi\Functions::uncode((string)(string)$invoiceData['mena']),
+                    ' '.\AbraFlexi\Functions::uncode((string) (string) $invoiceData['mena']),
                     empty($invoiceData['datUp1']) ? '' : $this->myDate($invoiceData['datUp1']),
                     empty($invoiceData['datUp2']) ? '' : $this->myDate($invoiceData['datUp2']),
                     empty($invoiceData['datSmir']) ? '' : $this->myDate($invoiceData['datSmir']),

@@ -1,8 +1,14 @@
-abraflexi-digest (1.32.0) UNRELEASED; urgency=medium
+abraflexi-digest (1.33.0) UNRELEASED; urgency=medium
+
+  * Update
+
+ -- vitex <info@vitexsoftware.cz>  Sat, 16 Nov 2024 21:02:23 +0100
+
+abraflexi-digest (1.32.0) unstable; urgency=medium
 
   * EASE_MAILTO changed to DIGEST_MAILTO
 
- -- vitex <info@vitexsoftware.cz>  Sun, 20 Oct 2024 11:28:53 +0200
+ -- vitex <info@vitexsoftware.cz>  Sat, 16 Nov 2024 21:02:19 +0100
 
 abraflexi-digest (1.31.0) unstable; urgency=medium
 

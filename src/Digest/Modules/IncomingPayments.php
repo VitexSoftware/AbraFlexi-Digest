@@ -60,7 +60,7 @@ class IncomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFl
             }
 
             foreach ($total as $currency => $amount) {
-                $results->addItem(new \Ease\Html\DivTag(self::formatCurrency((float)$amount).'&nbsp;'.$currency));
+                $results->addItem(new \Ease\Html\DivTag(self::formatCurrency((float) $amount).'&nbsp;'.$currency));
             }
         }
 

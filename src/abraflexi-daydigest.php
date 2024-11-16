@@ -26,6 +26,10 @@ $fmt = datefmt_create(
     'Europe/Prague',
     \IntlDateFormatter::GREGORIAN,
 );
+
+$myCompany = new \AbraFlexi\Company(\Ease\Shared::cfg('ABRAFLEXI_COMPANY'));
+$myCompanyName = $myCompany->getDataValue('nazev');
+
 $subject = \sprintf(_('AbraFlexi 🌅ly digest for  %s'), $myCompanyName);
 $digestor = new Digestor($subject);
 $digestor->addItem(new \Ease\Html\DivTag(datefmt_format($fmt, (new \DateTime())->getTimestamp())));

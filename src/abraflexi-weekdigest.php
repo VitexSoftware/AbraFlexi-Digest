@@ -31,6 +31,10 @@ $fmt = datefmt_create(
 );
 $formatter = new \IntlDateFormatter(\Ease\Locale::$localeUsed, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
 $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
+
+$myCompany = new \AbraFlexi\Company(\Ease\Shared::cfg('ABRAFLEXI_COMPANY'));
+$myCompanyName = $myCompany->getDataValue('nazev');
+
 $subject = sprintf(_('AbraFlexi %s Weekly digest'), $myCompanyName);
 $digestor = new Digestor($subject);
 

@@ -50,7 +50,7 @@ class WithoutEmail extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
             $count = 0;
 
             foreach ($withoutEmail as $address) {
-                $addresser->setMyKey(\AbraFlexi\Functions::code((string)$address['kod']));
+                $addresser->setMyKey(\AbraFlexi\Functions::code((string) $address['kod']));
 
                 if (empty($addresser->getNotificationEmailAddress())) {
                     ++$count;

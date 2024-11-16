@@ -31,7 +31,7 @@ class Mailer extends \Ease\HtmlMailer
      */
     public function __construct($sendTo, $subject)
     {
-        $this->fromEmailAddress = \Ease\Functions::cfg('DIGEST_FROM','digest@'. gethostname());
+        $this->fromEmailAddress = \Ease\Shared::cfg('DIGEST_FROM', 'digest@'.gethostname());
         parent::__construct($sendTo, $subject);
         $this->htmlDocument = new \Ease\Html\HtmlTag(
             [<<<'EOD'

@@ -22,14 +22,14 @@ use Ease\Html\DivTag;
  *
  * @author vitex
  */
-class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
+class DigestModule extends DivTag implements DigestModuleInterface
 {
     /**
      * Which records we want to see ?
      *
-     * @param array $condition
+     * @param array<string, string> $condition
      */
-    public $condition = ['limit' => 0];
+    public $condition = ['limit' => '0'];
 
     /**
      * AbraFlexi Evidence Column(s) used to filter by date.
@@ -56,7 +56,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
                     $condParts[$timeColumn] = $period;
                 }
 
-                $this->condition = [\AbraFlexi\RO::flexiUrl(
+                $this->condition = [\AbraFlexi\Functions::flexiUrl(
                     $condParts,
                     ' or ',
                 )];
@@ -79,7 +79,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
     public function process()
     {
         $this->addItem(new \Ease\Html\ATag('', '', ['id' => \get_class($this)]));
-        $this->addItem(new \Ease\Html\DivTag(
+        $this->addItem(new DivTag(
             new \Ease\Html\H2Tag(
                 new \Ease\Html\ButtonTag($this->heading(), [
                     'class' => 'btn btn-link btn-block text-left collapsed',
@@ -106,7 +106,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      */
     public function cardBody($content)
     {
-        return new \Ease\Html\DivTag(new DivTag($content, ['class' => 'card-body']), [
+        return new DivTag(new DivTag($content, ['class' => 'card-body']), [
             'id' => 'collapse'.\get_class($this),
             'class' => 'Xcollapse show',
             'aria-labelledby' => 'heading'.\get_class($this),
@@ -131,6 +131,8 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
 
     /**
      * Return Pure data (no markup).
+     *
+     * @return array<mixed>
      */
     public function digJson(): array
     {
@@ -150,13 +152,13 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
     /**
      * Get Currency name.
      *
-     * @param array $data
+     * @param array<string,string> $data
      *
      * @return string
      */
-    public static function getCurrency($data)
+    public static function getCurrency(array $data)
     {
-        return \AbraFlexi\Functions::uncode((string)(string) $data['mena']);
+        return \AbraFlexi\Functions::uncode((string) (string) $data['mena']);
     }
 
     /**
@@ -207,16 +209,15 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
     }
 
     /**
-     * Is date within date interval.
+     * Is Date within interval.
      *
-     * @param \DateTim $date
-     *
-     * @return bool
+     * @param \DateTime   $date     Date that is to be checked if it falls within the interval
+     * @param \DatePeriod $interval DatePeriod object that represents the interval
      */
     public static function isDateWithinInterval(
         \DateTime $date,
         \DatePeriod $interval
-    ) {
+    ): bool {
         return self::isDateBetweenDates(
             $date,
             $interval->getStartDate(),
@@ -250,7 +251,14 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
         return $result;
     }
 
-    public static function getPrice($data)
+    /**
+     * Get Price.
+     *
+     * @param array $data
+     *
+     * @return float
+     */
+    public static function getPrice(array $data)
     {
         return \array_key_exists('sumCelkem', $data) ? $data['sumCelkem'] : 0;
     }
@@ -258,7 +266,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
     /**
      * Return Totals for several currencies.
      *
-     * @param array $totals [currency=>amount,currency2=>amount2]
+     * @param array<string,float> $totals [currency=>amount,currency2=>amount2]
      *
      * @return \Ease\Html\DivTag
      */
@@ -267,7 +275,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
         $total = new \Ease\Html\DivTag();
 
         foreach ($totals as $currency => $amount) {
-            $total->addItem(new \Ease\Html\DivTag(self::formatCurrency((float)$amount).'&nbsp;'.\AbraFlexi\Functions::uncode((string)$currency)));
+            $total->addItem(new \Ease\Html\DivTag(self::formatCurrency((float) $amount).'&nbsp;'.\AbraFlexi\Functions::uncode((string) $currency)));
         }
 
         return $total;
@@ -278,7 +286,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      *
      * @param string $saveTo directory
      */
-    public function saveToHtml($saveTo): void
+    public function saveToHtml(string $saveTo): void
     {
         $filename = $saveTo.$this->getReportFilename();
         $this->addStatusMessage(
@@ -295,7 +303,7 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
      *
      * @param string $saveTo
      */
-    public function fileCleanUP($saveTo): void
+    public function fileCleanUP(string $saveTo): void
     {
         $filename = $saveTo.$this->getReportFilename();
 
@@ -307,7 +315,10 @@ class DigestModule extends \Ease\Html\DivTag implements DigestModuleInterface
         }
     }
 
-    public function getReportFilename()
+    /**
+     * Get Report Filename.
+     */
+    public function getReportFilename(): string
     {
         return pathinfo($_SERVER['SCRIPT_FILENAME'], \PATHINFO_FILENAME).'_'.pathinfo(
             \get_class($this),
