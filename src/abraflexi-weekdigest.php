@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest;
 
-\define('EASE_APPNAME', 'AbraFlexi WeekDigest');
+\define('EASE_APPNAME', 'AbraFlexi 📆 WeekDigest');
 
 require_once __DIR__.'/init.php';
 $start = new \DateTime();
@@ -35,7 +35,7 @@ $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
 $myCompany = new \AbraFlexi\Company(\Ease\Shared::cfg('ABRAFLEXI_COMPANY'));
 $myCompanyName = $myCompany->getDataValue('nazev');
 
-$subject = sprintf(_('AbraFlexi %s Weekly digest'), $myCompanyName);
+$subject = sprintf(_('AbraFlexi %s 📆 Weekly digest'), $myCompanyName);
 $digestor = new Digestor($subject);
 
 $digestor->addItem(new \Ease\Html\DivTag(sprintf(

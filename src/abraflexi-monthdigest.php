@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest;
 
-\define('EASE_APPNAME', 'AbraFlexi 🌜Digest');
+\define('EASE_APPNAME', 'AbraFlexi 🌜 Mothly Digest');
 
 require_once __DIR__.'/init.php';
 $start = new \DateTime();

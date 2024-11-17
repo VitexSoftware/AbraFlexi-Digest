@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest;
 
-\define('EASE_APPNAME', 'AbraFlexi🌅Digest');
+\define('EASE_APPNAME', 'AbraFlexi 🌅 Daily Digest');
 
 require_once __DIR__.'/init.php';
 $period = new \DatePeriod(new \DateTime(), new \DateInterval('P1D'), new \DateTime());
@@ -30,7 +30,7 @@ $fmt = datefmt_create(
 $myCompany = new \AbraFlexi\Company(\Ease\Shared::cfg('ABRAFLEXI_COMPANY'));
 $myCompanyName = $myCompany->getDataValue('nazev');
 
-$subject = \sprintf(_('AbraFlexi 🌅ly digest for  %s'), $myCompanyName);
+$subject = \sprintf(_('AbraFlexi 🌅 Daily digest for  %s'), $myCompanyName);
 $digestor = new Digestor($subject);
 $digestor->addItem(new \Ease\Html\DivTag(datefmt_format($fmt, (new \DateTime())->getTimestamp())));
 $digestor->dig($period, array_merge(\Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules'), \Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules\Daily')));

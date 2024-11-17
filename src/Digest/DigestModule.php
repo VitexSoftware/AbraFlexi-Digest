@@ -152,7 +152,7 @@ class DigestModule extends DivTag implements DigestModuleInterface
     /**
      * Get Currency name.
      *
-     * @param array<string,string> $data
+     * @param array<string, string> $data
      *
      * @return string
      */
@@ -254,8 +254,6 @@ class DigestModule extends DivTag implements DigestModuleInterface
     /**
      * Get Price.
      *
-     * @param array $data
-     *
      * @return float
      */
     public static function getPrice(array $data)
@@ -266,7 +264,7 @@ class DigestModule extends DivTag implements DigestModuleInterface
     /**
      * Return Totals for several currencies.
      *
-     * @param array<string,float> $totals [currency=>amount,currency2=>amount2]
+     * @param array<string, float> $totals [currency=>amount,currency2=>amount2]
      *
      * @return \Ease\Html\DivTag
      */
@@ -300,8 +298,6 @@ class DigestModule extends DivTag implements DigestModuleInterface
 
     /**
      * Remove report file.
-     *
-     * @param string $saveTo
      */
     public function fileCleanUP(string $saveTo): void
     {
