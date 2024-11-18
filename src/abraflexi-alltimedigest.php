@@ -15,14 +15,14 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest;
 
-\define('EASE_APPNAME', 'AbraFlexi All Time Digest');
+\define('EASE_APPNAME', 'AbraFlexi 🌌 All Time Digest');
 
 require_once __DIR__.'/init.php';
 
 $myCompany = new \AbraFlexi\Company(\Ease\Shared::cfg('ABRAFLEXI_COMPANY'));
 $myCompanyName = $myCompany->getDataValue('nazev');
 
-$subject = sprintf(_('AbraFlexi %s Alltime Digest'), $myCompanyName);
+$subject = sprintf(_('AbraFlexi %s 🌌 Alltime Digest'), $myCompanyName);
 $digestor = new Digestor($subject);
 $start = new \DateTime();
 $start->modify('-10 years');
