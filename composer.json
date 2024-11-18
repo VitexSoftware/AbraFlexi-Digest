@@ -15,8 +15,8 @@
         "vitexsoftware/ease-bootstrap5-widgets": "* 9999999-dev",
         "vitexsoftware/abraflexi-bricks": "^1.1",
         "pear/net_smtp": "^1.12",
-        "vitexsoftware/ease-core-bricks": "dev-master",
-        "vitexsoftware/ease-html-widgets": "dev-main"
+        "vitexsoftware/ease-core-bricks": "^1.2",
+        "vitexsoftware/ease-html-widgets": "^1.1"
     },
     "autoload": {
         "psr-4": {
