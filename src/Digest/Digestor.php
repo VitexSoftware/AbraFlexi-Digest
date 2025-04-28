@@ -266,7 +266,7 @@ EOD;
      */
     public function addToIndex($element): void
     {
-        $this->index[\get_class($element)] = $element->heading();
+        $this->index[$element::class] = $element->heading();
     }
 
     /**

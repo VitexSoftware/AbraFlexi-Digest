@@ -33,10 +33,8 @@ class DigestModule extends DivTag implements DigestModuleInterface
 
     /**
      * AbraFlexi Evidence Column(s) used to filter by date.
-     *
-     * @var array|string
      */
-    public $timeColumn;
+    public array|string $timeColumn;
 
     /**
      * Initial date to process.
@@ -203,7 +201,7 @@ class DigestModule extends DivTag implements DigestModuleInterface
     public static function isDateBetweenDates(
         \DateTime $date,
         \DateTime $startDate,
-        \DateTime $endDate
+        \DateTime $endDate,
     ) {
         return $date > $startDate && $date < $endDate;
     }
@@ -216,7 +214,7 @@ class DigestModule extends DivTag implements DigestModuleInterface
      */
     public static function isDateWithinInterval(
         \DateTime $date,
-        \DatePeriod $interval
+        \DatePeriod $interval,
     ): bool {
         return self::isDateBetweenDates(
             $date,
