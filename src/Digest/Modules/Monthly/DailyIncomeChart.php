@@ -22,7 +22,7 @@ namespace AbraFlexi\Digest\Modules\Monthly;
  */
 class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
-    public $timeColumn = 'datVyst';
+    public array|string $timeColumn = 'datVyst';
 
     /**
      * // Color Pallette

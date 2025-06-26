@@ -18,10 +18,15 @@ namespace AbraFlexi\Digest;
 \define('EASE_APPNAME', 'AbraFlexi Digest');
 
 require_once __DIR__ . '/../src/init.php';
+
+$myCompany = new \AbraFlexi\Company(\Ease\Shared::cfg('ABRAFLEXI_COMPANY'));
+$myCompanyName = $myCompany->getDataValue('nazev');
+
 $oPage = new \Ease\TWB5\WebPage($myCompanyName . ' ' . _('AbraFlexi digest'));
 $from = $oPage->getRequestValue('from');
 $to = $oPage->getRequestValue('to');
 $start = new \DateTime();
+
 
 if (empty($from)) {
     $start->modify('-1 month');
@@ -77,7 +82,7 @@ $container = new \Ease\TWB5\Container(new \Ease\Html\H1Tag(new \Ease\Html\ATag(
                         $myCompany->getApiURL(),
                         $myCompanyName,
                 ) . ' ' . _('AbraFlexi digest')));
-$container->addItem(new \AbraFlexi\ui\CompanyLogo(['class' => 'img-fluid']));
+$container->addItem(new \AbraFlexi\ui\TWB5\CompanyLogo(['class' => 'img-fluid']));
 $container->addItem(new \AbraFlexi\ui\TWB5\StatusInfoBox());
 $formColumns = new \Ease\TWB5\Row();
 $modulesCol = $formColumns->addColumn(6, new \Ease\Html\H2Tag(_('Modules')));
@@ -96,7 +101,7 @@ foreach ($candidates as $heading => $namespace) {
                         'modules[' . $className . ']',
                         isset($_REQUEST) && \array_key_exists('modules', $_REQUEST) && \array_key_exists($className, $_REQUEST['modules']),
                         $classFile,
-                        ['class' => 'module', 'data-ontitle' => $module->heading(), 'data-offtitle' => $module->heading()],
+                        ['class' => 'module', 'data-onlabel' => $module->heading(), 'data-offlabel' => $module->heading()],
         ));
     }
 }

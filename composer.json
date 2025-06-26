@@ -11,9 +11,9 @@
     "minimum-stability": "dev",
     "type": "project",
     "require": {
-        "vitexsoftware/ease-bootstrap5-widgets-abraflexi": "* 9999999-dev",
+        "vitexsoftware/ease-bootstrap5-widgets-abraflexi": "^1.4",
         "vitexsoftware/ease-bootstrap5-widgets": "* 9999999-dev",
-        "vitexsoftware/abraflexi-bricks": "^1.1",
+        "vitexsoftware/abraflexi-bricks": "^1.4",
         "pear/net_smtp": "^1.12",
         "vitexsoftware/ease-core-bricks": "^1.2",
         "vitexsoftware/ease-html-widgets": "^1.1"
@@ -30,9 +30,9 @@
     "require-dev": {
         "phpunit/phpunit": "*",
         "phpstan/phpstan": "*",
-        "friendsofphp/php-cs-fixer": "^3.61",
-        "ergebnis/composer-normalize": "^2.43",
-        "ergebnis/php-cs-fixer-config": "^6.34"
+        "friendsofphp/php-cs-fixer": "^3.75",
+        "ergebnis/composer-normalize": "^2.47",
+        "ergebnis/php-cs-fixer-config": "^6.46"
     },
     "config": {
         "allow-plugins": {

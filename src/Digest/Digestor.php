@@ -161,7 +161,7 @@ EOD;
     public function addHeading($subject): void
     {
         $this->addItem(new \Ease\Html\ATag('', '', ['name' => 'index']));
-        $this->addItem(new \AbraFlexi\ui\CompanyLogo([
+        $this->addItem(new \AbraFlexi\ui\TWB5\CompanyLogo([
             'align' => 'right', 'id' => 'companylogo',
             'height' => '50', 'title' => _('Company logo'),
         ]));

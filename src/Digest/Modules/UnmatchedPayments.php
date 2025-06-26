@@ -24,7 +24,7 @@ use AbraFlexi\ui\DocumentLink;
  */
 class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
-    public $timeColumn = 'datVyst';
+    public array|string $timeColumn = 'datVyst';
 
     /**
      * Process Incoming payments.

@@ -34,7 +34,7 @@ class DigestModule extends DivTag implements DigestModuleInterface
     /**
      * AbraFlexi Evidence Column(s) used to filter by date.
      */
-    public array|string $timeColumn;
+    public array|string $timeColumn = [];
 
     /**
      * Initial date to process.
