@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest\Modules;
 
-use AbraFlexi\ui\DocumentLink;
+
 
 /**
  * Payments without invoices.
@@ -54,7 +54,7 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
         if (empty($incomes)) {
             $this->addItem(_('none'));
         } else {
-            $incomesTable = new \AbraFlexi\Digest\Table([_('Document'), _('Description'),
+            $incomesTable = new \AbraFlexi\Digest\Outlook\TableTag([_('Document'), _('Description'),
                 _('Bank Account'), _('Company'), _('Date'), _('Amount')]);
 
             foreach ($incomes as $income) {
@@ -81,7 +81,7 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
                     $total[$currency] = $amount;
                 }
 
-                $income['kod'] = new DocumentLink($banker, 'code:'.$income['kod']);
+                $income['kod'] = new \AbraFlexi\ui\TWB5\DocumentLink($banker, 'code:'.$income['kod']);
                 $income['price'] = self::getAmount($income).' '.$currency;
                 $adresser->setMyKey($adresser);
                 //                $income['firma'] = new \Ease\Html\ATag(empty($income['firma']->showAs) ? $adresser->getApiUrl() . $income['firma'] : $income['firma']->showAs);

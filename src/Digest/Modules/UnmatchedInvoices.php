@@ -15,7 +15,6 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest\Modules;
 
-use AbraFlexi\ui\DocumentLink;
 use Ease\Html\DivTag;
 
 /**
@@ -76,7 +75,7 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
                             $totals[$currency] = 1;
                         }
 
-                        $proforma['kod'] = new DocumentLink($invoicer, $proforma['kod']);
+                        $proforma['kod'] = new \AbraFlexi\ui\TWB5\DocumentLink($invoicer, $proforma['kod']);
                         $proforma['price'] = self::getPrice($proforma);
                         $proforma['firma'] = new \AbraFlexi\Digest\CompanyLink(
                             $proforma['firma'],

@@ -18,7 +18,7 @@ namespace AbraFlexi\Digest\Modules;
 use AbraFlexi\Digest\DigestModule;
 use AbraFlexi\Digest\DigestModuleInterface;
 use AbraFlexi\Digest\Outlook\TableTag;
-use AbraFlexi\ui\TWB5\DocumentLink as DocumentLink;
+use AbraFlexi\ui\TWB5\DocumentLink;
 
 /**
  * Description of OutcomingInvoices.
