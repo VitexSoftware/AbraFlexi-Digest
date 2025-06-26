@@ -34,10 +34,13 @@ class Debtors extends DigestModule implements DigestModuleInterface
     public function dig(): bool
     {
         $invoicer = new \AbraFlexi\FakturaVydana();
-        $cond = ['datSplat lte \''.\AbraFlexi\RW::dateToFlexiDate(new \DateTime()).'\' AND (stavUhrK is null OR stavUhrK eq \'stavUhr.castUhr\') AND storno eq false AND typDoklK != typDokladu.dobropis', 'limit' => 0];
+        $cond = ['datSplat lte \''.\AbraFlexi\RW::dateToFlexiDate(new \DateTime()).'\' AND (stavUhrK is null OR stavUhrK eq \'stavUhr.castUhr\') AND storno eq false ', 
+            "(not(typDokl.typDoklK eq 'typDokladu.dobropis'))",
+            'includes'=>'faktura-vydana/typDokl/',
+            'limit' => 0]; // AND typDoklK != \'typDokladu.dobropis\'
 
         $faDatakturyRaw = $invoicer->getColumnsFromAbraFlexi(
-            ['kod', 'firma', 'sumCelkem',
+            ['kod', 'firma', 'sumCelkem', 'typDokl(typDoklK)',
                 'sumCelkemMen', 'zbyvaUhradit', 'zbyvaUhraditMen', 'mena', 'datSplat'],
             $cond,
         );
