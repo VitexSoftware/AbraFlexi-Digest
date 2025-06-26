@@ -26,7 +26,7 @@ use AbraFlexi\Digest\VerticalChart;
  */
 class WeeklyIncomeChart extends DigestModule implements DigestModuleInterface
 {
-    public $timeColumn = 'datVyst';
+    public array|string $timeColumn = 'datVyst';
 
     /**
      * // Color Pallette
