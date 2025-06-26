@@ -17,8 +17,8 @@ namespace AbraFlexi\Digest\Modules;
 
 use AbraFlexi\Digest\DigestModule;
 use AbraFlexi\Digest\DigestModuleInterface;
-use AbraFlexi\Digest\Table;
-use AbraFlexi\ui\DocumentLink;
+use AbraFlexi\Digest\Outlook\TableTag;
+use AbraFlexi\ui\TWB5\DocumentLink as DocumentLink;
 
 /**
  * Description of OutcomingInvoices.
@@ -60,7 +60,7 @@ class OutcomingInvoicesHiddenToCustomer extends DigestModule implements DigestMo
             $tableHeader[] = _('Mail status');
             $tableHeader[] = _('Document Contact');
             $tableHeader[] = _('Customer\'s Contact');
-            $outInvoicesTable = new Table($tableHeader);
+            $outInvoicesTable = new TableTag($tableHeader);
 
             foreach ($outInvoicesData as $outInvoiceData) {
                 $addresser->setMyKey($outInvoiceData['firma']);
@@ -70,7 +70,7 @@ class OutcomingInvoicesHiddenToCustomer extends DigestModule implements DigestMo
                 }
 
                 $outInvoiceData['firma'] = empty($outInvoiceData) ? '' : new DocumentLink($addresser, (string) $outInvoiceData['firma']);
-                $outInvoiceData['kod'] = new DocumentLink($digger, \AbraFlexi\RW::code($outInvoiceData['kod']));
+                $outInvoiceData['kod'] = new DocumentLink($digger, \AbraFlexi\Functions::code($outInvoiceData['kod']));
                 $outInvoiceData['custcontact'] = $addresser->getNotificationEmailAddress();
 
                 if (!empty($outInvoiceData['kontaktEmail'])) {
