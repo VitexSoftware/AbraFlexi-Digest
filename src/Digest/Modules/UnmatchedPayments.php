@@ -15,8 +15,6 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest\Modules;
 
-
-
 /**
  * Payments without invoices.
  *

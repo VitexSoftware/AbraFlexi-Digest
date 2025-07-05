@@ -34,9 +34,9 @@ class Debtors extends DigestModule implements DigestModuleInterface
     public function dig(): bool
     {
         $invoicer = new \AbraFlexi\FakturaVydana();
-        $cond = ['datSplat lte \''.\AbraFlexi\RW::dateToFlexiDate(new \DateTime()).'\' AND (stavUhrK is null OR stavUhrK eq \'stavUhr.castUhr\') AND storno eq false ', 
+        $cond = ['datSplat lte \''.\AbraFlexi\Functions::dateToFlexiDate(new \DateTime()).'\' AND (stavUhrK is null OR stavUhrK eq \'stavUhr.castUhr\') AND storno eq false ',
             "(not(typDokl.typDoklK eq 'typDokladu.dobropis'))",
-            'includes'=>'faktura-vydana/typDokl/',
+            'includes' => 'faktura-vydana/typDokl/',
             'limit' => 0]; // AND typDoklK != \'typDokladu.dobropis\'
 
         $faDatakturyRaw = $invoicer->getColumnsFromAbraFlexi(
