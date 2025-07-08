@@ -216,7 +216,7 @@ EOD;
             $this->addStatusMessage('EASE_MAILTO not defined - not sending result', 'debug');
         }
 
-        $saveto = \Ease\Shared::cfg('SAVETO');
+        $saveto = \Ease\Shared::cfg('RESULT_FILE');
 
         if ($saveto) {
             $this->saveToHtml($saveto);
@@ -328,7 +328,7 @@ EOD;
      */
     public function saveToHtml($saveTo): void
     {
-        $filename = $saveTo.pathinfo($_SERVER['SCRIPT_FILENAME'], \PATHINFO_FILENAME).'.html';
+        $filename = $saveTo;
         $webPage = new \Ease\Html\HtmlTag(new \Ease\Html\SimpleHeadTag([
             new \Ease\Html\TitleTag($this->subject),
             '<style>'.self::$purecss.self::getCustomCss().self::getWebPageInlineCSS().'</style>',
