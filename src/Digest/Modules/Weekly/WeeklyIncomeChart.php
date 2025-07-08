@@ -23,6 +23,8 @@ use AbraFlexi\Digest\VerticalChart;
  * Description of DailyIncomeChart.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class WeeklyIncomeChart extends DigestModule implements DigestModuleInterface
 {

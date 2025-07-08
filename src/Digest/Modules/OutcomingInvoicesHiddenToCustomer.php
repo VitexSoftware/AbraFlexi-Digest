@@ -24,6 +24,8 @@ use AbraFlexi\ui\TWB5\DocumentLink;
  * Description of OutcomingInvoices.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class OutcomingInvoicesHiddenToCustomer extends DigestModule implements DigestModuleInterface
 {

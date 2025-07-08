@@ -19,6 +19,8 @@ namespace AbraFlexi\Digest\Modules\AllTime;
  *  Purchase Price Lower Than Sales.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class PurchasePriceLowerThanSales extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {

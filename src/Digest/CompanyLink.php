@@ -19,6 +19,8 @@ namespace AbraFlexi\Digest;
  * Link to company.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class CompanyLink extends \Ease\Html\ATag
 {

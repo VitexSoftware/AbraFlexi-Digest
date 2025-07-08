@@ -19,6 +19,8 @@ namespace AbraFlexi\Digest;
  * Description of WebPage.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class WebPage extends \Ease\TWB5\WebPage
 {

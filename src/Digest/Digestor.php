@@ -22,6 +22,8 @@ use Ease\Html\PTag;
  * Description of Digestor.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Digestor extends \Ease\Html\DivTag
 {

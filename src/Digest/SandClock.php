@@ -19,6 +19,8 @@ namespace AbraFlexi\Digest;
  * Description of SnadClock.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class SandClock extends \Ease\Container
 {

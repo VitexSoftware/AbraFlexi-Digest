@@ -19,6 +19,8 @@ namespace AbraFlexi\Digest\Modules;
  * Find Customers Without Email.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class WithoutEmail extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {

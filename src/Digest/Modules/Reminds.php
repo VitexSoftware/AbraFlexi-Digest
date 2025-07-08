@@ -19,6 +19,8 @@ namespace AbraFlexi\Digest\Modules;
  * Sent Reminds overview.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {

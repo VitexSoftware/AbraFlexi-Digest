@@ -21,6 +21,8 @@ use Ease\Html\DivTag;
  * Description of DigestMod.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class DigestModule extends DivTag implements DigestModuleInterface
 {

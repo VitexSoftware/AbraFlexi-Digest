@@ -19,6 +19,8 @@ namespace AbraFlexi\Digest\Modules;
  * Description of IncomingInvoices.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {

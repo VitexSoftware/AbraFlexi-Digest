@@ -19,6 +19,8 @@ namespace AbraFlexi\Digest;
  * Description of Vertical.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class VerticalChart extends \Ease\Html\UlTag
 {

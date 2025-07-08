@@ -20,6 +20,8 @@ namespace AbraFlexi\Digest;
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
  * @copyright  (G) 2017-2024 Vitex Software
+ *
+ * @no-named-arguments
  */
 class Mailer extends \Ease\HtmlMailer
 {

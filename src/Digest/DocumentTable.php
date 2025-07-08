@@ -19,6 +19,8 @@ namespace AbraFlexi\Digest;
  * Description of DocumentTable.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
+ *
+ * @no-named-arguments
  */
 class DocumentTable extends Table
 {

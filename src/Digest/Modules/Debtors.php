@@ -23,6 +23,8 @@ use AbraFlexi\Digest\Outlook\TableTag;
  * Description of WaitingIncome.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Debtors extends DigestModule implements DigestModuleInterface
 {

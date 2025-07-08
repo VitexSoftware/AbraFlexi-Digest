@@ -19,6 +19,8 @@ namespace AbraFlexi\Digest\Modules\Monthly;
  * Description of DailyIncomeChart.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class DailyIncomeChart extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {

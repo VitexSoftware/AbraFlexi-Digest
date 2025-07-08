@@ -24,6 +24,8 @@ namespace AbraFlexi\Digest;
 
 /**
  * @author vitex
+ *
+ * @no-named-arguments
  */
 interface DigestModuleInterface
 {

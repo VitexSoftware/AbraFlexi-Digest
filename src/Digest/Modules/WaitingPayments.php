@@ -19,6 +19,8 @@ namespace AbraFlexi\Digest\Modules;
  * Incoming invoices without payment.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class WaitingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {

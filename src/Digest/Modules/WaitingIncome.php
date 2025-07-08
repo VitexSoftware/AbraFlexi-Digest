@@ -19,6 +19,8 @@ namespace AbraFlexi\Digest\Modules;
  * Income we wait for.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {

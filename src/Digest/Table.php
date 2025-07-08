@@ -21,6 +21,8 @@ namespace AbraFlexi\Digest;
  * @deprecated since version 1.0 - use Outlook\TableTag instead
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class Table extends Outlook\TableTag
 {

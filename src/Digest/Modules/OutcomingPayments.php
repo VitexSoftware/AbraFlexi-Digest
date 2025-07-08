@@ -19,6 +19,8 @@ namespace AbraFlexi\Digest\Modules;
  * Description of OutcomingPayments.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class OutcomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {

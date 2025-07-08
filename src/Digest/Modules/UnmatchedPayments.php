@@ -19,6 +19,8 @@ namespace AbraFlexi\Digest\Modules;
  * Payments without invoices.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {

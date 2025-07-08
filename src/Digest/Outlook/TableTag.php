@@ -19,6 +19,8 @@ namespace AbraFlexi\Digest\Outlook;
  * Description of TableTag.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class TableTag extends \Ease\Html\TableTag
 {

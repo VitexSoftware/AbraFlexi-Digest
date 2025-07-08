@@ -23,6 +23,8 @@ namespace AbraFlexi\Digest\Modules;
  * Description of NewCustomers.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class NewCustomers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {

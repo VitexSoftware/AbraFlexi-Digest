@@ -21,6 +21,8 @@ use Ease\Html\DivTag;
  * Incoming payments for us.
  *
  * @author vitex
+ *
+ * @no-named-arguments
  */
 class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
