@@ -5,10 +5,10 @@
     "executable": "\/usr\/bin\/abraflexi-weekdigest",
     "setup": "",
     "cmdparams": "",
-    "requirements": "AbraFlexi",
+    "requirements": ["AbraFlexi"],
     "deploy": "sudo apt install abraflexi-digest",
     "homepage": "https://github.com/VitexSoftware/AbraFlexi-Digest/",
-    "topics": "AbraFlexi,Digest,Analytics,Sensor,Weekly",
+    "topics": ["AbraFlexi", "Digest", "Analytics", "Sensor", "Weekly"],
     "uuid": "83e75bfe-36d6-49d7-87af-613b03b6c45d",
     "environment": {
         "ABRAFLEXI_COMPANY": {

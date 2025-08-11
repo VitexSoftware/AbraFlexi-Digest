@@ -5,10 +5,10 @@
     "executable": "\/bin\/abraflexi-alltimedigest",
     "setup": "",
     "cmdparams": "",
-    "requirements": "AbraFlexi",
+    "requirements": ["AbraFlexi"],
     "deploy": "sudo apt install abraflexi-digest",
     "homepage": "https:\/\/github.com\/VitexSoftware\/AbraFlexi-Digest\/",
-    "topics": "AbraFlexi,Digest,Analytics,Sensor",
+    "topics": ["AbraFlexi", "Digest", "Analytics", "Sensor"],
     "uuid": "1a00b753-9768-4afb-b556-446e78e6192c",
     "environment": {
         "ABRAFLEXI_COMPANY": {
