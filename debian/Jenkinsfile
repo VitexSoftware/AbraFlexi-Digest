@@ -1,6 +1,6 @@
 #!groovy
 
-String[] distributions = ['debian:bookworm', 'debian:trixie', 'ubuntu:jammy', 'ubuntu:noble']
+String[] distributions = ['debian:bullseye', 'debian:bookworm', 'debian:trixie', 'debian:forky', 'ubuntu:focal', 'ubuntu:jammy', 'ubuntu:noble']
 
 String vendor = 'vitexsoftware'
 String distribution = ''
@@ -9,8 +9,8 @@ String distroCodename = ''
 String ver = ''
 
 properties([
-        copyArtifactPermission('*')
-    ])
+    copyArtifactPermission('*')
+])
 node() {
     ansiColor('xterm') {
         stage('SCM Checkout') {
@@ -25,7 +25,6 @@ distributions.each {
     println  "Dist:" + distribution
 
     def dist = distribution.split(':')
-    //      distroFamily = dist[0]
     distroCodename = dist[1]
 
     def buildImage = ''
@@ -60,7 +59,6 @@ distributions.each {
 
             stage('Test ' + distribution) {
                 buildImage.inside {
-                    def abraflexi_env = 'APP_DEBUG=true EASE_LOGGER="console" ABRAFLEXI_URL="https://demo.flexibee.eu:5434" ABRAFLEXI_LOGIN="winstrom" ABRAFLEXI_PASSWORD="winstrom" ABRAFLEXI_COMPANY="demo_de" '
                     def debconf_debug = 0 //Set to "5" or "developer" to debug debconf
                     sh 'cd $WORKSPACE/dist/debian/ ; dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz; cd $WORKSPACE'
                     sh 'echo "deb [trusted=yes] file://///$WORKSPACE/dist/debian/ ./" | sudo tee /etc/apt/sources.list.d/local.list'
@@ -72,14 +70,6 @@ distributions.each {
                             sh 'sudo DEBIAN_FRONTEND=noninteractive DEBCONF_DEBUG=' + debconf_debug + ' apt-get -y install $WORKSPACE/dist/debian/' + deb_file
                         }
                     }
-                    println "ABRAFLEXI_ENV: " + abraflexi_env
-                    sh abraflexi_env + 'abraflexi-daydigest'
-                    sh abraflexi_env + 'abraflexi-weekdigest'
-                    sh abraflexi_env + 'abraflexi-monthdigest'
-                    sh abraflexi_env + 'abraflexi-yeardigest'
-                    sh abraflexi_env + 'abraflexi-alltimedigest'
-                    stash includes: 'dist/**', name: 'dist-' + distroCodename
-
                 }
             }
             stage('Copy artifacts ' + distribution ) {
