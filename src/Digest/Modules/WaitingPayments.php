@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest\Modules;
 
+use AbraFlexi\Digest\Outlook\TableTag;
+
 /**
  * Incoming invoices without payment.
  *
@@ -63,7 +65,8 @@ class WaitingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFle
         }
 
         $adreser = new \AbraFlexi\Adresar(null, ['offline' => 'true']);
-        $invTable = new \AbraFlexi\Digest\Table([_('Position'), _('Code'), _('Partner'),
+        $invTable = new TableTag(null, ['class' => 'table']);
+        $invTable->addRowHeaderColumns([_('Position'), _('Code'), _('Partner'),
             _('Due Days'),
             _('Amount')]);
         $pos = 0;

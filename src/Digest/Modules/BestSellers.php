@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest\Modules;
 
+use AbraFlexi\Digest\Outlook\TableTag;
+
 /**
  * Description of NewCustomers.
  *
@@ -55,7 +57,8 @@ class BestSellers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\D
             return false;
         }
 
-        $topProductsTable = new \AbraFlexi\Digest\Table([_('Pricelist'),
+        $topProductsTable = new TableTag(null, ['class' => 'table']);
+        $topProductsTable->addRowHeaderColumns([_('Pricelist'),
             _('Quantity'), _('Total')]);
         $products = [];
         $totals = [];

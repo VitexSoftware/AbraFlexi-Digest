@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest\Modules;
 
+use AbraFlexi\Digest\Outlook\TableTag;
+
 /**
  * Sent Reminds overview.
  *
@@ -52,7 +54,8 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
         } else {
             $invoicer->addStatusMessage('Faktur: '.\count($faDatakturyRaw));
             $adreser = new \AbraFlexi\Adresar(null, ['offline' => 'true']);
-            $invTable = new \AbraFlexi\Digest\Table([
+            $invTable = new TableTag(null, ['class' => 'table']);
+            $invTable->addRowHeaderColumns([
                 _('Client'),
                 _('Invoice'),
                 _('Amount'),

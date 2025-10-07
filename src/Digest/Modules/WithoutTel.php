@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest\Modules;
 
+use AbraFlexi\Digest\Outlook\TableTag;
+
 /**
  *  Customers without notification phone number.
  *
@@ -52,7 +54,8 @@ class WithoutTel extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Di
         if (empty($withoutPhone)) {
             $this->addItem(_('none'));
         } else {
-            $noTelTable = new \AbraFlexi\Digest\Table([
+            $noTelTable = new TableTag(null, ['class' => 'table']);
+            $noTelTable->addRowHeaderColumns([
                 _('Company'),
                 _('Street'),
                 _('City'),

@@ -23,20 +23,55 @@ $start = new \DateTime();
 $start->modify('-1 year');
 $end = new \DateTime();
 $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
-$fmt = datefmt_create(
-    'cs_CZ',
-    \IntlDateFormatter::SHORT,
-    \IntlDateFormatter::NONE,
-    'Europe/Prague',
-    \IntlDateFormatter::GREGORIAN,
-);
+
+try {
+    $fmt = datefmt_create(
+        'cs_CZ',
+        \IntlDateFormatter::SHORT,
+        \IntlDateFormatter::NONE,
+        'Europe/Prague',
+        \IntlDateFormatter::GREGORIAN,
+    );
+} catch (\ValueError $e) {
+    $fmt = false;
+}
+
+// Check if datefmt_create failed and create fallback
+if ($fmt === false) {
+    try {
+        $fmt = datefmt_create(
+            'en_US',
+            \IntlDateFormatter::SHORT,
+            \IntlDateFormatter::NONE,
+            'UTC',
+            \IntlDateFormatter::GREGORIAN,
+        );
+    } catch (\ValueError $e) {
+        // If even the fallback fails, we'll handle it later
+        $fmt = false;
+    }
+}
 
 $myCompany = new \AbraFlexi\Company(\Ease\Shared::cfg('ABRAFLEXI_COMPANY'));
 $myCompanyName = $myCompany->getDataValue('nazev');
 
 $subject = sprintf(_('AbraFlexi %s 🎆 Year digest'), $myCompanyName);
 $digestor = new Digestor($subject);
-$formatter = new \IntlDateFormatter(\Ease\Locale::$localeUsed, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
+
+// Create IntlDateFormatter with fallback locale
+$locale = \Ease\Locale::$localeUsed ?? 'en_US';
+$formatter = new \IntlDateFormatter($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
+
+// If the constructor failed, try with a fallback locale
+if ($formatter === null) {
+    $formatter = new \IntlDateFormatter('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
+}
+
+// Check if formatter is still null (should not happen with en_US)
+if ($formatter === null) {
+    throw new \Exception('Failed to create IntlDateFormatter');
+}
+
 $digestor->addItem(new \Ease\Html\DivTag(sprintf(
     _('from %s to %s'),
     $formatter->format($period->getStartDate()->getTimestamp()),

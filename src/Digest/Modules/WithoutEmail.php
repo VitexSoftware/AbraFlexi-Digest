@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest\Modules;
 
+use AbraFlexi\Digest\Outlook\TableTag;
+
 /**
  * Find Customers Without Email.
  *
@@ -46,7 +48,8 @@ class WithoutEmail extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
         if (empty($withoutEmail)) {
             $this->addItem(_('none'));
         } else {
-            $noMailTable = new \AbraFlexi\Digest\Table([_('Company'), _('Street'),
+            $noMailTable = new TableTag(null, ['class' => 'table']);
+            $noMailTable->addRowHeaderColumns([_('Company'), _('Street'),
                 _('City'),
                 _('Phone')]);
             $count = 0;

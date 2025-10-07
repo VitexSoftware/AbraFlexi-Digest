@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest\Modules;
 
+use AbraFlexi\Digest\Outlook\TableTag;
+
 /**
  * Description of OutcomingPayments.
  *
@@ -65,7 +67,8 @@ class OutcomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
                 }
             }
 
-            $totalsTable = new \AbraFlexi\Digest\Table([_('Amount'), _('Currency')]);
+            $totalsTable = new TableTag(null, ['class' => 'table']);
+            $totalsTable->addRowHeaderColumns([_('Amount'), _('Currency')]);
 
             foreach ($total as $currency => $amount) {
                 $totalsTable->addRowColumns([self::formatCurrency((float) $amount), $currency]);

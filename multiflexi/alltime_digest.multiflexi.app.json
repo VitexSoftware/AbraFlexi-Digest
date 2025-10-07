@@ -42,7 +42,7 @@
             "required": false
         },
         "DIGEST_CHECK_SUPPLIER_CONTACT": {
-            "type": "checkbox",
+            "type": "bool",
             "description": "Do not notify if the supplier does not have contact details",
             "defval": "happy",
             "required": false

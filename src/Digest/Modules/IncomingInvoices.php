@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest\Modules;
 
+use AbraFlexi\Digest\Outlook\TableTag;
+
 /**
  * Description of IncomingInvoices.
  *
@@ -92,7 +94,8 @@ class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFl
                 $invoiced[] = self::formatCurrency((float) $amount).' '.\AbraFlexi\Functions::uncode((string) $currencyCode);
             }
 
-            $inInvoicesTable = new \AbraFlexi\Digest\Table([_('Count'), _('Type'),
+            $inInvoicesTable = new TableTag(null, ['class' => 'table']);
+            $inInvoicesTable->addRowHeaderColumns([_('Count'), _('Type'),
                 _('Total')]);
 
             foreach ($typDoklRaw as $type => $count) {

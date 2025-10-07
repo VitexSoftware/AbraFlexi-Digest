@@ -22,14 +22,49 @@ $start = new \DateTime();
 $start->modify('-1 week');
 $end = new \DateTime();
 $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
-$fmt = datefmt_create(
-    'cs_CZ',
-    \IntlDateFormatter::SHORT,
-    \IntlDateFormatter::NONE,
-    'Europe/Prague',
-    \IntlDateFormatter::GREGORIAN,
-);
-$formatter = new \IntlDateFormatter(\Ease\Locale::$localeUsed, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
+
+try {
+    $fmt = datefmt_create(
+        'cs_CZ',
+        \IntlDateFormatter::SHORT,
+        \IntlDateFormatter::NONE,
+        'Europe/Prague',
+        \IntlDateFormatter::GREGORIAN,
+    );
+} catch (\ValueError $e) {
+    $fmt = false;
+}
+
+// Check if datefmt_create failed and create fallback
+if ($fmt === false) {
+    try {
+        $fmt = datefmt_create(
+            'en_US',
+            \IntlDateFormatter::SHORT,
+            \IntlDateFormatter::NONE,
+            'UTC',
+            \IntlDateFormatter::GREGORIAN,
+        );
+    } catch (\ValueError $e) {
+        // If even the fallback fails, we'll handle it later
+        $fmt = false;
+    }
+}
+
+// Create IntlDateFormatter with fallback locale
+$locale = \Ease\Locale::$localeUsed ?? 'en_US';
+$formatter = new \IntlDateFormatter($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
+
+// If the constructor failed, try with a fallback locale
+if ($formatter === null) {
+    $formatter = new \IntlDateFormatter('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
+}
+
+// Check if formatter is still null (should not happen with en_US)
+if ($formatter === null) {
+    throw new \Exception('Failed to create IntlDateFormatter');
+}
+
 $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
 
 $myCompany = new \AbraFlexi\Company(\Ease\Shared::cfg('ABRAFLEXI_COMPANY'));

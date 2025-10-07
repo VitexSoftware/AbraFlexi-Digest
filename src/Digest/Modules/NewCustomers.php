@@ -19,6 +19,8 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest\Modules;
 
+use AbraFlexi\Digest\Outlook\TableTag;
+
 /**
  * Description of NewCustomers.
  *
@@ -44,7 +46,8 @@ class NewCustomers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\
         if (empty($newCustomersData)) {
             $this->addItem(_('none'));
         } else {
-            $userTable = new \AbraFlexi\Digest\Table([_('Position'), _('Code'),
+            $userTable = new TableTag(null, ['class' => 'table']);
+            $userTable->addRowHeaderColumns([_('Position'), _('Code'),
                 _('Name'),
                 _('Email'), _('Phone')]);
 

@@ -46,7 +46,20 @@ if (empty($to)) {
 }
 
 if (\Ease\Document::isPosted()) {
-    $formatter = new \IntlDateFormatter(\Ease\Locale::$localeUsed, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
+    // Create IntlDateFormatter with fallback locale
+    $locale = \Ease\Locale::$localeUsed ?? 'en_US';
+    $formatter = new \IntlDateFormatter($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
+    
+    // If the constructor failed, try with a fallback locale
+    if ($formatter === null) {
+        $formatter = new \IntlDateFormatter('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
+    }
+    
+    // Check if formatter is still null (should not happen with en_US)
+    if ($formatter === null) {
+        throw new \Exception('Failed to create IntlDateFormatter');
+    }
+    
     $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
     $subject = sprintf(
             _('AbraFlexi %s digest from %s to %s'),

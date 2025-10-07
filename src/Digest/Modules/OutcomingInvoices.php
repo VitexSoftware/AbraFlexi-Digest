@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest\Modules;
 
+use AbraFlexi\Digest\Outlook\TableTag;
+
 /**
  * Description of OutcomingInvoices.
  *
@@ -94,7 +96,8 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
                 $tableHeader[] = _('Total').' '.\AbraFlexi\Functions::uncode((string) $currencyCode);
             }
 
-            $outInvoicesTable = new \AbraFlexi\Digest\Table($tableHeader);
+            $outInvoicesTable = new TableTag(null, ['class' => 'table']);
+            $outInvoicesTable->addRowHeaderColumns($tableHeader);
 
             foreach ($typDoklTotals as $typDokl => $typDoklTotal) {
                 $tableRow = [$typDoklCounts[$typDokl]];

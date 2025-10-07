@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest\Modules\AllTime;
 
+use AbraFlexi\Digest\Outlook\TableTag;
+
 /**
  *  Purchase Price Lower Than Sales.
  *
@@ -61,7 +63,8 @@ class PurchasePriceLowerThanSales extends \AbraFlexi\Digest\DigestModule impleme
             return false;
         }
 
-        $topProductsTable = new \AbraFlexi\Digest\Table([
+        $topProductsTable = new TableTag(null, ['class' => 'table']);
+        $topProductsTable->addRowHeaderColumns([
             _('Code'),
             _('Name'),
             _('Buy'),

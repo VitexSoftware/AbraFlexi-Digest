@@ -15,6 +15,10 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest\Modules;
 
+use AbraFlexi\Digest\Outlook\TableTag;
+
+/**
+
 use Ease\Html\DivTag;
 
 /**
@@ -53,7 +57,8 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
         if (empty($proformas)) {
             $this->addItem($this->cardBody(_('none')));
         } else {
-            $incomesTable = new \AbraFlexi\Digest\Table([_('Document'), _('Description'),
+            $incomesTable = new TableTag(null, ['class' => 'table']);
+            $incomesTable->addRowHeaderColumns([_('Document'), _('Description'),
                 _('Denunc state'), _('Document type'), _('Company'), _('Date'), _('Amount')]);
 
             foreach ($proformas as $proforma) {
