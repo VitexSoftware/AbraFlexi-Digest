@@ -1,76 +1,121 @@
 {
-    "image": "",
-    "name": "AllTime Digest",
-    "description": "digest for your Accounting from begin to now",
-    "executable": "\/bin\/abraflexi-alltimedigest",
-    "setup": "",
-    "cmdparams": "",
-    "requirements": ["AbraFlexi"],
-    "deploy": "sudo apt install abraflexi-digest",
-    "homepage": "https:\/\/github.com\/VitexSoftware\/AbraFlexi-Digest\/",
-    "topics": ["AbraFlexi", "Digest", "Analytics", "Sensor"],
+    "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
+    "schemaVersion": "3.0.0",
     "uuid": "1a00b753-9768-4afb-b556-446e78e6192c",
+    "name": {
+        "en": "AllTime Digest",
+        "cs": "AllTime Digest"
+    },
+    "description": {
+        "en": "digest for your Accounting from begin to now",
+        "cs": "digest for your Accounting from begin to now"
+    },
+    "tags": [
+        "AbraFlexi",
+        "Digest",
+        "Analytics",
+        "Sensor"
+    ],
+    "homepage": "https://github.com/VitexSoftware/AbraFlexi-Digest/",
+    "image": "",
+    "executable": "/bin/abraflexi-alltimedigest",
     "environment": {
         "ABRAFLEXI_COMPANY": {
             "type": "string",
             "description": "",
             "defval": "demo_de",
-            "required": true
+            "required": true,
+            "category": "API"
         },
         "ABRAFLEXI_LOGIN": {
             "type": "string",
-            "description": "AbraFlexi Login",
+            "description": {
+                "en": "AbraFlexi Login",
+                "cs": "AbraFlexi Login"
+            },
             "defval": "winstrom",
-            "required": true
+            "required": true,
+            "category": "API"
         },
         "ABRAFLEXI_PASSWORD": {
-            "type": "string",
-            "description": "AbraFlexi password",
+            "type": "password",
+            "description": {
+                "en": "AbraFlexi password",
+                "cs": "AbraFlexi password"
+            },
             "defval": "winstrom",
-            "required": true
+            "required": true,
+            "category": "API"
         },
         "ABRAFLEXI_URL": {
             "type": "string",
-            "description": "AbraFlexi Server URI",
-            "defval": "https:\/\/demo.flexibee.eu:5434",
-            "required": true
+            "description": {
+                "en": "AbraFlexi Server URI",
+                "cs": "AbraFlexi Server URI"
+            },
+            "defval": "https://demo.flexibee.eu:5434",
+            "required": true,
+            "category": "API"
         },
         "THEME": {
             "type": "text",
-            "description": "Report theme",
+            "description": {
+                "en": "Report theme",
+                "cs": "Report theme"
+            },
             "defval": "happy",
-            "required": false
+            "required": false,
+            "category": "Other"
         },
         "DIGEST_CHECK_SUPPLIER_CONTACT": {
             "type": "bool",
-            "description": "Do not notify if the supplier does not have contact details",
+            "description": {
+                "en": "Do not notify if the supplier does not have contact details",
+                "cs": "Do not notify if the supplier does not have contact details"
+            },
             "defval": "happy",
-            "required": false
+            "required": false,
+            "category": "Other"
         },
         "DIGEST_MAILTO": {
             "type": "text",
-            "description": "sending result",
+            "description": {
+                "en": "sending result",
+                "cs": "sending result"
+            },
             "defval": "",
-            "required": false
+            "required": false,
+            "category": "Other"
         },
         "RESULT_FILE": {
             "type": "string",
-            "description": "write output json data to",
+            "description": {
+                "en": "write output json data to",
+                "cs": "write output json data to"
+            },
             "defval": "alltime_digest.html",
-            "required": false
+            "required": false,
+            "category": "Other"
         },
-        "DIGEST_FROM": { 
+        "DIGEST_FROM": {
             "type": "text",
-            "description": "Diget sender addres",
+            "description": {
+                "en": "Diget sender addres",
+                "cs": "Diget sender addres"
+            },
             "defval": "",
-            "required": true
+            "required": true,
+            "category": "Other"
         },
         "EASE_LOGGER": {
             "type": "string",
-            "description": "write log messages using",
+            "description": {
+                "en": "write log messages using",
+                "cs": "write log messages using"
+            },
             "defval": "console|syslog",
-            "required": false
+            "required": false,
+            "category": "Behavior"
         }
-    },
-    "multiflexi": "1.7.2"
+    }
 }
