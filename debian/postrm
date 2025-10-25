@@ -1,0 +1,13 @@
+#!/bin/sh
+# postrm script for abraflexi-digest
+
+set -e
+
+if [ -f /usr/lib/abraflexi-digest/composer.lock ] ; then
+    rm -f /usr/lib/abraflexi-digest/composer.lock
+fi
+
+
+#DEBHELPER#
+
+exit 0
