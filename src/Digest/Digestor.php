@@ -177,11 +177,11 @@ EOD;
             echo $exc->getTraceAsString();
         }
 
-        if (!empty($infoRaw) && !\array_key_exists('success', $infoRaw)) {
+        if (!empty($infoRaw) && !array_key_exists('success', $infoRaw)) {
             $info = \Ease\Functions::reindexArrayBy($infoRaw, 'dbNazev');
             $myCompany = $prober->getCompany();
 
-            if (\array_key_exists($myCompany, $info)) {
+            if (array_key_exists($myCompany, $info)) {
                 $return = new \Ease\Html\ATag(
                     $prober->url.'/c/'.$myCompany,
                     $info[$myCompany]['nazev'],

@@ -61,7 +61,7 @@
             "type": "text",
             "description": {
                 "en": "Report theme",
-                "cs": "Report theme"
+                "cs": "Téma zprávy"
             },
             "defval": "happy",
             "required": false,
@@ -71,7 +71,7 @@
             "type": "bool",
             "description": {
                 "en": "Do not notify if the supplier does not have contact details",
-                "cs": "Do not notify if the supplier does not have contact details"
+                "cs": "Neoznamovat pokud dodavatel nemá kontaktní údaje"
             },
             "defval": "happy",
             "required": false,
@@ -91,7 +91,7 @@
             "type": "string",
             "description": {
                 "en": "write output json data to",
-                "cs": "write output json data to"
+                "cs": "zapsat výstupní json data do"
             },
             "defval": "alltime_digest.html",
             "required": false,
@@ -100,8 +100,8 @@
         "DIGEST_FROM": {
             "type": "text",
             "description": {
-                "en": "Diget sender addres",
-                "cs": "Diget sender addres"
+                "en": "Diget sender Address",
+                "cs": "Adresa odesílatele digestu"
             },
             "defval": "",
             "required": true,
@@ -111,7 +111,7 @@
             "type": "string",
             "description": {
                 "en": "write log messages using",
-                "cs": "write log messages using"
+                "cs": "zapsat log zprávy pomocí"
             },
             "defval": "console|syslog",
             "required": false,

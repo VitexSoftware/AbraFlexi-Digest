@@ -77,7 +77,7 @@ class Debtors extends DigestModule implements DigestModuleInterface
                 $totalsByCurrency[$currency] += $amount;
                 $oDays = \AbraFlexi\FakturaVydana::overdueDays($faData['datSplat']);
 
-                if (\array_key_exists((string) $faData['firma'], $overdue)) {
+                if (array_key_exists((string) $faData['firma'], $overdue)) {
                     if ($oDays > $overdue[(string) $faData['firma']]) {
                         $overdue[(string) $faData['firma']] = $oDays;
                     }
@@ -111,7 +111,7 @@ class Debtors extends DigestModule implements DigestModuleInterface
 
                 $adreser->setMyKey($firma);
                 $invoice = current($fakturyFirmy);
-                $nazevFirmy = \array_key_exists('firma', $invoice) && \is_object($invoice['firma']) && $invoice['firma']->showAs ? $invoice['firma']->showAs : \AbraFlexi\Functions::uncode((string) $firma);
+                $nazevFirmy = array_key_exists('firma', $invoice) && \is_object($invoice['firma']) && $invoice['firma']->showAs ? $invoice['firma']->showAs : \AbraFlexi\Functions::uncode((string) $firma);
                 $invTable->addRowColumns([
                     new \Ease\Html\ATag($adreser->getApiURL(), $nazevFirmy),
                     $overdue[$firma],

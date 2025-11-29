@@ -58,7 +58,7 @@ class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFl
                     ++$storno;
                 }
 
-                if (\array_key_exists($outInvoiceData['typDokl'], $typDoklRaw)) {
+                if (array_key_exists($outInvoiceData['typDokl'], $typDoklRaw)) {
                     ++$typDoklRaw[$outInvoiceData['typDokl']];
                 } else {
                     $typDoklRaw[$outInvoiceData['typDokl']] = 1;
@@ -66,18 +66,18 @@ class IncomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFl
 
                 $amount = ($outInvoiceData['mena'] === 'code:CZK') ? (float) ($outInvoiceData['sumCelkem']) : (float) ($outInvoiceData['sumCelkemMen']);
 
-                if (\array_key_exists($outInvoiceData['mena'], $invoicedRaw)) {
+                if (array_key_exists($outInvoiceData['mena'], $invoicedRaw)) {
                     $invoicedRaw[$outInvoiceData['mena']] += $amount;
                 } else {
                     $invoicedRaw[$outInvoiceData['mena']] = $amount;
                 }
 
-                if (!\array_key_exists($outInvoiceData['typDokl'], $totals)) {
+                if (!array_key_exists($outInvoiceData['typDokl'], $totals)) {
                     $totals[$outInvoiceData['typDokl']] = [];
                 }
 
                 if (
-                    !\array_key_exists(
+                    !array_key_exists(
                         $outInvoiceData['mena'],
                         $totals[$outInvoiceData['typDokl']],
                     )

@@ -60,7 +60,7 @@ class OutcomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
                     $amount = (float) $outcome['sumCelkem'];
                 }
 
-                if (\array_key_exists($currency, $total)) {
+                if (array_key_exists($currency, $total)) {
                     $total[$currency] += $amount;
                 } else {
                     $total[$currency] = $amount;

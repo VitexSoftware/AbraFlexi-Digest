@@ -112,12 +112,12 @@ class Reminds extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Diges
      */
     public function countRemind(\DateTime $date, string $column): void
     {
-        if (!\array_key_exists($column, $this->remids)) {
+        if (!array_key_exists($column, $this->remids)) {
             $this->remids[$column] = 0;
         }
 
         if ($this->isMyDate($date)) {
-            if (\array_key_exists($column, $this->remids)) {
+            if (array_key_exists($column, $this->remids)) {
                 ++$this->remids[$column];
             }
         }

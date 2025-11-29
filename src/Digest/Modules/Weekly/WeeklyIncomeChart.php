@@ -69,11 +69,11 @@ class WeeklyIncomeChart extends DigestModule implements DigestModuleInterface
             foreach ($incomes as $income) {
                 $currency = self::getCurrency($income);
 
-                if (!\array_key_exists($income['datVyst'], $days)) {
+                if (!array_key_exists($income['datVyst'], $days)) {
                     $days[$income['datVyst']] = [];
                 }
 
-                if (!\array_key_exists($currency, $averages)) {
+                if (!array_key_exists($currency, $averages)) {
                     $averages[$currency] = [];
                 }
 
@@ -83,13 +83,13 @@ class WeeklyIncomeChart extends DigestModule implements DigestModuleInterface
                     $incomeAmount = (float) $income['sumCelkemMen'];
                 }
 
-                if (\array_key_exists($currency, $days[$income['datVyst']])) {
+                if (array_key_exists($currency, $days[$income['datVyst']])) {
                     $days[$income['datVyst']][$currency] += $incomeAmount;
                 } else {
                     $days[$income['datVyst']][$currency] = $incomeAmount;
                 }
 
-                if (\array_key_exists($income['datVyst'], $averages[$currency])) {
+                if (array_key_exists($income['datVyst'], $averages[$currency])) {
                     $averages[$currency][$income['datVyst']] += $incomeAmount;
                 } else {
                     $averages[$currency][$income['datVyst']] = $incomeAmount;

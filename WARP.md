@@ -67,7 +67,7 @@ make clean
 ### MultiFlexi Validation
 When updating `multiflexi/*.app.json` files, validate them with:
 ```bash
-multiflexi-cli application validate-json --json multiflexi/[filename].app.json
+multiflexi-cli application validate-json --file multiflexi/[filename].app.json
 ```
 
 All MultiFlexi JSON files must conform to: https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json

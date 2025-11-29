@@ -65,15 +65,15 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
                     $amount = (float) $outInvoiceData['sumCelkem'] + (float) $outInvoiceData['sumZalohy'];
                 }
 
-                if (!\array_key_exists($typDokl, $typDoklTotals)) {
+                if (!array_key_exists($typDokl, $typDoklTotals)) {
                     $typDoklTotals[$typDokl] = [];
                 }
 
-                if (!\array_key_exists($currency, $typDoklTotals[$typDokl])) {
+                if (!array_key_exists($currency, $typDoklTotals[$typDokl])) {
                     $typDoklTotals[$typDokl][$currency] = 0;
                 }
 
-                if (\array_key_exists($typDokl, $typDoklCounts)) {
+                if (array_key_exists($typDokl, $typDoklCounts)) {
                     ++$typDoklCounts[$typDokl];
                     $typDoklTotals[$typDokl][$currency] += $amount;
                 } else {
@@ -81,7 +81,7 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
                     $typDoklTotals[$typDokl][$currency] = $amount;
                 }
 
-                if (\array_key_exists($currency, $invoicedRaw)) {
+                if (array_key_exists($currency, $invoicedRaw)) {
                     $invoicedRaw[$currency] += $amount;
                 } else {
                     $invoicedRaw[$currency] = $amount;
@@ -104,7 +104,7 @@ class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
                 $tableRow[] = \AbraFlexi\Functions::uncode((string) $typDokl);
 
                 foreach ($currencies as $currencyCode) {
-                    $tableRow[] = \array_key_exists(
+                    $tableRow[] = array_key_exists(
                         $currencyCode,
                         $typDoklTotals[$typDokl],
                     ) ? $typDoklTotals[$typDokl][$currencyCode] : '';
