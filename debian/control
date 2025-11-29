@@ -17,7 +17,7 @@ Description: digest for AbraFlexi
  email. Daily, weekly, monthly, yearly and all time.
 
 Package: multiflexi-abraflexi-digest
-Depends: multiflexi, abraflexi-digest
+Depends: multiflexi-cli, abraflexi-digest
 Architecture: all
 Section: web
 Priority: optional
