@@ -72,7 +72,7 @@
             "type": "bool",
             "description": {
                 "en": "Do not notify if the supplier does not have contact details",
-                "cs": "Do not notify if the supplier does not have contact details"
+                "cs": "Neupozorňovat, pokud dodavatel nemá kontaktní údaje"
             },
             "defval": "happy",
             "required": false,
@@ -82,7 +82,7 @@
             "type": "text",
             "description": {
                 "en": "Diget sender addres",
-                "cs": "Diget sender addres"
+                "cs": "Adresa odesílatele digestu"
             },
             "defval": "",
             "required": true,
@@ -91,8 +91,8 @@
         "DIGEST_MAILTO": {
             "type": "text",
             "description": {
-                "en": "sending result",
-                "cs": "sending result"
+                "en": "result recipients",
+                "cs": "příjemci výsledku"
             },
             "defval": "",
             "required": false,
@@ -102,7 +102,7 @@
             "type": "string",
             "description": {
                 "en": "write output json data to",
-                "cs": "write output json data to"
+                "cs": "zapsat výstupní json data do"
             },
             "defval": "yearly_digest.html",
             "required": false,
@@ -112,7 +112,7 @@
             "type": "string",
             "description": {
                 "en": "write log messages using",
-                "cs": "write log messages using"
+                "cs": "zapsat log zprávy pomocí"
             },
             "defval": "console|syslog",
             "required": false,

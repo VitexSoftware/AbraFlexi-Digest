@@ -4,11 +4,11 @@
     "uuid": "1a00b753-9768-4afb-b556-446e78e6192c",
     "name": {
         "en": "AllTime Digest",
-        "cs": "AllTime Digest"
+        "cs": "Digest za celé období"
     },
     "description": {
         "en": "digest for your Accounting from begin to now",
-        "cs": "digest for your Accounting from begin to now"
+        "cs": "digest pro vaše účetnictví od začátku do současnosti"
     },
     "tags": [
         "AbraFlexi",
@@ -41,7 +41,7 @@
             "type": "password",
             "description": {
                 "en": "AbraFlexi password",
-                "cs": "AbraFlexi password"
+                "cs": "Heslo do AbraFlexi"
             },
             "defval": "winstrom",
             "required": true,

@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace AbraFlexi\Digest\Modules;
 
 use AbraFlexi\Digest\Outlook\TableTag;
+use Ease\Html\DivTag;
 
 /**
 
@@ -99,7 +100,7 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
             $currDiv = new DivTag();
 
             foreach ($total as $currency => $amount) {
-                $currDiv->addItem(new \Ease\Html\DivTag($totals[$currency].'x '.self::formatCurrency((float) $amount).'&nbsp;'.$currency));
+                $currDiv->addItem(new DivTag($totals[$currency].'x '.self::formatCurrency((float) $amount).'&nbsp;'.$currency));
             }
 
             $this->addItem($this->cardBody([$incomesTable, $currDiv]));
