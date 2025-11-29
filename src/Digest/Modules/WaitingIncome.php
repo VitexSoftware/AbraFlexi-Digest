@@ -82,7 +82,7 @@ class WaitingIncome extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi
                     (($currency !== 'CZK') ? $outInvoiceData['sumCelkemMen'] : $outInvoiceData['sumCelkem']).' '.$currency,
                 ]);
 
-                if (array_key_exists($currency, $totals)) {
+                if (\array_key_exists($currency, $totals)) {
                     $totals[$currency] += (float) $outInvoiceData['sumCelkem'];
                 } else {
                     $totals[$currency] = (float) $outInvoiceData['sumCelkem'];

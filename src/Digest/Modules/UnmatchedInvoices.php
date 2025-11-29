@@ -19,10 +19,8 @@ use AbraFlexi\Digest\Outlook\TableTag;
 use Ease\Html\DivTag;
 
 /**
-
-use Ease\Html\DivTag;
-
-/**
+ * use Ease\Html\DivTag;.
+ * /**
  * Incoming payments for us.
  *
  * @author vitex
@@ -75,7 +73,7 @@ class UnmatchedInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraF
                         $amount = self::getAmount($proforma);
                         $currency = self::getCurrency($proforma);
 
-                        if (array_key_exists($currency, $total)) {
+                        if (\array_key_exists($currency, $total)) {
                             $total[$currency] += $amount;
                             ++$totals[$currency];
                         } else {

@@ -98,7 +98,7 @@ class WaitingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFle
                 )),
             ]);
 
-            if (array_key_exists($currency, $totals)) {
+            if (\array_key_exists($currency, $totals)) {
                 $totals[$currency] += (float) $inInvoiceData['sumCelkem'];
             } else {
                 $totals[$currency] = (float) $inInvoiceData['sumCelkem'];

@@ -28,7 +28,7 @@ if (\Ease\Document::isPosted() && \Ease\Document::getPostValue('url')) {
     \define('ABRAFLEXI_COMPANY', \Ease\Document::getPostValue('company'));
     $shared->setConfigValue('EASE_MAILTO', \Ease\Document::getPostValue('recipient'));
 } else {
-    $conffile = (isset($argv) && \is_array($argv) && array_key_exists(1, $argv) && file_exists($argv[1])) ? $argv[1] : '../.env';
+    $conffile = (isset($argv) && \is_array($argv) && \array_key_exists(1, $argv) && file_exists($argv[1])) ? $argv[1] : '../.env';
 
     if (file_exists($conffile)) {
         $shared->loadConfig($conffile, true);

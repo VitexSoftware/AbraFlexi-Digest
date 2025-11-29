@@ -43,7 +43,7 @@ class BestSellers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\D
 
         if (!empty($invoicesRaw)) {
             foreach ($invoicesRaw as $invoiceCode => $invoiceData) {
-                if (array_key_exists('polozkyDokladu', $invoiceData)) {
+                if (\array_key_exists('polozkyDokladu', $invoiceData)) {
                     foreach ($invoiceData['polozkyDokladu'] as $itemRaw) {
                         $items[] = $itemRaw;
                     }
@@ -70,13 +70,13 @@ class BestSellers extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\D
 
             $itemIdent = !empty($item['cenik']) ? \AbraFlexi\Functions::uncode((string) $item['cenik']) : $item['nazev'];
 
-            if (array_key_exists($itemIdent, $products)) {
+            if (\array_key_exists($itemIdent, $products)) {
                 ++$products[$itemIdent];
             } else {
                 $products[$itemIdent] = 1;
             }
 
-            if (array_key_exists($itemIdent, $totals)) {
+            if (\array_key_exists($itemIdent, $totals)) {
                 $totals[$itemIdent] += $item['sumZkl'];
             } else {
                 $totals[$itemIdent] = (float) $item['sumZkl'];

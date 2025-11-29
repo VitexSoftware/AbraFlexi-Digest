@@ -18,44 +18,44 @@ namespace AbraFlexi\Digest\Tests;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Test class for IntlDateFormatter functionality and error handling
+ * Test class for IntlDateFormatter functionality and error handling.
  *
  * This tests the fixes we implemented for IntlDateFormatter issues
  */
 class IntlDateFormatterTest extends TestCase
 {
     /**
-     * Test IntlDateFormatter with valid locale
+     * Test IntlDateFormatter with valid locale.
      */
     public function testIntlDateFormatterWithValidLocale(): void
     {
         $locale = 'en_US';
         $formatter = new \IntlDateFormatter($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
-        
+
         $this->assertInstanceOf(\IntlDateFormatter::class, $formatter);
         $this->assertIsString($formatter->format(time()));
     }
 
     /**
-     * Test IntlDateFormatter with null locale falls back to en_US
+     * Test IntlDateFormatter with null locale falls back to en_US.
      */
     public function testIntlDateFormatterWithNullLocaleFallback(): void
     {
         $locale = null;
-        $locale = $locale ?? 'en_US';
+        $locale ??= 'en_US';
         $formatter = new \IntlDateFormatter($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
-        
+
         // If the constructor failed, try with a fallback locale
         if ($formatter === null) {
             $formatter = new \IntlDateFormatter('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
         }
-        
+
         $this->assertInstanceOf(\IntlDateFormatter::class, $formatter);
         $this->assertIsString($formatter->format(time()));
     }
 
     /**
-     * Test datefmt_create with valid locale
+     * Test datefmt_create with valid locale.
      */
     public function testDatefmtCreateWithValidLocale(): void
     {
@@ -70,9 +70,9 @@ class IntlDateFormatterTest extends TestCase
         } catch (\ValueError $e) {
             $fmt = false;
         }
-        
+
         $this->assertNotFalse($fmt);
-        
+
         if ($fmt !== false) {
             $result = datefmt_format($fmt, time());
             $this->assertIsString($result);
@@ -80,12 +80,12 @@ class IntlDateFormatterTest extends TestCase
     }
 
     /**
-     * Test complete error handling pattern used in digest files
+     * Test complete error handling pattern used in digest files.
      */
     public function testCompleteErrorHandlingPattern(): void
     {
         // Simulate the pattern used in the digest files
-        
+
         // Step 1: Create formatter with potential failure
         try {
             $fmt = datefmt_create(
@@ -98,7 +98,7 @@ class IntlDateFormatterTest extends TestCase
         } catch (\ValueError $e) {
             $fmt = false;
         }
-        
+
         // Step 2: Fallback if needed
         if ($fmt === false) {
             try {
@@ -113,30 +113,31 @@ class IntlDateFormatterTest extends TestCase
                 $fmt = false;
             }
         }
-        
+
         // Step 3: Create IntlDateFormatter with similar pattern
         $locale = null; // Simulate \Ease\Locale::$localeUsed being null
-        $locale = $locale ?? 'en_US';
+        $locale ??= 'en_US';
         $formatter = new \IntlDateFormatter($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
-        
+
         if ($formatter === null) {
             $formatter = new \IntlDateFormatter('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
         }
-        
+
         if ($formatter === null) {
             $this->fail('Failed to create IntlDateFormatter even with fallback');
         }
-        
+
         // Step 4: Test formatting with fallback
         $formattedDate = false;
+
         if ($fmt !== false) {
             $formattedDate = datefmt_format($fmt, time());
         }
-        
+
         if ($formattedDate === false) {
             $formattedDate = (new \DateTime())->format('Y-m-d');
         }
-        
+
         // Assertions
         $this->assertInstanceOf(\IntlDateFormatter::class, $formatter);
         $this->assertIsString($formattedDate);

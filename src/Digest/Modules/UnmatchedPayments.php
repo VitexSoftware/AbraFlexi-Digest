@@ -75,7 +75,7 @@ class UnmatchedPayments extends \AbraFlexi\Digest\DigestModule implements \AbraF
                 $amount = self::getAmount($income);
                 $currency = self::getCurrency($income);
 
-                if (array_key_exists($currency, $total)) {
+                if (\array_key_exists($currency, $total)) {
                     $total[$currency] += $amount;
                 } else {
                     $total[$currency] = $amount;

@@ -54,7 +54,7 @@ class IncomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFl
                     $amount = (float) $income['sumCelkemMen'];
                 }
 
-                if (array_key_exists($currency, $total)) {
+                if (\array_key_exists($currency, $total)) {
                     $total[$currency] += $amount;
                 } else {
                     $total[$currency] = $amount;

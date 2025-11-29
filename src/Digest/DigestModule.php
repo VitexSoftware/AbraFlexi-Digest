@@ -168,7 +168,7 @@ class DigestModule extends DivTag implements DigestModuleInterface
      */
     public static function getAmount(array $data)
     {
-        return array_key_exists('sumCelkem', $data) ? $data['sumCelkem'] : 0.0;
+        return \array_key_exists('sumCelkem', $data) ? $data['sumCelkem'] : 0.0;
     }
 
     /**
@@ -258,7 +258,7 @@ class DigestModule extends DivTag implements DigestModuleInterface
      */
     public static function getPrice(array $data)
     {
-        return array_key_exists('sumCelkem', $data) ? $data['sumCelkem'] : 0;
+        return \array_key_exists('sumCelkem', $data) ? $data['sumCelkem'] : 0;
     }
 
     /**
