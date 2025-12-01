@@ -75,24 +75,38 @@ $subject = sprintf(
 );
 $digestor = new Digestor($subject);
 
-// Create IntlDateFormatter with fallback locale
+// Create IntlDateFormatter with proper error handling
 $locale = \Ease\Locale::$localeUsed ?? 'en_US';
-$formatter = new \IntlDateFormatter($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
+$formatter = null;
+
+try {
+    $formatter = new \IntlDateFormatter($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
+} catch (\ValueError $e) {
+    $formatter = null;
+}
 
 // If the constructor failed, try with a fallback locale
 if ($formatter === null) {
-    $formatter = new \IntlDateFormatter('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
+    try {
+        $formatter = new \IntlDateFormatter('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
+    } catch (\ValueError $e) {
+        $formatter = null;
+    }
 }
 
-// Check if formatter is still null (should not happen with en_US)
-if ($formatter === null) {
-    throw new \Exception('Failed to create IntlDateFormatter');
+// Format dates with fallback if formatter failed
+if ($formatter !== null) {
+    $startFormatted = $formatter->format($period->getStartDate()->getTimestamp());
+    $endFormatted = $formatter->format($period->getEndDate()->getTimestamp());
+} else {
+    $startFormatted = $period->getStartDate()->format('Y-m-d');
+    $endFormatted = $period->getEndDate()->format('Y-m-d');
 }
 
 $digestor->addItem(new \Ease\Html\DivTag(sprintf(
     _('from %s to %s'),
-    $formatter->format($period->getStartDate()->getTimestamp()),
-    $formatter->format($period->getEndDate()->getTimestamp()),
+    $startFormatted,
+    $endFormatted,
 )));
 
 $digestor->dig($period, array_merge(\Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules'), \Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules\Monthly')));
