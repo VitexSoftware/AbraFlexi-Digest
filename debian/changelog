@@ -1,8 +1,14 @@
-abraflexi-digest (1.33.1) UNRELEASED; urgency=medium
+abraflexi-digest (1.33.2) UNRELEASED; urgency=medium
+
+  * IntlDateFormatter fix
+
+ -- vitex <info@vitexsoftware.cz>  Mon, 01 Dec 2025 04:28:34 +0100
+
+abraflexi-digest (1.33.1) unstable; urgency=medium
 
   * Do not report credit notes
 
- -- vitex <info@vitexsoftware.cz>  Mon, 28 Apr 2025 14:55:10 +0200
+ -- vitex <info@vitexsoftware.cz>  Mon, 01 Dec 2025 04:28:17 +0100
 
 abraflexi-digest (1.33.0) unstable; urgency=medium
 
