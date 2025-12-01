@@ -60,11 +60,11 @@ $digestor = new Digestor($subject);
 
 // Create IntlDateFormatter with fallback locale
 $locale = \Ease\Locale::$localeUsed ?? 'en_US';
-$formatter = new \IntlDateFormatter($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
+$formatter = new \IntlDateFormatter($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE, 'Europe/Prague');
 
 // If the constructor failed, try with a fallback locale
 if ($formatter === null) {
-    $formatter = new \IntlDateFormatter('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
+    $formatter = new \IntlDateFormatter('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE, 'Europe/Prague');
 }
 
 // Check if formatter is still null (should not happen with en_US)
