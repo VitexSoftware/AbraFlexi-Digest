@@ -77,25 +77,24 @@ $digestor = new Digestor($subject);
 
 // Create IntlDateFormatter with proper error handling
 $locale = \Ease\Locale::$localeUsed ?? 'en_US';
-$formatter = null;
 
 try {
-    $formatter = new \IntlDateFormatter($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
+    $formatter = \datefmt_create($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
 } catch (\ValueError $e) {
-    $formatter = null;
+    $formatter = false;
 }
 
 // If the constructor failed, try with a fallback locale
-if ($formatter === null) {
+if (!$formatter) {
     try {
-        $formatter = new \IntlDateFormatter('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
+        $formatter = \datefmt_create('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
     } catch (\ValueError $e) {
-        $formatter = null;
+        $formatter = false;
     }
 }
 
 // Format dates with fallback if formatter failed
-if ($formatter !== null) {
+if ($formatter) {
     $startFormatted = $formatter->format($period->getStartDate()->getTimestamp());
     $endFormatted = $formatter->format($period->getEndDate()->getTimestamp());
 } else {

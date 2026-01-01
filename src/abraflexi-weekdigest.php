@@ -53,15 +53,15 @@ if ($fmt === false) {
 
 // Create IntlDateFormatter with fallback locale
 $locale = \Ease\Locale::$localeUsed ?? 'en_US';
-$formatter = new \IntlDateFormatter($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE, 'Europe/Prague');
+$formatter = \datefmt_create($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE, 'Europe/Prague');
 
 // If the constructor failed, try with a fallback locale
-if ($formatter === null) {
-    $formatter = new \IntlDateFormatter('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE, 'Europe/Prague');
+if (!$formatter) {
+    $formatter = \datefmt_create('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE, 'Europe/Prague');
 }
 
-// Check if formatter is still null (should not happen with en_US)
-if ($formatter === null) {
+// Check if formatter is still false (should not happen with en_US)
+if (!$formatter) {
     throw new \Exception('Failed to create IntlDateFormatter');
 }
 
