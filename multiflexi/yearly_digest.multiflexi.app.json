@@ -1,122 +1,122 @@
 {
-    "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
-    "schemaVersion": "3.0.0",
-    "uuid": "ff7d9f0e-e829-4a60-b3e6-198c1826c82b",
-    "name": {
-        "en": "Yearly Digest",
-        "cs": "Yearly Digest"
+  "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
+  "schemaVersion": "3.2.1",
+  "uuid": "ff7d9f0e-e829-4a60-b3e6-198c1826c82b",
+  "name": {
+    "en": "Yearly Digest",
+    "cs": "Yearly Digest"
+  },
+  "description": {
+    "en": "Generate AbraFlexi report every year",
+    "cs": "Generate AbraFlexi report every year"
+  },
+  "tags": [
+    "AbraFlexi",
+    "Digest",
+    "Analytics",
+    "Sensor",
+    "Yearly"
+  ],
+  "homepage": "https://github.com/VitexSoftware/AbraFlexi-Digest/",
+  "image": "",
+  "executable": "abraflexi-yeardigest",
+  "environment": {
+    "ABRAFLEXI_COMPANY": {
+      "type": "string",
+      "description": "",
+      "defval": "demo_de",
+      "required": true,
+      "category": "API"
     },
-    "description": {
-        "en": "Generate AbraFlexi report every year",
-        "cs": "Generate AbraFlexi report every year"
+    "ABRAFLEXI_LOGIN": {
+      "type": "string",
+      "description": {
+        "en": "AbraFlexi Login",
+        "cs": "AbraFlexi Login"
+      },
+      "defval": "winstrom",
+      "required": true,
+      "category": "API"
     },
-    "tags": [
-        "AbraFlexi",
-        "Digest",
-        "Analytics",
-        "Sensor",
-        "Yearly"
-    ],
-    "homepage": "https://github.com/VitexSoftware/AbraFlexi-Digest/",
-    "image": "",
-    "executable": "abraflexi-yeardigest",
-    "environment": {
-        "ABRAFLEXI_COMPANY": {
-            "type": "string",
-            "description": "",
-            "defval": "demo_de",
-            "required": true,
-            "category": "API"
-        },
-        "ABRAFLEXI_LOGIN": {
-            "type": "string",
-            "description": {
-                "en": "AbraFlexi Login",
-                "cs": "AbraFlexi Login"
-            },
-            "defval": "winstrom",
-            "required": true,
-            "category": "API"
-        },
-        "ABRAFLEXI_PASSWORD": {
-            "type": "password",
-            "description": {
-                "en": "AbraFlexi password",
-                "cs": "AbraFlexi password"
-            },
-            "defval": "winstrom",
-            "required": true,
-            "category": "API"
-        },
-        "ABRAFLEXI_URL": {
-            "type": "string",
-            "description": {
-                "en": "AbraFlexi Server URI",
-                "cs": "AbraFlexi Server URI"
-            },
-            "defval": "https://demo.flexibee.eu:5434",
-            "required": true,
-            "category": "API"
-        },
-        "THEME": {
-            "type": "text",
-            "description": {
-                "en": "Report theme",
-                "cs": "Report theme"
-            },
-            "defval": "happy",
-            "required": false,
-            "category": "Other"
-        },
-        "DIGEST_CHECK_SUPPLIER_CONTACT": {
-            "type": "bool",
-            "description": {
-                "en": "Do not notify if the supplier does not have contact details",
-                "cs": "Neupozorňovat, pokud dodavatel nemá kontaktní údaje"
-            },
-            "defval": "happy",
-            "required": false,
-            "category": "Other"
-        },
-        "DIGEST_FROM": {
-            "type": "text",
-            "description": {
-                "en": "Diget sender addres",
-                "cs": "Adresa odesílatele digestu"
-            },
-            "defval": "",
-            "required": true,
-            "category": "Other"
-        },
-        "DIGEST_MAILTO": {
-            "type": "text",
-            "description": {
-                "en": "result recipients",
-                "cs": "příjemci výsledku"
-            },
-            "defval": "",
-            "required": false,
-            "category": "Other"
-        },
-        "RESULT_FILE": {
-            "type": "string",
-            "description": {
-                "en": "write output json data to",
-                "cs": "zapsat výstupní json data do"
-            },
-            "defval": "yearly_digest.html",
-            "required": false,
-            "category": "Other"
-        },
-        "EASE_LOGGER": {
-            "type": "string",
-            "description": {
-                "en": "write log messages using",
-                "cs": "zapsat log zprávy pomocí"
-            },
-            "defval": "console|syslog",
-            "required": false,
-            "category": "Behavior"
-        }
+    "ABRAFLEXI_PASSWORD": {
+      "type": "password",
+      "description": {
+        "en": "AbraFlexi password",
+        "cs": "AbraFlexi password"
+      },
+      "defval": "winstrom",
+      "required": true,
+      "category": "API"
+    },
+    "ABRAFLEXI_URL": {
+      "type": "string",
+      "description": {
+        "en": "AbraFlexi Server URI",
+        "cs": "AbraFlexi Server URI"
+      },
+      "defval": "https://demo.flexibee.eu:5434",
+      "required": true,
+      "category": "API"
+    },
+    "THEME": {
+      "type": "string",
+      "description": {
+        "en": "Report theme",
+        "cs": "Report theme"
+      },
+      "defval": "happy",
+      "required": false,
+      "category": "Other"
+    },
+    "DIGEST_CHECK_SUPPLIER_CONTACT": {
+      "type": "bool",
+      "description": {
+        "en": "Do not notify if the supplier does not have contact details",
+        "cs": "Neupozorňovat, pokud dodavatel nemá kontaktní údaje"
+      },
+      "defval": "happy",
+      "required": false,
+      "category": "Other"
+    },
+    "DIGEST_FROM": {
+      "type": "string",
+      "description": {
+        "en": "Diget sender addres",
+        "cs": "Adresa odesílatele digestu"
+      },
+      "defval": "",
+      "required": true,
+      "category": "Other"
+    },
+    "DIGEST_MAILTO": {
+      "type": "string",
+      "description": {
+        "en": "result recipients",
+        "cs": "příjemci výsledku"
+      },
+      "defval": "",
+      "required": false,
+      "category": "Other"
+    },
+    "RESULT_FILE": {
+      "type": "string",
+      "description": {
+        "en": "write output json data to",
+        "cs": "zapsat výstupní json data do"
+      },
+      "defval": "yearly_digest.html",
+      "required": false,
+      "category": "Other"
+    },
+    "EASE_LOGGER": {
+      "type": "string",
+      "description": {
+        "en": "write log messages using",
+        "cs": "zapsat log zprávy pomocí"
+      },
+      "defval": "console|syslog",
+      "required": false,
+      "category": "Behavior"
     }
+  }
 }

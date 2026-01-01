@@ -1,127 +1,127 @@
 {
-    "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
-    "schemaVersion": "3.0.0",
-    "uuid": "690c7880-7687-4f4c-851b-5427d653b637",
-    "name": {
-        "en": "AbraFlexi Monthly Digest",
-        "cs": "AbraFlexi Měsíční Digest"
+  "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
+  "schemaVersion": "3.2.1",
+  "uuid": "690c7880-7687-4f4c-851b-5427d653b637",
+  "name": {
+    "en": "AbraFlexi Monthly Digest",
+    "cs": "AbraFlexi Měsíční Digest"
+  },
+  "description": {
+    "en": "Monthly analytics digest for AbraFlexi accounting system",
+    "cs": "Měsíční analytický digest pro účetní systém AbraFlexi"
+  },
+  "version": "1.33.1",
+  "tags": [
+    "AbraFlexi",
+    "Digest",
+    "Analytics",
+    "Monthly",
+    "Accounting"
+  ],
+  "homepage": "https://github.com/VitexSoftware/AbraFlexi-Digest/",
+  "repository": "https://github.com/VitexSoftware/AbraFlexi-Digest",
+  "image": "",
+  "executable": "/usr/bin/abraflexi-monthdigest",
+  "environment": {
+    "ABRAFLEXI_COMPANY": {
+      "type": "string",
+      "description": {
+        "en": "AbraFlexi Company Database",
+        "cs": "Databáze společnosti v AbraFlexi"
+      },
+      "defval": "demo_de",
+      "required": true,
+      "category": "API"
     },
-    "description": {
-        "en": "Monthly analytics digest for AbraFlexi accounting system",
-        "cs": "Měsíční analytický digest pro účetní systém AbraFlexi"
+    "ABRAFLEXI_LOGIN": {
+      "type": "string",
+      "description": {
+        "en": "AbraFlexi Login Username",
+        "cs": "Přihlašovací jméno do AbraFlexi"
+      },
+      "defval": "winstrom",
+      "required": true,
+      "category": "API"
     },
-    "version": "1.33.1",
-    "tags": [
-        "AbraFlexi",
-        "Digest",
-        "Analytics",
-        "Monthly",
-        "Accounting"
-    ],
-    "homepage": "https://github.com/VitexSoftware/AbraFlexi-Digest/",
-    "repository": "https://github.com/VitexSoftware/AbraFlexi-Digest",
-    "image": "",
-    "executable": "/usr/bin/abraflexi-monthdigest",
-    "environment": {
-        "ABRAFLEXI_COMPANY": {
-            "type": "string",
-            "description": {
-                "en": "AbraFlexi Company Database",
-                "cs": "Databáze společnosti v AbraFlexi"
-            },
-            "defval": "demo_de",
-            "required": true,
-            "category": "API"
-        },
-        "ABRAFLEXI_LOGIN": {
-            "type": "string",
-            "description": {
-                "en": "AbraFlexi Login Username",
-                "cs": "Přihlašovací jméno do AbraFlexi"
-            },
-            "defval": "winstrom",
-            "required": true,
-            "category": "API"
-        },
-        "ABRAFLEXI_PASSWORD": {
-            "type": "password",
-            "description": {
-                "en": "AbraFlexi Password",
-                "cs": "Heslo do AbraFlexi"
-            },
-            "defval": "winstrom",
-            "required": true,
-            "category": "API"
-        },
-        "ABRAFLEXI_URL": {
-            "type": "string",
-            "description": {
-                "en": "AbraFlexi Server URL",
-                "cs": "URL adresa AbraFlexi serveru"
-            },
-            "defval": "https://demo.flexibee.eu:5434",
-            "required": true,
-            "category": "API"
-        },
-        "THEME": {
-            "type": "string",
-            "description": {
-                "en": "Report Theme",
-                "cs": "Téma reportu"
-            },
-            "defval": "happy",
-            "required": false,
-            "category": "Other"
-        },
-        "DIGEST_CHECK_SUPPLIER_CONTACT": {
-            "type": "bool",
-            "description": {
-                "en": "Check if supplier has contact details",
-                "cs": "Kontrolovat, zda má dodavatel kontaktní údaje"
-            },
-            "defval": true,
-            "required": false,
-            "category": "Behavior"
-        },
-        "DIGEST_FROM": {
-            "type": "string",
-            "description": {
-                "en": "Digest Email Sender Address",
-                "cs": "Odesílatel digestu"
-            },
-            "defval": "noreply@example.com",
-            "required": false,
-            "category": "Other"
-        },
-        "DIGEST_MAILTO": {
-            "type": "string",
-            "description": {
-                "en": "Send Digest to Email Address",
-                "cs": "Poslat digest na emailovou adresu"
-            },
-            "defval": "",
-            "required": false,
-            "category": "Other"
-        },
-        "RESULT_FILE": {
-            "type": "string",
-            "description": {
-                "en": "Save Output to File",
-                "cs": "Uložit výstup do souboru"
-            },
-            "defval": "monthly_digest.html",
-            "required": false,
-            "category": "Other"
-        },
-        "EASE_LOGGER": {
-            "type": "string",
-            "description": {
-                "en": "Logging Method",
-                "cs": "Způsob logování"
-            },
-            "defval": "console",
-            "required": false,
-            "category": "Behavior"
-        }
+    "ABRAFLEXI_PASSWORD": {
+      "type": "password",
+      "description": {
+        "en": "AbraFlexi Password",
+        "cs": "Heslo do AbraFlexi"
+      },
+      "defval": "winstrom",
+      "required": true,
+      "category": "API"
+    },
+    "ABRAFLEXI_URL": {
+      "type": "string",
+      "description": {
+        "en": "AbraFlexi Server URL",
+        "cs": "URL adresa AbraFlexi serveru"
+      },
+      "defval": "https://demo.flexibee.eu:5434",
+      "required": true,
+      "category": "API"
+    },
+    "THEME": {
+      "type": "string",
+      "description": {
+        "en": "Report Theme",
+        "cs": "Téma reportu"
+      },
+      "defval": "happy",
+      "required": false,
+      "category": "Other"
+    },
+    "DIGEST_CHECK_SUPPLIER_CONTACT": {
+      "type": "bool",
+      "description": {
+        "en": "Check if supplier has contact details",
+        "cs": "Kontrolovat, zda má dodavatel kontaktní údaje"
+      },
+      "defval": true,
+      "required": false,
+      "category": "Behavior"
+    },
+    "DIGEST_FROM": {
+      "type": "string",
+      "description": {
+        "en": "Digest Email Sender Address",
+        "cs": "Odesílatel digestu"
+      },
+      "defval": "noreply@example.com",
+      "required": false,
+      "category": "Other"
+    },
+    "DIGEST_MAILTO": {
+      "type": "string",
+      "description": {
+        "en": "Send Digest to Email Address",
+        "cs": "Poslat digest na emailovou adresu"
+      },
+      "defval": "",
+      "required": false,
+      "category": "Other"
+    },
+    "RESULT_FILE": {
+      "type": "string",
+      "description": {
+        "en": "Save Output to File",
+        "cs": "Uložit výstup do souboru"
+      },
+      "defval": "monthly_digest.html",
+      "required": false,
+      "category": "Other"
+    },
+    "EASE_LOGGER": {
+      "type": "string",
+      "description": {
+        "en": "Logging Method",
+        "cs": "Způsob logování"
+      },
+      "defval": "console",
+      "required": false,
+      "category": "Behavior"
     }
+  }
 }

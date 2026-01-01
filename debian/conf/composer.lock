@@ -1,0 +1,254 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "c2c21a5fdc25067c89270a89d13c4a2f",
+    "packages": [
+        {
+            "name": "deb/abraflexi",
+            "version": "3.6.5.383",
+            "dist": {
+                "type": "path",
+                "url": "/usr/share/php/AbraFlexi",
+                "reference": "8403823b6b0b048ed9429c5d8ee32811364bea51"
+            },
+            "require": {
+                "deb/ease-core": "*",
+                "ext-curl": "*",
+                "ext-json": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AbraFlexi\\": "."
+                }
+            },
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Vítězslav Dvořák",
+                    "email": "vitex@arachne.cz"
+                }
+            ],
+            "description": "Library for easy interaction with czech accounting system AbraFlexi.",
+            "homepage": "https://github.com/Spoje-NET/php-abraflexi",
+            "transport-options": {
+                "relative": false
+            }
+        },
+        {
+            "name": "deb/abraflexi-bricks",
+            "version": "1.4.1.115",
+            "dist": {
+                "type": "path",
+                "url": "/usr/share/php/AbraFlexiBricks",
+                "reference": "2daf9de7a3a1aa945486fe06b314436052863afd"
+            },
+            "require": {
+                "deb/abraflexi": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AbraFlexi\\Bricks\\": "./Bricks",
+                    "AbraFlexi\\Bricks\\ConvertRules\\": "./Bricks/ConvertRules"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vítězslav Dvořák",
+                    "email": "vitex@arachne.cz"
+                }
+            ],
+            "description": "php-flexibee extending classes and widgets (debianized)",
+            "homepage": "https://github.com/VitexSoftware/php-abraflexi-bricks",
+            "transport-options": {
+                "relative": false
+            }
+        },
+        {
+            "name": "deb/ease-bootstrap5",
+            "version": "1.2.0.81",
+            "dist": {
+                "type": "path",
+                "url": "/usr/share/php/EaseTWB5",
+                "reference": "46593f29937134377efa896fe40c408cb7ad476b"
+            },
+            "require": {
+                "deb/ease-html": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ease\\TWB5\\": "."
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vítězslav Dvořák",
+                    "email": "info@vitexsoftware.cz",
+                    "homepage": "http://v.s.cz/"
+                }
+            ],
+            "description": "Set of Twitter Bootstrap 5 rendering objects (debianized)",
+            "homepage": "https://github.com/VitexSoftware/php-ease-twbootstrap5",
+            "transport-options": {
+                "relative": false
+            }
+        },
+        {
+            "name": "deb/ease-bootstrap5-widgets",
+            "version": "1.4.1.24",
+            "dist": {
+                "type": "path",
+                "url": "/usr/share/php/EaseTWB5Widgets",
+                "reference": "5dc63a35f10d6ca23fbcbbe559a2b75714bb5fb9"
+            },
+            "require": {
+                "deb/ease-bootstrap5": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ease\\TWB5\\Widgets\\": "./"
+                }
+            },
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Vítězslav Dvořák",
+                    "email": "info@vitexsoftware.cz",
+                    "homepage": "http://v.s.cz/"
+                }
+            ],
+            "description": "Twitter bootstrap5 Widgets for PHP Framework (debianized)",
+            "homepage": "http://v.s.cz/ease.php",
+            "transport-options": {
+                "relative": false
+            }
+        },
+        {
+            "name": "deb/ease-bootstrap5-widgets-abraflexi",
+            "version": "1.4.0.36",
+            "dist": {
+                "type": "path",
+                "url": "/usr/share/php/EaseTWB5WidgetsAbraFlexi",
+                "reference": "f0c59c06c35a9020d99ed25b139cf955029a6e7a"
+            },
+            "require": {
+                "deb/abraflexi-bricks": "*",
+                "deb/ease-bootstrap5": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AbraFlexi\\ui\\TWB5\\": "./"
+                }
+            },
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Vítězslav Dvořák",
+                    "email": "vitex@arachne.cz"
+                }
+            ],
+            "description": "php-abraflexi extending classes and widgets (debianized)",
+            "homepage": "https://github.com/VitexSoftware/AbraFlexi-Bricks",
+            "transport-options": {
+                "relative": false
+            }
+        },
+        {
+            "name": "deb/ease-core",
+            "version": "1.49.1.319",
+            "dist": {
+                "type": "path",
+                "url": "/usr/share/php/EaseCore",
+                "reference": "bada6ade733b0010eea1627daefc5ecc64a236f0"
+            },
+            "require": {
+                "composer-runtime-api": "*",
+                "php": ">=7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ease\\": ".",
+                    "Ease\\Logger\\": "Logger"
+                }
+            },
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Vítězslav Dvořák",
+                    "email": "info@vitexsoftware.cz",
+                    "homepage": "http://v.s.cz/"
+                }
+            ],
+            "description": "An Core of PHP Framework for Ease of writing Applications (debianized)",
+            "homepage": "http://v.s.cz/ease.php",
+            "transport-options": {
+                "relative": false
+            }
+        },
+        {
+            "name": "deb/ease-html",
+            "version": "2.0.0.151",
+            "dist": {
+                "type": "path",
+                "url": "/usr/share/php/EaseHtml",
+                "reference": "259407ff3eaa0abe5acb5d03af2872fae6ee2cf9"
+            },
+            "require": {
+                "deb/ease-core": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ease\\": ".",
+                    "Ease\\Html\\": "Html"
+                }
+            },
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Vítězslav Dvořák",
+                    "email": "info@vitexsoftware.cz",
+                    "homepage": "http://v.s.cz/"
+                }
+            ],
+            "description": "An Core of PHP Framework for Ease of writing Applications (debianized)",
+            "homepage": "http://v.s.cz/ease.php",
+            "transport-options": {
+                "relative": false
+            }
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {},
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
+}

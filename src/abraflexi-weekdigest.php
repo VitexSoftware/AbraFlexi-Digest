@@ -51,18 +51,23 @@ if ($fmt === false) {
     }
 }
 
-// Create IntlDateFormatter with fallback locale
+// Create IntlDateFormatter with proper error handling
 $locale = \Ease\Locale::$localeUsed ?? 'en_US';
-$formatter = \datefmt_create($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE, 'Europe/Prague');
+$formatter = null;
 
-// If the constructor failed, try with a fallback locale
-if (!$formatter) {
-    $formatter = \datefmt_create('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE, 'Europe/Prague');
+try {
+    $formatter = new \IntlDateFormatter($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE, 'Europe/Prague');
+} catch (\ValueError $e) {
+    $formatter = null;
 }
 
-// Check if formatter is still false (should not happen with en_US)
-if (!$formatter) {
-    throw new \Exception('Failed to create IntlDateFormatter');
+// If the constructor failed, try with a fallback locale
+if ($formatter === null) {
+    try {
+        $formatter = new \IntlDateFormatter('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE, 'Europe/Prague');
+    } catch (\ValueError $e) {
+        $formatter = null;
+    }
 }
 
 $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
@@ -73,10 +78,19 @@ $myCompanyName = $myCompany->getDataValue('nazev');
 $subject = sprintf(_('AbraFlexi %s 📆 Weekly digest'), $myCompanyName);
 $digestor = new Digestor($subject);
 
+// Format dates with fallback if formatter failed
+if ($formatter !== null) {
+    $startFormatted = $formatter->format($period->getStartDate()->getTimestamp());
+    $endFormatted = $formatter->format($period->getEndDate()->getTimestamp());
+} else {
+    $startFormatted = $period->getStartDate()->format('Y-m-d');
+    $endFormatted = $period->getEndDate()->format('Y-m-d');
+}
+
 $digestor->addItem(new \Ease\Html\DivTag(sprintf(
     _('from %s to %s'),
-    $formatter->format($period->getStartDate()->getTimestamp()),
-    $formatter->format($period->getEndDate()->getTimestamp()),
+    $startFormatted,
+    $endFormatted,
 )));
 
 $digestor->dig($period, array_merge(\Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules'), \Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules\Weekly')));
