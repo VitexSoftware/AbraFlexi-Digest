@@ -61,14 +61,24 @@ $digestor = new Digestor($subject);
 // Create IntlDateFormatter with proper error handling (procedural API)
 $locale = \Ease\Locale::$localeUsed ?? 'en_US';
 
+// Helper to validate formatter objects and avoid "unconstructed" fatals
+$isFormatterValid = static function ($fmt): bool {
+    if (!$fmt instanceof \IntlDateFormatter) {
+        return false;
+    }
+    // When the formatter is not properly constructed, error code is not zero
+    $code = \datefmt_get_error_code($fmt);
+    return function_exists('intl_is_failure') ? !\intl_is_failure($code) : ($code === U_ZERO_ERROR);
+};
+
 try {
     $formatter = \datefmt_create($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE, 'Europe/Prague');
 } catch (\ValueError $e) {
     $formatter = false;
 }
 
-// If creation failed, try with a fallback locale
-if ($formatter === false) {
+// If creation failed or resulted in an unconstructed instance, try a fallback
+if ($formatter === false || !$isFormatterValid($formatter)) {
     try {
         $formatter = \datefmt_create('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE, 'Europe/Prague');
     } catch (\ValueError $e) {
@@ -76,16 +86,16 @@ if ($formatter === false) {
     }
 }
 
-// Format dates with fallback if formatter failed
-if ($formatter !== false) {
+// Format dates with fallback if formatter failed or invalid
+if ($formatter !== false && $isFormatterValid($formatter)) {
     $startFormatted = \datefmt_format($formatter, $period->getStartDate()->getTimestamp());
     $endFormatted = \datefmt_format($formatter, $period->getEndDate()->getTimestamp());
 
-    if ($startFormatted === false) {
+    if ($startFormatted === false || $startFormatted === null) {
         $startFormatted = $period->getStartDate()->format('Y-m-d');
     }
 
-    if ($endFormatted === false) {
+    if ($endFormatted === false || $endFormatted === null) {
         $endFormatted = $period->getEndDate()->format('Y-m-d');
     }
 } else {
