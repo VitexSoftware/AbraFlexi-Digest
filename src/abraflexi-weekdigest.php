@@ -51,22 +51,21 @@ if ($fmt === false) {
     }
 }
 
-// Create IntlDateFormatter with proper error handling
+// Create IntlDateFormatter with proper error handling (procedural API)
 $locale = \Ease\Locale::$localeUsed ?? 'en_US';
-$formatter = null;
 
 try {
-    $formatter = new \IntlDateFormatter($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE, 'Europe/Prague');
+    $formatter = \datefmt_create($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE, 'Europe/Prague');
 } catch (\ValueError $e) {
-    $formatter = null;
+    $formatter = false;
 }
 
-// If the constructor failed, try with a fallback locale
-if ($formatter === null) {
+// If creation failed, try with a fallback locale
+if ($formatter === false) {
     try {
-        $formatter = new \IntlDateFormatter('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE, 'Europe/Prague');
+        $formatter = \datefmt_create('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE, 'Europe/Prague');
     } catch (\ValueError $e) {
-        $formatter = null;
+        $formatter = false;
     }
 }
 
@@ -79,9 +78,17 @@ $subject = sprintf(_('AbraFlexi %s 📆 Weekly digest'), $myCompanyName);
 $digestor = new Digestor($subject);
 
 // Format dates with fallback if formatter failed
-if ($formatter !== null) {
-    $startFormatted = $formatter->format($period->getStartDate()->getTimestamp());
-    $endFormatted = $formatter->format($period->getEndDate()->getTimestamp());
+if ($formatter !== false) {
+    $startFormatted = \datefmt_format($formatter, $period->getStartDate()->getTimestamp());
+    $endFormatted = \datefmt_format($formatter, $period->getEndDate()->getTimestamp());
+
+    if ($startFormatted === false) {
+        $startFormatted = $period->getStartDate()->format('Y-m-d');
+    }
+
+    if ($endFormatted === false) {
+        $endFormatted = $period->getEndDate()->format('Y-m-d');
+    }
 } else {
     $startFormatted = $period->getStartDate()->format('Y-m-d');
     $endFormatted = $period->getEndDate()->format('Y-m-d');

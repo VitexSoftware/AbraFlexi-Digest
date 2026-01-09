@@ -75,7 +75,7 @@ $subject = sprintf(
 );
 $digestor = new Digestor($subject);
 
-// Create IntlDateFormatter with proper error handling
+// Create IntlDateFormatter with proper error handling (procedural API)
 $locale = \Ease\Locale::$localeUsed ?? 'en_US';
 
 try {
@@ -84,8 +84,8 @@ try {
     $formatter = false;
 }
 
-// If the constructor failed, try with a fallback locale
-if (!$formatter) {
+// If creation failed, try with a fallback locale
+if ($formatter === false) {
     try {
         $formatter = \datefmt_create('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
     } catch (\ValueError $e) {
@@ -94,9 +94,17 @@ if (!$formatter) {
 }
 
 // Format dates with fallback if formatter failed
-if ($formatter) {
-    $startFormatted = $formatter->format($period->getStartDate()->getTimestamp());
-    $endFormatted = $formatter->format($period->getEndDate()->getTimestamp());
+if ($formatter !== false) {
+    $startFormatted = \datefmt_format($formatter, $period->getStartDate()->getTimestamp());
+    $endFormatted = \datefmt_format($formatter, $period->getEndDate()->getTimestamp());
+
+    if ($startFormatted === false) {
+        $startFormatted = $period->getStartDate()->format('Y-m-d');
+    }
+
+    if ($endFormatted === false) {
+        $endFormatted = $period->getEndDate()->format('Y-m-d');
+    }
 } else {
     $startFormatted = $period->getStartDate()->format('Y-m-d');
     $endFormatted = $period->getEndDate()->format('Y-m-d');
