@@ -88,8 +88,17 @@ if ($formatter === false || !$isFormatterValid($formatter)) {
 
 // Format dates with fallback if formatter failed or invalid
 if ($formatter !== false && $isFormatterValid($formatter)) {
-    $startFormatted = \datefmt_format($formatter, $period->getStartDate()->getTimestamp());
-    $endFormatted = \datefmt_format($formatter, $period->getEndDate()->getTimestamp());
+    try {
+        $startFormatted = \datefmt_format($formatter, $period->getStartDate()->getTimestamp());
+    } catch (\Error $e) {
+        $startFormatted = $period->getStartDate()->format('Y-m-d');
+    }
+
+    try {
+        $endFormatted = \datefmt_format($formatter, $period->getEndDate()->getTimestamp());
+    } catch (\Error $e) {
+        $endFormatted = $period->getEndDate()->format('Y-m-d');
+    }
 
     if ($startFormatted === false || $startFormatted === null) {
         $startFormatted = $period->getStartDate()->format('Y-m-d');
