@@ -77,8 +77,18 @@ $myCompanyName = $myCompany->getDataValue('nazev');
 $subject = sprintf(_('AbraFlexi %s 📆 Weekly digest'), $myCompanyName);
 $digestor = new Digestor($subject);
 
+// Helper to validate formatter objects and avoid "unconstructed" fatals
+$isFormatterValid = static function ($fmt): bool {
+    if (!$fmt instanceof \IntlDateFormatter) {
+        return false;
+    }
+    // When the formatter is not properly constructed, error code is not zero
+    $code = \datefmt_get_error_code($fmt);
+    return function_exists('intl_is_failure') ? !\intl_is_failure($code) : ($code === U_ZERO_ERROR);
+};
+
 // Format dates with fallback if formatter failed
-if ($formatter !== false) {
+if ($formatter !== false && $isFormatterValid($formatter)) {
     $startFormatted = \datefmt_format($formatter, $period->getStartDate()->getTimestamp());
     $endFormatted = \datefmt_format($formatter, $period->getEndDate()->getTimestamp());
 

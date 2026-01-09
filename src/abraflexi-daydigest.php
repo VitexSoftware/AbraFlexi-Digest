@@ -54,10 +54,23 @@ $myCompanyName = $myCompany->getDataValue('nazev');
 $subject = \sprintf(_('AbraFlexi 🌅 Daily digest for  %s'), $myCompanyName);
 $digestor = new Digestor($subject);
 
-// Format date with error handling
-$formattedDate = datefmt_format($fmt, (new \DateTime())->getTimestamp());
+// Helper to validate formatter objects and avoid "unconstructed" fatals
+$isFormatterValid = static function ($fmt): bool {
+    if (!$fmt instanceof \IntlDateFormatter) {
+        return false;
+    }
+    // When the formatter is not properly constructed, error code is not zero
+    $code = \datefmt_get_error_code($fmt);
+    return function_exists('intl_is_failure') ? !\intl_is_failure($code) : ($code === U_ZERO_ERROR);
+};
 
-if ($formattedDate === false) {
+// Format date with error handling
+if ($fmt !== false && $isFormatterValid($fmt)) {
+    $formattedDate = datefmt_format($fmt, (new \DateTime())->getTimestamp());
+    if ($formattedDate === false) {
+        $formattedDate = (new \DateTime())->format('Y-m-d'); // Fallback format
+    }
+} else {
     $formattedDate = (new \DateTime())->format('Y-m-d'); // Fallback format
 }
 

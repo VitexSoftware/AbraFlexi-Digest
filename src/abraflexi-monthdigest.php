@@ -54,16 +54,30 @@ if ($fmt === false) {
 $myCompany = new \AbraFlexi\Company(\Ease\Shared::cfg('ABRAFLEXI_COMPANY'));
 $myCompanyName = $myCompany->getDataValue('nazev');
 
+// Helper to validate formatter objects and avoid "unconstructed" fatals
+$isFormatterValid = static function ($fmt): bool {
+    if (!$fmt instanceof \IntlDateFormatter) {
+        return false;
+    }
+    // When the formatter is not properly constructed, error code is not zero
+    $code = \datefmt_get_error_code($fmt);
+    return function_exists('intl_is_failure') ? !\intl_is_failure($code) : ($code === U_ZERO_ERROR);
+};
+
 // Format dates with error handling
-$startDateFormatted = \datefmt_format($fmt, $period->getStartDate()->getTimestamp());
-
-if ($startDateFormatted === false) {
+if ($fmt !== false && $isFormatterValid($fmt)) {
+    $startDateFormatted = \datefmt_format($fmt, $period->getStartDate()->getTimestamp());
+    $endDateFormatted = \datefmt_format($fmt, $period->getEndDate()->getTimestamp());
+    
+    if ($startDateFormatted === false) {
+        $startDateFormatted = $period->getStartDate()->format('Y-m-d');
+    }
+    
+    if ($endDateFormatted === false) {
+        $endDateFormatted = $period->getEndDate()->format('Y-m-d');
+    }
+} else {
     $startDateFormatted = $period->getStartDate()->format('Y-m-d');
-}
-
-$endDateFormatted = \datefmt_format($fmt, $period->getEndDate()->getTimestamp());
-
-if ($endDateFormatted === false) {
     $endDateFormatted = $period->getEndDate()->format('Y-m-d');
 }
 
