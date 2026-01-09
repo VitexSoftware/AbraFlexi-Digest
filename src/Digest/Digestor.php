@@ -173,7 +173,7 @@ EOD;
 
         try {
             $infoRaw = $prober->getFlexiData();
-        } catch (Exception $exc) {
+        } catch (\Exception $exc) {
             echo $exc->getTraceAsString();
         }
 
