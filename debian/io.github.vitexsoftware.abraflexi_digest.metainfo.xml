@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="web-application">
+  <id>io.github.vitexsoftware.abraflexi_digest</id>
+  <metadata_license>MIT</metadata_license>
+  <project_license>GPL-2</project_license>
+  <name>abraflexi-digest</name>
+  <summary>digest for AbraFlexi</summary>
+  <description>
+    <p>
+      Prepare digest with accounting state of AbraFlexi. Then save to file or send by email. Daily, weekly, monthly, yearly and all time. Instal or Update MultiFlexi App json definitions for digest tools into MultiFlexi
+    </p>
+  </description>
+  <categories>
+    <category>Network</category>
+    <category>WebApplication</category>
+  </categories>
+  <url type="homepage">https://github.com/VitexSoftware/AbraFlexi-Digest</url>
+  <url type="bugtracker">https://github.com/VitexSoftware/AbraFlexi-Digest/issues</url>
+  <developer id="cz.vitexsoftware">
+    <name>VitexSoftware</name>
+  </developer>
+  <content_rating type="oars-1.1"/>
+</component>
