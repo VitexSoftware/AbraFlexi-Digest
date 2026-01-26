@@ -14,7 +14,7 @@
         "php": ">=8.1",
         "vitexsoftware/ease-bootstrap5-widgets-abraflexi": "^1.4",
         "vitexsoftware/ease-bootstrap5-widgets": "* 9999999-dev",
-        "vitexsoftware/abraflexi-bricks": "^1.4",
+        "vitexsoftware/abraflexi-bricks": "^1.5",
         "pear/net_smtp": "^1.12",
         "vitexsoftware/ease-core-bricks": "^1.2",
         "vitexsoftware/ease-html-widgets": "^1.1"
