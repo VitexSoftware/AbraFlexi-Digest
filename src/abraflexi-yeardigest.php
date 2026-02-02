@@ -66,9 +66,11 @@ $isFormatterValid = static function ($fmt): bool {
     if (!$fmt instanceof \IntlDateFormatter) {
         return false;
     }
+
     // When the formatter is not properly constructed, error code is not zero
     $code = \datefmt_get_error_code($fmt);
-    return function_exists('intl_is_failure') ? !\intl_is_failure($code) : ($code === U_ZERO_ERROR);
+
+    return \function_exists('intl_is_failure') ? !\intl_is_failure($code) : ($code === \U_ZERO_ERROR);
 };
 
 try {
@@ -118,4 +120,7 @@ $digestor->addItem(new \Ease\Html\DivTag(sprintf(
     $endFormatted,
 )));
 
-$digestor->dig($period, array_merge(\Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules'), \Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules\Yearly')));
+\Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules');
+\Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules\Yearly');
+
+$digestor->dig($period, array_merge(\Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules',true), \Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules\Yearly',true)));

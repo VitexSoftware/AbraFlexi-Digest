@@ -11,6 +11,7 @@
     "cs": "Týdenní analytický digest pro účetní systém AbraFlexi"
   },
   "version": "1.33.1",
+  "requirements": ["AbraFlexi"],
   "tags": [
     "AbraFlexi",
     "Digest",

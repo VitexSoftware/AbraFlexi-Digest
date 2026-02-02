@@ -43,6 +43,7 @@ interface DigestModuleInterface
 
     /**
      * Return Pure data (no markup).
+     *
      * @return array<string, mixed>
      */
     public function digJson(): array;

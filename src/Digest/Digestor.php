@@ -237,7 +237,7 @@ EOD;
     {
         $saveto = \Ease\Shared::cfg('DIGEST_SAVETO', false);
 
-        foreach ($modules as $class => $classFile) {
+        foreach ($modules as $class) {
             $this->timerStart($class);
             $module = new $class($interval);
 

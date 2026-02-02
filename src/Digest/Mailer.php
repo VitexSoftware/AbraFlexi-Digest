@@ -19,7 +19,7 @@ namespace AbraFlexi\Digest;
  * AbraFlexi Digest Mailer.
  *
  * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2017-2024 Vitex Software
+ * @copyright  (G) 2017-2026 Vitex Software
  *
  * @no-named-arguments
  */

@@ -10,6 +10,7 @@
     "en": "digest for your Accounting from begin to now",
     "cs": "digest pro vaše účetnictví od začátku do současnosti"
   },
+  "requirements": ["AbraFlexi"],
   "tags": [
     "AbraFlexi",
     "Digest",

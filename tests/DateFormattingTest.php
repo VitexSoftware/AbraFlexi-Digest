@@ -119,7 +119,7 @@ class DateFormattingTest extends TestCase
         // Test year modification (yearly digest)
         $yearDate = new \DateTime('2025-10-02');
         $yearDate->modify('-1 year');
-        $this->assertEquals('2024-10-02', $yearDate->format('Y-m-d'));
+        $this->assertEquals('2026-10-02', $yearDate->format('Y-m-d'));
     }
 
     /**

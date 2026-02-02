@@ -59,14 +59,17 @@ $isFormatterValid = static function ($fmt): bool {
     if (!$fmt instanceof \IntlDateFormatter) {
         return false;
     }
+
     // When the formatter is not properly constructed, error code is not zero
     $code = \datefmt_get_error_code($fmt);
-    return function_exists('intl_is_failure') ? !\intl_is_failure($code) : ($code === U_ZERO_ERROR);
+
+    return \function_exists('intl_is_failure') ? !\intl_is_failure($code) : ($code === \U_ZERO_ERROR);
 };
 
 // Format date with error handling
 if ($fmt !== false && $isFormatterValid($fmt)) {
     $formattedDate = datefmt_format($fmt, (new \DateTime())->getTimestamp());
+
     if ($formattedDate === false) {
         $formattedDate = (new \DateTime())->format('Y-m-d'); // Fallback format
     }
@@ -75,4 +78,8 @@ if ($fmt !== false && $isFormatterValid($fmt)) {
 }
 
 $digestor->addItem(new \Ease\Html\DivTag($formattedDate));
-$digestor->dig($period, array_merge(\Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules'), \Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules\Daily')));
+
+\Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules');
+\Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules\Daily');
+
+$digestor->dig($period, array_merge(\Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules',true), \Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules\Daily',true)));
