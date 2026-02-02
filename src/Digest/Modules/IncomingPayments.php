@@ -24,6 +24,9 @@ namespace AbraFlexi\Digest\Modules;
  */
 class IncomingPayments extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
+    /**
+     * @var string|string[]
+     */
     public array|string $timeColumn = 'datVyst';
 
     /**

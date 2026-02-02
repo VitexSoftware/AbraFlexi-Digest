@@ -31,4 +31,4 @@ $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
 \Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules');
 \Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules\AllTime');
 
-$digestor->dig($period, array_merge(\Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules',true), \Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules\AllTime',true)));
+$digestor->dig($period, array_merge(\Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules', true), \Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules\AllTime', true)));

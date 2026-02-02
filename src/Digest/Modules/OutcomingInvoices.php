@@ -26,6 +26,9 @@ use AbraFlexi\Digest\Outlook\TableTag;
  */
 class OutcomingInvoices extends \AbraFlexi\Digest\DigestModule implements \AbraFlexi\Digest\DigestModuleInterface
 {
+    /**
+     * Summary of __construct.
+     */
     public function __construct(\DatePeriod $interval)
     {
         $this->timeColumn = 'datVyst';

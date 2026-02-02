@@ -82,4 +82,4 @@ $digestor->addItem(new \Ease\Html\DivTag($formattedDate));
 \Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules');
 \Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules\Daily');
 
-$digestor->dig($period, array_merge(\Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules',true), \Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules\Daily',true)));
+$digestor->dig($period, array_merge(\Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules', true), \Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules\Daily', true)));

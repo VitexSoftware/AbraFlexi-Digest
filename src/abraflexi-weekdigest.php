@@ -115,4 +115,4 @@ $digestor->addItem(new \Ease\Html\DivTag(sprintf(
 \Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules');
 \Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules\Weekly');
 
-$digestor->dig($period, array_merge(\Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules',true), \Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules\Weekly',true)));
+$digestor->dig($period, array_merge(\Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules', true), \Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules\Weekly', true)));
