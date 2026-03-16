@@ -153,7 +153,7 @@ class WeeklyIncomeChart extends DigestModule implements DigestModuleInterface
         $this->incomeChart->addBar(
             round($percentChange),
             $amount,
-            $amount.' '.$caption.' '.\AbraFlexi\RO::flexiDateToDateTime($day)->format('d/m D'),
+            $amount.' '.$caption.' '. (new \AbraFlexi\DateTime($day))->format('d/m D'),
             self::$currencyColor[$caption],
         );
     }
