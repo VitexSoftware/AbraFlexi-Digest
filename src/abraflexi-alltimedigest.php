@@ -17,7 +17,7 @@ namespace AbraFlexi\Digest;
 
 \define('EASE_APPNAME', 'AbraFlexi 🌌 All Time Digest');
 
-require_once __DIR__.'/init.php';
+require_once '../vendor/autoload.php';
 
 $myCompany = new \AbraFlexi\Company(\Ease\Shared::cfg('ABRAFLEXI_COMPANY'));
 $myCompanyName = $myCompany->getDataValue('nazev');

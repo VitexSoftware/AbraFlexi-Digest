@@ -26,3 +26,5 @@
 /composer.lock
 .phpunit.cache/test-results
 .phpunit.result.cache
+debian/multiflexi-abraflexi-digest.debhelper.log
+debian/multiflexi-abraflexi-digest.substvars

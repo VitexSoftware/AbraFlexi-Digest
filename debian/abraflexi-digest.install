@@ -1,8 +1,10 @@
-debian/conf/composer.json       usr/lib/abraflexi-digest/
+debian/conf/composer.json       usr/share/php/abraflexi-digest/
+debian/autoload.php 		usr/share/php/abraflexi-digest/
+
 #debian/conf/abraflexi-digest.conf /etc/apache2/conf-available/
 src/*.php		        usr/share/abraflexi-digest/
 web/*.php		        usr/share/abraflexi-digest/
-src/Digest/*                    usr/share/abraflexi-digest/Digest/
+src/Digest/*                    usr/lib/abraflexi-digest/Digest/
 src/Digest/Modules/*		usr/lib/abraflexi-digest/Digest/Modules/
 src/Digest/Outlook/*		usr/lib/abraflexi-digest/Digest/Outlook/
 src/Digest/Modules/AllTime/*    usr/lib/abraflexi-digest/Digest/Modules/AllTime/

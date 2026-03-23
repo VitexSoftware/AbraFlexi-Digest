@@ -17,7 +17,8 @@ namespace AbraFlexi\Digest;
 
 \define('EASE_APPNAME', 'AbraFlexi Digest');
 
-require_once __DIR__.'/init.php';
+require_once '../vendor/autoload.php';
+
 $oPage = new \Ease\TWB5\WebPage($myCompanyName.' '._('AbraFlexi digest'));
 $container = new \Ease\TWB5\Container(new \Ease\Html\H1Tag(new \Ease\Html\ATag(
     $myCompany->getApiURL(),
