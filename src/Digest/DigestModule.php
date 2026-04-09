@@ -78,19 +78,20 @@ class DigestModule extends DivTag implements DigestModuleInterface
      */
     public function process()
     {
-        $this->addItem(new \Ease\Html\ATag('', '', ['id' => \get_class($this)]));
+        $divId = str_replace('\\', '', \get_class($this));
+        $this->addItem(new \Ease\Html\ATag('\\', '', ['id' => $divId]));
         $this->addItem(new DivTag(
             new \Ease\Html\H2Tag(
                 new \Ease\Html\ButtonTag($this->heading(), [
                     'class' => 'btn btn-link btn-block text-left collapsed',
                     'type' => 'button',
                     'data-toggle' => 'collapse',
-                    'data-target' => '#collapse'.\get_class($this),
+                    'data-target' => '#collapse'.$divId,
                     'aria-expanded' => 'false',
-                    'aria-controls' => 'collapse'.\get_class($this)]),
+                    'aria-controls' => 'collapse'.$divId]),
                 ['class' => 'mb-0'],
             ),
-            ['class' => 'card-header', 'id' => 'heading'.\get_class($this)],
+            ['class' => 'card-header', 'id' => 'heading'.$divId],
         ));
         $this->addStatusMessage($this->heading());
 

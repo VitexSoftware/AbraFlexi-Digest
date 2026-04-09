@@ -17,7 +17,7 @@ namespace AbraFlexi\Digest;
 
 \define('EASE_APPNAME', 'AbraFlexi 🌅 Daily Digest');
 
-require_once '../vendor/autoload.php';
+require_once 'init.php';
 
 $period = new \DatePeriod(new \DateTime(), new \DateInterval('P1D'), new \DateTime());
 

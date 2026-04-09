@@ -169,7 +169,7 @@ EOD;
         ]));
         $this->addItem(new \Ease\Html\H1Tag($subject));
         $prober = new \AbraFlexi\Company();
-        $prober->logBanner(' AbraFlexi Digest '.\Ease\Shared::appVersion().' '.$_SERVER['SCRIPT_FILENAME']);
+        $prober->logBanner(' AbraFlexi Digest '.\Ease\Shared::appVersion().' '.\Ease\Shared::appName());
 
         try {
             $infoRaw = $prober->getFlexiData();

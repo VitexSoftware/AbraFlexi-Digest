@@ -17,7 +17,7 @@ namespace AbraFlexi\Digest;
 
 \define('EASE_APPNAME', 'AbraFlexi 📆 WeekDigest');
 
-require_once '../vendor/autoload.php';
+require_once 'init.php';
 
 $start = new \DateTime();
 $start->modify('-1 week');
