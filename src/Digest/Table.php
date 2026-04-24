@@ -29,10 +29,10 @@ class Table extends Outlook\TableTag
     /**
      * Digest Table.
      *
-     * @param array $thCols     TH Columns
-     * @param array $properties
+     * @param array<int, string>   $thCols     TH Columns
+     * @param array<string, mixed> $properties
      */
-    public function __construct($thCols, $properties = [])
+    public function __construct(array $thCols, array $properties = [])
     {
         parent::__construct(null, $properties);
         $this->addRowHeaderColumns($thCols);

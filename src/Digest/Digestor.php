@@ -235,7 +235,7 @@ EOD;
      */
     public function processModules(array $modules, \DatePeriod $interval): void
     {
-        $saveto = \Ease\Shared::cfg('DIGEST_SAVETO', false);
+        $saveto = \Ease\Shared::cfg('RESULT_FILE', false);
 
         foreach ($modules as $class) {
             $this->timerStart($class);
@@ -389,7 +389,7 @@ EOD;
             ),
         ])));
         $this->addItem(new \Ease\Html\SmallTag(new \Ease\Html\DivTag([
-            _('(G) 2018-2023'),
+            _('(G) 2018-2026'),
             '&nbsp;', new \Ease\Html\ATag(
                 'https://www.vitexsoftware.cz/',
                 'Vitex Software',

@@ -6,6 +6,8 @@ require_once '/usr/share/php/EaseTWB5Widgets/autoload.php';
 require_once '/usr/share/php/EaseTWB5WidgetsAbraFlexi/autoload.php';
 require_once '/usr/share/php/AbraFlexiBricks/autoload.php';
 require_once '/usr/share/php/EaseHtmlWidgets/autoload.php';
+require_once '/usr/share/php/Symfony/Component/Mailer/autoload.php';
+require_once '/usr/share/php/Symfony/Component/Mime/autoload.php';
 
 // PSR-4 autoloader for application classes
 spl_autoload_register(function ($class) {

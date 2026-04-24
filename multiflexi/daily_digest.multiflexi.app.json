@@ -15,7 +15,8 @@
   "license": "MIT",
   "category": "Analytics",
   "requirements": [
-    "AbraFlexi"
+    "AbraFlexi",
+    "Mail"
   ],
   "tags": [
     "AbraFlexi",

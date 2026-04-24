@@ -36,5 +36,6 @@ if (\Ease\Document::isPosted() && \Ease\Document::getPostValue('url')) {
 }
 
 $oPage = new WebPage();
+$oPage->bootstrapCSS = '';
 
 $localer = \Ease\Locale::singleton(null, '../i18n', 'abraflexi-digest');
