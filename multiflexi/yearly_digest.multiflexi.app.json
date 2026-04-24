@@ -4,11 +4,11 @@
   "uuid": "ff7d9f0e-e829-4a60-b3e6-198c1826c82b",
   "name": {
     "en": "Yearly Digest",
-    "cs": "Yearly Digest"
+    "cs": "Roční Digest"
   },
   "description": {
     "en": "Generate AbraFlexi report every year",
-    "cs": "Generate AbraFlexi report every year"
+    "cs": "Generovat roční zprávu AbraFlexi"
   },
   "version": "1.33.1",
   "author": "Vitex Software",

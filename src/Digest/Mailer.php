@@ -38,7 +38,10 @@ class Mailer extends Sand
     public ?bool $sendResult = false;
     public $htmlDocument;
     public $htmlBody;
-    /** @var array<string, string> $mailHeaders */
+
+    /**
+     * @var array<string, string>
+     */
     public array $mailHeaders = [];
     public bool $finalized = false;
     private Email $email;
