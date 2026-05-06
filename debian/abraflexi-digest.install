@@ -18,4 +18,4 @@ i18n/cs_CZ/LC_MESSAGES/*.mo     usr/share/locale/cs_CZ/LC_MESSAGES
 i18n/en_US/LC_MESSAGES/*.mo     usr/share/locale/en_US/LC_MESSAGES
 debian/conf/digest.json         etc/abraflexi/
 abraflexi-digest.svg	usr/share/icons/hicolor/scalable/apps/
-io.github.vitexsoftware.abraflexi_digest.metainfo.xml	usr/share/metainfo/
+debian.vitexsoftware.abraflexi_digest.metainfo.xml	usr/share/metainfo/
