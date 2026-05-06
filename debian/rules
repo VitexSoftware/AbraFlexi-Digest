@@ -16,7 +16,7 @@ override_dh_install:
 		debian/abraflexi-digest/usr/share/php/abraflexi-digest/autoload.php
 	sed -i "2a defined('APP_VERSION') || define('APP_VERSION', '$(PKG_VERSION)');" \
 		debian/abraflexi-digest/usr/share/php/abraflexi-digest/autoload.php
-	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/conf/composer.json |sponge debian/abraflexi-digest/usr/lib/abraflexi-digest/composer.json
+	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  composer.json |sponge debian/tmp/composer.json
 	# Fix paths in application files
 	sed -i -e 's/..\/i18n/\/usr\/share\/locale/g'            	        	debian/abraflexi-digest/usr/share/abraflexi-digest/init.php
 	sed -i -e 's/..\/vendor/\/usr\/share\/php\/abraflexi-digest/g' 			debian/abraflexi-digest/usr/share/abraflexi-digest/*.php
