@@ -1,6 +1,6 @@
 {
     "name": "vitexsoftware/abraflexi-digest",
-    "description": "Periodical AbraFlexi digest.",
+    "description": "Periodical AbraFlexi digest — Markdown, HTML, PDF output.",
     "version": "dev-main",
     "authors": [
         {
@@ -9,24 +9,24 @@
         }
     ],
     "minimum-stability": "dev",
+    "license": "MIT",
     "type": "project",
     "require": {
         "php": ">=8.1",
-        "vitexsoftware/ease-bootstrap5-widgets-abraflexi": "^1.4",
-        "vitexsoftware/ease-bootstrap5-widgets": "*",
-        "vitexsoftware/abraflexi-bricks": "^1.5",
+        "vitexsoftware/digest-modules": "dev-main",
+        "vitexsoftware/digest-renderer": "dev-main",
+        "spojenet/flexibee": "*",
         "symfony/mailer": "^6.4|^7.0",
         "symfony/mime": "^6.4|^7.0",
-        "vitexsoftware/ease-core-bricks": "^1.2",
-        "vitexsoftware/ease-html-widgets": "^1.1"
+        "vitexsoftware/ease-core-bricks": "^1.2"
     },
+    "repositories": [
+        {"type": "path", "url": "../php-vitexsoftware-digest-modules"},
+        {"type": "path", "url": "../DigestRenderer"}
+    ],
     "autoload": {
         "psr-4": {
-            "AbraFlexi\\Digest\\": "src/Digest/",
-            "AbraFlexi\\Digest\\Outlook\\": "src/Digest/Outlook/",
-            "AbraFlexi\\Digest\\Modules\\": "src/Digest/Modules/",
-            "AbraFlexi\\Digest\\Modules\\AllTime\\": "src/Digest/Modules/AllTime",
-            "AbraFlexi\\Digest\\Modules\\Monthly\\": "src/Digest/Modules/Monthly"
+            "AbraFlexi\\Digest\\": "src/Digest/"
         }
     },
     "require-dev": {
