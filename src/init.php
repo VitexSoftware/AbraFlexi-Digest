@@ -15,27 +15,15 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest;
 
-// \define('STYLE_DIR', './css/themes/');
-
 require_once '../vendor/autoload.php';
+
 $shared = \Ease\Shared::instanced();
+$conffile = (isset($argv) && \is_array($argv) && \array_key_exists(1, $argv) && file_exists($argv[1]))
+    ? $argv[1]
+    : '../.env';
 
-if (\Ease\Document::isPosted() && \Ease\Document::getPostValue('url')) {
-    \define('SHOW_CONNECTION_FORM', true);
-    \define('ABRAFLEXI_URL', \Ease\Document::getPostValue('url'));
-    \define('ABRAFLEXI_LOGIN', \Ease\Document::getPostValue('user'));
-    \define('ABRAFLEXI_PASSWORD', \Ease\Document::getPostValue('password'));
-    \define('ABRAFLEXI_COMPANY', \Ease\Document::getPostValue('company'));
-    $shared->setConfigValue('EASE_MAILTO', \Ease\Document::getPostValue('recipient'));
-} else {
-    $conffile = (isset($argv) && \is_array($argv) && \array_key_exists(1, $argv) && file_exists($argv[1])) ? $argv[1] : '../.env';
-
-    if (file_exists($conffile)) {
-        $shared->loadConfig($conffile, true);
-    }
+if (file_exists($conffile)) {
+    $shared->loadConfig($conffile, true);
 }
 
-$oPage = new WebPage();
-$oPage->bootstrapCSS = '';
-
-$localer = \Ease\Locale::singleton(null, '../i18n', 'abraflexi-digest');
+\Ease\Locale::singleton(null, '../i18n', 'abraflexi-digest');

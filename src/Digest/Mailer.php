@@ -22,38 +22,69 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 
 /**
- * AbraFlexi Digest Mailer — sends HTML digest via Symfony Mailer.
+ * Digest Mailer — sends HTML digest via Symfony Mailer.
  *
- * @author     Vítězslav Dvořák <info@vitexsofware.cz>
- * @copyright  (G) 2017-2026 Vitex Software
+ * Follows the same pattern as AbraFlexi\Mailer\HtmlMailer from abraflexi-mailer.
+ * Configuration via MAIL_DSN, DIGEST_FROM / MAIL_FROM env variables.
  *
- * @no-named-arguments
+ * @author Vítězslav Dvořák <info@vitexsoftware.cz>
+ * @copyright (G) 2017-2026 Vitex Software
  */
 class Mailer extends Sand
 {
+    /**
+     * Recipient email address(es).
+     */
     public string $emailAddress = '';
-    public string $emailSubject = '';
-    public string $fromEmailAddress = '';
-    public bool $notify = true;
-    public ?bool $sendResult = false;
-    public $htmlDocument;
-    public $htmlBody;
 
     /**
-     * @var array<string, string>
+     * Email subject.
+     */
+    public string $emailSubject = '';
+
+    /**
+     * Sender email address.
+     */
+    public string $fromEmailAddress = '';
+
+    /**
+     * Show user notification about sending?
+     */
+    public bool $notify = true;
+
+    /**
+     * Result of the last send attempt.
+     */
+    public ?bool $sendResult = false;
+
+    /**
+     * @var array<string, string> Mail headers
      */
     public array $mailHeaders = [];
+
+    /**
+     * Whether finalize() has been called.
+     */
     public bool $finalized = false;
+
+    /**
+     * Pre-rendered HTML content (set via setHtmlContent).
+     */
+    private string $htmlContent = '';
+
     private Email $email;
     private SymfonyMailer $mailer;
 
     /**
-     * @param string $sendTo  recipient address
-     * @param string $subject email subject
+     * @param string $sendTo  Recipient address (comma-separated for multiple)
+     * @param string $subject Email subject
      */
     public function __construct(string $sendTo, string $subject)
     {
-        $this->fromEmailAddress = \Ease\Shared::cfg('DIGEST_FROM', \Ease\Shared::cfg('MAIL_FROM', 'digest@'.gethostname()));
+        $this->fromEmailAddress = \Ease\Shared::cfg(
+            'DIGEST_FROM',
+            \Ease\Shared::cfg('MAIL_FROM', 'digest@' . gethostname()),
+        );
 
         $this->setMailHeaders([
             'To' => $sendTo,
@@ -63,35 +94,6 @@ class Mailer extends Sand
             'Content-Type' => 'text/html; charset=utf-8',
             'Content-Transfer-Encoding' => '8bit',
         ]);
-
-        $this->htmlDocument = new \Ease\Html\HtmlTag(
-            [<<<'EOD'
-<!--[if gte mso 9]>
-<xml>
-<o:OfficeDocumentSettings>
-<o:AllowPNG/>
-<o:PixelsPerInch>96</o:PixelsPerInch>
-</o:OfficeDocumentSettings>
-</xml>
-<![endif]-->
-EOD,
-                new \Ease\Html\SimpleHeadTag([
-                    new \Ease\Html\TitleTag($this->emailSubject),
-                    '<style>'.
-                    Digestor::$msocss.
-                    Digestor::$purecss.
-                    Digestor::getCustomCss().
-                    Digestor::getWebPageInlineCSS().
-                    '</style>'])],
-            [
-                'xmlns' => 'http://www.w3.org/1999/xhtml',
-                'xmlns:o' => 'urn:schemas-microsoft-com:office:office',
-            ],
-        );
-        $this->htmlBody = $this->htmlDocument->addItem(new \Ease\Html\BodyTag(null, [
-            'width' => '100%',
-            'style' => 'margin: 0; padding: 0 !important; mso-line-height-rule: exactly;',
-        ]));
 
         $dsn = \Ease\Shared::cfg('MAIL_DSN', '');
 
@@ -105,7 +107,25 @@ EOD,
     }
 
     /**
-     * Sets mail headers.
+     * Set pre-rendered HTML content as the email body.
+     *
+     * When this is set, finalize() uses this content directly
+     * instead of rendering an Ease HTML document.
+     *
+     * @param string $html Full HTML document
+     */
+    public function setHtmlContent(string $html): self
+    {
+        $this->htmlContent = $html;
+        $this->finalized = false;
+
+        return $this;
+    }
+
+    /**
+     * Set mail headers.
+     *
+     * @param array<string, string> $mailHeaders Associative header array
      */
     public function setMailHeaders(array $mailHeaders): bool
     {
@@ -129,38 +149,13 @@ EOD,
     }
 
     /**
-     * Adds an item to the HTML body of the mail.
-     *
-     * @param mixed      $item         EaseObject or anything with draw()
-     * @param null|mixed $pageItemName
-     *
-     * @return mixed pointer to the inserted content
-     */
-    public function &addItem($item, $pageItemName = null)
-    {
-        $mailBody = '';
-
-        if (\is_object($item)) {
-            if (null === $this->htmlBody) {
-                $this->htmlBody = new \Ease\Html\BodyTag();
-            }
-
-            $mailBody = $this->htmlBody->addItem($item, $pageItemName);
-        }
-
-        return $mailBody;
-    }
-
-    /**
-     * Builds the Symfony Email object from the HTML document.
+     * Build the Symfony Email object.
      */
     public function finalize(): void
     {
-        $html = method_exists($this->htmlDocument, 'getRendered')
-            ? $this->htmlDocument->getRendered()
-            : (string) $this->htmlDocument;
-
-        $this->email->html($html);
+        if ($this->htmlContent !== '') {
+            $this->email->html($this->htmlContent);
+        }
 
         if (!empty($this->fromEmailAddress)) {
             $this->email->from(Address::create($this->fromEmailAddress));
@@ -201,7 +196,11 @@ EOD,
         $headers = $this->email->getHeaders();
 
         foreach ($this->mailHeaders as $headerName => $headerValue) {
-            if (!\in_array(strtolower($headerName), ['to', 'from', 'subject', 'cc', 'bcc', 'reply-to', 'content-type', 'content-transfer-encoding', 'date'], true)) {
+            if (!\in_array(
+                strtolower($headerName),
+                ['to', 'from', 'subject', 'cc', 'bcc', 'reply-to', 'content-type', 'content-transfer-encoding', 'date'],
+                true,
+            )) {
                 $headers->addTextHeader($headerName, $headerValue);
             }
         }
@@ -210,7 +209,7 @@ EOD,
     }
 
     /**
-     * Sends the digest mail.
+     * Send the email.
      */
     public function send(): bool
     {
@@ -239,7 +238,10 @@ EOD,
 
         if ($this->notify) {
             $mailStripped = str_replace(['<', '>'], '', $this->emailAddress);
-            $this->addStatusMessage(sprintf(_('Message %s was sent to %s'), $this->emailSubject, $mailStripped), 'success');
+            $this->addStatusMessage(
+                sprintf(_('Message %s was sent to %s'), $this->emailSubject, $mailStripped),
+                'success',
+            );
         }
 
         return true;

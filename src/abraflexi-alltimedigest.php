@@ -19,16 +19,13 @@ namespace AbraFlexi\Digest;
 
 require_once 'init.php';
 
-$myCompany = new \AbraFlexi\Company(\Ease\Shared::cfg('ABRAFLEXI_COMPANY'));
-$myCompanyName = $myCompany->getDataValue('nazev');
-
-$subject = sprintf(_('AbraFlexi %s 🌌 Alltime Digest'), $myCompanyName);
-$digestor = new Digestor($subject);
-$start = new \DateTime();
-$start->modify('-10 years');
+$start = new \DateTime('-10 years');
 $end = new \DateTime();
 $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
-\Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules');
-\Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules\AllTime');
 
-$digestor->dig($period, array_merge(\Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules', true), \Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules\AllTime', true)));
+$myCompany = new \AbraFlexi\Company(\Ease\Shared::cfg('ABRAFLEXI_COMPANY'));
+$subject = sprintf(_('AbraFlexi %s 🌌 Alltime digest'), $myCompany->getDataValue('nazev'));
+
+$digestor = new ModularDigestor($subject);
+$digestor->registerModules('alltime');
+$digestor->run($period);

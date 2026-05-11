@@ -20,10 +20,7 @@
         "symfony/mime": "^6.4|^7.0",
         "vitexsoftware/ease-core-bricks": "^1.2"
     },
-    "repositories": [
-        {"type": "path", "url": "../php-vitexsoftware-digest-modules"},
-        {"type": "path", "url": "../DigestRenderer"}
-    ],
+    "repositories": [],
     "autoload": {
         "psr-4": {
             "AbraFlexi\\Digest\\": "src/Digest/"

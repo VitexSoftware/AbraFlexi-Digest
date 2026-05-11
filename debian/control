@@ -7,7 +7,7 @@ Priority: optional
 Homepage: https://github.com/VitexSoftware/AbraFlexi-Digest
 
 Package: abraflexi-digest
-Depends: ${misc:Depends}, php-vitexsoftware-ease-bootstrap5-widgets, php-vitexsoftware-ease-bootstrap5-widgets-abraflexi, php-vitexsoftware-abraflexi-bricks, php-vitexsoftware-ease-html-widgets, composer, php-cli, php-intl, locales-all, php-symfony-mailer
+Depends: ${misc:Depends}, php-vitexsoftware-digest-modules, php-vitexsoftware-digest-renderer, php-spojenet-abraflexi, php-symfony-mailer, composer, php-cli, php-intl, locales-all
 Suggests: abraflexi-server,abraflexi-client-config, multiflexi
 Architecture: all
 Section: web

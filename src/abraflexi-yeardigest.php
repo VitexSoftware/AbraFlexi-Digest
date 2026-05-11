@@ -15,112 +15,17 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest;
 
-\define('EASE_APPNAME', 'AbraFlexi 🎆 Digest');
+\define('EASE_APPNAME', 'AbraFlexi 🎆 Yearly Digest');
 
 require_once 'init.php';
 
-$start = new \DateTime();
-$start->modify('-1 year');
+$start = new \DateTime('-1 year');
 $end = new \DateTime();
 $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
 
-try {
-    $fmt = datefmt_create(
-        'cs_CZ',
-        \IntlDateFormatter::SHORT,
-        \IntlDateFormatter::NONE,
-        'Europe/Prague',
-        \IntlDateFormatter::GREGORIAN,
-    );
-} catch (\ValueError $e) {
-    $fmt = false;
-}
-
-// Check if datefmt_create failed and create fallback
-if ($fmt === false) {
-    try {
-        $fmt = datefmt_create(
-            'en_US',
-            \IntlDateFormatter::SHORT,
-            \IntlDateFormatter::NONE,
-            'UTC',
-            \IntlDateFormatter::GREGORIAN,
-        );
-    } catch (\ValueError $e) {
-        // If even the fallback fails, we'll handle it later
-        $fmt = false;
-    }
-}
-
 $myCompany = new \AbraFlexi\Company(\Ease\Shared::cfg('ABRAFLEXI_COMPANY'));
-$myCompanyName = $myCompany->getDataValue('nazev');
+$subject = sprintf(_('AbraFlexi %s 🎆 Yearly digest'), $myCompany->getDataValue('nazev'));
 
-$subject = sprintf(_('AbraFlexi %s 🎆 Year digest'), $myCompanyName);
-$digestor = new Digestor($subject);
-
-// Create IntlDateFormatter with proper error handling (procedural API)
-$locale = \Ease\Locale::$localeUsed ?? 'en_US';
-
-// Helper to validate formatter objects and avoid "unconstructed" fatals
-$isFormatterValid = static function ($fmt): bool {
-    if (!$fmt instanceof \IntlDateFormatter) {
-        return false;
-    }
-
-    // When the formatter is not properly constructed, error code is not zero
-    $code = \datefmt_get_error_code($fmt);
-
-    return \function_exists('intl_is_failure') ? !\intl_is_failure($code) : ($code === \U_ZERO_ERROR);
-};
-
-try {
-    $formatter = \datefmt_create($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE, 'Europe/Prague');
-} catch (\ValueError $e) {
-    $formatter = false;
-}
-
-// If creation failed or resulted in an unconstructed instance, try a fallback
-if ($formatter === false || !$isFormatterValid($formatter)) {
-    try {
-        $formatter = \datefmt_create('en_US', \IntlDateFormatter::LONG, \IntlDateFormatter::NONE, 'Europe/Prague');
-    } catch (\ValueError $e) {
-        $formatter = false;
-    }
-}
-
-// Format dates with fallback if formatter failed or invalid
-if ($formatter !== false && $isFormatterValid($formatter)) {
-    try {
-        $startFormatted = \datefmt_format($formatter, $period->getStartDate()->getTimestamp());
-    } catch (\Error $e) {
-        $startFormatted = $period->getStartDate()->format('Y-m-d');
-    }
-
-    try {
-        $endFormatted = \datefmt_format($formatter, $period->getEndDate()->getTimestamp());
-    } catch (\Error $e) {
-        $endFormatted = $period->getEndDate()->format('Y-m-d');
-    }
-
-    if ($startFormatted === false || $startFormatted === null) {
-        $startFormatted = $period->getStartDate()->format('Y-m-d');
-    }
-
-    if ($endFormatted === false || $endFormatted === null) {
-        $endFormatted = $period->getEndDate()->format('Y-m-d');
-    }
-} else {
-    $startFormatted = $period->getStartDate()->format('Y-m-d');
-    $endFormatted = $period->getEndDate()->format('Y-m-d');
-}
-
-$digestor->addItem(new \Ease\Html\DivTag(sprintf(
-    _('from %s to %s'),
-    $startFormatted,
-    $endFormatted,
-)));
-
-\Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules');
-\Ease\Functions::loadClassesInNamespace('AbraFlexi\Digest\Modules\Yearly');
-
-$digestor->dig($period, array_merge(\Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules', true), \Ease\Functions::classesInNamespace('AbraFlexi\Digest\Modules\Yearly', true)));
+$digestor = new ModularDigestor($subject);
+$digestor->registerModules('yearly');
+$digestor->run($period);

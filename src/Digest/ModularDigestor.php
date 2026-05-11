@@ -16,262 +16,194 @@ declare(strict_types=1);
 namespace AbraFlexi\Digest;
 
 use VitexSoftware\DigestModules\Core\ModuleRunner;
+use VitexSoftware\DigestModules\Modules;
 use VitexSoftware\DigestModules\Providers\AbraFlexiDataProvider;
 use VitexSoftware\DigestRenderer\DigestRenderer;
 
 /**
- * Refactored Digestor using new modular structure.
+ * Digestor using modular architecture.
+ *
+ * Collects data via digest-modules (AbraFlexiDataProvider),
+ * renders via DigestRenderer (Markdown → HTML/PDF).
+ *
+ * Supports OUTPUT_FORMAT env: md (default), html, pdf.
  *
  * @author Vítězslav Dvořák <info@vitexsoftware.cz>
  */
 class ModularDigestor
 {
-    /**
-     * Subject/title of the digest.
-     */
+    /** @var array<string, string> Universal modules (all periods) */
+    private const UNIVERSAL_MODULES = [
+        'debtors' => Modules\Debtors::class,
+        'outcoming_invoices' => Modules\OutcomingInvoices::class,
+        'incoming_invoices' => Modules\IncomingInvoices::class,
+        'incoming_payments' => Modules\IncomingPayments::class,
+        'outcoming_payments' => Modules\OutcomingPayments::class,
+        'new_customers' => Modules\NewCustomers::class,
+        'without_email' => Modules\WithoutEmail::class,
+        'without_tel' => Modules\WithoutTel::class,
+        'waiting_income' => Modules\WaitingIncome::class,
+        'waiting_payments' => Modules\WaitingPayments::class,
+        'reminds' => Modules\Reminds::class,
+        'best_sellers' => Modules\BestSellers::class,
+        'unmatched_payments' => Modules\UnmatchedPayments::class,
+        'unmatched_invoices' => Modules\UnmatchedInvoices::class,
+        'outcoming_invoices_hidden' => Modules\OutcomingInvoicesHiddenToCustomer::class,
+    ];
+
+    /** @var array<string, array<string, string>> Period-specific modules */
+    private const PERIOD_MODULES = [
+        'daily' => [],
+        'weekly' => [
+            'weekly_income_chart' => Modules\Weekly\WeeklyIncomeChart::class,
+        ],
+        'monthly' => [
+            'daily_income_chart' => Modules\Monthly\DailyIncomeChart::class,
+        ],
+        'yearly' => [],
+        'alltime' => [
+            'purchase_price_lower_than_sales' => Modules\AllTime\PurchasePriceLowerThanSales::class,
+        ],
+    ];
+
     private string $subject;
-
-    /**
-     * Module runner for data collection.
-     */
     private ModuleRunner $moduleRunner;
-
-    /**
-     * HTML renderer for output generation.
-     */
     private DigestRenderer $renderer;
 
     /**
-     * Available modules mapping.
-     */
-    private array $availableModules = [
-        'outcoming_invoices' => \VitexSoftware\DigestModules\Modules\OutcomingInvoices::class,
-        'debtors' => \VitexSoftware\DigestModules\Modules\Debtors::class,
-        // Add more modules as they are converted
-    ];
-
-    /**
-     * Constructor.
-     *
-     * @param string               $subject         Digest title
-     * @param array<string, mixed> $abraFlexiConfig AbraFlexi connection configuration
+     * @param string               $subject        Digest title
+     * @param array<string, mixed> $abraFlexiConfig AbraFlexi connection config
      */
     public function __construct(string $subject, array $abraFlexiConfig = [])
     {
         $this->subject = $subject;
-
-        // Create data provider
         $dataProvider = new AbraFlexiDataProvider($abraFlexiConfig);
-
-        // Create module runner
         $this->moduleRunner = new ModuleRunner($dataProvider);
-
-        // Create renderer
         $this->renderer = new DigestRenderer();
 
         self::logBanner();
     }
 
     /**
-     * Add module to the digest.
+     * Register universal modules plus period-specific ones.
      *
-     * @param string      $moduleKey   Module identifier
-     * @param null|string $moduleClass Module class (optional, auto-detected)
+     * @param string $periodType daily|weekly|monthly|yearly|alltime
      */
-    public function addModule(string $moduleKey, ?string $moduleClass = null): self
+    public function registerModules(string $periodType = 'daily'): self
     {
-        $moduleClass ??= $this->availableModules[$moduleKey] ?? null;
-
-        if (!$moduleClass) {
-            throw new \InvalidArgumentException("Unknown module: {$moduleKey}");
+        foreach (self::UNIVERSAL_MODULES as $key => $class) {
+            $this->moduleRunner->addModule($key, $class);
         }
 
+        foreach (self::PERIOD_MODULES[$periodType] ?? [] as $key => $class) {
+            $this->moduleRunner->addModule($key, $class);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Register a single additional module.
+     *
+     * @param string $moduleKey   Module identifier
+     * @param string $moduleClass Fully qualified class name
+     */
+    public function addModule(string $moduleKey, string $moduleClass): self
+    {
         $this->moduleRunner->addModule($moduleKey, $moduleClass);
 
         return $this;
     }
 
     /**
-     * Run digest generation for specified period.
-     *
-     * @param \DatePeriod $period Time period to analyze
-     * @param string      $theme  Rendering theme ('bootstrap', 'email')
-     *
-     * @return string HTML output
-     */
-    public function generate(\DatePeriod $period, string $theme = 'bootstrap'): string
-    {
-        // Collect data from all modules
-        $digestData = $this->moduleRunner->run($period);
-
-        // Set theme and render
-        $this->renderer->setTheme($theme);
-
-        return $this->renderer->render($digestData);
-    }
-
-    /**
-     * Generate digest and send by email.
-     *
-     * @param \DatePeriod $period     Time period
-     * @param string      $emailTo    Recipient email
-     * @param string      $emailTheme Email theme ('email' recommended)
-     *
-     * @return bool Success status
-     */
-    public function sendByEmail(\DatePeriod $period, string $emailTo, string $emailTheme = 'email'): bool
-    {
-        try {
-            // Generate email-friendly HTML
-            $emailHtml = $this->generate($period, $emailTheme);
-
-            // Create mailer (keeping compatibility with existing Mailer class)
-            $mailer = new Mailer($emailTo, $this->subject);
-            $mailer->setHtmlContent($emailHtml);
-
-            return $mailer->send() === true;
-        } catch (\Throwable $e) {
-            error_log('Email sending failed: '.$e->getMessage());
-
-            return false;
-        }
-    }
-
-    /**
-     * Generate digest and save to file.
-     *
-     * @param \DatePeriod $period   Time period
-     * @param string      $filename Output filename
-     * @param string      $theme    Theme to use
-     *
-     * @return bool Success status
-     */
-    public function saveToFile(\DatePeriod $period, string $filename, string $theme = 'bootstrap'): bool
-    {
-        try {
-            $html = $this->generate($period, $theme);
-
-            return file_put_contents($filename, $html) !== false;
-        } catch (\Throwable $e) {
-            error_log('File saving failed: '.$e->getMessage());
-
-            return false;
-        }
-    }
-
-    /**
-     * Get raw JSON data without HTML rendering.
+     * Generate digest output.
      *
      * @param \DatePeriod $period Time period
+     * @param string|null $format Output format (null = read OUTPUT_FORMAT env, fallback 'html')
      *
-     * @return array<string, mixed> Raw digest data
+     * @return string Rendered output (Markdown, HTML, or raw PDF bytes)
      */
-    public function getJsonData(\DatePeriod $period): array
+    public function generate(\DatePeriod $period, ?string $format = null): string
     {
-        return $this->moduleRunner->run($period);
-    }
+        $format ??= \Ease\Shared::cfg('OUTPUT_FORMAT', 'html');
 
-    /**
-     * Save JSON data to file.
-     *
-     * @param \DatePeriod $period   Time period
-     * @param string      $filename Output filename
-     *
-     * @return bool Success status
-     */
-    public function saveJsonToFile(\DatePeriod $period, string $filename): bool
-    {
-        try {
-            $data = $this->getJsonData($period);
-            $json = json_encode($data, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE);
-
-            return file_put_contents($filename, $json) !== false;
-        } catch (\Throwable $e) {
-            error_log('JSON saving failed: '.$e->getMessage());
-
-            return false;
-        }
-    }
-
-    /**
-     * Set custom CSS for rendering.
-     *
-     * @param string $css Custom CSS
-     */
-    public function setCustomCss(string $css): self
-    {
-        $this->renderer->setCustomCss($css);
-
-        return $this;
-    }
-
-    /**
-     * Set custom template for rendering.
-     *
-     * @param string $templatePath Template file path
-     */
-    public function setCustomTemplate(string $templatePath): self
-    {
-        $this->renderer->setTemplate($templatePath);
-
-        return $this;
-    }
-
-    /**
-     * Legacy method: Process modules using old interface for backward compatibility.
-     *
-     * @deprecated Use addModule() and generate() instead
-     *
-     * @param \DatePeriod           $period  Time period
-     * @param array<string, string> $modules Module classes
-     */
-    public function processModules(\DatePeriod $period, array $modules): void
-    {
-        foreach ($modules as $moduleKey => $moduleClass) {
-            $this->addModule($moduleKey, $moduleClass);
+        if ($format === 'html' || $format === 'pdf') {
+            $theme = \Ease\Shared::cfg('THEME', 'bootstrap');
+            $this->renderer->setTheme($theme);
         }
 
-        // Generate default output
-        $html = $this->generate($period);
+        $digestData = $this->moduleRunner->run($period);
 
-        // Handle legacy save/email behavior
-        $saveTo = \Ease\Shared::cfg('RESULT_FILE');
+        return $this->renderer->render($digestData, $format);
+    }
+
+    /**
+     * Run the full digest pipeline: generate, save to file, send by email.
+     *
+     * @param \DatePeriod $period Time period
+     */
+    public function run(\DatePeriod $period): void
+    {
+        $format = \Ease\Shared::cfg('OUTPUT_FORMAT', 'html');
+        $output = $this->generate($period, $format);
+
+        // Save to file
+        $saveTo = \Ease\Shared::cfg('DIGEST_SAVETO', \Ease\Shared::cfg('RESULT_FILE', ''));
 
         if ($saveTo) {
-            $this->saveToFile($period, $saveTo);
+            $ext = match ($format) {
+                'md' => '.md',
+                'pdf' => '.pdf',
+                default => '.html',
+            };
+
+            $filename = str_ends_with($saveTo, $ext) ? $saveTo : $saveTo . $ext;
+            file_put_contents($filename, $output);
+            \Ease\Shared::logger()->addToLog(sprintf(_('Saved to %s'), $filename), 'success');
         }
 
+        // Send email (always as HTML for email clients)
         $emailTo = \Ease\Shared::cfg('DIGEST_MAILTO', \Ease\Shared::cfg('EASE_MAILTO', ''));
 
         if ($emailTo) {
-            $this->sendByEmail($period, $emailTo);
+            $emailHtml = ($format === 'html')
+                ? $output
+                : $this->generate($period, 'html');
+
+            $this->sendEmail($emailTo, $emailHtml);
         }
     }
 
     /**
-     * Factory method to create digestor with common modules.
+     * Send digest by email.
      *
-     * @param string               $subject    Digest title
-     * @param array<string>        $moduleKeys Module keys to include
-     * @param array<string, mixed> $config     AbraFlexi configuration
+     * @param string $emailTo  Recipient address(es)
+     * @param string $htmlBody Full HTML document
      */
-    public static function createWithModules(string $subject, array $moduleKeys, array $config = []): self
+    private function sendEmail(string $emailTo, string $htmlBody): void
     {
-        $digestor = new self($subject, $config);
-
-        foreach ($moduleKeys as $moduleKey) {
-            $digestor->addModule($moduleKey);
+        try {
+            $mailer = new Mailer($emailTo, $this->subject);
+            $mailer->setHtmlContent($htmlBody);
+            $mailer->send();
+        } catch (\Throwable $e) {
+            \Ease\Shared::logger()->addToLog(
+                sprintf(_('Email sending failed: %s'), $e->getMessage()),
+                'warning',
+            );
         }
-
-        return $digestor;
     }
 
     /**
-     * Log banner for backward compatibility.
+     * Log startup banner.
      */
     private static function logBanner(): void
     {
         $prober = new \AbraFlexi\Company();
-        $prober->logBanner(' AbraFlexi Modular Digest '.\Ease\Shared::appVersion().' '.($_SERVER['SCRIPT_FILENAME'] ?? ''));
+        $prober->logBanner(
+            ' AbraFlexi Modular Digest '
+            . \Ease\Shared::appVersion() . ' '
+            . ($_SERVER['SCRIPT_FILENAME'] ?? ''),
+        );
     }
 }
