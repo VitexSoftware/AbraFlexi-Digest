@@ -9,5 +9,13 @@
             <file>tests/DateFormattingTest.php</file>
             <file>tests/IntlDateFormatterTest.php</file>
         </testsuite>
+        <testsuite name="Providers">
+            <directory>tests/Digest/Providers</directory>
+        </testsuite>
     </testsuites>
+    <source>
+        <include>
+            <directory>src/Digest</directory>
+        </include>
+    </source>
 </phpunit>
