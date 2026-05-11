@@ -15,15 +15,15 @@ declare(strict_types=1);
 
 namespace AbraFlexi\Digest;
 
+use AbraFlexi\Digest\Providers\AbraFlexiDataProvider;
 use VitexSoftware\DigestModules\Core\ModuleRunner;
 use VitexSoftware\DigestModules\Modules;
-use VitexSoftware\DigestModules\Providers\AbraFlexiDataProvider;
 use VitexSoftware\DigestRenderer\DigestRenderer;
 
 /**
  * Digestor using modular architecture.
  *
- * Collects data via digest-modules (AbraFlexiDataProvider),
+ * Collects data via AbraFlexiDataProvider (this package),
  * renders via DigestRenderer (Markdown → HTML/PDF).
  *
  * Supports OUTPUT_FORMAT env: md (default), html, pdf.
