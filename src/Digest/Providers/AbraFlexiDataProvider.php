@@ -508,6 +508,10 @@ class AbraFlexiDataProvider implements DataProviderInterface
             $mena = $mena['kod'] ?? '';
         }
 
+        if (is_object($mena) && property_exists($mena, 'value')) {
+            $mena = $mena->value;
+        }
+
         $currency = str_replace('code:', '', (string) $mena);
 
         return $currency !== '' ? $currency : 'CZK';
@@ -515,11 +519,27 @@ class AbraFlexiDataProvider implements DataProviderInterface
 
     private function extractCompany(mixed $firma): string
     {
+        // AbraFlexi\Relation object — extract name from showAs ("CODE: Name")
+        if (is_object($firma)) {
+            if (property_exists($firma, 'showAs') && !empty($firma->showAs)) {
+                $showAs   = (string) $firma->showAs;
+                $colonPos = strpos($showAs, ': ');
+
+                return $colonPos !== false ? substr($showAs, $colonPos + 2) : $showAs;
+            }
+
+            if (property_exists($firma, 'value')) {
+                return str_replace('code:', '', (string) $firma->value);
+            }
+
+            return '';
+        }
+
         if (is_array($firma)) {
             return (string) ($firma['nazev'] ?? '');
         }
 
-        return (string) ($firma ?? '');
+        return str_replace('code:', '', (string) ($firma ?? ''));
     }
 
     private function toDateString(mixed $value): string
@@ -568,6 +588,24 @@ class AbraFlexiDataProvider implements DataProviderInterface
 
     private function normalizeDocumentType(mixed $typDokl): string
     {
+        // AbraFlexi\Relation object returned for foreign-key typDokl field.
+        // typDoklK is a field on the related typ-faktury-vydane record; to map it
+        // we use showAs ("CODE: Description") as the display label.
+        if (is_object($typDokl)) {
+            if (property_exists($typDokl, 'showAs') && !empty($typDokl->showAs)) {
+                $showAs   = (string) $typDokl->showAs;
+                $colonPos = strpos($showAs, ': ');
+
+                return $colonPos !== false ? substr($showAs, $colonPos + 2) : $showAs;
+            }
+
+            if (property_exists($typDokl, 'value')) {
+                return str_replace('code:', '', (string) $typDokl->value);
+            }
+
+            return '';
+        }
+
         if (is_array($typDokl)) {
             $typDoklK = $typDokl['typDoklK'] ?? '';
         } else {
