@@ -1,4 +1,4 @@
-abraflexi-digest (1.34) UNRELEASED; urgency=medium
+abraflexi-digest (2.0.0) UNRELEASED; urgency=medium
 
   * IntlDateFormatter fix
   * feat: switch mailer to Symfony Mailer, replace pear/net_smtp
