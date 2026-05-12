@@ -130,11 +130,44 @@ class ModularDigestor
         if ($format === 'html' || $format === 'pdf') {
             $theme = \Ease\Shared::cfg('THEME', 'bootstrap');
             $this->renderer->setTheme($theme);
+            $this->renderer->setHeaderExtra($this->buildLogoHtml());
+            $this->renderer->setFooterExtra($this->buildAppInfoHtml());
         }
 
         $digestData = $this->moduleRunner->run($period);
 
         return $this->renderer->render($digestData, $format);
+    }
+
+    private function buildLogoHtml(): string
+    {
+        $svgPath = \dirname(__DIR__, 2) . '/abraflexi-digest.svg';
+
+        if (!file_exists($svgPath)) {
+            return '';
+        }
+
+        $svg = file_get_contents($svgPath);
+
+        return '<div class="app-logo" style="float:right;width:80px;height:80px;margin:-10px 0 10px 20px;">'
+            . $svg
+            . '</div>';
+    }
+
+    private function buildAppInfoHtml(): string
+    {
+        $name     = \Ease\Shared::cfg('APP_NAME', 'AbraFlexi Digest');
+        $version  = \Ease\Shared::appVersion();
+        $homepage = 'https://github.com/VitexSoftware/AbraFlexi-Digest';
+
+        return sprintf(
+            '<p class="app-info" style="margin:8px 0 0;font-size:0.85em;">'
+            . '<strong>%s</strong> %s &mdash; <a href="%s">%s</a></p>',
+            htmlspecialchars($name),
+            htmlspecialchars($version),
+            htmlspecialchars($homepage),
+            htmlspecialchars($homepage),
+        );
     }
 
     /**
