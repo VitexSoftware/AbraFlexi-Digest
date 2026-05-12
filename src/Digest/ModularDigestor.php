@@ -148,8 +148,10 @@ class ModularDigestor
         }
 
         $svg = file_get_contents($svgPath);
+        // Force the SVG to fill its container instead of rendering at its natural size
+        $svg = preg_replace('/<svg\b/', '<svg style="width:100%;height:100%;display:block;"', $svg, 1);
 
-        return '<div class="app-logo" style="float:right;width:80px;height:80px;margin:-10px 0 10px 20px;">'
+        return '<div class="app-logo" style="float:right;width:80px;height:80px;overflow:hidden;margin:0 0 12px 20px;">'
             . $svg
             . '</div>';
     }
