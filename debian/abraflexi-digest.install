@@ -5,12 +5,8 @@ debian/autoload.php 		usr/share/php/abraflexi-digest/
 src/*.php		        usr/share/abraflexi-digest/
 web/*.php		        usr/share/abraflexi-digest/
 src/Digest/*                    usr/lib/abraflexi-digest/Digest/
-src/Digest/Modules/*		usr/lib/abraflexi-digest/Digest/Modules/
 src/Digest/Outlook/*		usr/lib/abraflexi-digest/Digest/Outlook/
-src/Digest/Modules/AllTime/*    usr/lib/abraflexi-digest/Digest/Modules/AllTime/
-#empty yet src/Digest/Modules/Daily/*	    usr/lib/abraflexi-digest/Digest/Modules/Daily/
-src/Digest/Modules/Weekly/*    usr/lib/abraflexi-digest/Digest/Modules/Weekly/
-src/Digest/Modules/Monthly/*    usr/lib/abraflexi-digest/Digest/Modules/Monthly/
+src/Digest/Providers/*          usr/lib/abraflexi-digest/Digest/Providers/
 src/css/*.css                   usr/share/abraflexi-digest/css/
 src/css/themes/*.css            usr/share/abraflexi-digest/css/themes
 bin/*                           usr/bin/
