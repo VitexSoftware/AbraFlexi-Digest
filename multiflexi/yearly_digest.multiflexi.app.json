@@ -76,7 +76,7 @@
         "en": "Report Theme",
         "cs": "Téma reportu"
       },
-      "defval": "happy",
+      "defval": "bootstrap",
       "required": false,
       "category": "Other"
     },
