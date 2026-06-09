@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
-  "schemaVersion": "3.3.0",
+  "schemaVersion": "3.4.0",
   "uuid": "ff7d9f0e-e829-4a60-b3e6-198c1826c82b",
   "name": {
     "en": "Yearly Digest",
@@ -29,6 +29,13 @@
   "repository": "https://github.com/VitexSoftware/AbraFlexi-Digest",
   "image": "",
   "executable": "/usr/bin/abraflexi-yeardigest",
+  "events": {
+    "emits": {
+      "digest.generated": {
+        "description": "A periodic digest report was generated"
+      }
+    }
+  },
   "environment": {
     "ABRAFLEXI_COMPANY": {
       "type": "string",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/schema/application.json",
-  "schemaVersion": "3.3.0",
+  "schemaVersion": "3.4.0",
   "uuid": "1a00b753-9768-4afb-b556-446e78e6192c",
   "name": {
     "en": "AllTime Digest",
@@ -28,6 +28,13 @@
   "repository": "https://github.com/VitexSoftware/AbraFlexi-Digest",
   "image": "",
   "executable": "/usr/bin/abraflexi-alltimedigest",
+  "events": {
+    "emits": {
+      "digest.generated": {
+        "description": "A periodic digest report was generated"
+      }
+    }
+  },
   "environment": {
     "ABRAFLEXI_COMPANY": {
       "type": "string",
