@@ -77,14 +77,22 @@
       "category": "API"
     },
     "THEME": {
-      "type": "string",
+      "type": "select",
       "description": {
         "en": "Report Theme",
         "cs": "Téma reportu"
       },
       "defval": "bootstrap",
       "required": false,
-      "category": "Other"
+      "category": "Other",
+      "options": {
+        "bootstrap": "Bootstrap",
+        "email": "Email",
+        "green": "Green",
+        "rainbow": "Rainbow",
+        "nordic-blue": "Nordic Blue",
+        "violet-garden": "Violet Garden"
+      }
     },
     "DIGEST_CHECK_SUPPLIER_CONTACT": {
       "type": "bool",
