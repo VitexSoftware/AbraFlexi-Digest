@@ -125,6 +125,16 @@
       "required": false,
       "category": "Other"
     },
+    "MAIL_DSN": {
+      "type": "password",
+      "description": {
+        "en": "Symfony Mailer DSN for sending the digest (e.g. smtp://user:pass@host:port?verify_peer=0). Defaults to local sendmail if empty.",
+        "cs": "DSN pro Symfony Mailer k odeslání digestu (např. smtp://user:pass@host:port?verify_peer=0). Pokud je prázdné, použije se lokální sendmail."
+      },
+      "defval": "",
+      "required": false,
+      "category": "Other"
+    },
     "RESULT_FILE": {
       "type": "string",
       "description": {
