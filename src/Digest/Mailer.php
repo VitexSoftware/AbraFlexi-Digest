@@ -81,6 +81,8 @@ class Mailer extends Sand
      */
     public function __construct(string $sendTo, string $subject)
     {
+        $this->setObjectName($subject);
+
         $this->fromEmailAddress = \Ease\Shared::cfg(
             'DIGEST_FROM',
             \Ease\Shared::cfg('MAIL_FROM', 'digest@' . gethostname()),
