@@ -6,9 +6,13 @@
   <project_license>GPL-2</project_license>
   <name>abraflexi-digest</name>
   <summary>digest for AbraFlexi</summary>
+  <summary xml:lang="cs">Přehled stavu AbraFlexi</summary>
   <description>
     <p>
       Prepare digest with accounting state of AbraFlexi. Then save to file or send by email. Daily, weekly, monthly, yearly and all time. Instal or Update MultiFlexi App json definitions for digest tools into MultiFlexi
+    </p>
+    <p xml:lang="cs">
+      Připraví přehled účetního stavu AbraFlexi a uloží ho do souboru nebo odešle e-mailem. Denně, týdně, měsíčně, ročně nebo za celou dobu. Instaluje nebo aktualizuje JSON definice aplikací pro přehledové nástroje v MultiFlexi.
     </p>
   </description>
   <categories>
