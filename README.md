@@ -82,7 +82,11 @@ DIGEST_MAILTO="info@yourdomain.net"
 DIGEST_FROM="noreply@vitexsoftware.cz"
 THEME="happy"
 DIGEST_SAVETO="/var/tmp/"
+DIGEST_ITEMS_LIMIT=0
 ```
+
+`DIGEST_ITEMS_LIMIT` sets the default maximum number of items listed in each section
+(`0` = unlimited). Only the listing is shortened — totals and charts still use all data.
 
 ## Programmatic usage
 

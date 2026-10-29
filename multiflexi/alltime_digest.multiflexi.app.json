@@ -153,6 +153,16 @@
       "defval": "console",
       "required": false,
       "category": "Behavior"
+    },
+    "DIGEST_ITEMS_LIMIT": {
+      "type": "integer",
+      "description": {
+        "en": "Default maximum number of items listed in each section (0 = unlimited)",
+        "cs": "Výchozí maximální počet vypsaných položek v každé sekci (0 = bez omezení)"
+      },
+      "defval": "0",
+      "required": false,
+      "category": "Behavior"
     }
   },
   "artifacts": [
