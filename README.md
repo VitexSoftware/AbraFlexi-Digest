@@ -83,7 +83,10 @@ DIGEST_FROM="noreply@vitexsoftware.cz"
 THEME="happy"
 DIGEST_SAVETO="/var/tmp/"
 DIGEST_ITEMS_LIMIT=0
+DIGEST_LOCALE="cs_CZ.UTF-8"
 ```
+
+`DIGEST_LOCALE` selects the language of the digest (system locale, must be installed on the server: `locale -a`).
 
 `DIGEST_ITEMS_LIMIT` sets the default maximum number of items listed in each section
 (`0` = unlimited). Only the listing is shortened — totals and charts still use all data.

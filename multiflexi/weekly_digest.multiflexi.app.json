@@ -164,6 +164,20 @@
       "defval": "0",
       "required": false,
       "category": "Behavior"
+    },
+    "DIGEST_LOCALE": {
+      "type": "set",
+      "description": {
+        "en": "Language of the digest (system locale, must be installed on the server)",
+        "cs": "Jazyk digestu (systémová lokalizace, musí být nainstalována na serveru)"
+      },
+      "defval": "cs_CZ.UTF-8",
+      "required": false,
+      "category": "Other",
+      "options": {
+        "cs_CZ.UTF-8": "Čeština",
+        "en_US.UTF-8": "English"
+      }
     }
   },
   "artifacts": [

@@ -1632,3 +1632,22 @@ msgstr "Výsledky AbraFlexi souhrnu"
 
 #~ msgid "Order specific"
 #~ msgstr "Order specific"
+
+msgid "AbraFlexi 🌅 Daily digest for %s"
+msgstr "AbraFlexi 🌅 Denní přehled pro %s"
+
+msgid "AbraFlexi %s 🌌 Alltime digest"
+msgstr "AbraFlexi %s 🌌 Přehled za celou dobu"
+
+msgid "AbraFlexi %s 🌜 Monthly digest"
+msgstr "AbraFlexi %s 🌜 Měsíční přehled"
+
+msgid "AbraFlexi %s 📆 Weekly digest"
+msgstr "AbraFlexi %s 📆 Týdenní přehled"
+
+msgid "AbraFlexi %s 🎆 Yearly digest"
+msgstr "AbraFlexi %s 🎆 Roční přehled"
+
+msgid "Email sending failed: %s"
+msgstr "Odeslání e-mailu selhalo: %s"
+

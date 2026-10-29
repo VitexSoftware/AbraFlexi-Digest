@@ -26,4 +26,4 @@ if (file_exists($conffile)) {
     $shared->loadConfig($conffile, true);
 }
 
-\Ease\Locale::singleton(null, '../i18n', 'abraflexi-digest');
+\Ease\Locale::singleton(\Ease\Shared::cfg('DIGEST_LOCALE') ?: null, '../i18n', 'abraflexi-digest');
