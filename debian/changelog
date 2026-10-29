@@ -1,9 +1,17 @@
-abraflexi-digest (2.0.0) UNRELEASED; urgency=medium
+abraflexi-digest (2.1.0) unstable; urgency=medium
 
+  [ vitex ]
   * IntlDateFormatter fix
   * feat: switch mailer to Symfony Mailer, replace pear/net_smtp
 
- -- vitex <info@vitexsoftware.cz>  Fri, 24 Apr 2026 07:16:36 +0200
+  [ Vítězslav Dvořák ]
+  * Digest item limit: new DIGEST_ITEMS_LIMIT setting (default maximum
+    number of items listed in each section, 0 = unlimited)
+  * Czech localization: new DIGEST_LOCALE setting, Czech digest subjects
+    and translated sections
+  * Remove obsolete installthemes.sh
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Thu, 29 Oct 2026 14:54:28 +0100
 
 abraflexi-digest (1.33.1) unstable; urgency=medium
 
