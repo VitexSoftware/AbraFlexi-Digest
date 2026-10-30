@@ -61,7 +61,7 @@ class AbraFlexiDataProvider implements DataProviderInterface
     ];
 
     /** @var array<string> Standard columns requested for contacts */
-    private const CONTACT_COLUMNS = ['kod', 'nazev', 'email', 'tel', 'ulice', 'mesto'];
+    private const CONTACT_COLUMNS = ['kod', 'nazev', 'email', 'tel', 'ulice', 'mesto', 'typVztahuK'];
 
     /** @var array<string> Standard columns requested for products */
     private const PRODUCT_COLUMNS = ['kod', 'nazev', 'nakupCena', 'cenaZakl'];
@@ -449,6 +449,12 @@ class AbraFlexiDataProvider implements DataProviderInterface
             DataProviderInterface::FIELD_PHONE  => (string) ($contact['tel'] ?? ''),
             DataProviderInterface::FIELD_STREET => (string) ($contact['ulice'] ?? ''),
             DataProviderInterface::FIELD_CITY   => (string) ($contact['mesto'] ?? ''),
+            DataProviderInterface::FIELD_RELATIONSHIP => match (str_replace('code:', '', (string) ($contact['typVztahuK'] ?? ''))) {
+                'typVztahu.odberatel' => DataProviderInterface::RELATIONSHIP_CUSTOMER,
+                'typVztahu.dodavatel' => DataProviderInterface::RELATIONSHIP_SUPPLIER,
+                'typVztahu.odberDodav' => DataProviderInterface::RELATIONSHIP_CUSTOMER_SUPPLIER,
+                default => '',
+            },
         ];
     }
 
