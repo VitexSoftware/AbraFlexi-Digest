@@ -1,3 +1,11 @@
+abraflexi-digest (2.2.1) unstable; urgency=medium
+
+  * MultiFlexi app definitions: offer all 10 DigestRenderer themes in
+    THEME options
+  * Depends: digest-modules >= 1.2.1, digest-renderer >= 1.3.0
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Fri, 30 Oct 2026 16:45:10 +0100
+
 abraflexi-digest (2.2.0) unstable; urgency=medium
 
   * Contact relationship (typVztahuK) is exposed to the digest modules, so the
