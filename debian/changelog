@@ -1,3 +1,10 @@
+abraflexi-digest (2.2.0) unstable; urgency=medium
+
+  * Contact relationship (typVztahuK) is exposed to the digest modules, so the
+    customers-without-email list works with customers and supplier/customers only
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Fri, 30 Oct 2026 14:12:41 +0100
+
 abraflexi-digest (2.1.0) unstable; urgency=medium
 
   [ vitex ]
