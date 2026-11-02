@@ -16,7 +16,7 @@
         "vitexsoftware/digest-modules": "dev-main",
         "vitexsoftware/digest-renderer": "dev-main",
         "spojenet/flexibee": "*",
-        "symfony/mailer": "^6.4|^7.0",
+        "symfony/mailer": "^8.1.10",
         "symfony/mime": "^8.1.10",
         "vitexsoftware/ease-core-bricks": "^1.2"
     },
