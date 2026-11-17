@@ -1,3 +1,10 @@
+abraflexi-digest (2.3.0) unstable; urgency=medium
+
+  * Debtors overview: provide invoice contact phone (kontaktTel)
+  * Depends: digest-modules >= 1.3.0, digest-renderer >= 1.3.1
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Tue, 17 Nov 2026 16:40:39 +0100
+
 abraflexi-digest (2.2.1) unstable; urgency=medium
 
   * MultiFlexi app definitions: offer all 10 DigestRenderer themes in

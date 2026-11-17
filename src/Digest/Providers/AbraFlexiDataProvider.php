@@ -50,7 +50,7 @@ class AbraFlexiDataProvider implements DataProviderInterface
     private const INVOICE_COLUMNS = [
         'kod', 'firma', 'sumCelkem', 'sumCelkemMen', 'sumZalohy', 'sumZalohyMen',
         'zbyvaUhradit', 'zbyvaUhraditMen', 'mena', 'datVyst', 'datSplat',
-        'storno', 'typDokl', 'stavUhrK', 'stavMailK', 'popis', 'kontaktEmail',
+        'storno', 'typDokl', 'stavUhrK', 'stavMailK', 'popis', 'kontaktEmail', 'kontaktTel',
         'stavOdpocetK', 'datUp1', 'datUp2', 'datSmir',
     ];
 
@@ -405,6 +405,7 @@ class AbraFlexiDataProvider implements DataProviderInterface
             DataProviderInterface::FIELD_MAIL_STATUS              => $this->normalizeMailStatus($inv['stavMailK'] ?? null),
             DataProviderInterface::FIELD_DESCRIPTION              => (string) ($inv['popis'] ?? ''),
             DataProviderInterface::FIELD_CONTACT_EMAIL            => (string) ($inv['kontaktEmail'] ?? ''),
+            DataProviderInterface::FIELD_CONTACT_PHONE            => (string) ($inv['kontaktTel'] ?? ''),
             DataProviderInterface::FIELD_DEDUCTION_STATUS         => $this->normalizeDeductionStatus($inv['stavOdpocetK'] ?? null),
             DataProviderInterface::FIELD_FIRST_REMINDER_DATE      => $this->toDateString($inv['datUp1'] ?? null),
             DataProviderInterface::FIELD_SECOND_REMINDER_DATE     => $this->toDateString($inv['datUp2'] ?? null),
